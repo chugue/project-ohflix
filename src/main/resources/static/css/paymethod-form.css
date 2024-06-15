@@ -123,7 +123,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 20px;
   background-color: white;
   border-bottom: 1px solid #e6e6e6;
 }
@@ -139,7 +142,7 @@
   font-weight: 600;
 }
 
-.main {
+.main-container {
   display: flex;
   justify-content: center;
   flex-direction: column;

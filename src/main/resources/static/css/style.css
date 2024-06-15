@@ -1,6 +1,6 @@
 .background {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/images/login-backgroun.jpg");
+    url("/static/images/login-backgroun.jpg");
   background-size: cover;
   background-position: center;
   height: 95vh;

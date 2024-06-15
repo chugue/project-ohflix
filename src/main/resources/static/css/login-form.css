@@ -1,9 +1,9 @@
 .background {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/images/login-backgroun.jpg");
+    url("/static/images/login-backgroun.jpg");
   background-size: cover;
   background-position: center;
-  height: 95vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,34 +15,36 @@
 
 .login-container {
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
   border-radius: 8px;
   text-align: start;
   color: white;
-  width: 450px;
-  height: 650px;
+  width: 400px;
+  height: 580px;
   padding: 60px;
 }
 
 .logo {
   position: fixed;
   top: 30px;
-  left: 30px;
+  left: 50px;
 }
 
 .logo img {
-  width: 150px;
+  width: 120px;
   margin-bottom: 20px;
 }
 
-.login-form h2 {
-  margin-bottom: 20px;
+.login-form h1 {
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .login-form input {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 8px 0;
   border: none;
   border-radius: 4px;
 }
@@ -57,6 +59,10 @@
   font-size: 16px;
   cursor: pointer;
   margin-top: 5px;
+  margin-bottom: 5px;
+}
+.login-form p {
+  font-size: 14px;
 }
 
 .align-center {
@@ -84,7 +90,7 @@
   color: black;
   text-decoration: none;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .kakao-container a:hover {
   color: black;
@@ -125,7 +131,7 @@
 .options a {
   color: #b3b3b3;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .options a:hover {
@@ -161,7 +167,10 @@ footer {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start; /* 수정된 부분 */
-  padding: 20px;
+  padding-left: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 100px;
   width: 100%;
 }
 

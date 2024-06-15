@@ -34,5 +34,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setCachePeriod(60 * 60)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+
+        registry.addResourceHandler("/static/js/**")
+                .addResourceLocations("classpath:/static/js/")
+                .setCachePeriod(60 * 60)
+                .resourceChain(true)
+                .addResolver(new PathResourceResolver());
     }
 }

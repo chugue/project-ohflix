@@ -7,24 +7,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/main-page")
+    @GetMapping("/")
     public String getMainPage(){
         return "main-page";
     }
-    @GetMapping("/account")
+    @GetMapping("/1")
     public String getAccountPage(){
-        return "account";
+        return "account-view";
     }
-    @GetMapping("/login-form")
+    @GetMapping("/2")
     public String getLoginForm(){
         return "login-form";
     }
-    @GetMapping("/content-details")
+    @GetMapping("/3")
     public String getContentDetails(){
         return "content-details";
     }
-    @GetMapping("/paymethod-register-form")
+    @GetMapping("/4")
     public String getPaymethodRegisterForm(){
-        return "paymethod-register-form";
+        return "paymethod-form";
+    }
+    @GetMapping("/5")
+    public String getProfileView(){
+        return "profile-form";
     }
 }
