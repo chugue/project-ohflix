@@ -1,0 +1,311 @@
+.background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/login-backgroun.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-field {
+  height: 50px;
+  font-size: medium;
+}
+
+.login-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: start;
+  color: white;
+  width: 400px;
+  height: 650px;
+  padding: 60px;
+}
+
+.logo {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}
+
+.logo img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e50914;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+.kakao-container {
+  background-color: #fee500;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  height: 41px;
+}
+.kakao-container:hover {
+  background-color: #fff700f9;
+}
+.kakao-container a {
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+.kakao-container a:hover {
+  color: black;
+  text-decoration: none;
+}
+.kakao-container img {
+  width: 20px;
+  margin-right: 10px;
+}
+.login-form button:hover {
+  background-color: #f40612;
+}
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 18px;
+}
+.checkbox-label input[type="checkbox"] {
+  margin-right: 20px; /* 원하는 공간 크기로 조정 */
+}
+.checkbox-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.options a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+.signup {
+  display: flex;
+  justify-content: start;
+  margin-top: 10px;
+  color: #b3b3b3;
+  width: 100%;
+}
+
+.signup a {
+  color: white;
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+footer {
+  background-color: rgba(0, 0, 0);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* 수정된 부분 */
+  padding: 20px;
+  width: 100%;
+}
+
+.footer-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-container ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.footer-container ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+.grid-list-container {
+  width: 100%;
+}
+
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 두 개의 열로 나누기 */
+  gap: 10px; /* 항목 간격 */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+}
+.footer-container ul li a:hover {
+  text-decoration: underline;
+}
+.footer-bt {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  font-size: 12px;
+}
+.footer-container p {
+  margin: 5px 0;
+  color: #b3b3b3;
+}
+
+/* ------------------------------------------- */
+
+.msg-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.payment-methods .method {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: start;
+  width: 500px;
+  margin-bottom: 20px;
+}
+
+.payment-methods .method p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.payment-methods .icons img {
+  width: 40px;
+  margin: 0 5px;
+}
+
+.lock-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.lock-icon img {
+  width: 50px;
+  margin-bottom: 20px;
+}
+
+.payment-container h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.payment-container p {
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.promo-code {
+  display: block;
+  margin-top: 20px;
+  color: #0071eb;
+  text-decoration: none;
+}
+
+.promo-code:hover {
+  text-decoration: underline;
+}
+
+.white-footer {
+  background-color: #f8f8f8;
+  color: #666;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+}
+
+.white-footer-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.white-footer-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.white-footer-container ul li {
+  margin: 0 10px;
+}
+
+.white-footer-container ul li a {
+  color: #0071eb;
+  text-decoration: none;
+}
+
+.white-footer-container ul li a:hover {
+  text-decoration: underline;
+}
+
+.white-footer-container p {
+  margin: 5px 0;
+}
