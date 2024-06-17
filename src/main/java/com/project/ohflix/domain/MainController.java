@@ -8,27 +8,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String getMainPage(){
+    public String getMainPage() {
         return "main-page";
     }
+
     @GetMapping("/1")
-    public String getAccountPage(){
+    public String getAccountPage() {
         return "account-view";
     }
+
     @GetMapping("/2")
-    public String getLoginForm(){
+    public String getLoginForm() {
         return "login-form";
     }
+
     @GetMapping("/3")
-    public String getContentDetails(){
+    public String getContentDetails() {
         return "content-details";
     }
+
     @GetMapping("/4")
-    public String getPaymethodRegisterForm(){
+    public String getPaymethodRegisterForm() {
         return "paymethod-form";
     }
+
     @GetMapping("/5")
-    public String getProfileView(){
+    public String getProfileView() {
         return "profile-form";
+    }
+
+    @GetMapping("/50")
+    public String accountMembership() {
+        return "account-membership";
     }
 }
