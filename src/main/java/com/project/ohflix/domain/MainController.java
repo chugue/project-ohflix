@@ -8,32 +8,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/11")
-    public String getLoginForm(){
+    public String getLoginForm() {
         return "login-form";
     }
+
     @GetMapping("/12")
-    public String getPaymethodRegisterForm(){
+    public String getPaymethodRegisterForm() {
         return "paymethod-form";
     }
+
     @GetMapping("/13")
-    public String getPaymethodManage(){return "paymethod-manage";}
+    public String getPaymethodManage() {
+        return "paymethod-manage";
+    }
 
     @GetMapping("/21")
-    public String getPasswordChangeForm(){return "password-change-form";}
+    public String getPasswordChangeForm() {
+        return "password-change-form";
+    }
 
     @GetMapping("/")
-    public String getMainPage(){
+    public String getMainPage() {
         return "main-page";
     }
+
     @GetMapping("/1")
-    public String getAccountPage(){return "account-view";}
+    public String getAccountPage() {
+        return "account-view";
+    }
+
     @GetMapping("/3")
-    public String getContentDetails(){
+    public String getContentDetails() {
         return "content-details";
     }
+
     @GetMapping("/5")
-    public String getProfileView(){
+    public String getProfileView() {
         return "profile-form";
+    }
+
+    @GetMapping("/52")
+    public String profileSetting() {
+        return "profile-setting";
     }
 
 }
