@@ -18,6 +18,8 @@ public class MainController {
     @GetMapping("/13")
     public String getPaymethodManage(){return "paymethod-manage";}
 
+    @GetMapping("/21")
+    public String getPasswordChangeForm(){return "password-change-form";}
 
     @GetMapping("/")
     public String getMainPage(){
