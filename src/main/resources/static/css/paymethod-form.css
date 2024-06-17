@@ -96,7 +96,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start; /* 수정된 부분 */
-  padding: 20px;
+  padding: 20px 100px 20px 100px;
   width: 100%;
 }
 
@@ -160,6 +160,16 @@
   text-align: center;
 }
 
+.msg-container h2{
+  font-size: 2rem;
+}
+
+.msg-container p{
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+
 .payment-methods .method {
   display: flex;
   flex-direction: row;
@@ -170,7 +180,9 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: start;
-  width: 510px;
+  width: 550px;
+  min-width: 600px;
+  max-width: 700px;
   height: 130px;
   margin-bottom: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
