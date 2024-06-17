@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+    @GetMapping("/")
+    public String getMainPage() {
+        return "main-page";
+    }
+
     @GetMapping("/11")
     public String getLoginForm() {
         return "login-form";
@@ -27,15 +32,19 @@ public class MainController {
         return "password-change-form";
     }
 
-    @GetMapping("/")
-    public String getMainPage() {
-        return "main-page";
-    }
 
-    @GetMapping("/1")
+    // account
+    @GetMapping("/50")
     public String getAccountPage() {
         return "account-view";
     }
+
+    // account
+    @GetMapping("/51")
+    public String accountMembership() {
+        return "account-membership";
+    }
+
 
     @GetMapping("/3")
     public String getContentDetails() {
@@ -51,5 +60,6 @@ public class MainController {
     public String profileSetting() {
         return "profile-setting";
     }
+
 
 }
