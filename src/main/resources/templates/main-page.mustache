@@ -2,6 +2,7 @@
 <html lang="ko">
   <head>
       <link rel="stylesheet" href="/static/css/reset.css" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- Material Icons CSS -->
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Main Page</title>
@@ -36,9 +37,16 @@
       <div class="right_menu">
         <div class="search"><i class="fa-solid fa-magnifying-glass"></i></div>
         <div class="alarm"><i class="fa-regular fa-bell"></i></div>
-        <div class="profile">
-          <img src="/static/images/profile.png" alt="Profile" />
-        </div>
+          <div class="dropdown">
+              <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile" /></button>
+              <div class="dropdown-content">
+                  <a href="#"><i class="material-icons">edit</i> 프로필 관리</a>
+                  <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
+                  <a href="#"><i class="material-icons">account_circle</i> 계정</a>
+                  <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
+                  <a href="#">넷플릭스에서 로그아웃</a>
+              </div>
+          </div>
       </div>
     </header>
 
