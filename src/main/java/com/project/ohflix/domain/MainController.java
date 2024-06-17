@@ -32,6 +32,7 @@ public class MainController {
         return "password-change-form";
     }
 
+
     // account
     @GetMapping("/50")
     public String getAccountPage() {
@@ -44,6 +45,7 @@ public class MainController {
         return "account-membership";
     }
 
+
     @GetMapping("/3")
     public String getContentDetails() {
         return "content-details";
@@ -53,4 +55,11 @@ public class MainController {
     public String getProfileView() {
         return "profile-form";
     }
+
+    @GetMapping("/52")
+    public String profileSetting() {
+        return "profile-setting";
+    }
+
+
 }
