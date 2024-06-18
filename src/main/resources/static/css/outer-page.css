@@ -1,0 +1,327 @@
+@charset "utf-8";
+
+header {
+    width: 100%;
+    height: 6vw;
+    padding: 24px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+body {
+    background-color: #000;
+}
+
+.logo {
+    float: left;
+}
+
+.logo img {
+    width: 10rem;
+}
+
+.right-menu {
+    float: right;
+    position: relative;
+}
+
+.right-menu span {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1rem;
+}
+
+#language-selector {
+    background: transparent;
+    color: #fff;
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem 0.4rem 1.8rem;
+    border: 1px solid #888;
+    border-radius: 0.2rem;
+}
+
+#language-selector option {
+    background: transparent;
+    color: #000;
+}
+
+.login-btn {
+    background-color: #E50914;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.2rem;
+    font-size: 0.875rem;
+    border: none;
+    color: #fff;
+}
+
+/* 헤더 끝 */
+/* 섹션 1 */
+#main-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/login-backgroun.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 43.75rem;
+    color: #fff;
+    align-content: center;
+    text-align: center;
+}
+
+#main-section h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.5;
+
+}
+
+section h3 {
+    margin-top: 16px;
+}
+
+.email-start {
+    margin-top: 8px;
+    padding: 0 30px;
+}
+
+.grid {
+    max-width: 40rem;
+    margin: auto;
+}
+
+.email-start input {
+    /* width: 100%; */
+    margin: 1rem auto 0;
+    padding: 1.25rem 1rem 0.5rem;
+    background: rgba(22, 22, 22, 0.7);
+    border: 1px solid #888;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.email-start button {
+    background-color: #E50914;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.2rem;
+    font-size: 1.5rem;
+    border: none;
+    color: #fff;
+}
+
+.email-start button:hover {
+    background-color: rgb(151, 6, 15)
+}
+
+#banner-section {
+    margin: 0 74px;
+}
+
+.banner {
+    background: radial-gradient(51.39% 511.66% at 47.68% -217.91%, #ff9900 0%, #e50914 17.27%, #0e1b4f 79.44%, #000413 100%);
+    padding: 22px;
+    color: #fff;
+    align-items: center;
+    text-align: start;
+    justify-content: center;
+    display: flex;
+}
+
+.banner img {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.banner h3 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.banner p {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.banner a {
+    color: #448ef4;
+}
+
+
+/* 푸터 시작 */
+footer {
+    background-color: rgba(0, 0, 0);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* 수정된 부분 */
+    padding-left: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 100px;
+    width: 100%;
+}
+
+.footer-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-container ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-container ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.grid-list-container {
+    width: 100%;
+}
+
+.grid-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 두 개의 열로 나누기 */
+    gap: 10px;
+    /* 항목 간격 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.footer-container ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bt {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    font-size: 12px;
+}
+
+.footer-container p {
+    margin: 5px 0;
+    color: #b3b3b3;
+}
+
+/* ------------------------------------------- */
+
+.msg-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.payment-methods .method {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: start;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.payment-methods .method p {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.payment-methods .icons img {
+    width: 40px;
+    margin: 0 5px;
+}
+
+.lock-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.lock-icon img {
+    width: 50px;
+    margin-bottom: 20px;
+}
+
+.payment-container h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.payment-container p {
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.promo-code {
+    display: block;
+    margin-top: 20px;
+    color: #0071eb;
+    text-decoration: none;
+}
+
+.promo-code:hover {
+    text-decoration: underline;
+}
+
+.white-footer {
+    background-color: #f8f8f8;
+    color: #666;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e6e6e6;
+}
+
+.white-footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.white-footer-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.white-footer-container ul li {
+    margin: 0 10px;
+}
+
+.white-footer-container ul li a {
+    color: #0071eb;
+    text-decoration: none;
+}
+
+.white-footer-container ul li a:hover {
+    text-decoration: underline;
+}
+
+.white-footer-container p {
+    margin: 5px 0;
+}
