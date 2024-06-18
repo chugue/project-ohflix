@@ -1,0 +1,146 @@
+body {
+  background-color: #141414;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 동일 선상에 정렬 */
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.back-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.back-button::before {
+  content: "←"; /* 화살표 추가 */
+  margin-right: 5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #aaa;
+  margin-left: 30px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-info span {
+  margin-right: 10px;
+}
+
+.profile-info img {
+  width: 60px;
+  height: 60px;
+  border-radius: 5%;
+  margin-right: 40px;
+}
+
+.container {
+  padding: 80px 20px 20px;
+  text-align: left;
+  
+}
+
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-wrapper h2 {
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+  padding-left: 20px;
+}
+
+.profile-container {
+  display: flex;
+  overflow-x: auto;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  width: 720px; /* 아이템 6개 배치위한 WIDTH */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.profile-container::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-item {
+  flex: 0 0 auto;
+  margin: 0 10px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.profile-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.profile-item img:hover {
+  transform: scale(1.1);
+}
+
+.scroll-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 65%; /* 버튼 위치 조정 */
+  transform: translateY(-50%);
+  display: none;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.scroll-button.left {
+  left: 0;
+}
+
+.scroll-button.right {
+  right: 0;
+}
