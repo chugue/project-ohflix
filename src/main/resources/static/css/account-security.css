@@ -1,0 +1,386 @@
+@charset 'utf-8';
+
+/* """"""""""""""""""""""""""초기 세팅"""""""""""""""""""""""""" */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
+.mt-70{
+    margin-top: 70px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.m-20 {
+    margin: 20px;
+}
+
+.m-15 {
+    margin: 15px;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+hr{
+    background:rgb(223, 223, 223);
+    height:1px;
+    border:0;
+}
+
+/* """"""""""""""""""""""""""""body"""""""""""""""""""""""""""" */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* 화면 전체 높이로 설정 */
+    margin: 0 auto;
+    /* 가운데 정렬을 위한 자동 마진 추가 */
+    background-color: #FAFAFA;
+}
+
+
+/* """""""""""""""""""""""""""""nav""""""""""""""""""""""""""""" */
+nav {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    flex: 0 1 auto;
+    position: fixed;
+    /* 네비게이션 바를 고정 */
+    top: 0;
+    /* 화면 상단에 위치 */
+    width: 100%;
+    /* 화면 전체 너비 차지 */
+    z-index: 1000;
+    /* 다른 요소들 위에 표시되도록 z-index 설정 */
+    display: flex;
+    justify-content: center;
+    /* Center the nav-div within the nav */
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.nav-div {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    /* 그리드 아이템 양쪽 끝 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 10px;
+    /* 내부 패딩 추가 */
+    width: 70vw;
+}
+
+.nav-div div{
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 100px;
+    margin-top: 9px;
+}
+
+.nav-profile {
+    border-radius: 5px;
+    margin-right: 13px;
+}
+
+/* """"""""""""""""""""""""""""""main"""""""""""""""""""""""""""""" */
+main {
+    width: 70vw;
+    /* main 요소 너비를 60%로 설정 */
+    margin: 67px auto 0;
+    /* 네비게이션 바의 높이에 따라 조절 */
+    flex: 1 0 auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 100px;
+    /* 간격 설정 */
+}
+
+.main-div {
+    margin: 5px;
+    text-align: start;
+    margin-top: 35px;
+}
+
+/* """"""""""""""""""""""""""main - left"""""""""""""""""""""""""" */
+.main-left-top {
+    font-size: 14px;
+    text-align: start;
+    margin-right: 20px;
+}
+
+.main-left-text {
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.main-left-text:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+}
+
+ul {
+    list-style: none;
+    /* 기본 스타일 제거 */
+    padding-left: 0;
+    /* 내부 패딩 제거 */
+    text-align: start;
+}
+
+.main-left-bottom {
+    padding: 10px;
+}
+
+ul.custom-list li {
+    font-size: 17px;
+}
+
+li {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+}
+
+.main-left-icon {
+    margin-right: 10px;
+}
+
+/* """"""""""""""""""""""""""main - right"""""""""""""""""""""""""" */
+.main-right-header {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.main-profile{
+    display: flex;
+    gap: 10px;
+}
+
+.main-profile div:nth-child(1) {
+    align-content: center;
+}
+.main-profile div:nth-child(2) img {
+    align-content: center;
+    border-radius: 30px;
+}
+
+.main-right-div1 {
+    background-color: white;
+    height: auto;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 5px;
+}
+
+.membership-date {
+    font-size: 13px;
+    background: linear-gradient(to right, #3D3B93, #E10B17);
+    border-radius: 0 30px 30px 0;
+    width: 35%;
+    height: 2rem;
+    line-height: 2rem;
+    color: white;
+    margin-top: 20px;
+}
+
+.membership-date div:first-child{
+    margin-left: 20px;
+}
+
+.membership-box i{
+    margin-right: 20px;
+}
+
+.membership-box div:nth-child(1) {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.membership-box div:nth-child(2) {
+    font-size: 15px;
+    color: rgb(82, 82, 82);
+}
+
+.membership-box div:nth-child(3) {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.membership-box div:nth-child(5) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-chevron-right{
+    color: rgb(65, 65, 65);
+}
+
+.main-right-div2 {
+    background-color: white;
+    height: auto;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+}
+
+.fast-link i{
+    width: 20px;
+    margin-right: 10px;
+    color: rgb(65, 65, 65);
+}
+
+.fast-link div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fast-link-div div:nth-child(2){
+    text-align: end;
+}
+
+.main-right-div3 {
+    background-color: white;
+    height: auto;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+}
+
+
+.setting-div > div {
+    display: flex;
+    align-items: center;
+}
+
+.setting-div span {
+    width: 20px;
+}
+
+.setting-text i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.setting-div {
+    display: flex;
+    justify-content: space-between;
+    position: relative; /* 부모 요소에 상대 위치 지정 */
+}
+
+.setting-text {
+    display: flex;
+    align-items: center;
+}
+
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-dot {
+    position: absolute;
+    top: -1px; /* 아이콘의 상단에 위치하도록 조정 */
+    right: 14.5px; /* 아이콘의 오른쪽에 위치하도록 조정 */
+    width: 6px;
+    height: 6px;
+    background-color: #C11119;
+    border-radius: 50%;
+    z-index: 10; /* 다른 요소보다 위에 오도록 설정 */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-container div {
+    line-height: 1.5; /* 줄 간격 조정 */
+}
+
+.text-container div:nth-child(2){
+    color: gray;
+    font-size: 13px;
+}
+
+.text-container div:nth-child(3){
+    color: #C11119;
+    font-size: 12px;
+}
+
+.profile-manage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-manage i {
+    margin-right: 10px;
+}
+
+.main-right-div4 {
+    background-color: white;
+    height: auto;
+    border: 1px solid rgb(145, 145, 145);
+    border-radius: 3px;
+}
+
+.main-right-div4 i {
+    margin-right: 5px;
+}
+
+.profile-cancel {
+    text-align: center;
+    color: #C11119;
+}
+
+/* """"""""""""""""""""""""""""footer"""""""""""""""""""""""""""" */
+footer {
+    display: flex;
+    justify-content: center;
+    flex: 0 1 auto;
+    text-align: start;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+footer div{
+    color: rgb(177, 177, 177);
+    width: 70vw;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+footer div p{
+    font-size: 9px;
+    margin-bottom: 5px;
+}
