@@ -37,6 +37,11 @@ public class MainController {
         return "password-change-form";
     }
 
+    @GetMapping("/22")
+    public String getProfileIcons() {
+        return "profile-icons";
+    }
+
 
     // account
     @GetMapping("/50")

@@ -1,210 +1,234 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-      <link rel="stylesheet" href="/static/css/reset.css" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- Material Icons CSS -->
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Main Page</title>
-      <!-- css 초기화 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈 - 오플릭스</title>
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="/static/css/reset.css">
     <!-- css -->
-    <link rel="stylesheet" href="/static/css/main-page.css" />
-    <!-- 폰트어썸 ver6 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
-      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="" href="" />
+    <link rel="stylesheet" href="/static/css/main-page.css">
+    <!-- Material Icons CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- 폰트어썸 라이브러리 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+          integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- jquery 라이브러리 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-
-  <body>
-    <!-- 헤더 -->
-    <header>
-      <div class="logo"><img src="/static/images/netflix_logo.png" alt="" /></div>
-      <nav>
+    <!-- js -->
+    <script src="/static/js/main-page.js"></script>
+</head>
+<body>
+<!-- 헤더 -->
+<header>
+    <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
+    <nav>
         <ul>
-          <li><a href="#">홈</a></li>
-          <li><a href="#">영화</a></li>
-          <li><a href="#">TV 프로그램</a></li>
-          <li><a href="#">최신 콘텐츠</a></li>
-          <li><a href="#">내가 찜한 콘텐츠</a></li>
+            <li><a href="#">홈</a></li>
+            <li><a href="#">영화</a></li>
+            <li><a href="#">TV 프로그램</a></li>
+            <li><a href="#">최신 콘텐츠</a></li>
+            <li><a href="#">내가 찜한 콘텐츠</a></li>
         </ul>
-      </nav>
-      <div class="right_menu">
-        <div class="search"><i class="fa-solid fa-magnifying-glass"></i></div>
-        <div class="alarm"><i class="fa-regular fa-bell"></i></div>
-          <div class="dropdown">
-              <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile" /></button>
-              <div class="dropdown-content">
-                  <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
-                  <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
-                  <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
-                  <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
-                  <a href="#">넷플릭스에서 로그아웃</a>
-              </div>
-          </div>
-      </div>
-    </header>
-
-    <!-- 메인 -->
-    <main>
-      <!-- 영상 섹션 -->
-      <!-- TODO : 이미지 대신 영화넣기 -->
-      <section class="movie">
-        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer" />
-        <div class="movie_info">
-          <img src="/static/images/oppenheimer_logo.jpg" alt="" />
-          <p>
-            오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든
-            오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한
-            기념비적' 작품이라고 평했다.
-          </p>
-          <button><i class="fa-solid fa-play"></i>재생</button>
-          <button><i class="fa-solid fa-circle-info"></i> 상세 정보</button>
+    </nav>
+    <div class="right_menu">
+        <!-- 검색 메뉴 -->
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="search-input" placeholder="제목, 사람, 장르">
         </div>
-      </section>
+        <div class="alarm"><i class="fa-regular fa-bell"></i></div>
+        <div class="dropdown">
+            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
+            <div class="dropdown-content">
+                <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
+                <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
+                <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
+                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
+                <a href="#">넷플릭스에서 로그아웃</a>
+            </div>
+        </div>
+        <script>
+            document.querySelector('.fa-solid').addEventListener('click', function () {
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput.classList.contains('show')) {
+                searchInput.classList.remove('show');
+            } else {
+                searchInput.classList.add('show');
+                searchInput.focus();
+            }
+        });</script>
+    </div>
+</header>
 
-      <!-- Top10 섹션 -->
-      <section class="category">
+<!-- 메인 -->
+<main>
+    <!-- 자동 재생 영상 섹션 -->
+    <!-- TODO : 이미지 대신 영화넣기 -->
+    <section class="movie">
+        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>
+        <div class="movie_info">
+            <img src="/static/images/oppenheimer_logo.jpg" alt=""/>
+            <p>오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
+            <button><i class="fa-solid fa-play"></i>재생</button>
+            <button><i class="fa-solid fa-circle-info"></i> 상세 정보</button>
+        </div>
+    </section>
+
+    <!-- Top10 영화 섹션 -->
+    <section class="category">
         <h2>오늘 대한민국의 TOP10 영화</h2>
         <div class="movies">
-          <!-- <div class="card-title"> -->
-          <!-- top10순위 매기는 svg이미지 -->
-          <!-- <svg id="rank-1" width="100%" height="100%" viewBox="0 0 80 154" class="svg-icon svg-icon-rank-1 top-10-rank"><path stroke="#595959" stroke-linejoin="square" stroke-width="4" d="M3.809 41.577h33.243c1.3-2.702 3.545-4.947 6.674-6.72 3.554-2.015 7.83-3.01 12.798-3.01 5.555 0 10.14 1.11 13.723 3.376 3.839 2.427 5.782 6.283 5.782 11.315 0 4.553-1.853 8.395-5.473 11.38-3.547 2.926-8.18 4.37-13.821 4.37H41.44v28.366h16.77c5.572 0 10.275 1.227 14.068 3.711 4.02 2.633 6.071 6.581 6.071 11.616 0 5.705-1.943 9.975-5.853 12.562-3.658 2.42-8.292 3.61-13.863 3.61-5.205 0-9.82-.94-13.827-2.836-3.698-1.75-6.32-4.272-7.785-7.529H2.33c2.096 12.089 7.761 21.65 17.028 28.78C29.242 148.175 42.594 152 59.476 152c10.706 0 20.175-1.783 28.42-5.337 8.185-3.528 14.575-8.486 19.208-14.884 4.595-6.346 6.896-13.938 6.896-22.837 0-6.952-1.93-13.494-5.81-19.666-3.815-6.07-9.68-10.367-17.683-12.908l-5.46-1.735 5.353-2.04c6.659-2.538 11.667-6.338 15.083-11.412 3.431-5.096 5.142-10.806 5.142-17.181 0-8.471-2.262-15.778-6.787-21.985-4.574-6.275-10.7-11.17-18.408-14.696C77.683 3.775 69.109 2 59.687 2 44.084 2 31.515 5.816 21.91 13.415c-9 7.119-15.025 16.486-18.101 28.162z"></path></svg> -->
-          <!-- <img src="images/top10_movies_01.jpg" alt="top10_01"> -->
-          <!-- </div> -->
-          <div class="scroll">
-              <img src="/static/images/top10_movie/top10_movie_01.jpg" alt="top10_01" id="popupImg" style="cursor: pointer;">
-            <img src="/static/images/top10_movie/top10_movie_02.jpg" alt="top10_02" />
-            <img src="/static/images/top10_movie/top10_movie_03.jpg" alt="top10_03" />
-            <img src="/static/images/top10_movie/top10_movie_04.jpg" alt="top10_04" />
-            <img src="/static/images/top10_movie/top10_movie_05.jpg" alt="top10_05" />
-            <img src="/static/images/top10_movie/top10_movie_06.jpg" alt="top10_06" />
-            <img src="/static/images/top10_movie/top10_movie_07.jpg" alt="top10_07" />
-            <img src="/static/images/top10_movie/top10_movie_08.jpg" alt="top10_08" />
-            <img src="/static/images/top10_movie/top10_movie_09.jpg" alt="top10_09" />
-            <img src="/static/images/top10_movie/top10_movie_10.jpg" alt="top10_10" />
-          </div>
-          <button id="next5btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
+            <!-- <div class="card-title"> -->
+            <!-- top10순위 매기는 svg이미지 -->
+            <!-- <svg id="rank-1" width="100%" height="100%" viewBox="0 0 80 154" class="svg-icon svg-icon-rank-1 top-10-rank"><path stroke="#595959" stroke-linejoin="square" stroke-width="4" d="M3.809 41.577h33.243c1.3-2.702 3.545-4.947 6.674-6.72 3.554-2.015 7.83-3.01 12.798-3.01 5.555 0 10.14 1.11 13.723 3.376 3.839 2.427 5.782 6.283 5.782 11.315 0 4.553-1.853 8.395-5.473 11.38-3.547 2.926-8.18 4.37-13.821 4.37H41.44v28.366h16.77c5.572 0 10.275 1.227 14.068 3.711 4.02 2.633 6.071 6.581 6.071 11.616 0 5.705-1.943 9.975-5.853 12.562-3.658 2.42-8.292 3.61-13.863 3.61-5.205 0-9.82-.94-13.827-2.836-3.698-1.75-6.32-4.272-7.785-7.529H2.33c2.096 12.089 7.761 21.65 17.028 28.78C29.242 148.175 42.594 152 59.476 152c10.706 0 20.175-1.783 28.42-5.337 8.185-3.528 14.575-8.486 19.208-14.884 4.595-6.346 6.896-13.938 6.896-22.837 0-6.952-1.93-13.494-5.81-19.666-3.815-6.07-9.68-10.367-17.683-12.908l-5.46-1.735 5.353-2.04c6.659-2.538 11.667-6.338 15.083-11.412 3.431-5.096 5.142-10.806 5.142-17.181 0-8.471-2.262-15.778-6.787-21.985-4.574-6.275-10.7-11.17-18.408-14.696C77.683 3.775 69.109 2 59.687 2 44.084 2 31.515 5.816 21.91 13.415c-9 7.119-15.025 16.486-18.101 28.162z"></path></svg> -->
+            <!-- <img src="images/top10_movies_01.jpg" alt="top10_01"> -->
+            <!-- </div> -->
+            <div class="scroll">
+                <img src="/static/images/top10_movie/top10_movie_01.jpg" alt="top10_01" id="popupImg"
+                     style="cursor: pointer;">
+                <img src="/static/images/top10_movie/top10_movie_02.jpg" alt="top10_02"/>
+                <img src="/static/images/top10_movie/top10_movie_03.jpg" alt="top10_03"/>
+                <img src="/static/images/top10_movie/top10_movie_04.jpg" alt="top10_04"/>
+                <img src="/static/images/top10_movie/top10_movie_05.jpg" alt="top10_05"/>
+                <img src="/static/images/top10_movie/top10_movie_06.jpg" alt="top10_06"/>
+                <img src="/static/images/top10_movie/top10_movie_07.jpg" alt="top10_07"/>
+                <img src="/static/images/top10_movie/top10_movie_08.jpg" alt="top10_08"/>
+                <img src="/static/images/top10_movie/top10_movie_09.jpg" alt="top10_09"/>
+                <img src="/static/images/top10_movie/top10_movie_10.jpg" alt="top10_10"/>
+            </div>
+            <button id="next5btn"><i class="fa-solid fa-chevron-right"></i></button>
+            <button id="prev5btn"><i class="fa-solid fa-chevron-left"></i></button>
         </div>
-      </section>
-      <!-- 추가 카테고리 섹션들 -->
-      <section class="category">
+    </section>
+    <!-- 추가 카테고리 섹션들 -->
+    <section class="category">
         <h2>새로 올라온 시리즈</h2>
         <div class="movies">
-          <div class="scroll">
-            <img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01" />
-            <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02" />
-            <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03" />
-            <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04" />
-            <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05" />
-            <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06" />
-            <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07" />
-            <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08" />
-            <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09" />
-            <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10" />
-            <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11" />
-          </div>
+            <div class="scroll">
+                <img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01"/>
+                <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02"/>
+                <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03"/>
+                <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04"/>
+                <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05"/>
+                <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06"/>
+                <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07"/>
+                <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08"/>
+                <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09"/>
+                <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10"/>
+                <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11"/>
+            </div>
         </div>
-      </section>
-    </main>
+    </section>
+    <!-- 검색결과 색션 -->
+    <section class="search-category">
+        <p class="search-info">더 다양한 검색어가 필요하시다면! : <a id="search-text" href="#"></a></p>
+        <div class="movies">
+            <div class="scroll">
+                <img src="/static/images/new_contents/new_contents_01.jpg" alt="서울의 봄" data-title="서울의 봄" data-genre="영화">
+                <img src="/static/images/new_contents/new_contents_02.jpg" alt="하이라키" data-title="하이라키" data-genre="시리즈">
+                <img src="/static/images/new_contents/new_contents_03.jpg" alt="끝내주는 해결사" data-title="끝내주는 해결사" data-genre="시리즈">
+                <img src="/static/images/new_contents/new_contents_04.jpg" alt="투르 드 프랑스" data-title="투르 드 프랑스" data-genre="시리즈">
+                <img src="/static/images/new_contents/new_contents_05.jpg" alt="한마바키" data-title="한마바키" data-genre="애니메이션">
+                <img src="/static/images/new_contents/new_contents_06.jpg" alt="위대한 쇼맨" data-title="위대한 쇼맨" data-genre="영화">
+                <img src="/static/images/new_contents/new_contents_07.jpg" alt="테라코타 전사들의 수수께끼" data-title="테라코타 전사들의 수수께끼" data-genre="다큐">
+                <img src="/static/images/new_contents/new_contents_08.jpg" alt="기생수 더 그레이" data-title="기생수 더 그레이" data-genre="시리즈">
+                <img src="/static/images/new_contents/new_contents_09.jpg" alt="정신병동에도 아침이 와요" data-title="정신병동에도 아침이 와요" data-genre="영화">
+                <img src="/static/images/new_contents/new_contents_10.jpg" alt="슬기로운 감빵생활" data-title="슬기로운 감빵생활" data-genre="시리즈">
+                <img src="/static/images/new_contents/new_contents_11.jpg" alt="신과 함께 죄와 벌" data-title="신과 함께 죄와 벌" data-genre="영화">
+            </div>
+        </div>
+    </section>
+</main>
 
-    <!-- 푸터 -->
-    <footer>
-      <div class="footer-sns">
+<!-- 푸터 -->
+<footer>
+    <div class="footer-sns">
         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#"><i class="fa-brands fa-instagram"></i></a>
         <a href="#"><i class="fa-brands fa-twitter"></i></a>
         <a href="#"><i class="fa-brands fa-youtube"></i></a>
-      </div>
-      <div class="footer-info">
+    </div>
+    <div class="footer-info">
         <p>
-          넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
-          제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
+            넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
+            제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
         </p>
         <p>대표: 레지널드 숀 톰프슨</p>
         <p>이메일 주소: korea@netflix.com</p>
         <p>
-          주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
-          우편번호 03161
+            주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
+            우편번호 03161
         </p>
         <p>사업자등록번호: 165-87-00119</p>
         <p>클라우드 호스팅: Amazon Web Services Inc.</p>
-      </div>
-    </footer>
-  </body>
+    </div>
+</footer>
+</body>
 
 <!--  모달 내용-->
-  <div id="modalWrap"> <!-- 모달 창을 감싸는 div -->
-      <div id="modalBody">
-          <span id="closeBtn">&times;</span> <!-- 모달을 닫는 X 버튼 -->
-          <div class="body-container">
-              <!-- 헤더 start -->
-              <div class="header-container">
-                  <div class="play">
-                      <div class="title">서울의 봄</div>
-                      <div class="buttons">
-                          <a href="#" class="play-button">▶ 재생</a>
-                          <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>
-                          <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
-                      </div>
-                  </div>
-              </div>
-              <!-- 헤더 end -->
+<div id="modalWrap"> <!-- 모달 창을 감싸는 div -->
+    <div id="modalBody">
+        <span id="closeBtn">&times;</span> <!-- 모달을 닫는 X 버튼 -->
+        <div class="body-container">
+            <!-- 헤더 start -->
+            <div class="header-container">
+                <div class="play">
+                    <div class="title">서울의 봄</div>
+                    <div class="buttons">
+                        <a href="#" class="play-button">▶ 재생</a>
+                        <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>
+                        <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- 헤더 end -->
 
-              <div class="containermargin">
-                  <div class="container">
-                      <div class="container1">
-                          <div class="introduce">
-                              <div class="info">
-                                  <span class="match">98% 일치</span>
-                                  <span>2023</span>
-                                  <span>2시간 21분</span>
-                                  <span>HD</span>
-                              </div>
-                              <div class="metadata">
-                                  <div><img src="/static/images/12.png" alt="" /></div>
-                              </div>
-                              <div class="description">
-                                  대통령의 죽음으로 군부대가 뒤흔들린 시기. 보안사령관이 서울
-                                  장악을 목표로 무자비한 계략을 밀어붙이면서 온 나라가 혼란에 빠질
-                                  위기에 처한다.
-                              </div>
-                          </div>
-                          <div class="details">
-                              <div class="cast">출연: 황정민, 정우성, 이성민, 더 보기</div>
-                              <div class="genre">장르: 스릴러 영화</div>
-                              <div class="features">영화 특징: 긴장감 넘치는</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="container2">
-                      <div class="title2">서울의 봄 상세 정보</div>
-                      <div class="details2">
-                          <div>감독: 김성수</div>
-                          <div>출연: 황정민, 정우성, 이성민, 박해준, 김성균</div>
-                          <div>각본: 홍인표, 홍원찬, 이영풍, 김성수</div>
-                          <div>장르: 스릴러 영화</div>
-                          <div>영화 특징: 긴장감 넘치는</div>
-                          <div class="rating">
-                  <span
-                  >관람등급: <img src="/static/images/12.png" alt="" />12세 이상
-                    관람가</span
-                  >
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!--  모달 내용-->
+            <div class="containermargin">
+                <div class="container">
+                    <div class="container1">
+                        <div class="introduce">
+                            <div class="info">
+                                <span class="match">98% 일치</span>
+                                <span>2023</span>
+                                <span>2시간 21분</span>
+                                <span>HD</span>
+                            </div>
+                            <div class="metadata">
+                                <div><img src="/static/images/12.png" alt=""/></div>
+                            </div>
+                            <div class="description">
+                                대통령의 죽음으로 군부대가 뒤흔들린 시기. 보안사령관이 서울
+                                장악을 목표로 무자비한 계략을 밀어붙이면서 온 나라가 혼란에 빠질
+                                위기에 처한다.
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="cast">출연: 황정민, 정우성, 이성민, 더 보기</div>
+                            <div class="genre">장르: 스릴러 영화</div>
+                            <div class="features">영화 특징: 긴장감 넘치는</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container2">
+                    <div class="title2">서울의 봄 상세 정보</div>
+                    <div class="details2">
+                        <div>감독: 김성수</div>
+                        <div>출연: 황정민, 정우성, 이성민, 박해준, 김성균</div>
+                        <div>각본: 홍인표, 홍원찬, 이영풍, 김성수</div>
+                        <div>장르: 스릴러 영화</div>
+                        <div>영화 특징: 긴장감 넘치는</div>
+                        <div class="rating">
+                            <span>관람등급: <img src="/static/images/12.png" alt=""/>12세 이상관람가</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  모달 내용-->
 </html>
 
 <script>
