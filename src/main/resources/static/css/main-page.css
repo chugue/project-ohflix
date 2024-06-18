@@ -46,6 +46,10 @@ header {
 .movie img {
     width: 100%;
 }
+.movie video{
+    width: 100%;
+    opacity: .8;
+}
 
 .logo {
     width: 12vw;
@@ -258,11 +262,13 @@ nav ul li a {
   width: 36%;
   position: absolute;
   bottom: 20px;
-  left: 20px;
+  left: 4%;
 }
 
 .movie_info p {
+    margin-top: 1vw;
     font-size: 1.2vw;
+    line-height: 1.5vw;
 }
 
 .movie_info button {
@@ -293,11 +299,11 @@ nav ul li a {
 
 .category h2 {
     padding: 20px;
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 2vw;
+    margin: 0 0 10px 4%;
 }
 
-/* top10 영화 */
+/* top10 영화 섹션 */
 .movies {
     position: relative;
 }
@@ -316,17 +322,6 @@ nav ul li a {
   /* height: auto; */
   cursor: pointer;
 }
-
-/* .card-title{
-} */
-/* .top-10-rank {
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: auto;
-    top: 0;
-    width: 50%;
-} */
 
 #next5btn {
   position: absolute;
@@ -381,7 +376,7 @@ nav ul li a {
 }
 
 /* 검색 카테고리 섹션 */
-.search-category {
+.search-section {
   display: none;
   position: relative;
 }
@@ -397,6 +392,34 @@ nav ul li a {
 
 #search-text:hover {
   color: #f00;
+}
+.search-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.fa-magnifying-glass {
+    position: absolute;
+    left: 20px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+
+.search-input {
+    width: 0;
+    padding: 10px 0 10px 2.5vw;
+    margin-left: 10px;
+
+    background-color: #0002;
+    color: #fff;
+    border: 1px solid #fff;
+    transition: width 0.2s;
+    opacity: 0;
+}
+.search-input.show {
+    width: 20vw;
+    opacity: 1;
 }
 
 /* 푸터 */
