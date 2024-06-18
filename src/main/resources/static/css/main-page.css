@@ -244,6 +244,7 @@ nav ul li a {
 /*drop down button 끝*/
 
 /*drop down button*/
+/* 영상 섹션 시작 */
 .movie {
   position: relative;
   color: white;
@@ -284,8 +285,8 @@ nav ul li a {
     color: #fff;
     background-color: #6d6d6eb3;
 }
-
-/* 카테고리 섹션 */
+/* 영상 섹션 종료 */
+/* 카테고리 섹션 시작 */
 .category {
     position: relative;
 }
