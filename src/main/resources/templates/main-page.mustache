@@ -38,32 +38,6 @@
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" class="search-input" placeholder="제목, 사람, 장르">
         </div>
-        <div class="alarm"><i class="fa-regular fa-bell"></i></div>
-        <div class="dropdown">
-            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
-            <div class="dropdown-content">
-                <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
-                <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
-                <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
-                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
-                <a href="#">넷플릭스에서 로그아웃</a>
-            </div>
-        </div>
-        <script>
-            document.querySelector('.fa-solid').addEventListener('click', function () {
-            const searchInput = document.querySelector('.search-input');
-            if (searchInput.classList.contains('show')) {
-                searchInput.classList.remove('show');
-            } else {
-                searchInput.classList.add('show');
-                searchInput.focus();
-            }
-        });</script>
-    </div>
-</header>
-    </nav>
-    <div class="right_menu">
-        <div class="search"><i class="fa-solid fa-magnifying-glass"></i></div>
         <div class="dropdown">
             <button class="dropdown-button"><i class="far fa-bell"></i></button>
             <div class="dropdown-notification">
@@ -122,15 +96,25 @@
         <div class="dropdown">
             <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
             <div class="dropdown-content">
-                <a href="#"><i class="fas fa-pencil-alt"></i> &nbsp; 프로필 관리</a>
-                <a href="#"><i class="fas fa-user-circle"></i> &nbsp; 계정</a>
-                <a href="#"><i class="fas fa-question-circle"></i> &nbsp; 고객 센터</a>
+                <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
+                <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
+                <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
+                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
                 <a href="#">넷플릭스에서 로그아웃</a>
             </div>
         </div>
+        <script>
+            document.querySelector('.fa-solid').addEventListener('click', function () {
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput.classList.contains('show')) {
+                searchInput.classList.remove('show');
+            } else {
+                searchInput.classList.add('show');
+                searchInput.focus();
+            }
+        });</script>
     </div>
 </header>
-
 <!-- 메인 -->
 <main>
     <!-- 자동 재생 영상 섹션 -->
