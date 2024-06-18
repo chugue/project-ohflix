@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+    color: inherit; /* 링크 텍스트 색상을 부모 요소의 색상으로 상속 */
+}
 /* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
 .mt-70{
     margin-top: 70px;
@@ -210,7 +214,7 @@ li:hover {
     color: rgb(82, 82, 82);
 }
 
-.membership-box div:nth-child(3) {
+.membership-box div:nth-child(4) {
     font-size: 14px;
     font-weight: 600;
 }
