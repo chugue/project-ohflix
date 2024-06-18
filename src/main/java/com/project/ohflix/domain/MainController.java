@@ -27,10 +27,38 @@ public class MainController {
         return "paymethod-manage";
     }
 
+    @GetMapping("/14")
+    public String getPaymethodUpdateForm() {
+        return "paymethod-update-form";
+    }
+
     @GetMapping("/21")
     public String getPasswordChangeForm() {
         return "password-change-form";
     }
+
+    @GetMapping("/22")
+    public String getProfileIcons() {
+        return "profile-icons";
+    }
+
+    @GetMapping("/31")
+    public String getPayment() {
+        return "payment-form";
+    }
+
+
+    // 승호
+    @GetMapping("/40")
+    public String getOuterPage() {
+        return "outer-page";
+    }
+    @GetMapping("/41")
+    public String getMyList() {
+        return "my-list";
+    }
+
+
 
 
     // account
@@ -45,6 +73,17 @@ public class MainController {
         return "account-membership";
     }
 
+    // account
+    @GetMapping("/52")
+    public String profileSetting() {
+        return "profile-setting";
+    }
+
+    // account
+    @GetMapping("/53")
+    public String accountSecurity() {
+        return "account-security";
+    }
 
     @GetMapping("/3")
     public String getContentDetails() {
@@ -56,10 +95,7 @@ public class MainController {
         return "profile-form";
     }
 
-    @GetMapping("/52")
-    public String profileSetting() {
-        return "profile-setting";
-    }
+
 
 
 }

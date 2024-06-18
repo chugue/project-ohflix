@@ -1,83 +1,80 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제 수단 관리</title>
-    <link rel="stylesheet" href="/static/css/paymethod-manage.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paymethod Update Form</title>
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/paymethod-update-form.css" />
 </head>
 <body>
 <header>
     <div class="header-logo">
-        <img src="/static/images/logo.png" alt="Netflix Logo">
+        <img src="/static/images/logo.png" alt="Netflix Logo" />
     </div>
     <div class="logout">
         <a href="#">로그아웃</a>
     </div>
 </header>
+<!-- ---------------------------------------- -->
 <div class="main">
-    <div class="main-box">
-        <div class="button-box">
-            <a href="#">
-                <button>
-                    <div class="img-container">
-                        <img src="/static/images/system/left-arrow.png">
-                    </div>
-                    계정
-                </button>
-            </a>
+    <div class="update-form-container">
+        <a href="#" class="back-link">
+            <img src="/static/images/system/arrow-left.svg" />결제 수단 변경</a
+        >
+        <h1>카드를 업데이트하세요</h1>
+        <div class="icons">
+            <img src="./images/cards/BC.png" alt="BC" />
+            <img src="./images/cards/Hana.png" alt="Hana" />
+            <img src="./images/cards/Hyundai.png" alt="Hyundai" />
+            <img src="./images/cards/KB.png" alt="KB" />
+            <img src="./images/cards/Lotte.png" alt="Lotte" />
+            <img src="./images/cards/NH.png" alt="NH" />
+            <img src="./images/cards/Samsung.png" alt="Samsung" />
+            <img src="./images/cards/Shinhan.png" alt="Shinhan" />
+            <!-- Add more icons as needed -->
         </div>
-        <div class="container">
-            <div class="msg-container">
-                <div class="lock-icon">
-                    <img src="/static/images/system/lock.png" alt="Lock Icon">
-                </div>
-                <h2>결제 수단 관리</h2>
-                <p>멤버십 요금을 어떻게 결제할지 직접 관리하세요. </p>
-            </div>
-            <div class="payment-container">
-                <div class="payment-methods">
-                    <div >
-                        <div class="row">
-                            <div>
-                                <div>신용카드</div>
-                            </div>
-                            <div>
-                                ●●●●0935
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <a href="#">
-                                <button>업데이트</button>
-                            </a>
-                        </div>
-                        <div>
-                            <img src="./images/system/kebab-menu.png" alt="arrow">
-                        </div>
+        <form>
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <label for="card-number">카드 번호</label>
+                    <div class="icon">
+                        <img src="/static/images/system/card.svg" />
                     </div>
                 </div>
+                <input type="text" id="card-number" class="card-input" required />
+                <input type="hidden" id="cardNumberHidden" name="cardNumberHidden">
             </div>
-        </div>
 
-        <div class="button-container">
-            <a href="#">
-                <button>
-                    <div class="button-elements">
-                        <img src="/static/images/system/add-icon.svg">
-                        <div style="width: 5px;"></div>
-                        <div>
-                            결제수단 등록
-                        </div>
-                    </div>
-                </button>
-            </a>
-        </div>
 
+            <div class="form-group">
+                <label for="expiry-date">유효기간</label>
+                <input type="text" id="expiry-date" placeholder="MM/YY" />
+            </div>
+
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" placeholder="이름" />
+            </div>
+
+            <div class="form-group">
+                <label for="dob">생년월일</label>
+                <input type="date" id="dob" placeholder="생년월일" />
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="agreement" />
+                <span for="agreement"
+                >본인의 개인 정보를 결제 서비스 업체에 제공하는 데에
+              동의합니다.</span
+                >
+            </div>
+            <button type="submit" class="submit-button">저장</button>
+        </form>
     </div>
-
 </div>
+
+<!-- -------------------------------------------- -->
 <footer class="white-footer">
     <div class="white-footer-container">
         <p>질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)</p>
@@ -93,15 +90,23 @@
             </ul>
         </div>
         <div class="footer-bt">
-            <p>넷플릭스서비스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
+            <p>
+                넷플릭스서비스코리아 유한회사 통신판매업신고번호:
+                제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
+            </p>
             <p>대표: 레지널드 숀 톰프슨</p>
             <p>이메일 주소: korea@netflix.com</p>
-            <p>주소: 대한민국 서울특별시 종로구 종로 26, 서울특별시 종로구 종로 26, 03161</p>
+            <p>
+                주소: 대한민국 서울특별시 종로구 종로 26, 서울특별시 종로구 종로 26,
+                03161
+            </p>
             <p>사업자등록번호: 165-87-00119</p>
             <p>클라우드 호스팅: Amazon Web Services Inc.</p>
             <p>공정거래위원회 웹사이트</p>
         </div>
     </div>
 </footer>
+
+<script src="/static/js/paymethod-update-form.js"></script>
 </body>
 </html>
