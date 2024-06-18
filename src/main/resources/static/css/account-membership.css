@@ -132,6 +132,11 @@ main {
     margin-bottom: 50px;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 ul {
     list-style: none;
     /* 기본 스타일 제거 */

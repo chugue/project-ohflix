@@ -1,62 +1,9 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
+.grid-list-container {
+    width: 100%;
 }
 
 * {
     box-sizing: border-box;
-}
-
-.background {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/images/login-backgroun.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 95vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-top: 5px;
-}
-
-.options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    flex-direction: column;
-}
-
-.options a {
-    color: #b3b3b3;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.options a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: rgba(0, 0, 0);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-}
-
-.grid-list-container {
-    width: 100%;
 }
 
 .grid-list {
@@ -88,216 +35,6 @@ header {
     color: #333;
     text-decoration: none;
     font-size: 19px;
-}
-
-.main {
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    align-items: center;
-    height: 70vh;
-}
-
-.main .main-box {
-    height: 100%;
-}
-
-.main .main-box .button-box {
-    display: flex;
-    flex-direction: row;
-    margin-top: 40px;
-    gap: 10px;
-}
-
-.main .main-box .button-box .img-container {
-    display: flex;
-    align-items: center;
-}
-
-.main .main-box .button-box button {
-    background-color: white;
-    border: white;
-    font-size: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 13px;
-    height: 30px;
-}
-
-.main .main-box .button-box a {
-    text-decoration: none;
-}
-
-.main .main-box .button-box img {
-    width: 20px;
-}
-
-.container {
-    width: 70vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 50px;
-}
-.msg-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.msg-container p {
-    font-size: 1rem;
-}
-
-.msg-container h2 {
-    font-size: 2rem;
-    margin: 0px;
-}
-
-.payment-methods {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 600px;
-    max-width: 700px;
-    width: 100%;
-    padding: 10px 20px 10px 20px;
-}
-
-.payment-methods .row {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-.payment-methods .row img {
-    height: 24px;
-}
-.payment-methods .row button {
-    height: 40px;
-    width: 96px;
-    background-color: white;
-    border-width: 1px;
-    border-color: #535353;
-    border-radius: 3px;
-    font-size: 16px;
-}
-.payment-methods .row button:hover {
-    background-color: #e6e6e6;
-    cursor: pointer;
-}
-
-.payment-methods {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: start;
-    width: 80%;
-    margin-bottom: 20px;
-    height: 90px;
-}
-
-.payment-methods .method p {
-    margin-bottom: 10px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.payment-methods .icons img {
-    width: 40px;
-    margin: 0 5px;
-}
-
-.lock-icon {
-    display: flex;
-    justify-content: center;
-}
-
-.lock-icon img {
-    width: 70px;
-    margin-bottom: 20px;
-}
-.payment-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.payment-container h2 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.payment-container p {
-    margin-bottom: 30px;
-    color: #666;
-}
-.button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.button-container button {
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-    background-color: white;
-    align-items: center;
-    justify-content: center;
-    border: white;
-    font-size: 1rem;
-    height: 40px;
-    width: 170px;
-    border-radius: 5px;
-}
-
-.button-container .button-elements {
-    display: flex;
-    flex-direction: row;
-    width: 200px;
-    justify-content: center;
-    align-items: center;
-}
-
-.button-container button:hover {
-    background-color: #e6e6e6;
-    cursor: pointer;
-}
-
-.button-container a {
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-}
-
-.button-container img {
-    width: 25px;
-}
-
-.promo-code {
-    display: block;
-    margin-top: 20px;
-    color: #0071eb;
-    text-decoration: none;
-}
-
-.promo-code:hover {
-    text-decoration: underline;
 }
 
 .white-footer-container ul {
@@ -359,4 +96,174 @@ header {
     justify-content: left;
     text-align: left;
     font-size: 12px;
+}
+
+/* ------------------------- */
+
+.main {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.update-form-container {
+    background-color: #fff;
+    padding: 20px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.back-link {
+    display: flex;
+    margin-bottom: 20px;
+    color: #0071eb;
+    text-decoration: none;
+    font-size: 15px;
+    align-items: center;
+    height: 25px;
+}
+
+.back-link .img-container {
+    height: 20px;
+    width: 20px;
+}
+
+.back-link img {
+    height: 15px;
+    width: 15px;
+    color: #0071eb;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.checkbox-container span {
+    font-size: 12.5px;
+    text-align: center;
+    color: #666;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    align-items: start;
+    padding-top: 20px;
+    position: relative;
+    width: 410px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    padding-top: 12px;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+.form-group .icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    right: 10px;
+    top: 19px;
+    right: 30px;
+    font-size: 30px; /* 아이콘 크기 조절 */
+    color: #000000; /* 아이콘 색상 조절 */
+    pointer-events: none; /* 아이콘이 클릭되지 않도록 설정 */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+    position: absolute;
+    width: 410px;
+    height: 60px;
+    margin-bottom: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background: transparent;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.form-group input:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.7);
+    outline: none;
+    /* focus 시 경계선 감싸기 */
+}
+
+/* .input-wrapper input.valid {
+  border: 2px solid green;
+}
+
+.input-wrapper input.invalid {
+  border: 2px solid red;
+}
+/*
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 30px;
+} */
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #d40813;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
 }

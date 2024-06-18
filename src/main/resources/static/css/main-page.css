@@ -6,7 +6,6 @@
     box-sizing: border-box;
     font-size: 1.2vw;
 }
-
 a {
     text-decoration: none;
     color: #000;
@@ -84,6 +83,19 @@ nav ul li a {
 
 .right_menu div {
     margin-right: 2vw;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  z-index: 1;
+  cursor: pointer;
 }
 
 /* .right{
@@ -231,11 +243,21 @@ nav ul li a {
 
 /*drop down button 끝*/
 
+/*drop down button*/
+.movie {
+  position: relative;
+  color: white;
+}
+
+.movie img {
+  width: 100%;
+}
+
 .movie_info {
-    width: 36%;
-    position: absolute;
-    bottom: 30px;
-    left: 50px;
+  width: 36%;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 
 .movie_info p {
@@ -280,46 +302,100 @@ nav ul li a {
 }
 
 .scroll {
-    display: flex;
-    gap: 10px;
-    overflow-x: scroll;
+  display: flex;
+  padding: 0 4%;
+  gap: 10px;
+  transition: transform .5s ease;
+  overflow-x: hidden;
+  /* margin: 0 0 0 5%; */
 }
 
 .movies img {
-    width: 20vw;
-    height: auto;
-    cursor: pointer;
+  width: calc(100% / 5);
+  /* height: auto; */
+  cursor: pointer;
 }
 
 /* .card-title{
 } */
-.top-10-rank {
+/* .top-10-rank {
     bottom: 0;
     left: 0;
     position: absolute;
     right: auto;
     top: 0;
     width: 50%;
-}
+} */
 
 #next5btn {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    height: 100%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 4%;
+  height: 100%;
 
-    background-color: transparent;
-    color: transparent;
-    border: none;
-    padding: 10px;
-    font-size: 30px;
-    cursor: pointer;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  padding: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: .2s;
 }
 
-#next5btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+#prev5btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 4%;
+  height: 100%;
+
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  padding: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#next5btn:hover, #prev5btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+#top10-movie img {
+  transition: opacity 0.5s ease-in-out;
+}
+
+#top10-movie img.show {
+  display: block;
+  opacity: 1;
+}
+
+#top10-movie img.hide {
+  opacity: 0;
+}
+
+/* 검색 카테고리 섹션 */
+.search-category {
+  display: none;
+  position: relative;
+}
+
+.search-info {
+  margin: 20px 0 20px 4%;
+  color: #808080;
+}
+
+#search-text {
+  color: #fff;
+}
+
+#search-text:hover {
+  color: #f00;
 }
 
 /* 푸터 */

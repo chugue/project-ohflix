@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css"/>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Main Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈 - 오플릭스</title>
     <!-- css 초기화 -->
+    <link rel="stylesheet" href="/static/css/reset.css">
     <!-- css -->
-    <link rel="stylesheet" href="/static/css/main-page.css"/>
-    <!-- 폰트어썸 ver6 -->
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
-            integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-    />
-    <link rel="" href=""/>
+    <link rel="stylesheet" href="/static/css/main-page.css">
+    <!-- Material Icons CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- 폰트어썸 라이브러리 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+          integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- jquery 라이브러리 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- js -->
+    <script src="/static/js/main-page.js"></script>
 </head>
-
 <body>
 <!-- 헤더 -->
 <header>
-    <div class="logo"><img src="/static/images/netflix_logo.png" alt=""/></div>
+    <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
     <nav>
         <ul>
             <li><a href="#">홈</a></li>
@@ -32,6 +31,36 @@
             <li><a href="#">최신 콘텐츠</a></li>
             <li><a href="#">내가 찜한 콘텐츠</a></li>
         </ul>
+    </nav>
+    <div class="right_menu">
+        <!-- 검색 메뉴 -->
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="search-input" placeholder="제목, 사람, 장르">
+        </div>
+        <div class="alarm"><i class="fa-regular fa-bell"></i></div>
+        <div class="dropdown">
+            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
+            <div class="dropdown-content">
+                <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
+                <a href="#"><i class="material-icons">swap_horiz</i> 프로필 이전</a>
+                <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
+                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
+                <a href="#">넷플릭스에서 로그아웃</a>
+            </div>
+        </div>
+        <script>
+            document.querySelector('.fa-solid').addEventListener('click', function () {
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput.classList.contains('show')) {
+                searchInput.classList.remove('show');
+            } else {
+                searchInput.classList.add('show');
+                searchInput.focus();
+            }
+        });</script>
+    </div>
+</header>
     </nav>
     <div class="right_menu">
         <div class="search"><i class="fa-solid fa-magnifying-glass"></i></div>
@@ -104,23 +133,19 @@
 
 <!-- 메인 -->
 <main>
-    <!-- 영상 섹션 -->
+    <!-- 자동 재생 영상 섹션 -->
     <!-- TODO : 이미지 대신 영화넣기 -->
     <section class="movie">
         <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>
         <div class="movie_info">
             <img src="/static/images/oppenheimer_logo.jpg" alt=""/>
-            <p>
-                오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든
-                오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한
-                기념비적' 작품이라고 평했다.
-            </p>
+            <p>오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
             <button><i class="fa-solid fa-play"></i>재생</button>
             <button><i class="fa-solid fa-circle-info"></i> 상세 정보</button>
         </div>
     </section>
 
-    <!-- Top10 섹션 -->
+    <!-- Top10 영화 섹션 -->
     <section class="category">
         <h2>오늘 대한민국의 TOP10 영화</h2>
         <div class="movies">
@@ -142,9 +167,8 @@
                 <img src="/static/images/top10_movie/top10_movie_09.jpg" alt="top10_09"/>
                 <img src="/static/images/top10_movie/top10_movie_10.jpg" alt="top10_10"/>
             </div>
-            <button id="next5btn">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+            <button id="next5btn"><i class="fa-solid fa-chevron-right"></i></button>
+            <button id="prev5btn"><i class="fa-solid fa-chevron-left"></i></button>
         </div>
     </section>
     <!-- 추가 카테고리 섹션들 -->
@@ -246,10 +270,7 @@
                         <div>장르: 스릴러 영화</div>
                         <div>영화 특징: 긴장감 넘치는</div>
                         <div class="rating">
-                  <span
-                  >관람등급: <img src="/static/images/12.png" alt=""/>12세 이상
-                    관람가</span
-                  >
+                            <span>관람등급: <img src="/static/images/12.png" alt=""/>12세 이상관람가</span>
                         </div>
                     </div>
                 </div>

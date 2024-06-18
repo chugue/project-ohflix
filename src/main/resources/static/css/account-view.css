@@ -110,6 +110,11 @@ main {
     /* 간격 설정 */
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .main-div {
     margin: 5px;
     text-align: start;
@@ -197,6 +202,12 @@ ul.custom-list li {
 }
 
 .membership-box div:nth-child(5) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.membership-box a {
     display: flex;
     justify-content: space-between;
     align-items: center;
