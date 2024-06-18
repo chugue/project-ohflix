@@ -36,6 +36,10 @@
     font-weight: bold;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 hr{
     background:rgb(223, 223, 223);
     height:1px;
@@ -128,13 +132,14 @@ main {
 }
 
 .main-left-text {
-    margin-top: 11px;
-    margin-bottom: 50px;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
-a {
-    text-decoration: none;
-    color: black;
+.main-left-text:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
 
 ul {
@@ -151,7 +156,16 @@ ul {
 
 ul.custom-list li {
     font-size: 17px;
-    margin-bottom: 30px;
+}
+
+li {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
 
 .main-left-icon {

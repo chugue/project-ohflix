@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css"/>
-    <link rel="stylesheet" href="/static/css/account-view.css"/>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/account-view.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>account</title>
 </head>
 
@@ -17,10 +15,10 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="/static/images/logo.png" alt="오류" class="nav-logo"/>
+            <img src="images/logo.png" alt="오류" class="nav-logo" />
         </div>
         <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
+            <img src="images/profile.png" alt="오류" class="nav-profile" />
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -47,9 +45,6 @@
                 </li>
                 <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
                 <li>
-                    <i class="fa-solid fa-house-laptop main-left-icon"></i>디바이스
-                </li>
-                <li>
                     <i class="fa-solid fa-users-rectangle main-left-icon"></i>프로필
                 </li>
             </ul>
@@ -66,16 +61,16 @@
                 <div>멤버십 시작:2020년 1월</div>
             </div>
             <div class="membership-box m-20">
-                <div class="mb-10">프리미엄 멤버십</div>
-                <div class="mb-10">다음 결제일 : 2024년 6월 24일</div>
-                <div class="mb-15">
-                    <i class="fa-regular fa-credit-card"></i>···· ···· ···· 1234
+                <div class="pointer">
+                    <div class="mb-10">프리미엄 멤버십</div>
+                    <div class="mb-10">다음 결제일 : 2024년 6월 24일</div>
+                    <div class="mb-15">
+                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· 1234
+                    </div>
                 </div>
-                <hr class="mb-15"/>
-                <a href="/51">
-                    <div>멤버십 관리</div>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </a>
+
+                <hr class="mb-15" />
+                <div class="pointer">멤버십 관리<i class="fa-solid fa-chevron-right"></i></div>
             </div>
         </div>
 
@@ -83,49 +78,42 @@
         <div class="mb-20">빠른 링크</div>
         <div class="main-right-div2 mb-20">
             <div class="fast-link m-20">
-                <a href="/13">
-                    <div class="mb-20">
-                        <div>
-                            <i class="fa-solid fa-credit-card"></i>
-                            결제 수단 관리
-                        </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="fast-link-div mb-20 pointer">
+                    <div class="pointer">
+                        <i class="fa-solid fa-credit-card"></i>
+                        결제 수단 관리
                     </div>
-                </a>
-                <hr class="mb-20"/>
-
-                <a href="/21">
-                    <div class="mb-20">
-                        <div>
-                            <i class="fa-solid fa-lock"></i>
-                            비밀번호 업데이트
-                        </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
+                    <div><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+                <hr class="mb-20" />
+                <div class="fast-link-div mb-20 pointer">
+                    <div class="pointer">
+                        <i class="fa-solid fa-lock"></i>
+                        비밀번호 업데이트
                     </div>
-                </a>
-                <hr class="mb-20"/>
-                <div class="mb-20">
-                    <div>
+                    <div><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+                <hr class="mb-20" />
+                <div class="fast-link-div mb-20 pointer">
+                    <div class="pointer">
                         <i class="fa-solid fa-person-circle-exclamation"></i>
                         자녀 보호 설정 조정
                     </div>
                     <div><i class="fa-solid fa-chevron-right"></i></div>
                 </div>
-                <hr class="mb-20"/>
-                <a href="/52">
-                    <div class="mb-20">
-                        <div>
-                            <i class="fa-solid fa-gear"></i>
-                            설정 변경
-                        </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
+                <hr class="mb-20" />
+                <div class="fast-link-div mb-20 pointer">
+                    <div class="pointer">
+                        <i class="fa-solid fa-gear"></i>
+                        설정 변경
                     </div>
-                </a>
+                    <div><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
             </div>
         </div>
 
         <div class="main-right-div3 mb-20">
-            <div class="profile-manage m-20">
+            <div class="profile-manage m-20 pointer">
                 프로필 관리
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
@@ -138,7 +126,7 @@
 
 <!-- hr -->
 <div class="mt-70">
-    <hr/>
+    <hr />
 </div>
 <!-- hr -->
 
@@ -164,4 +152,5 @@
 </footer>
 <!-- footer end -->
 </body>
+
 </html>
