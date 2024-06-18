@@ -42,6 +42,12 @@ public class MainController {
         return "profile-icons";
     }
 
+    @GetMapping("/31")
+    public String getPayment() {
+        return "payment-form";
+    }
+
+
     // 승호
     @GetMapping("/40")
     public String getOuterPage() {
