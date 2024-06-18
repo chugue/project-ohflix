@@ -27,6 +27,11 @@ public class MainController {
         return "paymethod-manage";
     }
 
+    @GetMapping("/14")
+    public String getPaymethodUpdateForm() {
+        return "paymethod-update-form";
+    }
+
     @GetMapping("/21")
     public String getPasswordChangeForm() {
         return "password-change-form";
