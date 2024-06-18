@@ -42,6 +42,14 @@ public class MainController {
         return "profile-icons";
     }
 
+    // 승호
+    @GetMapping("/40")
+    public String getOuterPage() {
+        return "outer-page";
+    }
+
+
+
 
     // account
     @GetMapping("/50")
