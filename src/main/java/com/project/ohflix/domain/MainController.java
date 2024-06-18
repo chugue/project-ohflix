@@ -47,6 +47,10 @@ public class MainController {
     public String getOuterPage() {
         return "outer-page";
     }
+    @GetMapping("/41")
+    public String getMyList() {
+        return "my-list";
+    }
 
 
 
