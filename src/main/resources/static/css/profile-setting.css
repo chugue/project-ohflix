@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+    color: inherit; /* 링크 텍스트 색상을 부모 요소의 색상으로 상속 */
+}
+
 /* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
 .mt-70{
     margin-top: 70px;
@@ -38,6 +43,10 @@
 
 .fw-bold {
     font-weight: bold;
+}
+
+.pointer{
+    cursor: pointer;
 }
 
 hr{
@@ -132,10 +141,15 @@ main {
 }
 
 .main-left-text {
-    margin-top: 11px;
-    margin-bottom: 50px;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
+.main-left-text:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+}
 ul {
     list-style: none;
     /* 기본 스타일 제거 */
@@ -150,7 +164,16 @@ ul {
 
 ul.custom-list li {
     font-size: 17px;
-    margin-bottom: 30px;
+}
+
+li {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
 
 .main-left-icon {
@@ -267,7 +290,11 @@ ul.custom-list li {
     align-items: center;
 }
 
-.setting-div i {
+.setting-div span {
+    width: 20px;
+}
+
+.setting-text i {
     margin-right: 10px;
     width: 20px;
 }

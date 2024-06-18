@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="/static/css/profile-setting.css" />
+    <link rel="stylesheet" href="/static/css/account-security.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,60 +54,58 @@
     <!-- main div right -->
     <div class="main-div">
         <!-- membership inforamtion -->
-        <div class="main-right-header mb-20">프로필</div>
-        <div class="main-profile mb-20">
-            <div>
-                윤둉님
-            </div>
-            <div>
-                <img src="images/profile.png" alt="오류" class="nav-profile" />
-            </div>
-        </div>
+        <div class="main-right-header mb-20">보안</div>
+        <div class="mb-20">계정 정보</div>
 
         <!-- fast link -->
         <div class="main-right-div2 mb-20">
-            <div class="fast-link m-20">
-                <div class="fast-link-div mb-20 pointer">
-                    <div>
-                        <i class="fa-regular fa-envelope"></i>
-                        이메일
+            <div class="setting m-20">
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <i class="fa-solid fa-lock"></i>
+                        <div>비밀번호</div>
                     </div>
-                    <div><i class="fa-solid fa-chevron-right"></i></div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+
+                </div>
+                <hr class="mb-20" />
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div class="notification-dot"></div>
+                        </div>
+                        <div class="text-container">
+                            <div>이메일</div>
+                            <div>ohfilx@gmail.com</div>
+                        </div>
+                    </div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                </div>
+                <hr class="mb-20" />
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <div class="text-container">
+                            <div>휴대폰</div>
+                            <div>010-1234-5678</div>
+                        </div>
+                    </div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+
                 </div>
             </div>
         </div>
 
-        <div class="mb-20">설정</div>
+        <div class="mb-20">엑세스 및 개인정보</div>
         <div class="main-right-div3 mb-20">
             <div class="setting m-20">
                 <div class="setting-div mb-20 pointer">
                     <div class="setting-text">
-                        <i class="fa-regular fa-circle-xmark"></i>
+                        <i class="fa-solid fa-shield-halved"></i>
                         <div class="text-container">
-                            <div>시청 제한</div>
-                            <div>관람등급 및 콘텐츠 제한 변경</div>
-                        </div>
-                    </div>
-                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                </div>
-                <hr class="mb-20" />
-                <div class="setting-div mb-20 pointer">
-                    <div class="setting-text">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <div class="text-container">
-                            <div>시청 기록</div>
-                            <div>시청 기록 및 평가 관리</div>
-                        </div>
-                    </div>
-                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                </div>
-                <hr class="mb-20" />
-                <div class="setting-div mb-20 pointer">
-                    <div class="setting-text">
-                        <i class="fa-solid fa-lock"></i>
-                        <div class="text-container">
-                            <div>개인 정보 및 데이터 설정</div>
-                            <div>개인 정보 이용 관리</div>
+                            <div>개인 정보 및 액세스</div>
+                            <div>개인 정보 사본 요청</div>
                         </div>
                     </div>
                     <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
@@ -118,7 +116,7 @@
         <div class="main-right-div4 mb-20 pointer">
             <div class="profile-cancel m-15">
                 <i class="fa-regular fa-trash-can"></i>
-                프로필 삭제
+                계정 삭제
             </div>
         </div>
     </div>

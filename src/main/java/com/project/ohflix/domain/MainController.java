@@ -63,6 +63,17 @@ public class MainController {
         return "account-membership";
     }
 
+    // account
+    @GetMapping("/52")
+    public String profileSetting() {
+        return "profile-setting";
+    }
+
+    // account
+    @GetMapping("/53")
+    public String accountSecurity() {
+        return "account-security";
+    }
 
     @GetMapping("/3")
     public String getContentDetails() {
@@ -74,10 +85,7 @@ public class MainController {
         return "profile-form";
     }
 
-    @GetMapping("/52")
-    public String profileSetting() {
-        return "profile-setting";
-    }
+
 
 
 }
