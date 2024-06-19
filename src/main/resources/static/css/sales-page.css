@@ -181,11 +181,13 @@ li:hover {
 }
 
 /* """"""""""""""""""""""""""main - right"""""""""""""""""""""""""" */
-
-.title {
-    display: flex;
+.main-right-margin {
+    display: inline-block;
     justify-content: center;
     align-items: center;
+    margin-right: 30px;
+}
+.title {
     font-size: 30px;
     font-weight: 700;
     text-align: center;
@@ -197,8 +199,6 @@ li:hover {
 }
 
 .canvas-container {
-    justify-content: center;
-    align-items: center;
     margin-bottom: 50px;
 }
 
