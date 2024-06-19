@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/admin-upload.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>account</title>
+</head>
+
+<body>
+<!-- nav start -->
+<nav>
+    <div class="nav-div">
+        <div>
+            <img src="images/logo.png" alt="오류" class="nav-logo" />
+        </div>
+        <div>
+            <img src="images/profile.png" alt="오류" class="nav-profile" />
+            <div>
+                <i class="fa-solid fa-caret-down fa-xs"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- nav end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- main start -->
+<main>
+    <!-- main div left -->
+    <div class="main-div">
+        <div class="main-left-top">
+            <div class="main-left-text">
+                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
+                돌아가기
+            </div>
+            <ul class="custom-list">
+                <li><i class="fa-solid fa-upload"></i>영상 업로드</li>
+                <li>
+                    <i class="fa-solid fa-photo-film"></i>영상 관리
+                </li>
+                <li>
+                    <i class="fa-solid fa-users-gear"></i>회원 관리
+                </li>
+                <li>
+                    <i class="fa-solid fa-comment-dots"></i>멤버십 해지 요청
+                </li>
+                <li>
+                    <i class="fa-solid fa-chart-line"></i>매출 관리
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- main div right -->
+
+    <div class="main-div">
+        <!-- membership inforamtion -->
+        <div class="main-right-header mb-20">영화 등록하기</div>
+
+        <!-- 영상 업로드 -->
+        <div class="mb-20">영상 업로드</div>
+        <div class="main-right-div1 mb-20">
+            <div class="membership-deco ml-20"></div>
+
+            <div class="membership-box m-20 pointer">
+
+                <form method="post" enctype="multipart/form-data" action="/upload/movie">
+                    <div class="mb-20 fast-link-div pointer">
+                        <div>
+                            <label for="file-upload" class="custom-file-upload">
+                                파일 선택
+                            </label>
+                            <input id="file-upload" type="file" name="file" />
+                            <span class="file-name1 file-name" id="file-name1">영화 선택하기</span>
+                        </div>
+                        <div>
+                            <label for="upload-btn" class="custom-upload-button">영상 업로드 하기</label>
+                            <button id="upload-btn" type="submit" class="custom-upload-button">영상 업로드 하기</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+
+        <!-- 이미지 업로드 -->
+
+        <form method="post" enctype="multipart/form-data" action="/upload/info">
+
+            <div class="mb-20">이미지 업로드</div>
+            <div class="main-right-div1 mb-20">
+                <div class="membership-deco ml-20"></div>
+
+                <div class="membership-box m-20 pointer">
+
+
+
+                        <div class="mb-20 fast-link-div pointer">
+                            <div>
+                                <label for="image-upload1" class="custom-file-upload">
+                                    파일 선택
+                                </label>
+                                <input id="image-upload1" type="file" name="file" />
+                                <span class="file-name2 file-name" id="file-name2">썸네일 선택하기</span>
+                            </div>
+
+
+                        </div>
+                        <hr class="mb-20">
+
+
+                    <div class="mb-20 fast-link-div pointer">
+                        <div>
+                            <label for="image-upload2" class="custom-file-upload">
+                                파일 선택
+                            </label>
+                            <input id="image-upload2" type="file" name="file" />
+                            <span class="file-name3 file-name" id="file-name3">작은 썸네일 선택하기</span>
+                        </div>
+
+
+                    </div>
+                    <hr class="mb-20">
+                    <div class="mb-20 fast-link-div pointer">
+                        <div>
+                            <label for="image-upload3" class="custom-file-upload">
+                                파일 선택
+                            </label>
+                            <input id="image-upload3" type="file" name="file" />
+                            <span class="file-name4 file-name" id="file-name4">대표 사진 선택하기 (가로사이즈)</span>
+                        </div>
+
+                    </div>
+                    <hr class="mb-20">
+                    <div class="mb-20 fast-link-div pointer">
+                        <div>
+                            <label for="image-upload4" class="custom-file-upload">
+                                파일 선택
+                            </label>
+                            <input id="image-upload4" type="file" name="file" />
+                            <span class="file-name5 file-name" id="file-name5">대표 사진 선택하기 (세로사이즈 작은 ver)</span>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- fast link -->
+            <div class="mb-20">영화 상세 정보</div>
+            <div class="main-right-div2 mb-20">
+                <div class="fast-link ml-20 mr-20">
+                    <table class="movie-info-table">
+                        <tr>
+                            <td>영 화 제 목</td>
+                            <td><input type="text" name="title" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>제 작 년 도</td>
+                            <td>
+                                <select id="yearSelect" name="year" class="movie-info">
+                                    <option value="">연도 선택</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>상 영 시 간</td>
+                            <td><input type="number" name="playtime" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>관 람 등 급</td>
+                            <td>
+                                <select name="rate" class="movie-info">
+                                    <option value="">관람 등급 선택</option>
+                                    <option value="전체 관람가">전체 관람가</option>
+                                    <option value="12세 관람가">12세 관람가</option>
+                                    <option value="15세 관람가">15세 관람가</option>
+                                    <option value="청소년 관람 불가">청소년 관람 불가</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>장 르</td>
+                            <td><input type="text" name="genre" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>감 독</td>
+                            <td><input type="text" name="director" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>주 연 배 우</td>
+                            <td><input type="text" name="actors" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>각 본</td>
+                            <td><input type="text" name="writers" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>연 출</td>
+                            <td><input type="text" name="subdirector" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td>특 징</td>
+                            <td><input type="text" name="characteristic" class="movie-info"></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle; padding-bottom: 5px;">소 개</td>
+                            <td><textarea name="introduction" id="info" class="movie-info"
+                                          style="height: 100px;"></textarea></td>
+                        </tr>
+
+                    </table>
+
+
+                </div>
+            </div>
+
+
+
+            <label for="upload-info-btn" class="membership-cancel custom-upload-button">영화 정보 등록</label>
+            <button id="upload-info-btn" type="submit" class="custom-upload-button">영화 정보 등록</button>
+
+        </form>
+    </div>
+</main>
+<!-- main end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- hr -->
+<div class="mt-70">
+    <hr />
+</div>
+<!-- hr -->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- footer start -->
+<footer>
+    <div>
+        <p>
+            넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
+            제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
+        </p>
+        <p>대표: 레지널드 숀 톰프슨</p>
+        <p>이메일 주소: korea@netflix.com</p>
+        <p>
+            주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
+            우편번호 03161
+        </p>
+        <p>사업자등록번호: 165-87-00119</p>
+        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+        <p>공정거래위원회 웹사이트</p>
+    </div>
+</footer>
+<!-- footer end -->
+
+<!-- 자바 스크립트 -->
+<script>
+    // 영화 업로드
+    document.getElementById('file-upload').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name1').textContent = fileName;
+    });
+
+    // 썸네일
+    document.getElementById('image-upload1').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name2').textContent = fileName;
+    });
+
+    // 작은 썸네일
+    document.getElementById('image-upload2').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name3').textContent = fileName;
+    });
+
+    // 대표 사진
+    document.getElementById('image-upload3').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name4').textContent = fileName;
+    });
+
+    // 대표사진2
+    document.getElementById('image-upload4').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name5').textContent = fileName;
+    });
+
+
+
+
+    // 현재 연도 구하기
+    var currentYear = new Date().getFullYear();
+    // select 요소 가져오기
+    var selectElement = document.getElementById('yearSelect');
+
+    // 옵션 추가: 1900년부터 현재 연도까지
+    for (var year = 1900; year <= currentYear; year++) {
+        var option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        selectElement.appendChild(option);
+    }
+
+
+
+</script>
+</body>
+
+</html>
