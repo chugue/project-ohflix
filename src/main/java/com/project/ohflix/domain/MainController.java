@@ -30,6 +30,10 @@ public class MainController {
     public String getPaymethodUpdateForm() {
         return "paymethod-update-form";
     }
+    @GetMapping("/15")
+    public String getUserCheck() {
+        return "user-check";
+    }
 
 
 
