@@ -17,12 +17,12 @@ $(document).ready(function () {
 
         // 'searchText'가 ''이면 숨기기, 아니면 텍스트와 표시
         if (searchText !== '') {
-            $('.search-section').show();
+            $('#search-section').show();
             $('#search-text').text(searchText).show();
             $('.category').hide();
             $('.movie').hide();
         } else {
-            $('.search-section').hide();
+            $('#search-section').hide();
             $('.category').show();
             $('.movie').show();
         }
