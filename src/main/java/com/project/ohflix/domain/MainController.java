@@ -42,6 +42,11 @@ public class MainController {
         return "profile-icons";
     }
 
+    @GetMapping("/23")
+    public String getRestrictionPass() {
+        return "restriction-pass";
+    }
+
     @GetMapping("/31")
     public String getPayment() {
         return "payment-form";
