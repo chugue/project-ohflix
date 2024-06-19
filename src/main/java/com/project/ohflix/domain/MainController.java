@@ -85,7 +85,7 @@ public class MainController {
     }
     @GetMapping("/42")
     public String getLatest() {
-        return "latest";
+        return "content-latest";
     }
 
 
