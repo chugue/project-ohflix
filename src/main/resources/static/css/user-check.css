@@ -1,0 +1,283 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+.container {
+    max-width: 800px;
+    min-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container p {
+    text-align: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 150px;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.verification {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 600px;
+    max-width: 800px;
+}
+
+.dropdown-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.profile:hover .dropdown-content {
+    display: block;
+}
+
+.profile:hover .dropdown-content {
+    display: block;
+}
+
+.profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+header {
+    background-color: #141414;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.profile:hover .dropdown-content {
+    display: block;
+}
+
+.icon img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+}
+
+.options {
+    margin: 20px 0;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    height: 80px;
+    border: white;
+    gap: 30px;
+}
+
+.option:hover {
+    background-color: #f7f7f7;
+}
+
+.option-element {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    align-items: center;
+}
+
+.arrow-right {
+    height: 30px;
+    align-self: center;
+}
+
+.option h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.option img {
+    width: 30px;
+    margin-right: 10px;
+    color: #8f8c8c;
+}
+
+.option div {
+    text-align: left;
+}
+
+.option p {
+    margin: 0;
+    text-align: left;
+}
+
+.help {
+    margin-top: 40px;
+}
+
+.help a {
+    color: #e50914;
+    text-decoration: none;
+}
+
+footer {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    margin: 0 10px;
+    color: #999;
+    text-decoration: none;
+}
+
+.service-code {
+    margin-bottom: 20px;
+}
+
+.company-info p {
+    margin: 5px 0;
+}
+
+.white-footer {
+    background-color: #f8f8f8;
+    color: #666;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e6e6e6;
+}
+
+.white-footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start; /* 수정된 부분 */
+    padding: 20px 100px 20px 100px;
+    width: 100%;
+}
+
+.white-footer-container ul li {
+    margin: 0 10px;
+}
+
+.white-footer-container ul li a {
+    color: #0071eb;
+    text-decoration: none;
+}
+
+.white-footer-container ul li a:hover {
+    text-decoration: underline;
+}
+
+.white-footer-container p {
+    margin: 5px 0;
+}
+
+.grid-list-container {
+    width: 100%;
+}
+
+.grid-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 두 개의 열로 나누기 */
+    gap: 10px; /* 항목 간격 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.footer-bt {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    font-size: 12px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix 시청 제한 설정</title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/restriction-manage.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="/static/images/logo.png" alt="Netflix Logo" class="logo">
+            <div class="profile">
+                <img src="/static/images/netflix-profile.png" alt="Profile Icon" class="profile-icon">
+                <button class="dropdown-button">
+                    <span class="dropdown-icon">▼</span>
+                    <div class="dropdown-content">
+                        <a href="#">키즈</a>
+                        <a href="#">프로필 관리</a>
+                        <a href="#">프로필 이전</a>
+                        <a href="#">계정</a>
+                        <a href="#">고객 센터</a>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>시청 제한</h1>
+            <h2>박동기 프로필의 관람등급</h2>
+            <p>이 프로필에서는 <strong>15+</strong> 등급 이하의 콘텐츠만 표시됩니다.</p>
+            <section class="restriction">
+                <div class="slider-container">
+                    <input type="range" min="0" max="2" value="0" class="slider" id="ageRange">
+                    <div class="labels">
+                        <span class="label" style="left: 0%;">전체관람가</span>
+                        <span class="label" style="left: 50%;">15세이상</span>
+                        <span class="label" style="left: 100%;">19세이상</span>
+                    </div>
+                </div>
+            </section>
+            <div class="buttons">
+                <button class="save-button">저장</button>
+                <button class="cancel-button">취소</button>
+            </div>
+        </div>
+    </main>
+    <hr class="divider">
+    <footer>
+        <div class="footer-links">
+            <p class="footer-subtitle">질문이 있으신가요? 고객 센터에 문의하세요.</p>
+            <div class="link-group">
+                <a href="#">음성 및 자막</a>
+                <a href="#">고객 센터</a>
+                <a href="#">기프트카드</a>
+                <a href="#">투자 정보(IR)</a>
+            </div>
+            <div class="link-group">
+                <a href="#">미디어 센터</a>
+                <a href="#">입사 정보</a>
+                <a href="#">쿠키 설정</a>
+                <a href="#">이용 약관</a>
+            </div>
+            <div class="link-group">
+                <a href="#">개인정보 처리방침</a>
+            </div>
+        </div>
+        <div class="service-code">
+            <p>서비스 코드</p> 
+        </div>
+        <div class="service-code-content">
+            <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</p>
+            <p>대표: 레지널드 숀 톰프슨</p>
+            <p>이메일 주소: korea@netflix.com</p>
+            <p>주소: 대한민국 서울특별시 종로구 종로 26, 그랑서울 A동 20층 우편번호 03161</p>
+            <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+            <p>공정거래위원회 웹사이트</p>
+        </div>  
+    </footer>
+    <script src="/static/js/restriction-manage.js"></script>
+</body>
+</html>
