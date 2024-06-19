@@ -68,7 +68,10 @@ public class MainController {
     public String getSales() {
         return "sales-page";
     }
-
+    @GetMapping("/33")
+    public String getMembers() {
+        return "members-manage";
+    }
 
     // 승호
     @GetMapping("/")
