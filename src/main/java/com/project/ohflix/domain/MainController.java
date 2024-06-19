@@ -46,6 +46,11 @@ public class MainController {
 
 
     // 지영
+    @GetMapping("/23")
+    public String getRestrictionPass() {
+        return "restriction-pass";
+    }
+
     @GetMapping("/31")
     public String getPayment() {
         return "payment-form";

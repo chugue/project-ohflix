@@ -57,11 +57,14 @@ body {
     border: none;
     color: #fff;
 }
-
+.login-btn:hover{
+    background-color: rgb(151, 6, 15);
+    cursor:pointer;
+}
 /* 헤더 끝 */
 /* 섹션 1 */
 #main-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/login-backgroun.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/images/login-backgroun.jpg");
     background-size: cover;
     background-position: center;
     min-height: 43.75rem;
@@ -113,7 +116,8 @@ section h3 {
 }
 
 .email-start button:hover {
-    background-color: rgb(151, 6, 15)
+    background-color: rgb(151, 6, 15);
+    cursor:pointer;
 }
 
 #banner-section {

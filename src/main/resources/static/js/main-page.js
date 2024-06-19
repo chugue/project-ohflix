@@ -27,12 +27,12 @@ $(document).ready(function () {
 
         // 'searchText'가 ''이면 숨기기, 아니면 텍스트와 표시
         if (searchText !== '') {
-            $('.search-category').show();
+            $('.search-section').show();
             $('#search-text').text(searchText).show();
             $('.category').hide();
             $('.movie').hide();
         } else {
-            $('.search-category').hide();
+            $('.search-section').hide();
             $('.category').show();
             $('.movie').show();
         }
@@ -40,63 +40,63 @@ $(document).ready(function () {
 });
 
 // 이미지 슬라이드
-// $(document).ready(function () {
-//     var pageIndex = 0;
-//     var itemsPerPage = 5; // 한 페이지 보일 아이템 수
-//     var totalItems = $('#top10-movie img').length;
+$(document).ready(function () {
+    var pageIndex = 0;
+    var itemsPerPage = 5; // 한 페이지 보일 아이템 수
+    var totalItems = $('#top10-movie img').length;
 
-//     // 초기 상태
-//     showItems(pageIndex);
+    // 초기 상태
+    showItems(pageIndex);
 
-//     // 다음, 이전 넘기기 버튼
-//     $('#next5btn').on('click', function () {
-//         pageIndex = (pageIndex + itemsPerPage) % totalItems;
-//         showItems(pageIndex);
-//     });
-//     $('#prev5btn').on('click', function () {
-//         pageIndex = (pageIndex - itemsPerPage + totalItems) % totalItems;
-//         if (pageIndex < 0) {
-//             pageIndex += totalItems;
-//         }
-//         showItems(pageIndex);
-//     });
+    // 다음, 이전 넘기기 버튼
+    $('#next5btn').on('click', function () {
+        pageIndex = (pageIndex + itemsPerPage) % totalItems;
+        showItems(pageIndex);
+    });
+    $('#prev5btn').on('click', function () {
+        pageIndex = (pageIndex - itemsPerPage + totalItems) % totalItems;
+        if (pageIndex < 0) {
+            pageIndex += totalItems;
+        }
+        showItems(pageIndex);
+    });
 
-//     // 이미지 보여주기 function
-//     function showItems(startIndex) {
-//         var $items = $('#top10-movie img');
-//         $items.fadeOut(); // 모든 이미지 숨기기
+    // 이미지 보여주기 function
+    function showItems(startIndex) {
+        var $items = $('#top10-movie img');
+        $items.fadeOut(); // 모든 이미지 숨기기
 
-//         // startIndex부터 itemsPerPage 만큼의 이미지를 보여주기
-//         for (var i = startIndex; i < startIndex + itemsPerPage; i++) {
-//             $items.eq(i % totalItems).fadeIn();
-//         }
-//         // 버튼의 활성 상태 설정
-//         // $('#prev5btn').toggle(startIndex > 0);
-//     }
-// });
+        // startIndex부터 itemsPerPage 만큼의 이미지를 보여주기
+        for (var i = startIndex; i < startIndex + itemsPerPage; i++) {
+            $items.eq(i % totalItems).fadeIn();
+        }
+        // 버튼의 활성 상태 설정
+        // $('#prev5btn').toggle(startIndex > 0);
+    }
+});
 
 // 이미지 슬라이드
-$(document).ready(function () {
-    var $prevBtn = $('#prev5btn');
-    var totalImages = $('#top10-movie img').length;
-    var itemsPerPage = 5; // 한 페이지 아이템 수
-    let pageIndex = 0;
-
-    // item list 보여주기
-    function showItems() {
-        const offset = -pageIndex * (100 / itemsPerPage);
-        $('#top10-movie').css('transform', `translateX(${offset}%)`);
-    }
-    // 다음 5개 item
-    $('#next5btn').on('click', function(){
-        pageIndex = (pageIndex + itemsPerPage) % totalImages;
-        showItems();
-    });
-    // 이전 5개 item
-    $('#prev5btn').on('click', function(){
-        pageIndex = (pageIndex - itemsPerPage + totalImages) % totalImages;
-        showItems();
-    });
-    // 초기화 TODO : 필요한가?
-    // showItems();
-});
+// $(document).ready(function () {
+//     var $prevBtn = $('#prev5btn');
+//     var totalImages = $('#top10-movie img').length;
+//     var itemsPerPage = 5; // 한 페이지 아이템 수
+//     let pageIndex = 0;
+//
+//     // item list 보여주기
+//     function showItems() {
+//         const offset = -pageIndex * (100 / itemsPerPage);
+//         $('#top10-movie').css('transform', `translateX(${offset}%)`);
+//     }
+//     // 다음 5개 item
+//     $('#next5btn').on('click', function(){
+//         pageIndex = (pageIndex + itemsPerPage) % totalImages;
+//         showItems();
+//     });
+//     // 이전 5개 item
+//     $('#prev5btn').on('click', function(){
+//         pageIndex = (pageIndex - itemsPerPage + totalImages) % totalImages;
+//         showItems();
+//     });
+//     // 초기화 TODO : 필요한가?
+//     // showItems();
+// });

@@ -27,7 +27,6 @@
         <ul>
             <li><a href="#">홈</a></li>
             <li><a href="#">영화</a></li>
-            <li><a href="#">TV 프로그램</a></li>
             <li><a href="#">최신 콘텐츠</a></li>
             <li><a href="/41">내가 찜한 콘텐츠</a></li>
         </ul>
@@ -38,6 +37,7 @@
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" class="search-input" placeholder="제목, 사람, 장르">
         </div>
+        <!--  알람 드롭 다운 메뉴  -->
         <div class="dropdown">
             <button class="dropdown-button"><i class="far fa-bell"></i></button>
             <div class="dropdown-notification">
@@ -89,10 +89,10 @@
                         <div class="notification-time">18일</div>
                     </div>
                 </div>
-
-                <!-- Repeat for other notification items -->
             </div>
         </div>
+        <!--  알람 드롭 다운 메뉴 종료  -->
+        <!--  프로필 드롭 다운 메뉴 시작  -->
         <div class="dropdown">
             <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
             <div class="dropdown-content">
@@ -102,6 +102,8 @@
                 <a href="#">넷플릭스에서 로그아웃</a>
             </div>
         </div>
+        <!--  프로필 드롭 다운 메뉴 종료  -->
+
         <script>
             document.querySelector('.fa-solid').addEventListener('click', function () {
             const searchInput = document.querySelector('.search-input');
@@ -111,16 +113,18 @@
                 searchInput.classList.add('show');
                 searchInput.focus();
             }
-        });</script>
+        });
+        </script>
     </div>
 </header>
 
 <!-- 메인 -->
 <main>
     <!-- 자동 재생 영상 섹션 -->
-    <!-- TODO : 이미지 대신 영화넣기 -->
     <section class="movie">
-        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>
+<!--        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>-->
+        <video width="100" src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
+        </video>
         <div class="movie_info">
             <img src="/static/images/oppenheimer_logo.jpg" alt=""/>
             <p>오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
@@ -175,7 +179,32 @@
         </div>
     </section>
 </main>
-
+<!-- 검색결과섹션 -->
+<section class="search-section">
+    <p class="search-info">더 다양한 검색어가 필요하시다면! : <a id="search-text" href="#"></a></p>
+    <div class="movies">
+        <div class="scroll">
+            <img src="/static/images/new_contents/new_contents_01.jpg" alt="서울의 봄" data-title="서울의 봄" data-genre="영화">
+            <img src="/static/images/new_contents/new_contents_02.jpg" alt="하이라키" data-title="하이라키" data-genre="시리즈">
+            <img src="/static/images/new_contents/new_contents_03.jpg" alt="끝내주는 해결사" data-title="끝내주는 해결사"
+                 data-genre="시리즈">
+            <img src="/static/images/new_contents/new_contents_04.jpg" alt="투르 드 프랑스" data-title="투르 드 프랑스"
+                 data-genre="시리즈">
+            <img src="/static/images/new_contents/new_contents_05.jpg" alt="한마바키" data-title="한마바키" data-genre="애니메이션">
+            <img src="/static/images/new_contents/new_contents_06.jpg" alt="위대한 쇼맨" data-title="위대한 쇼맨" data-genre="영화">
+            <img src="/static/images/new_contents/new_contents_07.jpg" alt="테라코타 전사들의 수수께끼" data-title="테라코타 전사들의 수수께끼"
+                 data-genre="다큐">
+            <img src="/static/images/new_contents/new_contents_08.jpg" alt="기생수 더 그레이" data-title="기생수 더 그레이"
+                 data-genre="시리즈">
+            <img src="/static/images/new_contents/new_contents_09.jpg" alt="정신병동에도 아침이 와요" data-title="정신병동에도 아침이 와요"
+                 data-genre="영화">
+            <img src="/static/images/new_contents/new_contents_10.jpg" alt="슬기로운 감빵생활" data-title="슬기로운 감빵생활"
+                 data-genre="시리즈">
+            <img src="/static/images/new_contents/new_contents_11.jpg" alt="신과 함께 죄와 벌" data-title="신과 함께 죄와 벌"
+                 data-genre="영화">
+        </div>
+    </div>
+</section>
 <!-- 푸터 -->
 <footer>
     <div class="footer-sns">
