@@ -28,7 +28,7 @@ body {
     color: #fff;
 }
 
-/* 헤더 */
+/* 헤더 시작 */
 header {
     height: 6vw;
     display: flex;
@@ -40,20 +40,7 @@ header {
     font-size: 1.5vw;
 }
 
-.movie {
-    position: relative;
-    color: white;
-    height: 40vw;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-}
 
-.movie video {
-    height: 80vw;
-    opacity: .8;
-}
 
 .logo {
     width: 12vw;
@@ -138,12 +125,6 @@ nav ul li a {
     color: #f00;
 }
 
-
-
-/* .right{
-    float:right;
-} */
-/*drop down button 시작*/
 .dropdown-button {
     cursor: pointer;
     width: 3vw;
@@ -174,10 +155,6 @@ nav ul li a {
 
 }
 
-.right_menu div {
-    margin-right: 2vw;
-    /* 각 메뉴 아이템 사이의 간격을 설정합니다 */
-}
 
 /*drop down account*/
 .dropdown-content {
@@ -293,14 +270,23 @@ nav ul li a {
 .notification-subtitle:hover {
     color: aliceblue;
 }
-
 /*drop down button 끝*/
+/* 헤더 종료 */
 
-/*drop down button*/
 /* 영상 섹션 시작 */
+.movie {
+    position: relative;
+    color: white;
+    height: 40vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
 
-.movie img {
-    width: 100%;
+.movie video {
+    height: 80vw;
+    opacity: .8;
 }
 
 .movie_info {
@@ -340,8 +326,8 @@ nav ul li a {
     color: #fff;
     background-color: #6d6d6eb3;
 }
-
 /* 영상 섹션 종료 */
+
 /* 카테고리 섹션 시작 */
 .category {
     position: relative;
@@ -366,35 +352,19 @@ nav ul li a {
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {}
-
-/* #prev5btn {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 4%;
-  height: 100%;
-
-  background-color: transparent;
-  color: transparent;
-  border: none;
-  padding: 10px;
-  font-size: 30px;
-  cursor: pointer;
-  transition: .2s;
-} */
-
-/* #next5btn:hover, #prev5btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-} */
-
-
-/* 검색 카테고리 섹션 */
-.search-section {
+/* 검색 섹션 */
+.margin-section {
     margin: 0px 4% 10px;
+}
+.margin-section h2{
+    padding: 20px 0;
+    font-size: 24px;
+}
+
+#search-section{
     display: none;
 }
+
 
 .item-list {
     display: flex;
@@ -435,10 +405,11 @@ nav ul li a {
         width: calc(33.333% - 0.4vw);
     }
 }
+/* 서치 섹션 종료 */
+/* 카테고리 종료 */
 
 
-
-/* 푸터 */
+/* 푸터 시작 */
 footer {
     max-width: 980px;
     margin: 20px auto 0;
