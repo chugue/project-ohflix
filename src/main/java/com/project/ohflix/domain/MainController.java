@@ -47,9 +47,14 @@ public class MainController {
         return "restriction-pass";
     }
 
+
     @GetMapping("/31")
     public String getPayment() {
         return "payment-form";
+    }
+    @GetMapping("/32")
+    public String getSales() {
+        return "sales-page";
     }
 
 
