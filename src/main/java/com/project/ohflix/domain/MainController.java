@@ -87,6 +87,10 @@ public class MainController {
     public String getLatest() {
         return "latest";
     }
+    @GetMapping("/43")
+    public String getCancelplan() {
+        return "cancelplan";
+    }
 
 
 
