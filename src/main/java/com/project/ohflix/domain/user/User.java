@@ -1,5 +1,8 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix.domain._enums.Paymethod;
+import com.project.ohflix.domain._enums.Status;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +25,9 @@ public class User {
 
     @Column(nullable = false)
     private String username;
+
+    @OneToOne
+    private ProfileIcon profileIcon;
 
     @Enumerated(EnumType.STRING)
     private Paymethod paymethod;
@@ -46,13 +52,5 @@ public class User {
         this.loginSave = loginSave;
         this.isAutoPlay = isAutoPlay;
         this.isSubscribe = isSubscribe;
-    }
-
-    public enum Status {
-        USER, ADMIN
-    }
-
-    public enum Paymethod {
-        KAKAOPAY, CREDITCARD
     }
 }
