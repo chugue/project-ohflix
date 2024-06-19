@@ -241,9 +241,9 @@ button[type="submit"]{
     display: inline-block;
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #000000;
+    background-color: #d10000;
     color: white;
-    border: 1px solid #929292;
+    border: 1px solid #d10000;
     border-radius: 5px;
     font-size: 16px;
     text-align: center;
@@ -251,12 +251,12 @@ button[type="submit"]{
 }
 
 .custom-upload-button:hover {
-    background-color: #4b4b4b;
+    background-color: #B9090B;
 }
 
 .membership-deco {
     font-size: 13px;
-    background: linear-gradient(to right, #ffffff, #000000);
+    background: linear-gradient(to right, #ffffff, #B9090B);
     border-radius: 1000000000px 1000000000px 0 0;
     width: auto;
     height: 0.4rem;
