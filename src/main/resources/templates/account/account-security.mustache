@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="/static/css/account-membership.css" />
+    <link rel="stylesheet" href="/static/css/account-security.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,10 +15,10 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="images/logo.png" alt="오류" class="nav-logo" />
+            <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
         </div>
         <div>
-            <img src="images/profile.png" alt="오류" class="nav-profile" />
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -54,58 +54,74 @@
     <!-- main div right -->
     <div class="main-div">
         <!-- membership inforamtion -->
-        <div class="main-right-header mb-20">멤버십</div>
-        <div class="mb-20">멤버십 상세정보</div>
-        <div class="main-right-div1 mb-20">
-            <div class="membership-deco">
-            </div>
-
-            <div class="membership-box m-20 pointer">
-                <div class="mb-10">스텐다드 멤버십</div>
-                <div class="mb-10">4K 영상 해상도, 공간 음향, 광고 없이 시청 등.</div>
-            </div>
-        </div>
+        <div class="main-right-header mb-20">보안</div>
+        <div class="mb-20">계정 정보</div>
 
         <!-- fast link -->
-        <div class="mb-20">결제 정보</div>
         <div class="main-right-div2 mb-20">
-            <div class="fast-link m-20">
-                <div class="membership-box pointer">
-                    <div class="mb-10">프리미엄 멤버십</div>
-                    <div class="mb-10">다음 결제일 : 2024년 6월 24일</div>
-                    <div class="mb-15">
-                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· 1234
+            <div class="setting m-20">
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <i class="fa-solid fa-lock"></i>
+                        <div>비밀번호</div>
                     </div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+
                 </div>
                 <hr class="mb-20" />
-                <a href="/13">
-                    <div class="mb-20 fast-link-div pointer">
-                        <div>
-                            결제 수단 관리
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div class="notification-dot"></div>
                         </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="text-container">
+                            <div>이메일</div>
+                            <div>ohfilx@gmail.com</div>
+                        </div>
                     </div>
-                </a>
-
-                <hr class="mb-20" />
-                <div class="mb-20 fast-link-div pointer">
-                    <div>
-                        결제 내역 관리
-                    </div>
-                    <div><i class="fa-solid fa-chevron-right"></i></div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
                 </div>
+                <hr class="mb-20" />
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <div class="text-container">
+                            <div>휴대폰</div>
+                            <div>010-1234-5678</div>
+                        </div>
+                    </div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
 
+                </div>
             </div>
         </div>
 
-        <div class="main-right-div3 mb-20 pointer">
-            <div class="membership-cancel m-15">
-                멤버십 해지
+        <div class="mb-20">엑세스 및 개인정보</div>
+        <div class="main-right-div3 mb-20">
+            <div class="setting m-20">
+                <div class="setting-div mb-20 pointer">
+                    <div class="setting-text">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div class="text-container">
+                            <div>개인 정보 및 액세스</div>
+                            <div>개인 정보 사본 요청</div>
+                        </div>
+                    </div>
+                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-right-div4 mb-20 pointer">
+            <div class="profile-cancel m-15">
+                <i class="fa-regular fa-trash-can"></i>
+                계정 삭제
             </div>
         </div>
     </div>
 </main>
-<!-- main end-->
+<!-- nav start end-->
 
 <!-- ------------------------------------------------------------------------------------------------ -->
 
