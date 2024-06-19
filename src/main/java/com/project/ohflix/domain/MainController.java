@@ -60,10 +60,13 @@ public class MainController {
 
 
     // 지영
-
     @GetMapping("/31")
     public String getPayment() {
         return "payment-form";
+    }
+    @GetMapping("/32")
+    public String getSales() {
+        return "sales-page";
     }
 
 
