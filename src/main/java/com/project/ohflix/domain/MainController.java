@@ -48,12 +48,18 @@ public class MainController {
         return "profile-icons";
     }
 
-
-    // 지영
     @GetMapping("/23")
     public String getRestrictionPass() {
         return "restriction-pass";
     }
+
+    @GetMapping("/24")
+    public String getRestrictionManage() {
+        return "restriction-manage";
+    }
+
+
+    // 지영
 
     @GetMapping("/31")
     public String getPayment() {
