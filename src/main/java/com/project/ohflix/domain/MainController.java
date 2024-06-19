@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
-    public String getMainPage() {
-        return "main-page";
-    }
 
+
+
+    // 성훈
     @GetMapping("/11")
     public String getLoginForm() {
         return "login-form";
@@ -31,7 +30,14 @@ public class MainController {
     public String getPaymethodUpdateForm() {
         return "paymethod-update-form";
     }
+    @GetMapping("/15")
+    public String getUserCheck() {
+        return "user-check";
+    }
 
+
+
+    // 동기
     @GetMapping("/21")
     public String getPasswordChangeForm() {
         return "password-change-form";
@@ -42,6 +48,8 @@ public class MainController {
         return "profile-icons";
     }
 
+
+    // 지영
     @GetMapping("/23")
     public String getRestrictionPass() {
         return "restriction-pass";
@@ -61,6 +69,10 @@ public class MainController {
     @GetMapping("/41")
     public String getMyList() {
         return "my-list";
+    }
+    @GetMapping("/")
+    public String getMainPage() {
+        return "main-page";
     }
 
 
