@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Netflix Monthly Revenue Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/sales-page.css"/> <!-- 외부 CSS 파일을 연결 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+</head>
+<body>
+<!-- nav start -->
+<nav>
+    <div class="nav-div">
+        <div>
+            <img src="images/logo.png" alt="오류" class="nav-logo"/>
+        </div>
+        <div>
+            <img src="images/profile.png" alt="오류" class="nav-profile"/>
+            <div>
+                <i class="fa-solid fa-caret-down fa-xs"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- nav end-->
+
+<!-- main left-->
+<main>
+    <div class="main-div">
+        <div class="main-left-top">
+            <div class="main-left-text">
+                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
+                돌아가기
+            </div>
+            <ul class="custom-list">
+                <li><i class="fa-solid fa-house main-left-icon"></i>개요</li>
+                <li>
+                    <i class="fa-solid fa-credit-card main-left-icon"></i>멤버십
+                </li>
+                <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
+                <li>
+                    <i class="fa-solid fa-users main-left-icon"></i>프로필
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- main left end-->
+    <div class="main-div">
+        <div class="title">
+            <div class="title-red">OH!FLIX</div>
+            월 매출
+        </div>
+        <div class="canvas-container">
+            <canvas id="line-chart" width="750" height="400"></canvas>
+        </div>
+        <div class="table-title">월별 구독 현황</div>
+        <table>
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>년월</th>
+                <th>구독 회원 수</th>
+                <th>총 가입자 수</th>
+                <th>이달 매출</th>
+                <th>올해 누적 매출</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>2024-01</td>
+                <td>100</td>
+                <td>1000</td>
+                <td>₩10,000,000</td>
+                <td>₩10,000,000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2024-02</td>
+                <td>120</td>
+                <td>1100</td>
+                <td>₩12,000,000</td>
+                <td>₩22,000,000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2024-03</td>
+                <td>150</td>
+                <td>1200</td>
+                <td>₩15,000,000</td>
+                <td>₩37,000,000</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2024-04</td>
+                <td>130</td>
+                <td>1250</td>
+                <td>₩13,000,000</td>
+                <td>₩50,000,000</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2024-05</td>
+                <td>160</td>
+                <td>1300</td>
+                <td>₩16,000,000</td>
+                <td>₩66,000,000</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2024-06</td>
+                <td>180</td>
+                <td>1400</td>
+                <td>₩18,000,000</td>
+                <td>₩84,000,000</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>2024-07</td>
+                <td>200</td>
+                <td>1450</td>
+                <td>₩20,000,000</td>
+                <td>₩104,000,000</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>2024-08</td>
+                <td>190</td>
+                <td>1500</td>
+                <td>₩19,000,000</td>
+                <td>₩123,000,000</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>2024-09</td>
+                <td>210</td>
+                <td>1550</td>
+                <td>₩21,000,000</td>
+                <td>₩144,000,000</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>2024-10</td>
+                <td>230</td>
+                <td>1600</td>
+                <td>₩23,000,000</td>
+                <td>₩167,000,000</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>2024-11</td>
+                <td>250</td>
+                <td>1650</td>
+                <td>₩25,000,000</td>
+                <td>₩192,000,000</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>2024-12</td>
+                <td>270</td>
+                <td>1700</td>
+                <td>₩27,000,000</td>
+                <td>₩219,000,000</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<!-- footer start -->
+<footer>
+    <div>
+        <p>
+            넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
+            제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
+        </p>
+        <p>대표: 레지널드 숀 톰프슨</p>
+        <p>이메일 주소: korea@netflix.com</p>
+        <p>
+            주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
+            우편번호 03161
+        </p>
+        <p>사업자등록번호: 165-87-00119</p>
+        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+        <p>공정거래위원회 웹사이트</p>
+    </div>
+</footer>
+<!-- footer end -->
+</body>
+</html>
+<script>
+    var ctx = document.getElementById('line-chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], // Assuming monthly labels
+            datasets: [
+                {
+                    label: 'Netflix Monthly Revenue (in billions ₩)',
+                    data: [650, 690, 720, 710, 730, 780, 790, 810, 820, 830, 850, 880], // Replace with actual monthly revenue data in billions of Korean Won
+                    borderColor: '#E50914',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Netflix Monthly Revenue'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value.toLocaleString('ko-KR') + ' ₩'; // Formatting to Korean Won
+                        }
+                    }
+                }]
+            }
+        }
+    });
+</script>
