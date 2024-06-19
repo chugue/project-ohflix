@@ -14,26 +14,26 @@ public class MainController {
     // 성훈
     @GetMapping("/11")
     public String getLoginForm() {
-        return "login-form";
+        return "user/login-form";
     }
 
     @GetMapping("/12")
     public String getPaymethodRegisterForm() {
-        return "paymethod-form";
+        return "paymethod/paymethod-form";
     }
 
     @GetMapping("/13")
     public String getPaymethodManage() {
-        return "paymethod-manage";
+        return "paymethod/paymethod-manage";
     }
 
     @GetMapping("/14")
     public String getPaymethodUpdateForm() {
-        return "paymethod-update-form";
+        return "paymethod/aymethod-update-form";
     }
     @GetMapping("/15")
     public String getUserCheck() {
-        return "user-check";
+        return "user/user-check";
     }
 
 
@@ -41,33 +41,33 @@ public class MainController {
     // 동기
     @GetMapping("/21")
     public String getPasswordChangeForm() {
-        return "password-change-form";
+        return "user/password-change-form";
     }
 
     @GetMapping("/22")
     public String getProfileIcons() {
-        return "profile-icons";
+        return "profile/profile-icons";
     }
 
     @GetMapping("/23")
     public String getRestrictionPass() {
-        return "restriction-pass";
+        return "restriction/restriction-pass";
     }
 
     @GetMapping("/24")
     public String getRestrictionManage() {
-        return "restriction-manage";
+        return "restiction/restriction-manage";
     }
 
 
     // 지영
     @GetMapping("/31")
     public String getPayment() {
-        return "payment-form";
+        return "paymethod/payment-form";
     }
     @GetMapping("/32")
     public String getSales() {
-        return "sales-page";
+        return "user/sales-page";
     }
     @GetMapping("/33")
     public String getMembers() {
@@ -89,7 +89,7 @@ public class MainController {
     }
     @GetMapping("/42")
     public String getLatest() {
-        return "content-latest";
+        return "content/content-latest";
     }
 
 
@@ -98,25 +98,25 @@ public class MainController {
     // account
     @GetMapping("/50")
     public String getAccountPage() {
-        return "account-view";
+        return "account/account-view";
     }
 
     // account
     @GetMapping("/51")
     public String accountMembership() {
-        return "account-membership";
+        return "account/account-membership";
     }
 
     // account
     @GetMapping("/52")
     public String profileSetting() {
-        return "profile-setting";
+        return "profile/profile-setting";
     }
 
     // account
     @GetMapping("/53")
     public String accountSecurity() {
-        return "account-security";
+        return "account/account-security";
     }
 
     // admin
@@ -137,12 +137,12 @@ public class MainController {
 
     @GetMapping("/3")
     public String getContentDetails() {
-        return "content-details";
+        return "content/content-details";
     }
 
     @GetMapping("/5")
     public String getProfileView() {
-        return "profile-form";
+        return "profile/profile-form";
     }
 
 
