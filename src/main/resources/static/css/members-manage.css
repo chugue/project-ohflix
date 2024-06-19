@@ -1,3 +1,4 @@
+@charset 'utf-8';
 
 /* """"""""""""""""""""""""""초기 세팅"""""""""""""""""""""""""" */
 * {
@@ -180,60 +181,75 @@ li:hover {
 }
 
 /* """"""""""""""""""""""""""main - right"""""""""""""""""""""""""" */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #FAFAFA;
+}
 .main-right-margin {
-    display: inline-block;
     justify-content: center;
     align-items: center;
     margin-right: 30px;
 }
 .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 30px;
     font-weight: 700;
     text-align: center;
 }
-
-.title-red {
-    color: #E50914;
-    margin-right: 10px;
+.member-count {
+    display: flex;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 20px;
 }
-
-.canvas-container {
-    margin-bottom: 50px;
+.member{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-canvas {
-    max-width: 1000px;
-    width: 100%;
+.member-container{
+    align-items: center;
 }
-
 table {
     width: 100%;
-    max-width: 800px;
     border-collapse: collapse;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 12px;
 }
-
 .table-title {
     font-size: 18px;
     font-weight: 700;
     text-align: center;
+    margin-top: 10px;
 }
-
 th, td {
     padding: 8px;
     text-align: center;
     border: 1px solid #dddddd;
 }
-
 th {
     background-color: #f2f2f2;
 }
-
 td {
     background-color: #ffffff;
 }
+td i{
+    font-size: 20px;
+}
+.red{
+    color: #E50914;
+}
+.gray{
+    color: #808080;
+}
+
 /* """"""""""""""""""""""""""""footer"""""""""""""""""""""""""""" */
 footer {
     display: flex;
