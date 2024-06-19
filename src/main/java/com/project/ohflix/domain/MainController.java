@@ -3,6 +3,7 @@ package com.project.ohflix.domain;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
@@ -68,7 +69,10 @@ public class MainController {
     public String getSales() {
         return "sales-page";
     }
-
+    @GetMapping("/33")
+    public String getMembers() {
+        return "members-manage";
+    }
 
     // 승호
     @GetMapping("/")
@@ -113,6 +117,22 @@ public class MainController {
     @GetMapping("/53")
     public String accountSecurity() {
         return "account-security";
+    }
+
+    // admin
+    @GetMapping("/54")
+    public String adminUpload() {
+        return "admin-upload";
+    }
+
+    @PostMapping("/upload/movie")
+    public String uploadMovie() {
+        return null;
+    }
+
+    @PostMapping("/upload/info")
+    public String uploadInfo() {
+        return null;
     }
 
     @GetMapping("/3")
