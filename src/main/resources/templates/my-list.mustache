@@ -5,14 +5,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>홈 - 오플릭스</title>
-    <!-- 폰트어썸 라이브러리 -->
+    <!-- 라이브러리 -->
+    <!-- google Icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- font-awesome Icon 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
           integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- css 초기화 -->
-    <link rel="stylesheet" href="/static/css/reset.css">
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 임포트 -->
     <!-- css -->
-    <link rel="stylesheet" href="/static/css/my-list.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/main-page.css">
+    <link rel="stylesheet" href="/static/css/latest.css">
+    <!-- js -->
+    <script src="/static/js/main-page.js"></script>
     <!-- 파비콘 ( 아이콘 ) -->
     <link rel="icon" href="/static/images/OH!.ico">
 </head>
@@ -20,31 +33,109 @@
 <body>
 <!-- 헤더 -->
 <header>
-    <div class="logo"><img src="/static/images/OH!FLIX.png" alt=""></div>
+    <a href="/"><div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div></a>
     <nav>
         <ul>
-            <li><a href="#">홈</a></li>
+            <li><a href="/">홈</a></li>
             <li><a href="#">영화</a></li>
-            <li><a href="#">최신 콘텐츠</a></li>
-            <li><a href="#">내가 찜한 콘텐츠</a></li>
+            <li><a href="/42">최신 콘텐츠</a></li>
+            <li><a href="/41">내가 찜한 콘텐츠</a></li>
         </ul>
     </nav>
     <div class="right_menu">
+        <!-- 검색 메뉴 -->
         <div class="search-container">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <!-- <i class="fa-solid fa-magnifying-glass search-icon"></i> -->
+            <span class="material-icons search-icon">search</span>
             <input type="text" class="search-input" placeholder="제목, 사람, 장르">
         </div>
-        <div class="alarm"><i class="fa-regular fa-bell"></i></div>
-        <div class="profile"><img src="/static/images/profile.png" alt="Profile"></div>
-        <script src="script.js"></script>
+        <!--  알람 드롭 다운 메뉴  -->
+        <div class="dropdown">
+            <button class="dropdown-button"><i class="far fa-bell"></i></button>
+            <div class="dropdown-notification">
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify1.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">브리저튼</div>
+                        <div class="notification-time">5일</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify2.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">울트라맨</div>
+                        <div class="notification-time">7일</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify3.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">블랙클로버</div>
+                        <div class="notification-time">10일</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify4.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">하이라키</div>
+                        <div class="notification-time">12일</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify5.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">히트맨</div>
+                        <div class="notification-time">15일</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <img src="/static/images/notification/notify6.jpg" class="notification-image">
+                    <div class="notification-details">
+                        <div class="notification-subtitle">신규 콘텐츠</div>
+                        <div class="notification-subtitle">그놈이다</div>
+                        <div class="notification-time">18일</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  알람 드롭 다운 메뉴 종료  -->
+        <!--  프로필 드롭 다운 메뉴 시작  -->
+        <div class="dropdown">
+            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile" /></button>
+            <div class="dropdown-content">
+                <a href="/5"><i class="material-icons">edit</i> 프로필 관리</a>
+                <a href="/50"><i class="material-icons">account_circle</i> 계정</a>
+                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
+                <a href="#">넷플릭스에서 로그아웃</a>
+            </div>
+        </div>
+        <!--  프로필 드롭 다운 메뉴 종료  -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <script>
+            document.querySelector('.search-icon').addEventListener('click', function () {
+                const searchInput = document.querySelector('.search-input');
+                if (searchInput.classList.contains('show')) {
+                    searchInput.classList.remove('show');
+                } else {
+                    searchInput.classList.add('show');
+                    searchInput.focus();
+                }
+            });
+        </script>
     </div>
 </header>
 
 <!-- 메인 -->
 <main>
 
-    <!-- 추가 카테고리 섹션들 -->
-    <section class="my-list-category">
+    <!-- 내가 찜한 콘턴츠 섹션 -->
+    <section class="margin-section" id="my-list-section">
         <h2>내가 찜한 콘텐츠</h2>
         <div class="movies">
             <div class="item-list">
@@ -105,5 +196,88 @@
 </footer>
 
 </body>
+<!--  모달 내용-->
+<div id="modalWrap"> <!-- 모달 창을 감싸는 div -->
+    <div id="modalBody">
+        <span id="closeBtn">&times;</span> <!-- 모달을 닫는 X 버튼 -->
+        <div class="body-container">
+            <!-- 헤더 start -->
+            <div class="header-container">
+                <div class="play">
+                    <div class="title">서울의 봄</div>
+                    <div class="buttons">
+                        <a href="#" class="play-button">▶ 재생</a>
+                        <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>
+                        <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- 헤더 end -->
+
+            <div class="containermargin">
+                <div class="container">
+                    <div class="container1">
+                        <div class="introduce">
+                            <div class="info">
+                                <span class="match">98% 일치</span>
+                                <span>2023</span>
+                                <span>2시간 21분</span>
+                                <span>HD</span>
+                            </div>
+                            <div class="metadata">
+                                <div><img src="/static/images/12.png" alt="" /></div>
+                            </div>
+                            <div class="description">
+                                대통령의 죽음으로 군부대가 뒤흔들린 시기. 보안사령관이 서울
+                                장악을 목표로 무자비한 계략을 밀어붙이면서 온 나라가 혼란에 빠질
+                                위기에 처한다.
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="cast">출연: 황정민, 정우성, 이성민, 더 보기</div>
+                            <div class="genre">장르: 스릴러 영화</div>
+                            <div class="features">영화 특징: 긴장감 넘치는</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container2">
+                    <div class="title2">서울의 봄 상세 정보</div>
+                    <div class="details2">
+                        <div>감독: 김성수</div>
+                        <div>출연: 황정민, 정우성, 이성민, 박해준, 김성균</div>
+                        <div>각본: 홍인표, 홍원찬, 이영풍, 김성수</div>
+                        <div>장르: 스릴러 영화</div>
+                        <div>영화 특징: 긴장감 넘치는</div>
+                        <div class="rating">
+                            <span>관람등급: <img src="/static/images/12.png" alt="" />12세 이상관람가</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  모달 내용-->
 
 </html>
+
+<script>
+    const img = document.getElementById("popupImg"); // 모달을 띄우는 버튼 요소 가져오기
+    const modal = document.getElementById("modalWrap"); // 모달 창 요소 가져오기
+    const closeBtn = document.getElementById("closeBtn"); // 모달을 닫는 버튼(X) 요소 가져오기
+
+    img.onclick = function () {
+        modal.style.display = "block"; // 버튼을 클릭하면 모달을 보이게 함
+    };
+
+    closeBtn.onclick = function () {
+        modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김
+        }
+    };
+</script>

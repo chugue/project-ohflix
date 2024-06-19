@@ -74,6 +74,10 @@ public class MainController {
     }
 
     // 승호
+    @GetMapping("/")
+    public String getMainPage() {
+        return "main-page";
+    }
     @GetMapping("/40")
     public String getOuterPage() {
         return "outer-page";
@@ -82,9 +86,9 @@ public class MainController {
     public String getMyList() {
         return "my-list";
     }
-    @GetMapping("/")
-    public String getMainPage() {
-        return "main-page";
+    @GetMapping("/42")
+    public String getLatest() {
+        return "latest";
     }
 
 
