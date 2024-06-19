@@ -93,30 +93,25 @@ public class MainController {
     }
 
 
-
-
-    // account
+    // 윤정
     @GetMapping("/50")
     public String getAccountPage() {
-        return "account-view";
+        return "account/account-view";
     }
 
-    // account
     @GetMapping("/51")
     public String accountMembership() {
-        return "account-membership";
+        return "account/account-membership";
     }
 
-    // account
     @GetMapping("/52")
     public String profileSetting() {
-        return "profile-setting";
+        return "profile/profile-setting";
     }
 
-    // account
     @GetMapping("/53")
     public String accountSecurity() {
-        return "account-security";
+        return "account/account-security";
     }
 
     // admin
@@ -134,6 +129,8 @@ public class MainController {
     public String uploadInfo() {
         return null;
     }
+
+
 
     @GetMapping("/3")
     public String getContentDetails() {
