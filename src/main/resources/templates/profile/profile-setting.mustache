@@ -15,7 +15,9 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
+            <a href="/">
+                <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
+            </a>
         </div>
         <div>
             <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
@@ -50,31 +52,35 @@
         </div>
 
         <!-- fast link -->
-        <div class="main-right-div2 mb-20">
-            <div class="fast-link m-20">
-                <div class="fast-link-div mb-20 pointer">
-                    <div>
-                        <i class="fa-regular fa-envelope"></i>
-                        이메일
+        <a href="/api/user-check">
+            <div class="main-right-div2 mb-20">
+                <div class="fast-link m-20">
+                    <div class="fast-link-div mb-20 pointer">
+                        <div>
+                            <i class="fa-regular fa-envelope"></i>
+                            이메일
+                        </div>
+                        <div><i class="fa-solid fa-chevron-right"></i></div>
                     </div>
-                    <div><i class="fa-solid fa-chevron-right"></i></div>
                 </div>
             </div>
-        </div>
+        </a>
 
         <div class="mb-20">설정</div>
         <div class="main-right-div3 mb-20">
             <div class="setting m-20">
-                <div class="setting-div mb-20 pointer">
-                    <div class="setting-text">
-                        <i class="fa-regular fa-circle-xmark"></i>
-                        <div class="text-container">
-                            <div>시청 제한</div>
-                            <div>관람등급 및 콘텐츠 제한 변경</div>
+                <a href="/api/restriction-pass">
+                    <div class="setting-div mb-20 pointer">
+                        <div class="setting-text">
+                            <i class="fa-regular fa-circle-xmark"></i>
+                            <div class="text-container">
+                                <div>시청 제한</div>
+                                <div>관람등급 및 콘텐츠 제한 변경</div>
+                            </div>
                         </div>
+                        <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
                     </div>
-                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                </div>
+                </a>
                 <hr class="mb-20" />
                 <div class="setting-div mb-20 pointer">
                     <div class="setting-text">

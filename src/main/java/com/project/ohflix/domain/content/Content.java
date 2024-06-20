@@ -35,6 +35,9 @@ public class Content {
     private String subPhoto; // 대표 사진 (세로사이즈 작은거)
 
     @Column(nullable = false)
+    private String textPhoto; // 대표 텍스트 사진
+
+    @Column(nullable = false)
     private String director; // 감독 이름
 
     @Column(nullable = false)
@@ -65,13 +68,15 @@ public class Content {
     private Genre genre; // 장르 [ANIME, ACTION, COMEDY, ROMANCE, THRILLER, HORROR, SF, FANTASY, DOCUMENTARY]
 
     @Builder
-    public Content(Integer id, String title, String thumbnail, String miniThumbnail, String mainPhoto, String subPhoto, String director, String introduction, String characteristic, String playTime, String year, String writers, String actors, String subDirector, Integer viewCount, Rate rate, Genre genre) {
+
+    public Content(Integer id, String title, String thumbnail, String miniThumbnail, String mainPhoto, String subPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String year, String writers, String actors, String subDirector, Integer viewCount, Rate rate, Genre genre) {
         this.id = id;
         this.title = title;
         this.thumbnail = thumbnail;
         this.miniThumbnail = miniThumbnail;
         this.mainPhoto = mainPhoto;
         this.subPhoto = subPhoto;
+        this.textPhoto = textPhoto;
         this.director = director;
         this.introduction = introduction;
         this.characteristic = characteristic;
