@@ -53,4 +53,19 @@ public class PurchaseHistoryController {
     public String uploadInfo() {
         return null;
     }
+
+    @GetMapping("/api/admin-detail")
+    public String adminDetail() {
+        return "admin-detail";
+    }
+
+    @PostMapping("/update/movie")
+    public String updateMovie() {
+        return null;
+    }
+
+    @PostMapping("/update/info")
+    public String updateInfo() {
+        return null;
+    }
 }
