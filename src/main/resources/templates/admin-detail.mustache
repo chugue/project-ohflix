@@ -148,7 +148,16 @@
                                 <span class="file-name5 file-name" id="file-name5">{{subPhoto}}</span>
                             </div>
                         </div>
-
+                        <hr class="mb-20">
+                        <div class="mb-20 fast-link-div pointer">
+                            <div>
+                                <label for="image-upload5" class="custom-file-upload">
+                                    파일 선택
+                                </label>
+                                <input id="image-upload5" type="file" name="textPhoto" />
+                                <span class="file-name6 file-name" id="file-name6">대표 텍스트 사진 선택하기</span>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -295,6 +304,12 @@
     document.getElementById('image-upload4').addEventListener('change', function () {
         var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
         document.getElementById('file-name5').textContent = fileName;
+    });
+
+    // 대표 텍스트 사진
+    document.getElementById('image-upload5').addEventListener('change', function () {
+        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+        document.getElementById('file-name6').textContent = fileName;
     });
 
 
