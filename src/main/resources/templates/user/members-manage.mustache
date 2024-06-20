@@ -3,7 +3,7 @@
 <head>
     <title>Netflix Monthly Revenue Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="/css/members-manage.css"/> <!-- 외부 CSS 파일을 연결 -->
+    <link rel="stylesheet" href="/static/css/members-manage.css"/> <!-- 외부 CSS 파일을 연결 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 </head>
@@ -12,10 +12,10 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="images/logo.png" alt="오류" class="nav-logo"/>
+            <img src="/static/images/logo.png" alt="오류" class="nav-logo"/>
         </div>
         <div>
-            <img src="images/profile.png" alt="오류" class="nav-profile"/>
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -33,13 +33,18 @@
                 돌아가기
             </div>
             <ul class="custom-list">
-                <li><i class="fa-solid fa-house main-left-icon"></i>개요</li>
+                <li><i class="fa-solid fa-upload"></i>영상 업로드</li>
                 <li>
-                    <i class="fa-solid fa-credit-card main-left-icon"></i>멤버십
+                    <i class="fa-solid fa-photo-film"></i>영상 관리
                 </li>
-                <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
                 <li>
-                    <i class="fa-solid fa-users main-left-icon"></i>프로필
+                    <i class="fa-solid fa-users-gear"></i>회원 관리
+                </li>
+                <li>
+                    <i class="fa-solid fa-comment-dots"></i>멤버십 해지 요청
+                </li>
+                <li>
+                    <i class="fa-solid fa-chart-line"></i>매출 관리
                 </li>
             </ul>
         </div>
@@ -110,7 +115,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 </main>
 <!-- footer start -->
