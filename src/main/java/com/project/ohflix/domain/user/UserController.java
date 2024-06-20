@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/api/restriction-manage")
     public String getRestrictionManage() {
-        return "restiction/restriction-manage";
+        return "restriction/restriction-manage";
     }
 
     @GetMapping("/api/sales-page")
@@ -38,7 +38,7 @@ public class UserController {
         return "user/sales-page";
     }
 
-    @GetMapping("/api/members-manage")
+    @GetMapping("/admin/members-manage")
     public String getMembers() {
         return "user/members-manage";
     }
@@ -51,5 +51,10 @@ public class UserController {
     @GetMapping("/api/refund-page")
     public String getRefund() {
         return "user/refund-page";
+    }
+
+    @GetMapping("/api/account-membership")
+    public String getAccountMembership() {
+        return "account/account-membership";
     }
 }
