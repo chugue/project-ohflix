@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ContentController {
 
-    @GetMapping("/api/lastest-content")
+    @GetMapping("/api/latest-content")
     public String getLatest() {
-        return "latest-content";
+        return "content/latest-content";
     }
 
     @GetMapping("/api/content-details")

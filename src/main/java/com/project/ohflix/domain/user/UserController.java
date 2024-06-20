@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/api/restriction-manage")
     public String getRestrictionManage() {
-        return "restiction/restriction-manage";
+        return "restriction/restriction-manage";
     }
 
     @GetMapping("/api/sales-page")
