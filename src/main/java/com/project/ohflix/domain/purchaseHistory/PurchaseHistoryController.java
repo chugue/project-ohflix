@@ -68,4 +68,7 @@ public class PurchaseHistoryController {
     public String updateInfo() {
         return null;
     }
+
+    @GetMapping("/api/video-manage")
+    public String videoManage() {return "video-manage";}
 }
