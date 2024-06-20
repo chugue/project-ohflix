@@ -48,6 +48,11 @@ public class UserController {
         return "account/account-view";
     }
 
+    @GetMapping("/api/refund-page")
+    public String getRefund() {
+        return "user/refund-page";
+    }
+
     @GetMapping("/api/account-membership")
     public String getAccountMembership() {
         return "account/account-membership";
