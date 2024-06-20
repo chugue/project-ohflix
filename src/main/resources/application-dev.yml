@@ -24,11 +24,11 @@ spring:
   h2:
     console:
       enabled: true
-#  sql:
-#    init:
-#      mode: always
-#      data-locations:
-#        - classpath:db/data.sql
+  sql:
+    init:
+      mode: always
+      data-locations:
+        - classpath:db/data.sql
 
   jpa:
     hibernate:
@@ -38,7 +38,7 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 10
-#    defer-datasource-initialization: true
+    defer-datasource-initialization: true
     open-in-view: true
   servlet:
     multipart:

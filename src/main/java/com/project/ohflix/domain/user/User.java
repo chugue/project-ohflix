@@ -33,9 +33,6 @@ public class User {
     private ProfileIcon profileIcon; // 프로필 아이콘
 
     @Enumerated(EnumType.STRING)
-    private Paymethod paymethod; // 카카오페이? 신용카드?
-
-    @Enumerated(EnumType.STRING)
     private Status status; // 사용자? 관리자?
 
     private Boolean isKids; // 키즈 시청 제한 여부
@@ -47,13 +44,12 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String email, String password, String username, ProfileIcon profileIcon, Paymethod paymethod, Status status, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
+    public User(Integer id, String email, String password, String username, ProfileIcon profileIcon, Status status, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.username = username;
         this.profileIcon = profileIcon;
-        this.paymethod = paymethod;
         this.status = status;
         this.isKids = isKids;
         this.loginSave = loginSave;
