@@ -15,10 +15,10 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="images/logo.png" alt="오류" class="nav-logo" />
+            <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
         </div>
         <div>
-            <img src="images/profile.png" alt="오류" class="nav-profile" />
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -75,7 +75,7 @@
                             <label for="file-upload" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="file-upload" type="file" name="file" />
+                            <input id="file-upload" type="file" name="movie" />
                             <span class="file-name1 file-name" id="file-name1">영화 선택하기</span>
                         </div>
                         <div>
@@ -107,7 +107,7 @@
                                 <label for="image-upload1" class="custom-file-upload">
                                     파일 선택
                                 </label>
-                                <input id="image-upload1" type="file" name="file" />
+                                <input id="image-upload1" type="file" name="thumbnail" />
                                 <span class="file-name2 file-name" id="file-name2">썸네일 선택하기</span>
                             </div>
 
@@ -121,7 +121,7 @@
                             <label for="image-upload2" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload2" type="file" name="file" />
+                            <input id="image-upload2" type="file" name="miniThumbnail" />
                             <span class="file-name3 file-name" id="file-name3">작은 썸네일 선택하기</span>
                         </div>
 
@@ -133,7 +133,7 @@
                             <label for="image-upload3" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload3" type="file" name="file" />
+                            <input id="image-upload3" type="file" name="mainPhto" />
                             <span class="file-name4 file-name" id="file-name4">대표 사진 선택하기 (가로사이즈)</span>
                         </div>
 
@@ -144,7 +144,7 @@
                             <label for="image-upload4" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload4" type="file" name="file" />
+                            <input id="image-upload4" type="file" name="subPhoto" />
                             <span class="file-name5 file-name" id="file-name5">대표 사진 선택하기 (세로사이즈 작은 ver)</span>
                         </div>
 
@@ -175,7 +175,7 @@
                         </tr>
                         <tr>
                             <td>상 영 시 간</td>
-                            <td><input type="number" name="playtime" class="movie-info"></td>
+                            <td><input type="number" name="playTime" class="movie-info"></td>
                         </tr>
                         <tr>
                             <td>관 람 등 급</td>
@@ -184,7 +184,6 @@
                                     <option value="">관람 등급 선택</option>
                                     <option value="전체 관람가">전체 관람가</option>
                                     <option value="12세 관람가">12세 관람가</option>
-                                    <option value="15세 관람가">15세 관람가</option>
                                     <option value="청소년 관람 불가">청소년 관람 불가</option>
                                 </select>
                             </td>
@@ -207,7 +206,7 @@
                         </tr>
                         <tr>
                             <td>연 출</td>
-                            <td><input type="text" name="subdirector" class="movie-info"></td>
+                            <td><input type="text" name="subDirector" class="movie-info"></td>
                         </tr>
                         <tr>
                             <td>특 징</td>
@@ -306,7 +305,7 @@
     var selectElement = document.getElementById('yearSelect');
 
     // 옵션 추가: 1900년부터 현재 연도까지
-    for (var year = 1900; year <= currentYear; year++) {
+    for (var year = currentYear; year >= 1900; year--) {
         var option = document.createElement('option');
         option.value = year;
         option.textContent = year;
