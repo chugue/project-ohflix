@@ -32,26 +32,9 @@
 <!-- main start -->
 <main>
     <!-- main div left -->
-    <div class="main-div">
-        <div class="main-left-top">
-            <div class="main-left-text">
-                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
-                돌아가기
-            </div>
-            <ul class="custom-list">
-                <li><i class="fa-solid fa-house main-left-icon"></i>개요</li>
-                <li>
-                    <i class="fa-solid fa-credit-card main-left-icon"></i>멤버십
-                </li>
-                <a href="/api/account-security">
-                    <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
-                </a>
-                <li>
-                    <i class="fa-solid fa-users main-left-icon"></i>프로필
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- 사이드 바 메뉴 시작 -->
+    {{> /_components/custom-list}}
+    <!-- 사이드 바 메뉴 끝 -->
 
     <!-- main div right -->
     <div class="main-div">
@@ -72,7 +55,7 @@
                 </div>
 
                 <hr class="mb-15"/>
-                <a href="/api/members-manage">
+                <a href="/api/account-membership">
                     <div class="profile-manage pointer">
                         멤버십 관리
                         <i class="fa-solid fa-chevron-right"></i>
@@ -152,23 +135,7 @@
 <!-- ------------------------------------------------------------------------------------------------ -->
 
 <!-- footer start -->
-<footer>
-    <div>
-        <p>
-            넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
-            제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
-        </p>
-        <p>대표: 레지널드 숀 톰프슨</p>
-        <p>이메일 주소: korea@netflix.com</p>
-        <p>
-            주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
-            우편번호 03161
-        </p>
-        <p>사업자등록번호: 165-87-00119</p>
-        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
-        <p>공정거래위원회 웹사이트</p>
-    </div>
-</footer>
+{{> /_components/white-footer}}
 <!-- footer end -->
 </body>
 

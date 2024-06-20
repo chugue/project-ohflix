@@ -108,11 +108,17 @@ header {
     border: white;
     font-size: 17px;
     display: flex;
-    justify-content: row;
+    justify-content: center;
     align-items: center;
     gap: 13px;
     height: 30px;
 }
+
+.main .main-box .button-box button:hover {
+    background-color: #dadada;
+    border-radius: 5px;
+}
+
 
 .main .main-box .button-box a {
     text-decoration: none;

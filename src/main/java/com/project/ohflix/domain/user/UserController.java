@@ -38,7 +38,7 @@ public class UserController {
         return "user/sales-page";
     }
 
-    @GetMapping("/api/members-manage")
+    @GetMapping("/admin/members-manage")
     public String getMembers() {
         return "user/members-manage";
     }
@@ -46,5 +46,10 @@ public class UserController {
     @GetMapping("/api/account-view")
     public String getAccountPage() {
         return "account/account-view";
+    }
+
+    @GetMapping("/api/account-membership")
+    public String getAccountMembership() {
+        return "account/account-membership";
     }
 }

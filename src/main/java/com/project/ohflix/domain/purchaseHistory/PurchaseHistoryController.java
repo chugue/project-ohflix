@@ -39,7 +39,7 @@ public class PurchaseHistoryController {
         return "account/account-security";
     }
 
-    @GetMapping("/api/admin-upload")
+    @GetMapping("/admin/admin-upload")
     public String adminUpload() {
         return "admin-upload";
     }
