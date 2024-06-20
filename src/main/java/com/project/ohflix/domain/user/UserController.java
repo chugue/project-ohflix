@@ -47,4 +47,9 @@ public class UserController {
     public String getAccountPage() {
         return "account/account-view";
     }
+
+    @GetMapping("/api/refund-page")
+    public String getRefund() {
+        return "user/refund-page";
+    }
 }

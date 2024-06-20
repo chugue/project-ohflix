@@ -1,0 +1,263 @@
+
+/* """"""""""""""""""""""""""초기 세팅"""""""""""""""""""""""""" */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+    color: inherit; /* 링크 텍스트 색상을 부모 요소의 색상으로 상속 */
+}
+
+/* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
+.mt-70{
+    margin-top: 70px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.m-20 {
+    margin: 20px;
+}
+
+.m-15 {
+    margin: 15px;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+hr{
+    background:rgb(223, 223, 223);
+    height:1px;
+    border:0;
+}
+
+/* """"""""""""""""""""""""""""body"""""""""""""""""""""""""""" */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* 화면 전체 높이로 설정 */
+    margin: 0 auto;
+    /* 가운데 정렬을 위한 자동 마진 추가 */
+    background-color: #FAFAFA;
+}
+
+
+/* """""""""""""""""""""""""""""nav""""""""""""""""""""""""""""" */
+nav {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    flex: 0 1 auto;
+    position: fixed;
+    /* 네비게이션 바를 고정 */
+    top: 0;
+    /* 화면 상단에 위치 */
+    width: 100%;
+    /* 화면 전체 너비 차지 */
+    z-index: 1000;
+    /* 다른 요소들 위에 표시되도록 z-index 설정 */
+    display: flex;
+    justify-content: center;
+    /* Center the nav-div within the nav */
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.nav-div {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    /* 그리드 아이템 양쪽 끝 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 10px;
+    /* 내부 패딩 추가 */
+    width: 70vw;
+}
+
+.nav-div div{
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 100px;
+    margin-top: 9px;
+}
+
+.nav-profile {
+    border-radius: 5px;
+    margin-right: 13px;
+}
+
+/* """"""""""""""""""""""""""""""main"""""""""""""""""""""""""""""" */
+main {
+    width: 70vw;
+    /* main 요소 너비를 60%로 설정 */
+    margin: 67px auto 0;
+    /* 네비게이션 바의 높이에 따라 조절 */
+    flex: 1 0 auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    /* 간격 설정 */
+}
+
+.main-div {
+    margin: 5px;
+    text-align: start;
+    margin-top: 35px;
+}
+
+/* """"""""""""""""""""""""""main - left"""""""""""""""""""""""""" */
+.main-left-top {
+    font-size: 14px;
+    text-align: start;
+    margin-right: 20px;
+}
+
+.main-left-text {
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.main-left-text:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+}
+
+ul {
+    list-style: none;
+    /* 기본 스타일 제거 */
+    padding-left: 0;
+    /* 내부 패딩 제거 */
+    text-align: start;
+}
+
+.main-left-bottom {
+    padding: 10px;
+}
+
+ul.custom-list li {
+    font-size: 17px;
+}
+
+li {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+}
+
+.main-left-icon {
+    margin-right: 10px;
+}
+
+/* """"""""""""""""""""""""""main - right"""""""""""""""""""""""""" */
+.title{
+    text-align: center;
+    font-size: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button.accept:hover {
+    background-color: #265a28;
+}
+
+button.accept {
+    background-color: #4CAF50;
+    color: white;
+}
+button.reject:hover {
+    background-color: #7c231d;
+}
+button.reject {
+    background-color: #f44336;
+    color: white;
+}
+
+select.reject-reason {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+/* """"""""""""""""""""""""""""footer"""""""""""""""""""""""""""" */
+footer {
+    display: flex;
+    justify-content: center;
+    flex: 0 1 auto;
+    text-align: start;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+footer div{
+    color: rgb(177, 177, 177);
+    width: 70vw;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+footer div p{
+    font-size: 9px;
+    margin-bottom: 5px;
+}
