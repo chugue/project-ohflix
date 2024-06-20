@@ -57,4 +57,9 @@ public class UserController {
     public String getAccountMembership() {
         return "account/account-membership";
     }
+
+    @GetMapping("/api/cancel-plan")
+    public String getCancelPlan() {
+        return "user/cancel-plan";
+    }
 }
