@@ -1,13 +1,18 @@
 package com.project.ohflix.domain.purchaseHistory;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @RequiredArgsConstructor
 @Controller
 public class PurchaseHistoryController {
+
+    private final HttpSession session;
+    private final PurchaseHistoryService purchaseHistoryService;
 
     @GetMapping("/api/paymethod-form")
     public String getPaymethodRegisterForm() {
@@ -36,6 +41,10 @@ public class PurchaseHistoryController {
 
     @GetMapping("/api/account-security")
     public String accountSecurity() {
+        // accountSecurityPage 데이터 바인딩
+        PurchaseHistoryResponse.AccountSecurityDTO accountSecurityDTO = purchaseHistoryService.AccountSecurityPage(2);
+        session.setAttribute("user", accountSecurityDTO);
+
         return "account/account-security";
     }
 
