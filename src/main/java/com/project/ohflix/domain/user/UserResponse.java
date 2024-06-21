@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.user;
 
 
+import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import lombok.Data;
 
@@ -9,6 +10,16 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class UserResponse {
+
+    // 로그인 사용자의 관람등급 가져오기
+    @Data
+    public static class RestrictionLevelDTO {
+        private Rate userSaveRate;
+
+        public RestrictionLevelDTO(User user) {
+            this.userSaveRate = user.getUserSaveRate();
+        }
+    }
 
     // user-check 페이지
     @Data
@@ -49,5 +60,7 @@ public class UserResponse {
             return period.getYears() * 12 + period.getMonths();
         }
     }
+
+
 }
 

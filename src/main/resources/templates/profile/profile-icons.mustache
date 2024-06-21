@@ -1,105 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix 프로필 변경</title>
-  <link rel="stylesheet" href="/static/css/profile-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix 프로필 변경</title>
+    <link rel="stylesheet" href="/static/css/profile-icons.css">
 </head>
 <body>
-  <div class="header">
+<div class="header">
     <div class="back-button-container">
-      <button class="back-button">프로필 변경</button>
-      <p class="subtitle">프로필 아이콘을 선택하세요.</p>
+        <button class="back-button">프로필 변경</button>
+        <p class="subtitle">프로필 아이콘을 선택하세요.</p>
     </div>
     <div class="profile-info">
-      <span id="profileName">박동기</span>
-      <img src="/static/images/profiles/netflix-profile.png" alt="프로필 사진" id="currentProfilePic">
+        <span id="profileName">박동기</span>
+        <img src="/static/images/profiles/netflix-profile.png" alt="프로필 사진" id="currentProfilePic">
     </div>
-  </div>
-  <div class="container">
+</div>
+<div class="container">
     <div class="profile-wrapper" id="wrapper1">
-      <h2>대표 아이콘</h2>
-      <button class="scroll-button left" id="scrollLeft1">&#9664;</button>
-      <div class="profile-container" id="profileContainer1">
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile2.png" alt="Profile 2"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile3.png" alt="Profile 3"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile4.png" alt="Profile 4"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile5.png" alt="Profile 5"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile6.png" alt="Profile 6"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile7.png" alt="Profile 7"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile26.png" alt="Profile 26"></div>
-      </div>
-      <button class="scroll-button right" id="scrollRight1">&#9654;</button>
+        <h2>대표 아이콘</h2>
+        <button class="scroll-button left" id="scrollLeft1">&#9664;</button>
+        <div class="profile-container" id="profileContainer1">
+            {{#profileIconList}}
+                {{#main}}
+                    <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+                {{/main}}
+            {{/profileIconList}}
+        </div>
+        <button class="scroll-button right" id="scrollRight1">&#9654;</button>
     </div>
     <div class="profile-wrapper" id="wrapper2">
-      <h2>자주 쓰는 아이콘</h2>
-      <button class="scroll-button left" id="scrollLeft2">&#9664;</button>
-      <div class="profile-container" id="profileContainer2">
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile8.png" alt="Profile 8"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile9.png" alt="Profile 9"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile10.png" alt="Profile 10"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile11.png" alt="Profile 11"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile12.png" alt="Profile 12"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile13.png" alt="Profile 13"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile27.png" alt="Profile 27"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile28.png" alt="Profile 28"></div>
-      </div>
-      <button class="scroll-button right" id="scrollRight2">&#9654;</button>
+        <h2>자주 쓰는 아이콘</h2>
+        <button class="scroll-button left" id="scrollLeft2">&#9664;</button>
+        <div class="profile-container" id="profileContainer2">
+            {{#profileIconList}}
+                {{#mostUse}}
+                    <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+                {{/mostUse}}
+            {{/profileIconList}}
+        </div>
+        <button class="scroll-button right" id="scrollRight2">&#9654;</button>
     </div>
     <div class="profile-wrapper" id="wrapper3">
-      <h2>재미있는 아이콘</h2>
-      <button class="scroll-button left" id="scrollLeft3">&#9664;</button>
-      <div class="profile-container" id="profileContainer3">
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile14.png" alt="Profile 14"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile15.png" alt="Profile 15"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile16.png" alt="Profile 16"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile17.png" alt="Profile 17"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile18.png" alt="Profile 18"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile19.png" alt="Profile 19"></div>
-      </div>
-      <button class="scroll-button right" id="scrollRight3">&#9654;</button>
+        <h2>재미있는 아이콘</h2>
+        <button class="scroll-button left" id="scrollLeft3">&#9664;</button>
+        <div class="profile-container" id="profileContainer3">
+            {{#profileIconList}}
+                {{#funny}}
+                    <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+                {{/funny}}
+            {{/profileIconList}}
+        </div>
+        <button class="scroll-button right" id="scrollRight3">&#9654;</button>
     </div>
     <div class="profile-wrapper" id="wrapper4">
-      <h2>인기 있는 아이콘</h2>
-      <button class="scroll-button left" id="scrollLeft4">&#9664;</button>
-      <div class="profile-container" id="profileContainer4">
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile20.png" alt="Profile 20"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile21.png" alt="Profile 21"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile22.png" alt="Profile 22"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile23.png" alt="Profile 23"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile24.png" alt="Profile 24"></div>
-        <div class="profile-item"><img src="/static/images/profiles/netflix-profile25.png" alt="Profile 25"></div>
-      </div>
-      <button class="scroll-button right" id="scrollRight4">&#9654;</button>
+        <h2>인기 있는 아이콘</h2>
+        <button class="scroll-button left" id="scrollLeft4">&#9664;</button>
+        <div class="profile-container" id="profileContainer4">
+            {{#profileIconList}}
+                {{#popular}}
+                    <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+                {{/popular}}
+            {{/profileIconList}}
+        </div>
+        <button class="scroll-button right" id="scrollRight4">&#9654;</button>
     </div>
-  </div>
-  <div class="profile-wrapper" id="wrapper5">
+</div>
+<div class="profile-wrapper" id="wrapper5">
     <h2>최주호와 아이들</h2>
     <button class="scroll-button left" id="scrollLeft5">&#9664;</button>
     <div class="profile-container" id="profileContainer5">
-      <div class="profile-item"><img src="/static/images/profiles/netflix-profile31.png" alt="Profile 31"></div>
-      <div class="profile-item"><img src="/static/images/profiles/netflix-profile32.png" alt="Profile 32"></div>
-      <div class="profile-item"><img src="/static/images/profiles/netflix-profile33.png" alt="Profile 33"></div>
-      <div class="profile-item"><img src="/static/images/profiles/netflix-profile34.png" alt="Profile 34"></div>
-      <div class="profile-item"><img src="/static/images/profiles/netflix-profile35.png" alt="Profile 35"></div>
+        {{#profileIconList}}
+            {{#joohoChildFirst}}
+                <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+            {{/joohoChildFirst}}
+        {{/profileIconList}}
     </div>
     <button class="scroll-button right" id="scrollRight5">&#9654;</button>
-  </div>
+</div>
 </div>
 <div class="profile-wrapper" id="wrapper6">
-  <h2>최주호와 아이들 2</h2>
-  <button class="scroll-button left" id="scrollLeft6">&#9664;</button>
-  <div class="profile-container" id="profileContainer6">
-    <div class="profile-item"><img src="/static/images/profiles/netflix-profile36.png" alt="Profile 36"></div>
-    <div class="profile-item"><img src="/static/images/profiles/netflix-profile37.png" alt="Profile 37"></div>
-    <div class="profile-item"><img src="/static/images/profiles/netflix-profile38.png" alt="Profile 38"></div>
-    <div class="profile-item"><img src="/static/images/profiles/netflix-profile39.png" alt="Profile 39"></div>
-    <div class="profile-item"><img src="/static/images/profiles/netflix-profile40.png" alt="Profile 40"></div>
-  </div>
-  <button class="scroll-button right" id="scrollRight6">&#9654;</button>
+    <h2>최주호와 아이들 2</h2>
+    <button class="scroll-button left" id="scrollLeft6">&#9664;</button>
+    <div class="profile-container" id="profileContainer6">
+        {{#profileIconList}}
+            {{#joohoChildSecond}}
+                <div class="profile-item"><img src={{path}} alt="Profile {{id}}"></div>
+            {{/joohoChildSecond}}
+        {{/profileIconList}}
+    </div>
+    <button class="scroll-button right" id="scrollRight6">&#9654;</button>
 </div>
 </div>
-  <script src="/static/js/profile-icons.js"></script>
+<script src="/static/js/profile-icons.js"></script>
 </body>
 </html>
