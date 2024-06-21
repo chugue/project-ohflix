@@ -71,4 +71,9 @@ public class PurchaseHistoryController {
 
     @GetMapping("/api/video-manage")
     public String videoManage() {return "video-manage";}
+
+    @GetMapping("/api/paymethod-register-form")
+    public String payMethodRegisterForm() {
+        return "paymethod/paymethod-register-form";
+    }
 }
