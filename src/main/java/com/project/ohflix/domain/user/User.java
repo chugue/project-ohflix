@@ -26,6 +26,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String mobile; // 전화번호
+
     @Column(nullable = false)
     private String username;
 
@@ -44,10 +46,11 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String email, String password, String username, ProfileIcon profileIcon, Status status, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
+    public User(Integer id, String email, String password, String mobile, String username, ProfileIcon profileIcon, Status status, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.mobile = mobile;
         this.username = username;
         this.profileIcon = profileIcon;
         this.status = status;
