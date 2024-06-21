@@ -53,10 +53,6 @@ public class PurchaseHistoryController {
         return "paymethod/purchase-histories";
     }
 
-    @GetMapping("/api/profile-setting")
-    public String profileSetting() {
-        return "profile/profile-setting";
-    }
 
 
     @GetMapping("/api/account-security")

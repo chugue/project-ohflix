@@ -31,6 +31,21 @@ public class UserResponse {
         }
     }
 
+    //profile-setting
+    @Data
+    public static class ProfileSettingDTO {
+        private Integer userId;
+        private String username;
+        private Integer iconId;
+        private String iconPath;
+
+        public ProfileSettingDTO(User user) {
+            this.userId = user.getId();
+            this.username = user.getUsername();
+            this.iconId = user.getProfileIcon().getId();
+            this.iconPath = user.getProfileIcon().getPath();
+        }
+    }
 
 }
 
