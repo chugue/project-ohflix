@@ -21,8 +21,8 @@ public class MyListController {
     public String getMyFavList(HttpServletRequest request) {
         User sessionUser = (User) httpSession.getAttribute("sessionUser");
         // TODO : 로그인 구현 할 시 1대신 sessionUser.getId() 사용하기
-        List<MyListResponse.MyFavoriteListDTO> myFavoriteList = myListService.findMyListById(1);
-        request.setAttribute("myFavoriteList", myFavoriteList);
+        List<MyListResponse.MyFavoriteListDTO> respDTOList = myListService.findMyListById(1);
+        request.setAttribute("myFavoriteList", respDTOList);
         return "mylist/my-favorite-list";
     }
 }
