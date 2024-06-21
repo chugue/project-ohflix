@@ -44,18 +44,15 @@ public class UserResponse {
     @Data
     public static class UserProfileFormDTO {
         private Integer id;
-        private String username;
-        private String email;
         private ProfileIcon profileIcon;    // 프로필 아이콘
-        private Rate userSaveRate;          // 사용자가 설정한 관람등급
+        private String username;            // 이름
+        private String email;               // 이메일
+        private Rate userSaveRate;          // 관람등급
         private Status isKids;              // 키즈 시청 제한 여부
         private Boolean isAutoPlay;         // 자동 재생 여부
         private Timestamp createdAt;
-//        private String password;
-//        private String mobile;        // 전화번호
-//        private Status status;        // 사용자? 관리자?
-//        private Boolean loginSave;    // 로그인 정보 저장 여부
-//        private Boolean isSubscribe;  // 유료회원? 구독회원?
+
+        private String profileIconPath;
 
         public UserProfileFormDTO(User user) {
             this.id = user.getId();
@@ -66,6 +63,8 @@ public class UserResponse {
             this.isKids = user.getIsKids();
             this.isAutoPlay = user.getIsAutoPlay();
             this.createdAt = user.getCreatedAt();
+
+            this.profileIconPath = user.getProfileIcon().getPath();
         }
     }
 }

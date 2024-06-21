@@ -30,7 +30,8 @@ public class UserController {
     @GetMapping("/api/profile-form")
     public String getProfileView(HttpServletRequest request) {
         User sessionUser = (User) httpSession.getAttribute("sessionUser");
-        User respDTO = userService.profileFormPage(sessionUser.getId());
+//        User respDTO = userService.userProfileForm(sessionUser.getId());
+        UserResponse.UserProfileFormDTO respDTO = userService.userProfileForm(4);
         request.setAttribute("user", respDTO);
         return "profile/profile-form";
     }

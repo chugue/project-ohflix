@@ -27,11 +27,10 @@ public class UserService {
       return new UserResponse.UserCheckDTO(cardInfo);
     }
 
-
-    public User profileFormPage(Integer id) {
-
-
-        return null;
+    public UserResponse.UserProfileFormDTO userProfileForm(Integer sessionUserId) {
+        User userProfile = userRepository.findUserProfileById(sessionUserId);
+        System.out.println(userProfile);
+        return new UserResponse.UserProfileFormDTO(userProfile);
     }
 }
 
