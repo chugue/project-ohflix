@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class ProfileIconController {
-    private final HttpSession httpSession;
     private final ProfileIconService profileIconService;
 
     @GetMapping("/api/profile-icons")
