@@ -1,7 +1,10 @@
 package com.project.ohflix.domain.purchaseHistory;
 
 
+import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Paymethod;
+import com.project.ohflix.domain._enums.Rate;
+import com.project.ohflix.domain.content.Content;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -53,6 +56,7 @@ public class PurchaseHistoryResponse {
             }
         }
     }
+
     // account-security 페이지
     @Data
     public static class AccountSecurityDTO {
@@ -67,5 +71,6 @@ public class PurchaseHistoryResponse {
             this.mobile = user.getMobile();
         }
     }
+
 }
 

@@ -6,87 +6,63 @@
     <title>영상 관리</title>
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/video-manage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
-    <nav>
-        <div class="nav-div">
-            <img src="/static/images/OH!FLIX.png" alt="Logo" class="nav-logo">
-            <div class="profile">
-                <img src="/static/images/netflix-profile.png" alt="프로필" class="nav-profile">
-                <button class="dropdown-button">
-                    <span class="dropdown-icon">▼</span>
-                    <div class="dropdown-content">
-                        <a href="#">키즈</a>
-                        <a href="#">프로필 관리</a>
-                        <a href="#">프로필 이전</a>
-                        <a href="#">계정</a>
-                        <a href="#">고객 센터</a>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
-                돌아가기
-            </div>
-            <ul class="sidebar-menu">
-                <li><i class="fa-solid fa-upload"></i> 영상 업로드</li>
-                <li><i class="fa-solid fa-photo-film"></i> 영상 관리</li>
-                <li><i class="fa-solid fa-users-gear"></i> 회원 관리</li>
-                <li><i class="fa-solid fa-comment-dots"></i> 멤버십 해지 요청</li>
-                <li><i class="fa-solid fa-chart-line"></i> 매출 관리</li>
-            </ul>
-        </div>
-        <div class="main-content">
-            <h1 class="main-title">영상 목록</h1>
-            <div class="card-container">
-                <div class="card">
-                    <img src="/static/images/video_manage/video-manage01.jpg" alt="영상 썸네일">
-                    <div class="card-content">
-                        <h3>서울의 봄</h3>
-                        <div class="card-buttons">
-                            <button class="detail-button">상세보기</button>
-                            <button class="delete-button">삭제</button>
-                        </div>
-                    </div>
+<nav>
+    <div class="nav-div">
+        <img src="/static/images/OH!FLIX.png" alt="Logo" class="nav-logo">
+        <div class="profile">
+            <img src="/static/images/netflix-profile.png" alt="프로필" class="nav-profile">
+            <button class="dropdown-button">
+                <span class="dropdown-icon">▼</span>
+                <div class="dropdown-content">
+                    <a href="#">키즈</a>
+                    <a href="#">프로필 관리</a>
+                    <a href="#">프로필 이전</a>
+                    <a href="#">계정</a>
+                    <a href="#">고객 센터</a>
                 </div>
-                <div class="card">
-                    <img src="/static/images/video_manage/video-manage02.jpg" alt="영상 썸네일">
-                    <div class="card-content">
-                        <h3>하이라키</h3>
-                        <div class="card-buttons">
-                            <button class="detail-button">상세보기</button>
-                            <button class="delete-button">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="/static/images/video_manage/video-manage03.jpg" alt="영상 썸네일">
-                    <div class="card-content">
-                        <h3>끝내주는 해결사</h3>
-                        <div class="card-buttons">
-                            <button class="detail-button">상세보기</button>
-                            <button class="delete-button">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="/static/images/video_manage/video-manage04.jpg" alt="영상 썸네일">
-                    <div class="card-content">
-                        <h3>위대한 쇼맨</h3>
-                        <div class="card-buttons">
-                            <button class="detail-button">상세보기</button>
-                            <button class="delete-button">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- 필요한 만큼 더 많은 카드를 추가하세요 -->
-            </div>
+            </button>
         </div>
     </div>
+</nav>
+<div class="container">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
+            돌아가기
+        </div>
+        <ul class="sidebar-menu">
+            <li><i class="fa-solid fa-upload"></i> 영상 업로드</li>
+            <li><i class="fa-solid fa-photo-film"></i> 영상 관리</li>
+            <li><i class="fa-solid fa-users-gear"></i> 회원 관리</li>
+            <li><i class="fa-solid fa-comment-dots"></i> 멤버십 해지 요청</li>
+            <li><i class="fa-solid fa-chart-line"></i> 매출 관리</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1 class="main-title">영상 목록</h1>
+
+        <div class="card-container">
+            {{#VideoManagePageDTO}}
+                {{#videoDTO}}
+                    <div class="card">
+                        <img src="{{thumbnail}}" alt="영상 썸네일">
+                        <div class="card-content">
+                            <h3>{{title}}</h3>
+                            <div class="card-buttons">
+                                <button class="detail-button">상세보기</button>
+                                <button class="delete-button">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                {{/videoDTO}}
+            {{/VideoManagePageDTO}}
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
