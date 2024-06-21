@@ -2,20 +2,20 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>홈 - 오플릭스</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>오!플릭스</title>
     <!-- 라이브러리 -->
     <!-- google Icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- font-awesome Icon 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
           integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <!-- swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -33,7 +33,9 @@
 <body>
 <!-- 헤더 -->
 <header>
-    <a href="/"><div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div></a>
+    <a href="/">
+        <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
+    </a>
     <nav>
         <ul>
             <li><a href="/">홈</a></li>
@@ -106,7 +108,7 @@
         <!--  알람 드롭 다운 메뉴 종료  -->
         <!--  프로필 드롭 다운 메뉴 시작  -->
         <div class="dropdown">
-            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile" /></button>
+            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
             <div class="dropdown-content">
                 <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
                 <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>
@@ -139,9 +141,14 @@
         <h2>내가 찜한 콘텐츠</h2>
         <div class="movies">
             <div class="item-list">
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01">
-                </div>
+                {{#myFavoriteList}}
+                    {{#content}}
+                        <div class="item">
+                            <img src={{thumbnail}} alt="new_01">
+                        </div>
+                    {{/content}}
+                {{/myFavoriteList}}
+                <!-- 프론트 더미 -->
                 <div class="item">
                     <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">
                 </div>
@@ -225,7 +232,7 @@
                                 <span>HD</span>
                             </div>
                             <div class="metadata">
-                                <div><img src="/static/images/12.png" alt="" /></div>
+                                <div><img src="/static/images/12.png" alt=""/></div>
                             </div>
                             <div class="description">
                                 대통령의 죽음으로 군부대가 뒤흔들린 시기. 보안사령관이 서울
@@ -249,7 +256,7 @@
                         <div>장르: 스릴러 영화</div>
                         <div>영화 특징: 긴장감 넘치는</div>
                         <div class="rating">
-                            <span>관람등급: <img src="/static/images/12.png" alt="" />12세 이상관람가</span>
+                            <span>관람등급: <img src="/static/images/12.png" alt=""/>12세 이상관람가</span>
                         </div>
                     </div>
                 </div>
