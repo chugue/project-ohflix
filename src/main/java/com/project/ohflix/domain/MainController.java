@@ -33,4 +33,9 @@ public class MainController {
         return null;
     }
 
+    @GetMapping("/api/info-copy")
+    public String getInfoCopyPage() {
+        return "admin/info-copy";
+    }
+
 }
