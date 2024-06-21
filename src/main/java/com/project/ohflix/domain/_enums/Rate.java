@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public enum Rate {
 
-    PG("청소년 관람가"),
-    R("청소년 관람 불가"),
+    PG("15세 이하 관람 불가"),
+    R("19세 이하 관람 불가"),
     ALL("전체 관람가");
 
     private final String value;
