@@ -35,12 +35,12 @@ public class UserController {
 
     @GetMapping("/api/sales-page")
     public String getSales() {
-        return "user/sales-page";
+        return "admin/sales-page";
     }
 
     @GetMapping("/admin/members-manage")
     public String getMembers() {
-        return "user/members-manage";
+        return "admin/members-manage";
     }
 
     @GetMapping("/api/account-view")

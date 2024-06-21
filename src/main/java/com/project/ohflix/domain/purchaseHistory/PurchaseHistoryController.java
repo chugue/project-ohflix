@@ -41,16 +41,16 @@ public class PurchaseHistoryController {
 
     @GetMapping("/admin/admin-upload")
     public String adminUpload() {
-        return "admin-upload";
+        return "admin/admin-upload";
     }
 
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink() {
-        return "content-update-link";
+        return "admin/content-update-link";
     }
 
     @GetMapping("/api/video-manage")
-    public String videoManage() {return "video-manage";}
+    public String videoManage() {return "admin/video-manage";}
 
 
 
