@@ -13,12 +13,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/login-form")
-    public String getLoginForm() {
+    public String getLoginForm() {return "user/login-form";}
 
-
-        return "user/login-form";
-    }
-
+    // 사용자 확인 방법 선택 페이지
     @GetMapping("/api/user-check")
     public String getUserCheck(HttpServletRequest request) {
         Integer sessionUserId = 2; //TODO : 세션이 구현되면 세션 사용자 아이디가 들어가야됨
