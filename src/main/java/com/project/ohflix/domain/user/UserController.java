@@ -1,5 +1,8 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix.domain.cardInfo.CardInfoRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,15 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
+    private final UserService userService;
 
     @GetMapping("/login-form")
-    public String getLoginForm() {
-        return "user/login-form";
+    public String getLoginForm() {return "user/login-form";}
+
+    // 사용자 확인 방법 선택 페이지
+    @GetMapping("/api/user-check")
+    public String getUserCheck(HttpServletRequest request) {
+        Integer sessionUserId = 2; //TODO : 세션이 구현되면 세션 사용자 아이디가 들어가야됨
+        UserResponse.UserCheckDTO respDTO =userService.userCheckPage(sessionUserId);
+        request.setAttribute("UserCheckDTO", respDTO);
+        return "user/user-check";
     }
 
-    @GetMapping("/api/user-check")
-    public String getUserCheck() {
-        return "user/user-check";
+    @GetMapping("/api/view-history")
+    public String getViewed() {
+        return "user/view-history";
     }
 
     @GetMapping("/api/password-change-form")
@@ -35,12 +46,12 @@ public class UserController {
 
     @GetMapping("/api/sales-page")
     public String getSales() {
-        return "user/sales-page";
+        return "admin/sales-page";
     }
 
     @GetMapping("/admin/members-manage")
     public String getMembers() {
-        return "user/members-manage";
+        return "admin/members-manage";
     }
 
     @GetMapping("/api/account-view")

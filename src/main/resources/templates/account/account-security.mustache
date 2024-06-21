@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="/static/css/account-security.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/account-security.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>account</title>
 </head>
 
@@ -16,11 +16,11 @@
     <div class="nav-div">
         <div>
             <a href="/">
-                <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
+                <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
             </a>
         </div>
         <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -39,11 +39,11 @@
     <!-- 사이드 바 메뉴 끝 -->
 
     <!-- main div right -->
-    <div class="main-div">
-        <!-- membership inforamtion -->
-        <div class="main-right-header mb-20">보안</div>
-        <div class="mb-20">계정 정보</div>
-
+<div class="main-div">
+    <!-- membership inforamtion -->
+    <div class="main-right-header mb-20">보안</div>
+    <div class="mb-20">계정 정보</div>
+    {{#AccountSecurityDTO}}
         <!-- fast link -->
         <div class="main-right-div2 mb-20">
             <div class="setting m-20">
@@ -56,7 +56,7 @@
                         <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
                     </div>
                 </a>
-                <hr class="mb-20" />
+                <hr class="mb-20"/>
                 <a href="/api/user-check">
                     <div class="setting-div mb-20 pointer">
                         <div class="setting-text">
@@ -66,20 +66,20 @@
                             </div>
                             <div class="text-container">
                                 <div>이메일</div>
-                                <div>ohfilx@gmail.com</div>
+                                <div>{{email}}</div>
                             </div>
                         </div>
                         <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
                     </div>
                 </a>
-                <hr class="mb-20" />
+                <hr class="mb-20"/>
                 <a href="/api/user-check">
                     <div class="setting-div mb-20 pointer">
                         <div class="setting-text">
                             <i class="fa-solid fa-mobile-screen-button"></i>
                             <div class="text-container">
                                 <div>휴대폰</div>
-                                <div>010-1234-5678</div>
+                                <div>{{mobile}}</div>
                             </div>
                         </div>
                         <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
@@ -111,6 +111,7 @@
             </div>
         </div>
     </div>
+    {{/AccountSecurityDTO}}
 </main>
 <!-- nav start end-->
 
@@ -118,7 +119,7 @@
 
 <!-- hr -->
 <div class="mt-70">
-    <hr />
+    <hr/>
 </div>
 <!-- hr -->
 

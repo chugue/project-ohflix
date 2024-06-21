@@ -1,10 +1,7 @@
 package com.project.ohflix.domain.content;
 
 import com.project.ohflix.domain._enums.Genre;
-import com.project.ohflix.domain._enums.Paymethod;
 import com.project.ohflix.domain._enums.Rate;
-import com.project.ohflix.domain._enums.Status;
-import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -19,45 +16,44 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String title; // 제목
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String thumbnail; // 썸네일
 
-    @Column(nullable = false)
-    private String miniThumbnail; // 작은 썸네일
+    @Column(nullable = false, length = 255)
+    private String videoPath;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String mainPhoto; // 대표 사진 (가로사이즈)
 
-    @Column(nullable = false)
-    private String subPhoto; // 대표 사진 (세로사이즈 작은거)
+    @Column(nullable = false, length = 255)
+    private String posterPhoto; // 포스터 사진 (세로사이즈 포스터 형식 작은거, top10메뉴에 쓰임)
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String textPhoto; // 대표 텍스트 사진
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String director; // 감독 이름
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String introduction; // 영화 소개
 
+    @Column(columnDefinition = "TEXT")
     private String characteristic; // 영화 특징
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String playTime; // 재생 시간
 
-    @Column(nullable = false)
-    private String year; // 제작 연도
+    @Column(nullable = false, length = 4)
+    private String productYear; // 제작 연도
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String writers; // 각본
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String actors; // 배우
-
-    private String subDirector; // 연출
 
     private Integer viewCount; // 조회수 인기 컨텐츠 정보로 사용
 
@@ -68,23 +64,22 @@ public class Content {
     private Genre genre; // 장르 [ANIME, ACTION, COMEDY, ROMANCE, THRILLER, HORROR, SF, FANTASY, DOCUMENTARY]
 
     @Builder
-
-    public Content(Integer id, String title, String thumbnail, String miniThumbnail, String mainPhoto, String subPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String year, String writers, String actors, String subDirector, Integer viewCount, Rate rate, Genre genre) {
+    public Content(Integer id, String title, String thumbnail, String videoPath, String mainPhoto, String posterPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String productYear, String writers, String actors, Integer viewCount, Rate rate, Genre genre) {
         this.id = id;
         this.title = title;
+
         this.thumbnail = thumbnail;
-        this.miniThumbnail = miniThumbnail;
+        this.videoPath = videoPath;
         this.mainPhoto = mainPhoto;
-        this.subPhoto = subPhoto;
+        this.posterPhoto = posterPhoto;
         this.textPhoto = textPhoto;
         this.director = director;
         this.introduction = introduction;
         this.characteristic = characteristic;
         this.playTime = playTime;
-        this.year = year;
+        this.productYear = productYear;
         this.writers = writers;
         this.actors = actors;
-        this.subDirector = subDirector;
         this.viewCount = viewCount;
         this.rate = rate;
         this.genre = genre;

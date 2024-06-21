@@ -15,7 +15,7 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="/static/images/logo.png" alt="오류" class="nav-logo"/>
+            <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
         </div>
         <div>
             <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
@@ -63,6 +63,7 @@
         <div class="main-right-header mb-20">영화 정보 수정하기</div>
 
         <!-- 영상 업로드 -->
+        {{#content}}
         <div class="mb-20">영상 업로드 수정</div>
         <div class="main-right-div1 mb-20">
             <div class="membership-deco ml-20"></div>
@@ -75,8 +76,8 @@
                             <label for="file-upload" class="custom-file-upload">
                                 파일 수정
                             </label>
-                            <input id="file-upload" type="file" name="movie"/>
-                            <span class="file-name1 file-name" id="file-name1">업로드한 영화 제목</span>
+                            <input id="file-upload" type="file" name="videoPath"/>
+                            <span class="file-name1 file-name" id="file-name1">{{videoPath}}</span>
                         </div>
                         <div>
                             <label for="upload-btn" class="custom-upload-button">영상 업로드 하기</label>
@@ -90,7 +91,7 @@
 
 
         <!-- 이미지 업로드 -->
-        {{#content}}
+
             <form method="post" enctype="multipart/form-data" action="/update/info">
 
                 <div class="mb-20">이미지 업로드 수정</div>
@@ -144,8 +145,8 @@
                                 <label for="image-upload4" class="custom-file-upload">
                                     파일 수정
                                 </label>
-                                <input id="image-upload4" type="file" name="subPhoto"/>
-                                <span class="file-name5 file-name" id="file-name5">{{subPhoto}}</span>
+                                <input id="image-upload4" type="file" name="posterPhoto"/>
+                                <span class="file-name5 file-name" id="file-name5">{{posterPhoto}}</span>
                             </div>
                         </div>
                         <hr class="mb-20">
@@ -175,7 +176,7 @@
                             <tr>
                                 <td>제 작 년 도</td>
                                 <td>
-                                    <select id="yearSelect" name="year" class="movie-info">
+                                    <select id="yearSelect" name="productYear" class="movie-info">
                                         <option value="">연도 선택</option>
                                     </select>
                                 </td>

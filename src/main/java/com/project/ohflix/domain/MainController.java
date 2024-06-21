@@ -3,6 +3,7 @@ package com.project.ohflix.domain;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
@@ -15,4 +16,20 @@ public class MainController {
     public String getOuterPage() {
         return "outer-page";
     }
+
+    @GetMapping("/api/account-refund")
+    public String getAccountRefundPage() {
+        return "account/account-refund";
+    }
+
+    @PostMapping("/refund")
+    public String refund() {
+        return null;
+    }
+
+    @GetMapping("/api/info-copy")
+    public String getInfoCopyPage() {
+        return "admin/info-copy";
+    }
+
 }
