@@ -22,7 +22,6 @@ public class PurchaseHistoryController {
         return "paymethod/paymethod-register-form";
     }
 
-
     @GetMapping("/api/paymethod-manage")
     public String getPaymethodManage(HttpServletRequest request) {
 
@@ -62,6 +61,10 @@ public class PurchaseHistoryController {
 
     @GetMapping("/api/account-security")
     public String accountSecurity() {
+        // accountSecurityPage 데이터 바인딩
+        PurchaseHistoryResponse.AccountSecurityDTO respDTO = purchaseHistoryService.AccountSecurityPage(2);
+        session.setAttribute("AccountSecurityDTO", respDTO);
+
         return "account/account-security";
     }
 

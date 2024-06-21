@@ -67,6 +67,7 @@ public class Content {
     public Content(Integer id, String title, String thumbnail, String videoPath, String mainPhoto, String posterPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String productYear, String writers, String actors, Integer viewCount, Rate rate, Genre genre) {
         this.id = id;
         this.title = title;
+
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
         this.mainPhoto = mainPhoto;
