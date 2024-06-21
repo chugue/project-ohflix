@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.purchaseHistory;
 
+import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.cardInfo.CardInfoResponse;
@@ -7,6 +8,8 @@ import com.project.ohflix.domain.user.User;
 import com.project.ohflix.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,14 +20,22 @@ public class PurchaseHistoryService {
     private final CardInfoRepository cardInfoRepository;
 
     //paymethod-manage
-    public CardInfoResponse.CardNumber paymethodManagePage(int userId) {
-        User user=userRepository.findById(userId).orElseThrow();
+    public List<CardInfoResponse.paymethodManageDTO> paymethodManagePage(int userId) {
+        User user=userRepository.findById(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
-        CardInfo cardInfo = cardInfoRepository.findByUserId(user.getId()).orElseThrow();
+        List<CardInfo> cardInfos = cardInfoRepository.findByUserId(user.getId()).orElseThrow(() -> new Exception404("등록하신 카드가 없습니다."));
 
-        CardInfoResponse.CardNumber respDTO = new CardInfoResponse.CardNumber(cardInfo.getCardNumber());
+        List<CardInfoResponse.paymethodManageDTO> respDTO = cardInfos.stream().map(CardInfoResponse.paymethodManageDTO::new).toList();
 
         return respDTO;
+    }
+
+    public PurchaseHistoryResponse.purchaseHistoryDTO purchaseHistories(int userId) {
+        User user=userRepository.findById(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        List<PurchaseHistory> purchaseHistories= purchaseHistoryRepository.findByUserId(user.getId()).orElseThrow(() -> new Exception404("결제내역이 없습니다."));
+
+        return new PurchaseHistoryResponse.purchaseHistoryDTO(purchaseHistories);
     }
 }
 

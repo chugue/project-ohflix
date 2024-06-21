@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class PurchaseHistoryController {
@@ -26,20 +28,29 @@ public class PurchaseHistoryController {
 
         //SessionUser user=session.getAttribute("sessionUser");
 
-        //유저정보를 넣을 수 없어서 1번유저를 바로 넣음!
-        CardInfoResponse.CardNumber respDTO=purchaseHistoryService.paymethodManagePage(2);
+        //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
+        List<CardInfoResponse.paymethodManageDTO> respDTO=purchaseHistoryService.paymethodManagePage(2);
 
-        request.setAttribute("cardNumber", respDTO.getCardNumber());
+        request.setAttribute("card", respDTO);
         return "paymethod/paymethod-manage";
     }
 
     @GetMapping("/api/paymethod-update-form")
-    public String getPaymethodUpdateForm() {
+    public String getPaymethodUpdateForm(HttpServletRequest request) {
+
         return "paymethod/paymethod-update-form";
     }
 
     @GetMapping("/api/purchase-histories")
-    public String getPayment() {
+    public String getPayment(HttpServletRequest request) {
+
+        //SessionUser user=session.getAttribute("sessionUser");
+
+        //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
+        PurchaseHistoryResponse.purchaseHistoryDTO respDTO=purchaseHistoryService.purchaseHistories(2);
+        System.out.println("respDTO = " + respDTO);
+        request.setAttribute("purchardHistories", respDTO);
+
         return "paymethod/purchase-histories";
     }
 

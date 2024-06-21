@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
@@ -15,5 +16,5 @@ public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
     Optional<CardInfo> findUserInfo(@Param("userId") Integer userId);
 
     @Query("select c from CardInfo c join fetch c.user cu where cu.id = :userId")
-    Optional<CardInfo> findByUserId(@Param("userId") Integer userId);
+    Optional<List<CardInfo>> findByUserId(@Param("userId") Integer userId);
 }

@@ -7,11 +7,13 @@ public class CardInfoResponse {
 
     //paymethod-manage
     @Data
-    public static class CardNumber{
+    public static class paymethodManageDTO{
+        Integer cardInfoId;
         String cardNumber;
 
-        public CardNumber(String cardNumber) {
-            this.cardNumber = cardNumber;
+        public paymethodManageDTO(CardInfo cardInfo) {
+            this.cardInfoId = cardInfo.getId();
+            this.cardNumber = cardInfo.getCardNumber();
         }
     }
 }
