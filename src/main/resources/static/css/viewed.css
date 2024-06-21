@@ -130,7 +130,7 @@ td {
     text-align: left;
     align-content: center;
 }
-table:last-child{
+tbody:last-child{
     border-bottom: 1px solid #ccc;
 }
 
@@ -158,6 +158,28 @@ table:last-child{
 .btn {
     border: none;
     cursor: pointer;
+    background: transparent;
+}
+
+.bottom-btn{
+    margin-top: 20px;
+}
+.see-more-btn{
+    padding: 8px 16px;
+    background: linear-gradient(180deg,#0080ff,#0277ec);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+}
+.return-btn{
+    padding: 8px 16px;
+    background: linear-gradient(180deg,#e6e6e6,#ddd);
+    border: none;
+    border-radius: 2px;
+}
+.see-more-btn:hover,.return-btn:hover{
+    opacity: .7;
+    cursor:pointer;
 }
 
 /* 메인 종료 */
