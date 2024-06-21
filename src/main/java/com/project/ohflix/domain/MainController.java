@@ -15,4 +15,9 @@ public class MainController {
     public String getOuterPage() {
         return "outer-page";
     }
+    @GetMapping("/40")
+    public String getViewed() {
+        return "viewed";
+    }
+
 }
