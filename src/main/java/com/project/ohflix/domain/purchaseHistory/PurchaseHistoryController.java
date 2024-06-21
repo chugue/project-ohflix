@@ -81,7 +81,7 @@ public class PurchaseHistoryController {
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink() {
         // contentUpdateLinkPage 데이터 바인딩
-        ContentResponse.ContentUpdateLinkDTO respDTO = contentService.contentUpdateLinkDTO(1);
+        ContentResponse.ContentUpdateLinkPageDTO respDTO = contentService.contentUpdateLinkPageDTO(1);
         session.setAttribute("ContentUpdateLinkDTO", respDTO);
 
         return "admin/content-update-link";
@@ -89,6 +89,10 @@ public class PurchaseHistoryController {
 
     @GetMapping("/api/video-manage")
     public String videoManage() {
+        // videoManagePage 데이터 바인딩
+        ContentResponse.VideoManagePageDTO respDTO = contentService.videoManagePageDTO();
+        session.setAttribute("VideoManagePageDTO", respDTO);
+
         return "admin/video-manage";
     }
 

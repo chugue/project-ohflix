@@ -4,12 +4,16 @@ package com.project.ohflix.domain.content;
 import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
 import lombok.Data;
 
+import java.util.List;
+
 public class ContentResponse {
+
     // content-update-link 페이지
     @Data
-    public static class ContentUpdateLinkDTO {
+    public static class ContentUpdateLinkPageDTO {
         private int id;
         private String title; // 영화 제목
         private String thumbnail; // 썸네일
@@ -27,7 +31,7 @@ public class ContentResponse {
         private Rate rate; // 관람등급
         private Genre genre; // 장르
 
-        public ContentUpdateLinkDTO(Content content) {
+        public ContentUpdateLinkPageDTO(Content content) {
             this.id = content.getId();
             this.title = content.getTitle();
             this.thumbnail = FilenameFormatUtil.parseThumbnailFileName(content.getThumbnail());
@@ -45,8 +49,29 @@ public class ContentResponse {
             this.rate = content.getRate();
             this.genre = content.getGenre();
         }
+    }
 
+    // video-manage 페이지
+    @Data
+    public static class VideoManagePageDTO {
+        private List<Video> videoDTO;
 
+        public VideoManagePageDTO(List<Content> contents) {
+            this.videoDTO = contents.stream().map(content -> new Video(content)).toList();
+        }
+
+        @Data
+        public static class Video {
+            private int id;
+            private String title; // 영화 제목
+            private String thumbnail; // 썸네일
+
+            public Video(Content content) {
+                this.id = content.getId();
+                this.title = content.getTitle();
+                this.thumbnail = content.getThumbnail();
+            }
+        }
     }
 }
 
