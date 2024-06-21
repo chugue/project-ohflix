@@ -44,7 +44,7 @@
                         <img src="/static/images/system/message.svg" alt="SMS Icon" />
                         <div>
                             <h3>문자로 코드 받기</h3>
-                            <p>010-3422-0935</p>
+                            <p>{{UserCheckDTO.mobile}}</p>
                         </div>
                     </div>
                     <img
@@ -58,7 +58,7 @@
                         <img src="/static/images/system/email.svg" alt="SMS Icon" />
                         <div>
                             <h3>이메일 코드 받기</h3>
-                            <p>chugue85@gmail.com</p>
+                            <p>{{UserCheckDTO.email}}</p>
                         </div>
                     </div>
                     <img
@@ -72,7 +72,7 @@
                         <img src="/static/images/system/credit.svg" alt="SMS Icon" />
                         <div>
                             <h3>결제 정보 확인</h3>
-                            <p>LOCAL(마지막 네 자리: 4067)</p>
+                            <p>LOCAL(마지막 네 자리: {{UserCheckDTO.lastDigit}})</p>
                         </div>
                     </div>
                     <img
