@@ -4,12 +4,14 @@ import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
+    private final HttpSession httpSession;
     private final UserService userService;
 
     @GetMapping("/login-form")
@@ -22,6 +24,15 @@ public class UserController {
         UserResponse.UserCheckDTO respDTO =userService.userCheckPage(sessionUserId);
         request.setAttribute("UserCheckDTO", respDTO);
         return "user/user-check";
+    }
+
+    // 사용자 프로필 변경 페이지
+    @GetMapping("/api/profile-form")
+    public String getProfileView(HttpServletRequest request) {
+        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        User respDTO = userService.profileFormPage(sessionUser.getId());
+        request.setAttribute("user", respDTO);
+        return "profile/profile-form";
     }
 
     @GetMapping("/api/view-history")
@@ -73,4 +84,6 @@ public class UserController {
     public String getCancelPlan() {
         return "user/cancel-plan";
     }
+
+
 }
