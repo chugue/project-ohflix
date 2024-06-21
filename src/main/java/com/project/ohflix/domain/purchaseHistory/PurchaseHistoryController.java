@@ -44,6 +44,16 @@ public class PurchaseHistoryController {
         return "admin-upload";
     }
 
+    @GetMapping("/admin/content-update-link")
+    public String contentUpdateLink() {
+        return "content-update-link";
+    }
+
+    @GetMapping("/api/video-manage")
+    public String videoManage() {return "video-manage";}
+
+
+
     @PostMapping("/upload/movie")
     public String uploadMovie() {
         return null;
@@ -52,11 +62,6 @@ public class PurchaseHistoryController {
     @PostMapping("/upload/info")
     public String uploadInfo() {
         return null;
-    }
-
-    @GetMapping("/api/admin-detail")
-    public String adminDetail() {
-        return "admin-detail";
     }
 
     @PostMapping("/update/movie")
@@ -68,7 +73,4 @@ public class PurchaseHistoryController {
     public String updateInfo() {
         return null;
     }
-
-    @GetMapping("/api/video-manage")
-    public String videoManage() {return "video-manage";}
 }
