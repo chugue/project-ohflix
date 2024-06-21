@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -48,7 +50,11 @@ public class UserController {
     }
 
     @GetMapping("/admin/members-manage")
-    public String getMembers() {
+    public String getMembers(HttpServletRequest request) {
+        List<UserResponse.MembersDTO> members = userService.MembersDTOList();
+        long subscriberCount = members.stream().filter(UserResponse.MembersDTO::getIsSubscribe).count();
+        request.setAttribute("members", members);
+        request.setAttribute("subscriberCount", subscriberCount);
         return "admin/members-manage";
     }
 

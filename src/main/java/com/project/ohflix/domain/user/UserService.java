@@ -6,6 +6,9 @@ import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -20,6 +23,13 @@ public class UserService {
 
       return new UserResponse.UserCheckDTO(cardInfo);
     }
+
+    public List<UserResponse.MembersDTO> MembersDTOList() {
+        return userRepository.findAll().stream()
+                .map(UserResponse.MembersDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }
 
 
