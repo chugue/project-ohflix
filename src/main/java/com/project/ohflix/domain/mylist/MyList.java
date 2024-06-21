@@ -28,10 +28,12 @@ public class MyList {
     @ManyToOne(fetch = FetchType.LAZY)
     private Content content;
 
-    private String playedTime; // 이어보기 재생 시간 - 시청중인 컨텐츠 보기에서 사용
+    private String playedTime;
 
     @Enumerated(EnumType.STRING)
-    private WatchOrFav watchOrFav; // 시청중인 컨텐츠인지, 찜한 컨텐츠인지
+    @Column(name = "watch_or_fav")
+    private WatchOrFav watchOrFav; // Enum으로 선언
+
     @CreationTimestamp
     private Timestamp createdAt;
 
@@ -44,4 +46,5 @@ public class MyList {
         this.watchOrFav = watchOrFav;
         this.createdAt = createdAt;
     }
+
 }
