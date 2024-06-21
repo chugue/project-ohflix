@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+
 @Service
 @RequiredArgsConstructor
 public class ContentService {
@@ -30,6 +32,15 @@ public class ContentService {
         List<Content> contents = contentRepository.findAll();
 
         return new ContentResponse.VideoManagePageDTO(contents);
+    }
+
+
+    public List<ContentResponse.LatestContentDTO> findLatestContent() {
+        List<Content> latestContentList = contentRepository.findLatestContent();
+        System.out.println(latestContentList);
+
+        return latestContentList.stream().map(content
+                -> new ContentResponse.LatestContentDTO(content)).toList();
     }
 }
 

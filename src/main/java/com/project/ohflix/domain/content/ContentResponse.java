@@ -8,6 +8,11 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
 import lombok.Data;
 
 import java.util.List;
+import com.project.ohflix.domain._enums.Genre;
+import com.project.ohflix.domain._enums.Rate;
+import lombok.Data;
+
+import java.sql.Timestamp;
 
 public class ContentResponse {
 
@@ -71,6 +76,19 @@ public class ContentResponse {
                 this.title = content.getTitle();
                 this.thumbnail = content.getThumbnail();
             }
+        }
+    }
+
+    @Data
+    public static class LatestContentDTO {
+        private Integer id;
+        private String thumbnail;       // 썸네일
+        private Timestamp createdAt;
+
+        public LatestContentDTO(Content content) {
+            this.id = content.getId();
+            this.thumbnail = content.getThumbnail();
+            this.createdAt = content.getCreatedAt();
         }
     }
 }
