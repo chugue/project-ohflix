@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,10 @@ public class UserController {
     }
 
     @GetMapping("/api/user-check")
-    public String getUserCheck() {
-        Integer sessionUserId = 2;
-        userService.userCheckPage(sessionUserId);
-
+    public String getUserCheck(HttpServletRequest request) {
+        Integer sessionUserId = 2; //TODO : 세션이 구현되면 세션 사용자 아이디가 들어가야됨
+        UserResponse.UserCheckDTO respDTO =userService.userCheckPage(sessionUserId);
+        request.setAttribute("UserCheckDTO", respDTO);
         return "user/user-check";
     }
 
