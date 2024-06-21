@@ -224,6 +224,8 @@ button[type="submit"]{
     border: 1px solid #767676;
     border-radius: 5px;
     font-size: 16px;
+    width: 170px;
+    text-align: center;
 }
 
 .custom-file-upload:hover {
