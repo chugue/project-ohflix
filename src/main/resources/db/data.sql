@@ -69,23 +69,29 @@ INSERT INTO content_tb (
         ('나 홀로 집에','/static/images/dummy/home_alone/thumbnail.webp','/static/images/dummy/home_alone/main-photo.webp','/static/images/dummy/home_alone/main-photo.webp','/static/images/dummy/home_alone/poster-photo.png','/static/images/dummy/home_alone/text-photo.webp','크리스 콜럼버스','가족이 다 사라졌으면 좋겠어! 하나님이 소원을 들어주신 걸까? 크리스마스 연휴에 집에 혼자 남게 된 8살 소년. 혼자 놀기에 지칠 즈음, 집 주위를 얼쩡거리는 도둑들을 발견하는데. 들어올 테면 들어와 보시지. 우리 집은 내가 지킨다!','허당 매력','1시간 43분','1990','크리스 콜럼버스','맥컬리 컬킨, 조 페시, 다니엘 스턴, 존 허드, 로버츠 블로섬, 캐서린 오하라, 앤젤라 고설스, 데빈 러트레이, 게리 배먼, 힐러리 울프',   3 ,'ALL','COMEDY'),
         ('악마는 프라다를 입는다','/static/images/dummy/devil_wears_prada/thumbnail.webp','/static/images/dummy/devil_wears_prada/main-photo.webp','/static/images/dummy/devil_wears_prada/main-photo.webp','/static/images/dummy/devil_wears_prada/poster-photo.png','/static/images/dummy/devil_wears_prada/text-photo.webp','데이비드 프랭클','깐깐한 패션지 편집장의 비서로 일하게 된 사회 초년생. 성공을 위해 고군분투하는 동시에, 자신만의 강점과 스타일을 찾아나간다.','위트 있는, 기분 좋아지는','1시간 49분','2006','얼린 브로시 매케나','앤 해서웨이, 메릴 스트립, 에밀리 블런트, 스탠리 투치, 사이먼 베이커, 에이드리언 그레니에이, 트레이시 톰스, 재클린 티퍼니 브라운, 리치 서머, 다니엘 선자타', 10,'PG','COMEDY'),
         ('행오버','/static/images/dummy/hangover/thumbnail.webp','/static/images/dummy/hangover/main-photo.webp','/static/images/dummy/hangover/main-photo.webp','/static/images/dummy/hangover/poster-photo.png','/static/images/dummy/hangover/text-photo.webp','토드 필립스','라스베이거스에서 벌인 광란의 총각 파티 후 다음 날 아침. 절친 셋이 숙취에 시달리며 깨어나 보니 결혼식을 앞둔 친구가 사라졌다! 전날 일은 하나도 기억이 안 나는데 어쩌지?','아찔하고 발칙하게','1시간 39분','2009','스콧 무어, 존 루커스','브래들리 쿠퍼, 에드 헬름스, 잭 갤리퍼내키스, 저스틴 바사, 헤더 그레이엄, 사샤 바레즈, 제프리 탬보어, 켄 정, 레이철 해리스, 마이크 타이슨', 23,'R','COMEDY'),
-        ('화이트칙스','/static/images/dummy/white_chicks/thumbnail.webp','/static/images/dummy/white_chicks/main-photo.webp','/static/images/dummy/white_chicks/main-photo.webp','/static/images/dummy/white_chicks/poster-photo.png','/static/images/dummy/white_chicks/text-photo.webp','키넌 아이보리 웨이언스','납치 음모를 저지해야 하는 두 흑인 FBI 요원. 자신들이 경호를 맡은 상속녀 시늉을 하려고 백인 여자로 변장한다.','아찔하고 발칙하게, 허당 매력','1시간 49분','2004','키넌 아이보리 웨이언스, 숀 웨이언스, 말런 웨이언스, 앤드루 매켈프레시, 마이클 앤서니 스노든, 제이비어 쿡','숀 웨이언스, 말런 웨이언스, 제이미 킹, 프랭키 페이슨, 로슬린 먼로, 존 허드, 비지 필립스, 테리 크루스, 브리트니 다니엘, 에디 베레즈, 메이틀랜드 워드',22,'PG','COMEDY');
-/*        ('찰리와 초콜릿 공장',
-        '/static/images/dummy/charlie_chocolate/thumbnail.webp',
-        '/',
-        '/',
-        '/',
-        '/',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        ,
-        '',
-        '');*/
+        ('화이트칙스','/static/images/dummy/white_chicks/thumbnail.webp','/static/images/dummy/white_chicks/main-photo.webp','/static/images/dummy/white_chicks/main-photo.webp','/static/images/dummy/white_chicks/poster-photo.png','/static/images/dummy/white_chicks/text-photo.webp','키넌 아이보리 웨이언스','납치 음모를 저지해야 하는 두 흑인 FBI 요원. 자신들이 경호를 맡은 상속녀 시늉을 하려고 백인 여자로 변장한다.','아찔하고 발칙하게, 허당 매력','1시간 49분','2004','키넌 아이보리 웨이언스, 숀 웨이언스, 말런 웨이언스, 앤드루 매켈프레시, 마이클 앤서니 스노든, 제이비어 쿡','숀 웨이언스, 말런 웨이언스, 제이미 킹, 프랭키 페이슨, 로슬린 먼로, 존 허드, 비지 필립스, 테리 크루스, 브리트니 다니엘, 에디 베레즈, 메이틀랜드 워드',22,'PG','COMEDY'),
+        ('찰리와 초콜릿 공장','/static/images/dummy/charlie_chocolate/thumbnail.webp','/static/images/dummy/charlie_chocolate/main-photo.webp','/static/images/dummy/charlie_chocolate/main-photo.webp','/static/images/dummy/charlie_chocolate/poster-photo.png','/static/images/dummy/charlie_chocolate/text-photo.webp','팀 버튼','괴짜 윌리 웡카의 초콜릿 공장을 견학하게 된 행운의 어린이 5명은 그가 만들어내는 놀라운 과자의 비밀을 알게 된다.','유쾌 발랄, 상상의 나래','1시54분','2005','존 오거스트','조니 뎁, 프레디 하이모어, 데이비드 켈리, 헬레나 본햄 카터, 노아 테일러, 미시 파일, 제임스 폭스, 딥 로이, 크리스토퍼 리, 아담 고들리, 안나소피아 롭, 줄리아 윈터, 조던 프라이, 필립 위그래츠', 3,'ALL','COMEDY'),
+        ('유전','/static/images/dummy/hereditary/thumbnail.webp','/static/images/dummy/hereditary/main-photo.webp','/static/images/dummy/hereditary/main-photo.webp','/static/images/dummy/hereditary/poster-photo.png','/static/images/dummy/hereditary/text-photo.webp','아리 애스터','"애니"는 일주일 전 돌아가신 어머니의 유령이 집에 나타나는 것을 느낀다. 애니가 어머니와 닮았다며 접근한 수상한 이웃 "조앤"을 통해 엄마의 비밀을 발견하고, 자신이 엄마와 똑같은 일을 저질렀음을 알게 된다. 그리고 마침내 애니의 엄마로부터 시작돼 딸 "찰리"와 아들 "피터"에게까지 이어진 저주의 실체가 정체를 드러내는데···','소름돋는, 긴박한','2시간 7분','2018','아리 애스터','토니 콜렛, 밀리 샤피로, 알렉스 울프', 1,'PG','HORROR');
+-- INSERT INTO content_tb (
+--     title, thumbnail, video_path, main_photo, poster_photo, text_photo,
+--     director, introduction, characteristic, play_time, product_year, writers,
+--     actors, view_count, rate, genre
+-- ) VALUES ('',
+--          '/',
+--          '/',
+--          '/',
+--          '/',
+--          '/',
+--          '',
+--          '',
+--          '',
+--          '',
+--          '',
+--          '',
+--          '',
+--             ,
+--          '',
+--          '');
 
 
 
