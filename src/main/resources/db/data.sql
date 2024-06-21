@@ -76,3 +76,11 @@ VALUES
     -- user_id 5
     (5, 5, '스트리밍 서비스', '2024-06-14~2024-07-13', 'KAKAOPAY', 13500, '2024-06-14 08:30:00'),
     (5, 5, '스트리밍 서비스', '2024-05-14~2024-06-13', 'KAKAOPAY', 13500, '2024-05-14 11:45:00');
+
+--- 생성 순서 : 6번, mylist 테이블
+INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
+VALUES
+    (1, 1, '00:15:00', 'WATCHING', NOW()),
+    (1, 2, '00:30:00', 'WATCHING', NOW()),
+    (1, 3, '00:00:00', 'FAVORITE', NOW());
+
