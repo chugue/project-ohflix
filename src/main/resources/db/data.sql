@@ -27,3 +27,18 @@ VALUES
     ('user8@example.com', '1234', 'user8', 8, 'USER', true, false, true, false, NOW()),
     ('user9@example.com', '1234', 'user9', 9, 'USER', false, true, false, true, NOW()),
     ('user10@example.com', '1234', 'user10', 10, 'USER', true, false, false, false, NOW());
+
+
+
+
+-- 카드정보 더미 데이터
+INSERT INTO card_info_tb (user_id, card_number, expiry_month, card_owner, date_of_birth, is_agreed_third)
+VALUES
+    (2, '9876543210987654', '09/23', 'Jane Smith', '1985-05-15', false),
+    (3, '5555666677778888', '11/24', 'Michael Johnson', '1988-10-20', true),
+    (4, '4444555566667777', '08/22', 'Emily Davis', '1995-03-30', false),
+    (5, '1111222233334444', '07/21', 'Sophia Wilson', '1983-11-05', true),
+    (6, '9999888877776666', '06/20', 'Daniel Brown', '1979-09-12', false),
+    (7, '6666555577778888', '05/19', 'Olivia Martinez', '1992-04-25', true),
+    (8, '3333444455556666', '04/18', 'Alexander Taylor', '1987-07-08', false),
+    (9, '7777888899990000', '03/17', 'Isabella Anderson', '1998-02-15', true);
