@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,14 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
+    private final UserService userService;
 
     @GetMapping("/login-form")
     public String getLoginForm() {
+
+
         return "user/login-form";
     }
 
     @GetMapping("/api/user-check")
     public String getUserCheck() {
+        Integer sessionUserId = 2;
+        userService.userCheckPage(sessionUserId);
+
         return "user/user-check";
     }
 

@@ -27,6 +27,9 @@ public class CardInfo {
     private String cardNumber; // 카드 번호
 
     @Column(nullable = false)
+    private String lastDigit; // 카드 번호 끝 4자리
+
+    @Column(nullable = false)
     private String expiryMonth; // 유효 기간
 
     @Column(nullable = false)
@@ -37,11 +40,11 @@ public class CardInfo {
 
     private Boolean isAgreedThird; // 제 3자 정보이용 동의
 
-    @Builder
-    public CardInfo(Integer id, User user, String cardNumber, String expiryMonth, String cardOwner, Date dateOfBirth, Boolean isAgreedThird) {
+    public CardInfo(Integer id, User user, String cardNumber, String lastDigit, String expiryMonth, String cardOwner, Date dateOfBirth, Boolean isAgreedThird) {
         this.id = id;
         this.user = user;
         this.cardNumber = cardNumber;
+        this.lastDigit = lastDigit;
         this.expiryMonth = expiryMonth;
         this.cardOwner = cardOwner;
         this.dateOfBirth = dateOfBirth;
