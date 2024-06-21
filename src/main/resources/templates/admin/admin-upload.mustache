@@ -177,7 +177,7 @@
                         <tr>
                             <td>제 작 년 도</td>
                             <td>
-                                <select id="yearSelect" name="year" class="movie-info">
+                                <select id="productYear" name="productYear" class="movie-info">
                                     <option value="">연도 선택</option>
                                 </select>
                             </td>
@@ -317,7 +317,7 @@
     // 현재 연도 구하기
     var currentYear = new Date().getFullYear();
     // select 요소 가져오기
-    var selectElement = document.getElementById('yearSelect');
+    var selectElement = document.getElementById('productYear');
 
     // 옵션 추가: 1900년부터 현재 연도까지
     for (var year = currentYear; year >= 1900; year--) {

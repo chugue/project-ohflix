@@ -1,6 +1,9 @@
 package com.project.ohflix.domain.purchaseHistory;
 
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.user.User;
 import com.project.ohflix.domain.user.UserRepository;
 import com.project.ohflix._core.error.exception.Exception404;
@@ -24,6 +27,7 @@ public class PurchaseHistoryService {
     private final UserRepository userRepository;
     private final PurchaseHistoryRepository purchaseHistoryRepository;
     private final CardInfoRepository cardInfoRepository;
+    private final ContentRepository contentRepository;
 
     //paymethod-manage
     public List<CardInfoResponse.paymethodManageDTO> paymethodManagePage(int userId) {
@@ -46,15 +50,13 @@ public class PurchaseHistoryService {
 
     // AccountSecurityPage (email, mobile 불러오기)
     @Transactional
-    public PurchaseHistoryResponse.AccountSecurityDTO AccountSecurityPage(int userId) {
+    public PurchaseHistoryResponse.AccountSecurityDTO accountSecurityPage(int userId) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new Exception404("찾을 수 없는 유저입니다."));
 
         return new PurchaseHistoryResponse.AccountSecurityDTO(user);
     }
-
-
 }
 
 
