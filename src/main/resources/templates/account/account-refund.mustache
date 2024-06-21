@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/account-refund.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>account</title>
+</head>
+
+<body>
+<!-- nav start -->
+<nav>
+    <div class="nav-div">
+        <div>
+            <img src="/static/images/logo.png" alt="오류" class="nav-logo" />
+        </div>
+        <div>
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
+            <div>
+                <i class="fa-solid fa-caret-down fa-xs"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- nav end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- main start -->
+<main>
+    <!-- main div left -->
+    <div class="main-div">
+        <div class="main-left-top">
+            <div class="main-left-text">
+                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
+                돌아가기
+            </div>
+            <ul class="custom-list">
+                <li><i class="fa-solid fa-house main-left-icon"></i>개요</li>
+                <li>
+                    <i class="fa-solid fa-credit-card main-left-icon"></i>멤버십
+                </li>
+                <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
+                <li>
+                    <i class="fa-solid fa-users main-left-icon"></i>프로필
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- main div right -->
+    <div class="main-div">
+        <!-- membership inforamtion -->
+        <form action="/refund" method="POST">
+            <div class="main-right-header mb-20">환불 요청</div>
+            <div class="mb-20">환불 사유를 선택해주세요.</div>
+            <div class="main-right-div1 mb-20">
+                <div class="membership-deco">
+                </div>
+
+                <div class="membership-box m-20">
+
+                    <fieldset>
+                            <span>
+                                <span class="mb-20">
+                                    <input type="radio" id="service-quality" name="refund-reason"
+                                           value="service-quality" class="pointer">
+                                    <label for="service-quality">스트리밍 중 버퍼링이나 화질 저하 등 품질 문제.</label><br>
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="content-issue" name="refund-reason" value="content-issue"
+                                           class="pointer">
+                                    <label for="content-issue">기대했던 콘텐츠 부족 또는 지역 제한으로 인한 접근 불가.</label><br>
+
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="technical-issue" name="refund-reason"
+                                           value="technical-issue" class="pointer">
+                                    <label for="technical-issue">앱이나 웹사이트의 버그 및 디바이스 호환성 문제.</label><br>
+
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="subscription-issue" name="refund-reason"
+                                           value="subscription-issue" class="pointer">
+                                    <label for="subscription-issue">자동 갱신 실수 또는 해지 요청을 잊은 경우.</label><br>
+                                </span><br><br>
+                            </span>
+
+                        <span>
+                                <span>
+                                    <input type="radio" id="payment-issue" name="refund-reason" value="payment-issue"
+                                           class="pointer">
+                                    <label for="payment-issue">중복 결제나 과다 청구 등 결제 관련 오류.</label><br>
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="user-experience" name="refund-reason"
+                                           value="user-experience" class="pointer">
+                                    <label for="user-experience">인터페이스 불편함이나 추천 알고리즘 부정확성.</label><br>
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="personal-reason" name="refund-reason"
+                                           value="personal-reason" class="pointer">
+                                    <label for="personal-reason">경제적 이유나 개인적인 서비스 이용 중단 결정.</label><br>
+                                </span><br><br>
+
+                                <span>
+                                    <input type="radio" id="other" name="refund-reason" value="other" class="pointer">
+                                    <label for="other">과장된 광고나 정책 변경으로 인한 불만.</label>
+                                </span><br><br><br><br>
+
+                            </span>
+
+                        <span class="text">
+                                (단, 몇몇 항목은 결제 이후의 시청내역이 없어야 함)
+                            </span>
+                    </fieldset>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+            <label for="upload-info-btn" class="membership-cancel custom-upload-button">환불 요청하기</label>
+            <button id="upload-info-btn" type="submit" class="custom-upload-button">환불 요청하기</button>
+
+        </form>
+    </div>
+</main>
+<!-- main end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- hr -->
+<div class="mt-70">
+    <hr />
+</div>
+<!-- hr -->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- footer start -->
+<footer>
+    <div>
+        <p>
+            넷플릭스서비시스코리아 유한회사 통신판매업신고번호:
+            제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)
+        </p>
+        <p>대표: 레지널드 숀 톰프슨</p>
+        <p>이메일 주소: korea@netflix.com</p>
+        <p>
+            주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층
+            우편번호 03161
+        </p>
+        <p>사업자등록번호: 165-87-00119</p>
+        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+        <p>공정거래위원회 웹사이트</p>
+    </div>
+</footer>
+<!-- footer end -->
+</body>
+
+</html>
