@@ -14,9 +14,11 @@ public class UserService {
 
 
     // user-check 페이지 데이터
-    public void userCheckPage(Integer sessionUserId) {
+    public UserResponse.UserCheckDTO userCheckPage(Integer sessionUserId) {
        CardInfo cardInfo =  cardInfoRepository.findUserInfo(sessionUserId)
                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+
+      return new UserResponse.UserCheckDTO(cardInfo);
     }
 }
 
