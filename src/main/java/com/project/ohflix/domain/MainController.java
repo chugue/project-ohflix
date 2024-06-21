@@ -17,12 +17,6 @@ public class MainController {
         return "outer-page";
     }
 
-    @GetMapping("/40")
-    public String getViewed() {
-        return "viewed";
-    }
-
-
     @GetMapping("/api/account-refund")
     public String getAccountRefundPage() {
         return "account/account-refund";

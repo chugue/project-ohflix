@@ -27,6 +27,11 @@ public class UserController {
         return "user/user-check";
     }
 
+    @GetMapping("/api/view-history")
+    public String getViewed() {
+        return "user/view-history";
+    }
+
     @GetMapping("/api/password-change-form")
     public String getPasswordChangeForm() {
         return "user/password-change-form";

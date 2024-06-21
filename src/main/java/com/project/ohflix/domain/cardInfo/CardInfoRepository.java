@@ -9,8 +9,9 @@ import java.util.Optional;
 
 public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
 
-    @Query("""
+
+    @Query(""" 
              select c from CardInfo c join fetch c.user u where c.user.id = :userId
-             """)
+             """) // user-check 페이지에서 사용하는 쿼리
     Optional<CardInfo> findUserInfo(@Param("userId") Integer userId);
 }
