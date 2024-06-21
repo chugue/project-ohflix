@@ -2,15 +2,26 @@
 INSERT INTO profile_icon_tb (path, name, main, most_use, funny, popular, jooho_child_first, jooho_child_second)
 VALUES
     ('/static/images/profiles/netflix-profile.png', 'Icon 1', true, false, true, true, false, false),
-    ('/static/images/profiles/netflix-profile2.png', 'Icon 2', false, true, false, true, true, false),
-    ('/static/images/profiles/netflix-profile3.png', 'Icon 3', false, false, true, false, false, true),
-    ('/static/images/profiles/netflix-profile4.png', 'Icon 4', true, true, false, false, true, false),
-    ('/static/images/profiles/netflix-profile5.png', 'Icon 5', false, false, true, true, false, true),
-    ('/static/images/profiles/netflix-profile6.png', 'Icon 6', true, false, false, true, true, false),
-    ('/static/images/profiles/netflix-profile7.png', 'Icon 7', false, true, true, false, false, true),
+    ('/static/images/profiles/netflix-profile2.png', 'Icon 2', false, true, false, true, false, false),
+    ('/static/images/profiles/netflix-profile3.png', 'Icon 3', false, false, true, true, false, false),
+    ('/static/images/profiles/netflix-profile4.png', 'Icon 4', true, true, false, true, false, false),
+    ('/static/images/profiles/netflix-profile5.png', 'Icon 5', false, false, true, true, false, false),
+    ('/static/images/profiles/netflix-profile6.png', 'Icon 6', true, false, false, true, false, false),
+    ('/static/images/profiles/netflix-profile7.png', 'Icon 7', false, true, true, false, false, false),
     ('/static/images/profiles/netflix-profile8.png', 'Icon 8', true, false, true, true, false, false),
-    ('/static/images/profiles/netflix-profile9.png', 'Icon 9', false, true, false, false, true, true),
-    ('/static/images/profiles/netflix-profile10.png', 'Icon 10', true, false, false, true, true, false);
+    ('/static/images/profiles/netflix-profile9.png', 'Icon 9', false, true, false, false, false, false),
+    ('/static/images/profiles/netflix-profile10.png', 'Icon 10', true, false, false, true, false, false),
+--     C3반 친구들 더미
+    ('/static/images/profiles/netflix-profile31.png', 'Icon 31', false, false, false, false, true, false),
+    ('/static/images/profiles/netflix-profile32.png', 'Icon 32', false, false, false, false, true, false),
+    ('/static/images/profiles/netflix-profile33.png', 'Icon 33', false, false, false, false, true, false),
+    ('/static/images/profiles/netflix-profile34.png', 'Icon 34', false, false, false, false, true, false),
+    ('/static/images/profiles/netflix-profile35.png', 'Icon 35', false, false, false, false, true, false),
+    ('/static/images/profiles/netflix-profile36.png', 'Icon 36', false, false, false, false, false, true),
+    ('/static/images/profiles/netflix-profile37.png', 'Icon 37', false, false, false, false, false, true),
+    ('/static/images/profiles/netflix-profile38.png', 'Icon 38', false, false, false, false, false, true),
+    ('/static/images/profiles/netflix-profile39.png', 'Icon 39', false, false, false, false, false, true),
+    ('/static/images/profiles/netflix-profile40.png', 'Icon 40', false, false, false, false, false, true);
 
 -- 생성 순서 : 2번, 사용자 더미 1번사용자는 오플릭스 관리자.
 INSERT INTO user_tb (email, password, username, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, created_at)
