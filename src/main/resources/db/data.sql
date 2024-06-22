@@ -24,18 +24,18 @@ VALUES
     ('/static/images/profiles/netflix-profile40.png', 'Icon 40', false, false, false, false, false, true);
 
 -- 생성 순서 : 2번, 사용자 더미 1번사용자는 오플릭스 관리자.
-INSERT INTO user_tb (email, password, username, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, created_at)
+INSERT INTO user_tb (email, password, username, name, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, created_at)
 VALUES
-    ('admin1@example.com', '1234', 'adminUser', '010-1111-1111', 1, 'ADMIN', 'R', false, true, true, true, NOW()),
-    ('user2@example.com', '1234', 'user2', '010-2222-2222', 2, 'USER', 'ALL', false, false, true, true, NOW()),
-    ('user3@example.com', '1234', 'user3', '010-3333-3333', 3, 'USER', 'ALL', true, false, true, false, NOW()),
-    ('user4@example.com', '1234', 'user4', '010-4444-4444', 4, 'USER', 'PG', false, true, false, true, NOW()),
-    ('user5@example.com', '1234', 'user5', '010-5555-5555', 5, 'USER', 'ALL', false, false, true, false, NOW()),
-    ('user6@example.com', '1234', 'user6', '010-6666-6666', 6, 'USER', 'PG', true, true, false, true, NOW()),
-    ('user7@example.com', '1234', 'user7', '010-7777-7777', 7, 'USER', 'ALL', false, false, false, true, NOW()),
-    ('user8@example.com', '1234', 'user8', '010-8888-8888', 8, 'USER', 'PG', true, false, true, false, NOW()),
-    ('user9@example.com', '1234', 'user9', '010-9999-9999', 9, 'USER', 'ALL', false, true, false, true, NOW()),
-    ('user10@example.com', '1234', 'user10', '010-1111-0000', 10, 'USER','R', true, false, false, false, NOW());
+    ('admin1@example.com', '1234', 'adminUser', '관리자', '010-1111-1111', 1, 'ADMIN', 'R', false, true, true, true, NOW()),
+    ('user2@example.com', '1234', 'user2', '김성훈', '010-2222-2222', 2, 'USER', 'ALL', false, false, true, true, NOW()),
+    ('user3@example.com', '1234', 'user3', '박동기', '010-3333-3333', 3, 'USER', 'ALL', true, false, true, false, NOW()),
+    ('user4@example.com', '1234', 'user4', '공지영', '010-4444-4444', 4, 'USER', 'PG', false, true, false, true, NOW()),
+    ('user5@example.com', '1234', 'user5', '양승호', '010-5555-5555', 5, 'USER', 'ALL', false, false, true, false, NOW()),
+    ('user6@example.com', '1234', 'user6', '최윤정', '010-6666-6666', 6, 'USER', 'PG', true, true, false, true, NOW()),
+    ('user7@example.com', '1234', 'user7', '최주호', '010-7777-7777', 7, 'USER', 'ALL', false, false, false, true, NOW()),
+    ('user8@example.com', '1234', 'user8', '홍길동', '010-8888-8888', 8, 'USER', 'PG', true, false, true, false, NOW()),
+    ('user9@example.com', '1234', 'user9', '김철수', '010-9999-9999', 9, 'USER', 'ALL', false, true, false, true, NOW()),
+    ('user10@example.com', '1234', 'user10', '강유리', '010-1111-0000', 10, 'USER','R', true, false, false, false, NOW());
 
 -- 생성 순서 : 3번, 카드 정보 더미
 INSERT INTO card_info_tb (user_id, card_number, last_digit, expiry_month, card_owner, date_of_birth, is_agreed_third)
