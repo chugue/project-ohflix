@@ -25,8 +25,5 @@ public class ContentController {
         return "content/content-details";
     }
 
-    @GetMapping("/api/profile-form")
-    public String getProfileView() {
-        return "profile/profile-form";
-    }
+
 }

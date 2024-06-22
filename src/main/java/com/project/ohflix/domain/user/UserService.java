@@ -30,6 +30,12 @@ public class UserService {
       return new UserResponse.UserCheckDTO(cardInfo);
     }
 
+    public UserResponse.UserProfileFormDTO userProfileForm(Integer sessionUserId) {
+        User userProfile = userRepository.findUserProfileById(sessionUserId);
+        System.out.println(userProfile);
+        return new UserResponse.UserProfileFormDTO(userProfile);
+    }
+
     //profile-setting 프로필 세팅 페이지
     public UserResponse.ProfileSettingDTO profileSetting(int userId) {
 
@@ -38,7 +44,6 @@ public class UserService {
 
         return respDTO;
     }
-
 }
 
 
