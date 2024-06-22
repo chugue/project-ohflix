@@ -6,12 +6,14 @@ import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -35,11 +37,15 @@ public class Refund {
     @ColumnDefault("'PENDING'")
     private Refuse status; // 환불 상태 (디폴트 값 '대기중')
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private PurchaseHistory purchaseHistory;
+
     @Builder
-    public Refund(Integer id, User user, Reason reason, Refuse status) {
+    public Refund(Integer id, User user, Reason reason, Refuse status, PurchaseHistory purchaseHistory) {
         this.id = id;
         this.user = user;
         this.reason = reason;
         this.status = status;
+        this.purchaseHistory = purchaseHistory;
     }
 }

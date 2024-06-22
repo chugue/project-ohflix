@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
+import com.project.ohflix.domain.refund.RefundResponse;
+import com.project.ohflix.domain.refund.RefundService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-    private final HttpSession httpSession;
+    private final HttpSession session;
     private final UserService userService;
+    private final RefundService refundService;
 
     @GetMapping("/login-form")
     public String getLoginForm() {return "user/login-form";}
@@ -31,7 +34,7 @@ public class UserController {
     // 사용자 프로필 변경 페이지
     @GetMapping("/api/profile-form")
     public String getProfileView(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
 //        User respDTO = userService.userProfileForm(sessionUser.getId());
         UserResponse.UserProfileFormDTO respDTO = userService.userProfileForm(4);
         request.setAttribute("user", respDTO);
@@ -78,8 +81,10 @@ public class UserController {
     }
 
     @GetMapping("/api/refund-page")
-    public String getRefund() {
-
+    public String getRefund(HttpServletRequest request) {
+        // refindPage 데이터 바인딩
+        RefundResponse.RefundPageDTO respDTO = refundService.refundPageDTO();
+        request.setAttribute("RefundPageDTO", respDTO);
 
         return "user/refund-page";
     }

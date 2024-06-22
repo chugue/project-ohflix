@@ -65,12 +65,14 @@
                 </tr>
                 </thead>
                 <tbody>
+                {{#RefundPageDTO}}
+                {{#refundDTO}}
                 <tr>
-                    <td>1</td>
-                    <td>홍길동</td>
-                    <td>hong123</td>
-                    <td>결제 환불 요청</td>
-                    <td>2024-06-20</td>
+                    <td>{{id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.usesrname}}</td>
+                    <td>{{reason.value}}</td>
+                    <td>결제 날짜</td>
                     <td>
                         <button class="accept">수락</button>
                         <select class="reject-reason">
@@ -82,159 +84,8 @@
                         <button class="reject" onclick="rejectRequest(event)">반려</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>김철수</td>
-                    <td>kimcs456</td>
-                    <td>오류로 인한 환불</td>
-                    <td>2024-06-19</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>이영희</td>
-                    <td>leeyh789</td>
-                    <td>중복 결제 환불</td>
-                    <td>2024-06-18</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>박민수</td>
-                    <td>parkms123</td>
-                    <td>취소 요청 환불</td>
-                    <td>2024-06-17</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>최유리</td>
-                    <td>choiyr456</td>
-                    <td>서비스 불만 환불</td>
-                    <td>2024-06-16</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>강현우</td>
-                    <td>kanghw789</td>
-                    <td>잘못된 결제 환불</td>
-                    <td>2024-06-15</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>윤지훈</td>
-                    <td>yunjh123</td>
-                    <td>미사용 서비스 환불</td>
-                    <td>2024-06-14</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>정다은</td>
-                    <td>jeongde456</td>
-                    <td>부분 환불 요청</td>
-                    <td>2024-06-13</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>오세훈</td>
-                    <td>ohsh789</td>
-                    <td>결제 승인 취소</td>
-                    <td>2024-06-12</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>한가영</td>
-                    <td>hangy123</td>
-                    <td>잘못된 금액 환불</td>
-                    <td>2024-06-11</td>
-                    <td>
-                        <button class="accept">수락</button>
-                        <select class="reject-reason">
-                            <option value="" disabled selected>반려 사유 선택</option>
-                            <option value="결제 오류">결제 오류</option>
-                            <option value="서비스 불만">서비스 불만</option>
-                            <option value="상품 미 출고">상품 미 출고</option>
-                        </select>
-                        <button class="reject" onclick="rejectRequest(event)">반려</button>
-                    </td>
-                </tr>
+                {{/refundDTO}}
+                {{/RefundPageDTO}}
                 </tbody>
             </table>
         </div>

@@ -139,3 +139,13 @@ VALUES
     (1, 2, '00:30:00', 'WATCHING', NOW()),
     (1, 3, '00:00:00', 'FAVORITE', NOW());
 
+
+-- 셍성 순서 : 7번, refund 테이블
+INSERT INTO refund_tb (user_id, reason)
+VALUES
+    (2, 'SERVICE_QUALITY'),
+    (3, 'CONTENT_ISSUE'),
+    (4, 'TECHNICAL_ISSUE'),
+    (5, 'SUBSCRIPTION_ISSUE');
+
+
