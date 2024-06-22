@@ -21,7 +21,10 @@ public class ContentController {
     }
 
     @GetMapping("/api/content-details")
-    public String getContentDetails() {
+    public String getContentDetails(HttpServletRequest request) { //TODO : 나중에 여기 PathVariable로 contentID 설정해야됨
+        Integer contentId = 2;
+        ContentResponse.DetailsDTO respDTO= contentService.getContetnDetails(contentId);
+        request.setAttribute("DetailsDTO", respDTO);
         return "content/content-details";
     }
 
