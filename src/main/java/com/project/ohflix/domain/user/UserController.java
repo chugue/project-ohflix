@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,14 +30,25 @@ public class UserController {
         return "user/user-check";
     }
 
-    // 사용자 프로필 변경 페이지
+    // 사용자 프로필 변경 페이지 TODO : SessionUserID 넣기
     @GetMapping("/api/profile-form")
     public String getProfileView(HttpServletRequest request) {
         User sessionUser = (User) httpSession.getAttribute("sessionUser");
 //        User respDTO = userService.userProfileForm(sessionUser.getId());
-        UserResponse.UserProfileFormDTO respDTO = userService.userProfileForm(4);
-        request.setAttribute("user", respDTO);
+        UserResponse.ProfileFormDTO respDTO = userService.userProfileForm(4);
+        request.setAttribute("UserProfileFormDTO", respDTO);
         return "profile/profile-form";
+    }
+
+    // YSH : 맴버십 취소 페이지
+    @GetMapping("/api/cancel-plan")
+    public String getCancelPlan(HttpServletRequest request) {
+        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+//        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(sessionUser.getId());
+        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(2);
+
+        request.setAttribute("CancelPlanPageDTO", respDTO);
+        return "user/cancel-plan";
     }
 
     @GetMapping("/api/view-history")
@@ -87,10 +100,7 @@ public class UserController {
         return "account/account-membership";
     }
 
-    @GetMapping("/api/cancel-plan")
-    public String getCancelPlan() {
-        return "user/cancel-plan";
-    }
+
 
 
     @GetMapping("/api/profile-setting")

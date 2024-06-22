@@ -3,8 +3,12 @@ package com.project.ohflix.domain.user;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
+import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.content.ContentService;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final CardInfoRepository cardInfoRepository;
     private final ProfileIconRepository profileIconRepository;
+    private final PurchaseHistoryRepository purchaseHistoryRepository;
+    private final ContentService contentService;
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
@@ -39,10 +45,10 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserResponse.UserProfileFormDTO userProfileForm(Integer sessionUserId) {
+    public UserResponse.ProfileFormDTO userProfileForm(Integer sessionUserId) {
         User userProfile = userRepository.findUserProfileById(sessionUserId);
         System.out.println(userProfile);
-        return new UserResponse.UserProfileFormDTO(userProfile);
+        return new UserResponse.ProfileFormDTO(userProfile);
     }
 
     //profile-setting 프로필 세팅 페이지
@@ -51,6 +57,15 @@ public class UserService {
         UserResponse.ProfileSettingDTO respDTO=new UserResponse.ProfileSettingDTO(user);
 
         return respDTO;
+    }
+    // 멤버쉽 취소
+    public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
+        User user = userRepository.findUserPurchaseHistory(sessionUserId);
+        List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
+//        List<Content> contentList =
+
+//        return ;
+        return  new UserResponse.CancelPlanPageDTO(user, purchaseHistoryList);
     }
 }
 

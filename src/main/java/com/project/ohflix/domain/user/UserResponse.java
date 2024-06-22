@@ -4,7 +4,10 @@ package com.project.ohflix.domain.user;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
+import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,6 +20,7 @@ import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 public class UserResponse {
 
@@ -69,9 +73,9 @@ public class UserResponse {
         }
     }
 
-
+    // 유저 프로필 변경페이지 폼
     @Data
-    public static class UserProfileFormDTO {
+    public static class ProfileFormDTO {
         private Integer id;
         private ProfileIcon profileIcon;    // 프로필 아이콘
         private String username;            // 이름
@@ -83,7 +87,7 @@ public class UserResponse {
         private String profileIconPath;
 
 
-        public UserProfileFormDTO(User user) {
+        public ProfileFormDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.email = user.getEmail();
@@ -111,5 +115,24 @@ public class UserResponse {
             this.iconPath = user.getProfileIcon().getPath();
         }
     }
+
+    // 맴버십 취소 페이지 폼 데이터
+    @Data
+    public static class CancelPlanPageDTO{
+        private Integer userId;                 // 세션 유저 ID
+        private Integer profile_icon_id;        // 프로필 아이콘
+        private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
+        private List<PurchaseHistory> purchaseHistoryList;// 결제 내역
+//        private Content content;                // 떠나기 전 마지막 콘텐츠로 유혹하기 => 찜 한 콘텐트로?
+
+        public CancelPlanPageDTO(User user, List<PurchaseHistory> purchaseHistoryList) {
+            this.userId = user.getId();
+            this.profile_icon_id = user.getProfileIcon().getId();
+            this.isSubscribe = user.getIsSubscribe();
+            this.purchaseHistoryList = purchaseHistoryList;
+//            this.content =
+        }
+    }
+
 }
 

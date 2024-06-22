@@ -16,4 +16,12 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
             select p from PurchaseHistory p join fetch p.user pu where pu.id = :userId and p.createdAt > :oneYearAgo
             """)
     Optional<List<PurchaseHistory>> findByUserId(@Param("userId") Integer userId, @Param("oneYearAgo") Timestamp oneYearAgo);
+
+    @Query("""
+            SELECT DISTINCT p
+            FROM PurchaseHistory p
+            JOIN FETCH p.user u
+            WHERE u.id = :id
+            """)
+    List<PurchaseHistory> findByUser(@Param("id") int id);
 }
