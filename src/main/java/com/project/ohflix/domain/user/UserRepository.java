@@ -28,4 +28,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             select u from User u join fetch u.profileIcon pu where u.id = :userId
             """)
     Optional<User> findUsernameAndIcon(@Param("userId") Integer userId);
+
 }
