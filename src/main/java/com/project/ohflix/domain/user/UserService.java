@@ -73,8 +73,7 @@ public class UserService {
         List<UserResponse.SalesPageSubscribeUserDTO> subscribeUserStats = userNativeRepository.findSubscribeUserStats(startDate, currentDate);
         List<PurchaseHistoryResponse.SalesPageSalesDTO> saleStats = purchaseHistoryNativeRepository.findMonthlySalesStats(startDate, currentDate);
 
-        System.out.println("userStats = " + userStats);
-        System.out.println("saleStats = " + saleStats);
+
 
         Map<String, UserResponse.SalesPageUserDTO> userStatsMap = userStats.stream()
                 .collect(Collectors.toMap(UserResponse.SalesPageUserDTO::getYearMonth, stat -> stat));
@@ -82,10 +81,9 @@ public class UserService {
                 .collect(Collectors.toMap(UserResponse.SalesPageSubscribeUserDTO::getYearMonth, stat -> stat));
         Map<String, PurchaseHistoryResponse.SalesPageSalesDTO> saleStatsMap = saleStats.stream()
                 .collect(Collectors.toMap(PurchaseHistoryResponse.SalesPageSalesDTO::getYearMonth, stat -> stat));
-        System.out.println("userStatsMap = " + userStatsMap);
-        System.out.println("saleStatsMap = " + saleStatsMap);
 
-        List<UserResponse.SalesPageDTO> completeStats = new ArrayList<>();
+
+        List<UserResponse.SalesPageDTO> respDTO = new ArrayList<>();
         YearMonth startMonth = YearMonth.of(2024, 1);
         YearMonth endMonth = YearMonth.of(2024, 12);
 
@@ -110,11 +108,11 @@ public class UserService {
                     cumulativeSales
             );
 
-            completeStats.add(combinedStat);
+            respDTO.add(combinedStat);
         }
 
-        System.out.println("completeStats = " + completeStats);
-        return completeStats;
+
+        return respDTO;
     }
 
 }
