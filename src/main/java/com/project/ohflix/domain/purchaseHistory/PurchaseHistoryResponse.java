@@ -17,6 +17,7 @@ import lombok.Data;
 
 public class PurchaseHistoryResponse {
 
+    //purchase-histories
     @Data
     public static class purchaseHistoryDTO {
         private String paymentDate;
@@ -26,7 +27,7 @@ public class PurchaseHistoryResponse {
             // Convert Timestamp to LocalDate
             LocalDate localDate = purchaseHistories.getFirst().getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             // Add 30 days
-            LocalDate newDate = localDate.plusDays(31);
+            LocalDate newDate = localDate.plusDays(30);
             // Format the new date in "yyyy년 MM월 dd일" format
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
             this.paymentDate = newDate.format(formatter);
@@ -41,6 +42,9 @@ public class PurchaseHistoryResponse {
             private String servicePeriod;
             private Paymethod paymethod;
             private String cardNumber;
+            private Integer amount;
+            private Integer vat;
+            private Integer supplyValue;
 
             public purchase(PurchaseHistory purchaseHistory) {
                 this.id = purchaseHistory.getId();
@@ -53,6 +57,9 @@ public class PurchaseHistoryResponse {
                 this.servicePeriod = purchaseHistory.getServicePeriod();
                 this.paymethod = purchaseHistory.getPaymethod();
                 this.cardNumber = purchaseHistory.getCardInfo().getCardNumber();
+                this.amount = purchaseHistory.getAmount();
+                this.vat = (int) (purchaseHistory.getAmount()*0.1);
+                this.supplyValue = purchaseHistory.getAmount()-vat;
             }
         }
     }

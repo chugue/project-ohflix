@@ -16,6 +16,8 @@ public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
              """) // user-check 페이지에서 사용하는 쿼리
     Optional<CardInfo> findUserInfo(@Param("userId") Integer userId);
 
-    @Query("select c from CardInfo c join fetch c.user cu where cu.id = :userId")
+    @Query("""
+            select c from CardInfo c join fetch c.user cu where cu.id = :userId
+            """)
     Optional<List<CardInfo>> findByUserId(@Param("userId") Integer userId);
 }

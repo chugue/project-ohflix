@@ -87,4 +87,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/api/profile-setting")
+    public String profileSetting(HttpServletRequest request) {
+
+        //SessionUser user=session.getAttribute("sessionUser");
+
+        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
+
+        request.setAttribute("ProfileSettingDTO",respDTO);
+
+        return "profile/profile-setting";
+    }
 }

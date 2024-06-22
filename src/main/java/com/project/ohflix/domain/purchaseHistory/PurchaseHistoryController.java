@@ -35,7 +35,7 @@ public class PurchaseHistoryController {
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
         List<CardInfoResponse.paymethodManageDTO> respDTO = purchaseHistoryService.paymethodManagePage(2);
 
-        request.setAttribute("card", respDTO);
+        request.setAttribute("paymethodManageDTO", respDTO);
         return "paymethod/paymethod-manage";
     }
 
@@ -53,15 +53,11 @@ public class PurchaseHistoryController {
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
         PurchaseHistoryResponse.purchaseHistoryDTO respDTO = purchaseHistoryService.purchaseHistories(2);
         System.out.println("respDTO = " + respDTO);
-        request.setAttribute("purchardHistories", respDTO);
+        request.setAttribute("purchaseHistoryDTO", respDTO);
 
         return "paymethod/purchase-histories";
     }
 
-    @GetMapping("/api/profile-setting")
-    public String profileSetting() {
-        return "profile/profile-setting";
-    }
 
 
     @GetMapping("/api/account-security")
