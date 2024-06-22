@@ -50,6 +50,13 @@ public class ContentService {
 
         return new ContentResponse.DetailsDTO(content);
     }
+
+    // 메인 페이지 영화 상세정보 가져오는 모달 - 비동기 통신
+    public ContentResponse.DetailsDTO getContentInfo(Integer contentId) {
+        Content content = contentRepository.findById(contentId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+        return new ContentResponse.DetailsDTO(content);
+    }
 }
 
 
