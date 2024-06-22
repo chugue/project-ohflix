@@ -63,7 +63,7 @@
         <div class="main-right-header mb-20">영화 정보 수정하기</div>
 
         <!-- 영상 업로드 -->
-        {{#content}}
+        {{#ContentUpdateLinkDTO}}
         <div class="mb-20">영상 업로드 수정</div>
         <div class="main-right-div1 mb-20">
             <div class="membership-deco ml-20"></div>
@@ -105,7 +105,7 @@
                             <div class="mb-20 fast-link-div pointer">
                                 <div>
                                     <label for="image-upload1" class="custom-file-upload">
-                                        파일 수정
+                                        썸네일 수정
                                     </label>
                                     <input id="image-upload1" type="file" name="thumbnail"/>
                                     <span class="file-name2 file-name" id="file-name2">{{thumbnail}}</span>
@@ -116,23 +116,10 @@
                             <hr class="mb-20">
                         </form>
 
-
-                        <div class="mb-20 fast-link-div pointer">
-                            <div>
-                                <label for="image-upload2" class="custom-file-upload">
-                                    파일 수정
-                                </label>
-                                <input id="image-upload2" type="file" name="miniThumbnail"/>
-                                <span class="file-name3 file-name" id="file-name3">{{miniThumbnail}}</span>
-                            </div>
-
-
-                        </div>
-                        <hr class="mb-20">
                         <div class="mb-20 fast-link-div pointer">
                             <div>
                                 <label for="image-upload3" class="custom-file-upload">
-                                    파일 수정
+                                    대표 사진 수정
                                 </label>
                                 <input id="image-upload3" type="file" name="mainPhoto"/>
                                 <span class="file-name4 file-name" id="file-name4">{{mainPhoto}}</span>
@@ -143,7 +130,7 @@
                         <div class="mb-20 fast-link-div pointer">
                             <div>
                                 <label for="image-upload4" class="custom-file-upload">
-                                    파일 수정
+                                    포스터 사진 수정
                                 </label>
                                 <input id="image-upload4" type="file" name="posterPhoto"/>
                                 <span class="file-name5 file-name" id="file-name5">{{posterPhoto}}</span>
@@ -153,10 +140,10 @@
                         <div class="mb-20 fast-link-div pointer">
                             <div>
                                 <label for="image-upload5" class="custom-file-upload">
-                                    파일 선택
+                                    대표 텍스트 수정
                                 </label>
                                 <input id="image-upload5" type="file" name="textPhoto" />
-                                <span class="file-name6 file-name" id="file-name6">대표 텍스트 사진 선택하기</span>
+                                <span class="file-name6 file-name" id="file-name6">{{textPhoto}}</span>
                             </div>
                         </div>
 
@@ -176,23 +163,24 @@
                             <tr>
                                 <td>제 작 년 도</td>
                                 <td>
-                                    <select id="yearSelect" name="productYear" class="movie-info">
-                                        <option value="">연도 선택</option>
+                                    <select id="productYear" name="productYear" class="movie-info">
+                                        <!--TODO: 숫자 안 뜨는 거 해결하기-->
+                                        <option value="">{{productYear}}</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td>상 영 시 간</td>
-                                <td><input type="number" name="playTime" class="movie-info" value="{{playTime}}"></td>
+                                <td><input type="text" name="playTime" class="movie-info" value="{{playTime}}"></td>
                             </tr>
                             <tr>
                                 <td>관 람 등 급</td>
                                 <td>
                                     <select name="rate" class="movie-info">
-                                        <option value="">관람 등급 선택</option>
+                                        <option value="">{{rate}}</option>
                                         <option value="전체 관람가">전체 관람가</option>
-                                        <option value="12세 관람가">12세 관람가</option>
-                                        <option value="청소년 관람 불가">청소년 관람 불가</option>
+                                        <option value="15세 이하 관람 불가">15세 이하 관람 불가</option>
+                                        <option value="19세 이하 관람 불가">19세 이하 관람 불가</option>
                                     </select>
                                 </td>
                             </tr>
@@ -211,11 +199,6 @@
                             <tr>
                                 <td>각 본</td>
                                 <td><input type="text" name="writers" class="movie-info" value="{{writers}}"></td>
-                            </tr>
-                            <tr>
-                                <td>연 출</td>
-                                <td><input type="text" name="subDirector" class="movie-info" value="{{subDirector}}">
-                                </td>
                             </tr>
                             <tr>
                                 <td>특 징</td>
@@ -239,7 +222,7 @@
                 <button id="upload-info-btn" type="submit" class="custom-upload-button">영화 정보 수정</button>
 
             </form>
-        {{/content}}
+        {{/ContentUpdateLinkDTO}}
     </div>
 
 </main>
@@ -317,7 +300,7 @@
     // 현재 연도 구하기
     var currentYear = new Date().getFullYear();
     // select 요소 가져오기
-    var selectElement = document.getElementById('yearSelect');
+    var selectElement = document.getElementById('productYear');
 
     // 옵션 추가: 1900년부터 현재 연도까지
     for (var year = currentYear; year >= 1900; year--) {
@@ -326,6 +309,7 @@
         option.textContent = year;
         selectElement.appendChild(option);
     }
+
 </script>
 </body>
 

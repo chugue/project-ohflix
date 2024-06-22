@@ -1,6 +1,9 @@
 package com.project.ohflix.domain.purchaseHistory;
 
 import com.project.ohflix.domain.cardInfo.CardInfoResponse;
+import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.content.ContentResponse;
+import com.project.ohflix.domain.content.ContentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,8 @@ public class PurchaseHistoryController {
 
     private final HttpSession session;
     private final PurchaseHistoryService purchaseHistoryService;
+    private final ContentRepository contentRepository;
+    private final ContentService contentService;
 
     @GetMapping("/api/paymethod-form")
     public String getPaymethodRegisterForm() {
@@ -28,9 +33,9 @@ public class PurchaseHistoryController {
         //SessionUser user=session.getAttribute("sessionUser");
 
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
-        List<CardInfoResponse.paymethodManageDTO> respDTO=purchaseHistoryService.paymethodManagePage(2);
+        List<CardInfoResponse.paymethodManageDTO> respDTO = purchaseHistoryService.paymethodManagePage(2);
 
-        request.setAttribute("card", respDTO);
+        request.setAttribute("paymethodManageDTO", respDTO);
         return "paymethod/paymethod-manage";
     }
 
@@ -46,23 +51,19 @@ public class PurchaseHistoryController {
         //SessionUser user=session.getAttribute("sessionUser");
 
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
-        PurchaseHistoryResponse.purchaseHistoryDTO respDTO=purchaseHistoryService.purchaseHistories(2);
+        PurchaseHistoryResponse.purchaseHistoryDTO respDTO = purchaseHistoryService.purchaseHistories(2);
         System.out.println("respDTO = " + respDTO);
-        request.setAttribute("purchardHistories", respDTO);
+        request.setAttribute("purchaseHistoryDTO", respDTO);
 
         return "paymethod/purchase-histories";
     }
 
-    @GetMapping("/api/profile-setting")
-    public String profileSetting() {
-        return "profile/profile-setting";
-    }
 
 
     @GetMapping("/api/account-security")
     public String accountSecurity() {
         // accountSecurityPage 데이터 바인딩
-        PurchaseHistoryResponse.AccountSecurityDTO respDTO = purchaseHistoryService.AccountSecurityPage(2);
+        PurchaseHistoryResponse.AccountSecurityDTO respDTO = purchaseHistoryService.accountSecurityPage(2);
         session.setAttribute("AccountSecurityDTO", respDTO);
 
         return "account/account-security";
@@ -75,8 +76,22 @@ public class PurchaseHistoryController {
 
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink() {
+        // contentUpdateLinkPage 데이터 바인딩
+        ContentResponse.ContentUpdateLinkPageDTO respDTO = contentService.contentUpdateLinkPageDTO(1);
+        session.setAttribute("ContentUpdateLinkDTO", respDTO);
+
         return "admin/content-update-link";
     }
+
+    @GetMapping("/api/video-manage")
+    public String videoManage() {
+        // videoManagePage 데이터 바인딩
+        ContentResponse.VideoManagePageDTO respDTO = contentService.videoManagePageDTO();
+        session.setAttribute("VideoManagePageDTO", respDTO);
+
+        return "admin/video-manage";
+    }
+
 
     @PostMapping("/upload/movie")
     public String uploadMovie() {
@@ -96,13 +111,5 @@ public class PurchaseHistoryController {
     @PostMapping("/update/info")
     public String updateInfo() {
         return null;
-    }
-
-    @GetMapping("/api/video-manage")
-    public String videoManage() {return "video-manage";}
-
-    @GetMapping("/api/paymethod-register-form")
-    public String payMethodRegisterForm() {
-        return "paymethod/paymethod-register-form";
     }
 }
