@@ -52,7 +52,7 @@ public class Content {
     @Column(nullable = false, length = 4)
     private String productYear; // 제작 연도
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String writers; // 각본
 
     @Column(columnDefinition = "TEXT")
@@ -89,5 +89,17 @@ public class Content {
         this.rate = rate;
         this.genre = genre;
         this.createdAt = createdAt;
+    }
+
+
+    @PrePersist
+    @PreUpdate
+    private void ensureNonNull() {
+        if (this.writers == null) {
+            this.writers = "";
+        }
+        if (this.actors == null) {
+            this.actors = "";
+        }
     }
 }
