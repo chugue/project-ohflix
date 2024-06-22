@@ -20,4 +20,5 @@ public enum Genre {
     Genre(String value) {
         this.value = value;
     }
+
 }

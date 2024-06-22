@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
     @Slf4j
     @ControllerAdvice
-    public class MySSRExceptionHandler {
+    public class MyExceptionHandler {
 
         @ExceptionHandler(Exception400.class)
         public String ex400(Exception400 e, HttpServletRequest request){

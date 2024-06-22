@@ -55,7 +55,7 @@ public class Content {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String writers; // 각본
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String actors; // 배우
 
     private Integer viewCount; // 조회수 인기 컨텐츠 정보로 사용
@@ -68,12 +68,11 @@ public class Content {
 
     @CreationTimestamp
     private Timestamp createdAt;
-    
+
     @Builder
     public Content(Integer id, String title, String thumbnail, String videoPath, String mainPhoto, String posterPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String productYear, String writers, String actors, Integer viewCount, Rate rate, Genre genre, Timestamp createdAt) {
         this.id = id;
         this.title = title;
-
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
         this.mainPhoto = mainPhoto;
