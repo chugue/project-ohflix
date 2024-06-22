@@ -14,6 +14,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
+
 public class UserResponse {
 
     // 로그인 사용자의 관람등급 가져오기
@@ -40,7 +44,32 @@ public class UserResponse {
         }
     }
 
-    // user profile form 페이지
+    // admin/member-manage 페이지
+    @Data
+    public static class MembersDTO{
+        private Integer id;
+        private String username;
+        private Boolean isSubscribe;
+        private Timestamp createdAt;
+        private Integer monthsSubscribed;
+
+        public MembersDTO(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+            this.isSubscribe = user.getIsSubscribe();
+            this.createdAt = user.getCreatedAt();
+            this.monthsSubscribed = calculateMonthsSubscribed(user.getCreatedAt());
+        }
+
+        private Integer calculateMonthsSubscribed(Timestamp createdAt) {
+            LocalDate createdDate = createdAt.toLocalDateTime().toLocalDate();
+            LocalDate currentDate = LocalDate.now();
+            Period period = Period.between(createdDate, currentDate);
+            return period.getYears() * 12 + period.getMonths();
+        }
+    }
+
+
     @Data
     public static class UserProfileFormDTO {
         private Integer id;
@@ -51,8 +80,8 @@ public class UserResponse {
         private Status isKids;              // 키즈 시청 제한 여부
         private Boolean isAutoPlay;         // 자동 재생 여부
         private Timestamp createdAt;
-
         private String profileIconPath;
+
 
         public UserProfileFormDTO(User user) {
             this.id = user.getId();
@@ -63,7 +92,6 @@ public class UserResponse {
             this.isKids = user.getIsKids();
             this.isAutoPlay = user.getIsAutoPlay();
             this.createdAt = user.getCreatedAt();
-
             this.profileIconPath = user.getProfileIcon().getPath();
         }
     }

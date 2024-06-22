@@ -8,6 +8,9 @@ import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -30,6 +33,12 @@ public class UserService {
       return new UserResponse.UserCheckDTO(cardInfo);
     }
 
+    public List<UserResponse.MembersDTO> MembersDTOList() {
+        return userRepository.findAll().stream()
+                .map(UserResponse.MembersDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public UserResponse.UserProfileFormDTO userProfileForm(Integer sessionUserId) {
         User userProfile = userRepository.findUserProfileById(sessionUserId);
         System.out.println(userProfile);
@@ -38,7 +47,6 @@ public class UserService {
 
     //profile-setting 프로필 세팅 페이지
     public UserResponse.ProfileSettingDTO profileSetting(int userId) {
-
         User user=userRepository.findUsernameAndIcon(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
         UserResponse.ProfileSettingDTO respDTO=new UserResponse.ProfileSettingDTO(user);
 
