@@ -57,11 +57,11 @@
                 <div class="member">
                     <div class="member-count">
                         <div class="gray">총 회원 수 :</div>
-                        <div class="ml-10">1235</div>
+                        <div class="ml-10">{{members.size}}</div>
                     </div>
                     <div class="member-count">
                         <div class="gray">구독 회원 수 : </div>
-                        <div class="ml-10">300</div>
+                        <div class="ml-10">{{subscriberCount}}</div>
                     </div>
 
                 </div>
@@ -77,41 +77,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>김철수</td>
-                    <td>2023-01-01</td>
-                    <td><i class="fa-solid fa-fire red"></i></td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>이영희</td>
-                    <td>2023-02-15</td>
-                    <td><i class="fa-solid fa-fire gray"></i></td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>박민수</td>
-                    <td>2023-03-10</td>
-                    <td><i class="fa-solid fa-fire red"></i></td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>최지우</td>
-                    <td>2023-04-20</td>
-                    <td><i class="fa-solid fa-fire red"></i></td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>정혜진</td>
-                    <td>2023-05-05</td>
-                    <td><i class="fa-solid fa-fire gray"></i></td>
-                    <td>8</td>
-                </tr>
+                {{#members}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{username}}</td>
+                        <td>{{createdAt}}</td>
+                        <td>{{#isSubscribe}}<i class="fa-solid fa-fire red"></i>{{/isSubscribe}}{{^isSubscribe}}<i class="fa-solid fa-fire gray"></i>{{/isSubscribe}}</td>
+                        <td>{{monthsSubscribed}}</td>
+                    </tr>
+                {{/members}}
                 </tbody>
             </table>
         </div>
