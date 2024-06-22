@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Entity
@@ -63,10 +66,14 @@ public class Content {
     @Enumerated(EnumType.STRING)
     private Genre genre; // 장르 [ANIME, ACTION, COMEDY, ROMANCE, THRILLER, HORROR, SF, FANTASY, DOCUMENTARY]
 
+    @CreationTimestamp
+    private Timestamp createdAt;
+    
     @Builder
-    public Content(Integer id, String title, String thumbnail, String videoPath, String mainPhoto, String posterPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String productYear, String writers, String actors, Integer viewCount, Rate rate, Genre genre) {
+    public Content(Integer id, String title, String thumbnail, String videoPath, String mainPhoto, String posterPhoto, String textPhoto, String director, String introduction, String characteristic, String playTime, String productYear, String writers, String actors, Integer viewCount, Rate rate, Genre genre, Timestamp createdAt) {
         this.id = id;
         this.title = title;
+
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
         this.mainPhoto = mainPhoto;
@@ -82,5 +89,6 @@ public class Content {
         this.viewCount = viewCount;
         this.rate = rate;
         this.genre = genre;
+        this.createdAt = createdAt;
     }
 }

@@ -38,30 +38,32 @@
                 <h2>결제 수단 관리</h2>
                 <p>멤버십 요금을 어떻게 결제할지 직접 관리하세요. </p>
             </div>
-            <div class="payment-container">
-                <div class="payment-methods">
-                    <div >
+            {{#paymethodManageDTO}}
+                <div class="payment-container">
+                    <div class="payment-methods">
+                        <div>
+                            <div class="row">
+                                <div>
+                                    <div>신용카드</div>
+                                </div>
+                                <div>
+                                    {{cardNumber}}
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div>
-                                <div>신용카드</div>
+                                <a href="/api/paymethod-update-form">
+                                    <button>업데이트</button>
+                                </a>
                             </div>
                             <div>
-                                ●●●●0935
+                                <img src="/static/images/system/kebab-menu.png" alt="arrow">
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <a href="/api/paymethod-update-form">
-                                <button>업데이트</button>
-                            </a>
-                        </div>
-                        <div>
-                            <img src="/static/images/system/kebab-menu.png" alt="arrow">
                         </div>
                     </div>
                 </div>
-            </div>
+            {{/paymethodManageDTO}}
         </div>
 
         <div class="button-container">
