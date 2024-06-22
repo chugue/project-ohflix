@@ -11,6 +11,42 @@ import java.util.List;
 
 public class ContentResponse {
 
+    // 메인 페이지 모달 - 컨텐츠 상세정보 데이터
+    @Data
+    public static class InfoDTO {
+        private Integer id;
+        private String title;
+        private String mainPhoto;
+        private String productYear;
+        private String playTime;
+        private String textPhoto;
+        private String actors;
+        private String writers;
+        private String genre;
+        private String characteristics;
+        private String introduction;
+        private String rateImg;
+        private String rate;
+        private String director;
+
+        public InfoDTO(Content content) {
+            this.id = content.getId();
+            this.mainPhoto = content.getMainPhoto();
+            this.title = content.getTitle();
+            this.productYear = content.getProductYear();
+            this.playTime = content.getPlayTime();
+            this.actors = content.getActors();
+            this.textPhoto = content.getTextPhoto();
+            this.director = content.getDirector();
+            this.genre = content.getGenre().getValue();
+            this.rateImg = content.getRate().getImgPath();
+            this.rate = content.getRate().getValue();
+            this.writers = content.getWriters();
+            this.characteristics = content.getCharacteristic();
+            this.introduction = content.getIntroduction();
+        }
+    }
+
     // 상세정보 페이지 데이터
     @Data
     public static class DetailsDTO {

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="/static/css/content-details.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/css/content-details.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{{DetailsDTO.title}}</title>
 </head>
 <body>
 <div class="body-container">
-    <img src="{{DetailsDTO.mainPhoto}}" class="background-image"/>
     <!-- 헤더 start -->
     <div class="header-container">
+        <img src="{{DetailsDTO.mainPhoto}}" class="background-image"/>
         <div class="play">
             <div class="title">
-           <img src="{{DetailsDTO.textPhoto}}" />
+                <img src="{{DetailsDTO.textPhoto}}"/>
             </div>
             <div class="buttons">
                 <a href="#" class="play-button">▶ 재생</a>
@@ -26,41 +26,40 @@
     </div>
     <!-- 헤더 end -->
 </div>
-    <div class="containermargin">
-        <div class="container">
-            <div class="container1">
-                <div class="introduce">
-                    <div class="info">
-                        <span class="match">98% 일치</span>
-                        <span>{{DetailsDTO.productYear}}</span>
-                        <span>{{DetailsDTO.playTime}}</span>
-                        <span>HD</span>
-                    </div>
-                    <div class="metadata">
-                        <div><img src="{{DetailsDTO.rateImg}}" alt="" /></div>
-                    </div>
-                    <div class="description">
-                        {{DetailsDTO.introduction}}
-                    </div>
+<div class="containermargin">
+    <div class="container">
+        <div class="container1">
+            <div class="introduce">
+                <div class="info">
+                    <span class="match">98% 일치</span>
+                    <span>{{DetailsDTO.productYear}}</span>
+                    <span>{{DetailsDTO.playTime}}</span>
+                    <span>HD</span>
                 </div>
-                <div class="details">
-                    <div class="cast">출연: {{DetailsDTO.actors}}</div>
-                    <div class="genre">장르: {{DetailsDTO.genre}} 영화</div>
-                    <div class="features">영화 특징: {{DetailsDTO.characteristics}}</div>
+                <div class="metadata">
+                    <div><img src="{{DetailsDTO.rateImg}}" alt=""/></div>
+                </div>
+                <div class="description">
+                    {{DetailsDTO.introduction}}
                 </div>
             </div>
+            <div class="details">
+                <div class="cast">출연: {{DetailsDTO.actors}}</div>
+                <div class="genre">장르: {{DetailsDTO.genre}} 영화</div>
+                <div class="features">영화 특징: {{DetailsDTO.characteristics}}</div>
+            </div>
         </div>
-        <div class="container2">
-            <div class="title2">{{DetailsDTO.title}} 상세 정보</div>
-            <div class="details2">
-                <div>감독: {{DetailsDTO.director}}</div>
-                <div>출연: {{DetailsDTO.actors}}</div>
-                <div>각본: {{DetailsDTO.writers}}</div>
-                <div>장르: {{DetailsDTO.genre}} 영화</div>
-                <div>영화 특징: {{DetailsDTO.characteristics}}</div>
-                <div class="rating">
-                    <span>관람등급: <img src="{{DetailsDTO.rateImg}}" alt="" />{{DetailsDTO.rate}}</span>
-                </div>
+    </div>
+    <div class="container2">
+        <div class="title2">{{DetailsDTO.title}} 상세 정보</div>
+        <div class="details2">
+            <div>감독: {{DetailsDTO.director}}</div>
+            <div>출연: {{DetailsDTO.actors}}</div>
+            <div>각본: {{DetailsDTO.writers}}</div>
+            <div>장르: {{DetailsDTO.genre}} 영화</div>
+            <div>영화 특징: {{DetailsDTO.characteristics}}</div>
+            <div class="rating">
+                <span>관람등급: <img src="{{DetailsDTO.rateImg}}" alt=""/>{{DetailsDTO.rate}}</span>
             </div>
         </div>
     </div>

@@ -1,10 +1,8 @@
 package com.project.ohflix.domain.user;
 
-import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -99,11 +97,8 @@ public class UserController {
     public String profileSetting(HttpServletRequest request) {
 
         //SessionUser user=session.getAttribute("sessionUser");
-
         UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
-
         request.setAttribute("ProfileSettingDTO",respDTO);
-
         return "profile/profile-setting";
     }
 }
