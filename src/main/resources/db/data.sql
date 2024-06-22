@@ -85,61 +85,52 @@ INSERT INTO content_tb (
          ('살인의 추억','/resources/static/images/dummy/memories_murder/thumbnail.webp','/static/images/dummy/memories_murder/main-photo.webp','/static/images/dummy/memories_murder/main-photo.webp','/static/images/dummy/memories_murder/poster-photo.webp','/static/images/dummy/memories_murder/text-photo.webp','봉준호','80년대 화성에서 연쇄 살인이 발생한다. 생소한 사건인 데다 과학 수사도 미진한 시절, 육감과 추리력만 믿고 발로 뛰는 형사들. 미치도록 잡고 싶은 범인은 지금 어디 있는가.','긴장감 넘치는','2시간 10분','2003','봉준호, 심성보','송강호, 김상경, 김뢰하',  3 ,'PG','THRILLER',NOW()),
          ('살인자의 기억법','/static/images/dummy/killers_memory/thumbnail.webp','/static/images/dummy/killers_memory/main-photo.webp','/static/images/dummy/killers_memory/main-photo.webp','/static/images/dummy/killers_memory/poster-photo.webp','/static/images/dummy/killers_memory/text-photo.webp','원신연','과거 연쇄 살인을 저질렀던 병수. 알츠하이머에 걸려 기억이 점점 희미해진다. 녹음기에 의지해 사라지는 기억을 붙들어 두던 어느 날, 딸의 새 남자친구를 만난다. 하지만 살인자는 살인자를 알아보는 법. 이놈한테서 분명 피 냄새가 나.','심리, 긴장감 넘치는','1시간 58분','2017','황조윤, 원신연','설경구, 김남길, 김설현',  2 ,'PG','THRILLER',NOW());
 INSERT INTO content_tb (
-    title, thumbnail, video_path, main_photo, poster_photo, text_photo,
-    director, introduction, characteristic, play_time, product_year, writers,
-    actors, view_count, rate, genre, created_at
+    title, thumbnail, video_path, main_photo, poster_photo, text_photo,director, introduction,
+    characteristic, play_time, product_year, writers, actors, view_count, rate, genre, created_at
 ) VALUES ('올드보이','/static/images/dummy/oldboy/thumbnail.webp','/static/images/dummy/oldboy/main-photo.webp','/static/images/dummy/oldboy/main-photo.webp','/static/images/dummy/oldboy/poster-photo.webp','/static/images/dummy/oldboy/text-photo.webp','박찬욱','내가 여기 왜 들어온 걸까. 영문도 모른 채 감금됐던 남자가 15년 만에 풀려났다. 그리고 시작된 5일간의 추적. 복수를 원하는가? 그렇다면 누가 왜 가뒀는지 비밀을 풀어라.','발상의 전환, 폭력적인, 어두운','2시간','2003','박찬욱, 임준형, 황조윤','최민식, 유지태, 강혜', 3  ,'R','THRILLER',NOW()),
          ('헤어질 결심','/static/images/dummy/decision_to_leave/thumbnail.png','/static/images/dummy/decision_to_leave/main-photo.png','/static/images/dummy/decision_to_leave/main-photo.png','/static/images/dummy/decision_to_leave/poster-photo.png','/static/images/dummy/decision_to_leave/text-photo.png','박찬욱','산 정상에서 추락한 한 남자의 변사 사건. 담당 형사 "해준"(박해일)은 사망자의 아내 "서래"(탕웨이)와 마주하게 된다. "산에 가서 안 오면 걱정했어요, 마침내 죽을까 봐." 남편의 죽음 앞에서 특별한 동요를 보이지 않는 "서래". 경찰은 보통의 유가족과는 다른 "서래"를 용의선상에 올린다. "해준"은 사건 당일의 알리바이 탐문과 신문, 잠복수사를 통해 "서래"를 알아가면서 그녀에 대한 관심이 점점 커져가는 것을 느낀다. 한편, 좀처럼 속을 짐작하기 어려운 "서래"는 상대가 자신을 의심한다는 것을 알면서도 조금의 망설임도 없이 "해준"을 대하는데…. 진심을 숨기는 용의자 용의자에게 의심과 관심을 동시에 느끼는 형사 그들의 <헤어질 결심>','거부할 수 없는 이끌림, 긴장감 넘치는, 로맨틱','2시간 18분','2022','박찬욱, 정서경','탕웨이, 박해일',  2 ,'PG','ROMANCE',NOW()),
          ('어바웃 타임','/static/images/dummy/about_time/thumbnail.png','/static/images/dummy/about_time/main-photo.png','/static/images/dummy/about_time/main-photo.png','/static/images/dummy/about_time/poster-photo.png','/static/images/dummy/about_time/text-photo.png','리처드 커티스','평범한 청년이 알게 된 가문의 놀라운 비밀. 그건 바로 집안의 남자들에게 시간을 되돌리는 능력이 있다는 것. 청년은 첫눈에 반한 여인의 마음을 얻기 위해 그 특별한 능력을 사용하기로 한다. 그리고 그녀와의 꿈 같은 시간이 시작된다.','힐링, 설렘주의, 위트 있는','2시간 6분','2013','리처드 커티스','도널드 글리슨, 레이첼 맥아담스, 빌 나이, 마고 로비, 리디아 윌슨, 린제이 던칸, 리처드 코더리, 톰 홀랜더, 조슈아 맥과이어, 바네사 커비',  3 ,'PG','ROMANCE',NOW()),
          ('남자가 사랑할때','/static/images/dummy/when_a_man_loves/thumbnail.png','/static/images/dummy/when_a_man_loves/main-photo.png','/static/images/dummy/when_a_man_loves/main-photo.png','/static/images/dummy/when_a_man_loves/poster-photo.png','/static/images/dummy/when_a_man_loves/text-photo.png','한동욱','나이만 먹었을 뿐, 대책 없는 이 남자, 아직도 형 집에 얹혀 살며 조카한테 삥 뜯기는 이 남자, 빌려준 돈은 기필코 받아오는 이 남자, 목사라고 인정사정 봐 주지 않는 이 남자, 여자한테 다가갈 땐 바지부터 내리고 보는 막무가내 이 남자, 평생 사랑과는 거리가 멀었던 한 남자가 사랑에 눈 뜨다! 일생에 단 한번, 남자가 사랑할 때','감상적, 감정을 파고드는, 로맨틱','1시간 59분','2014','유갑열','황정민, 한혜진, 곽도원, 정만식, 김혜은, 남일우', 3  ,'PG','ROMANCE',NOW()),
-         ('그 시절, 우리가 좋아했던 소녀',
-          '/',
-          '/',
-          '/',
-          '/',
-          '/',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-             ,
-          '',
-          '',
-          NOW());
+         ('그 시절, 우리가 좋아했던 소녀','/static/images/dummy/when_we_like_a_girl/thumbnail.png','/static/images/dummy/when_we_like_a_girl/main-photo.webp','/static/images/dummy/when_we_like_a_girl/main-photo.webp','/static/images/dummy/when_we_like_a_girl/poster-photo.png','/static/images/dummy/when_we_like_a_girl/text-photo.png','주다바오','학교 대표 얼간이 커징텅과 친구들은 최고의 모범생 션자이를 좋아한다. 수업 도중 사고를 친 커징텅은 션자이의 특별 감시를 받게 되고 둘은 점점 가까워진다. 션자이에 대한 마음이 커진 커징텅은 자신만의 방식으로 고백을 하지만 션자이는 대답하지 않는다. 그렇게 15년이 지나고, 두 사람은 다시 만나게 되는데… 그 때 너도 나와 같은 마음이었을까?','달콤 쌉싸름, 허당 매력, 로맨틱','1시간 47분','2011','주다바오','가진동, 진연희, 하오사오원, 좡하오취안, 차이창셴, 옌성위, 완완',  3 ,'PG','ROMANCE',NOW()),
+         ('싱글 인 서울','/static/images/dummy/single_in_seoul/thumbnail.webp','/static/images/dummy/single_in_seoul/main-photo.webp','/static/images/dummy/single_in_seoul/main-photo.webp','/static/images/dummy/single_in_seoul/poster-photo.webp','/static/images/dummy/single_in_seoul/text-photo.webp','박범수','싱글 라이프에 관한 책을 함께 만들게 된 두 사람. 혼자 사는 삶에 대해 정반대의 가치관을 가진 그들이 어느덧 서로에게 끌리기 시작한다.','로맨틱','1시간 43분','2022','이지민','이동욱, 임수정, 이솜, 장현성, 김지영, 이미도, 이상이, 지이수', 3  ,'PG','ROMANCE',NOW()),
+         ('선과 악의 학교','/static/images/dummy/school_of_evil_good/thumbnail.png','/static/images/dummy/school_of_evil_good/main-photo.png','/static/images/dummy/school_of_evil_good/main-photo.png','/static/images/dummy/school_of_evil_good/poster-photo.png','/static/images/dummy/school_of_evil_good/poster-photo.png','폴 피그','절친 소피와 아가사는 어느 날 신비한 존재에 의해 마법 학교로 휩쓸려 간다. 이 학교는 미래의 동화 속 영웅과 악당을 키워내는 곳. 운명을 알 길 없는 이곳에서 두 친구의 우정은 계속될 수 있을까.','유쾌 발랄, 상상의 나래, 흥미진진','2시간 29분','2022','데이비드 매기, 폴 피그','소피아 앤 카루소, 소피아 와일리, 샤를리즈 테론, 케리 워싱턴, 로런스 피시번, 양자경, 제이미 플래터스, 킷 영, 피터 세러피너위치, 롭 딜레이니, 마크 헵, 패티 루폰, 레이철 블룸', 2 ,'PG','FANTASY',NOW()),
+         ('조선명탐정','/static/images/dummy/chosun_detector/thumbnail.png','/static/images/dummy/chosun_detector/main-photo.webp','/static/images/dummy/chosun_detector/main-photo.webp','/static/images/dummy/chosun_detector/poster-photo.png','/static/images/dummy/chosun_detector/text-photo.png','김석윤','목에 난 이빨 자국, 불탄 시체... 흡혈괴마 소행으로 의심되는 괴사건을 맡은 조선 명탐정. 그런데 수사하는 곳마다 의문의 여인이 나타난다. 그녀와 함께 찾은 단서, 시신에 꽂힌 화살촉의 글자가 수상한데. 범인은 뭔가를 알리고 있다!','긴장감 넘치는, 흥미진진','1시간 59분','2018','이남규','김명민, 오달수, 김지원, 김범, 박근형, 우현, 이민기, 안내상, 현우', 2  ,'PG','FANTASY',NOW()),
+         ('트와일라잇','/static/images/dummy/twilight/thumbnail.png','/static/images/dummy/twilight/main-photo.png','/static/images/dummy/twilight/main-photo.png','/static/images/dummy/twilight/poster-photo.png','/static/images/dummy/twilight/text-photo.png','캐서린 하드윅','17세의 평범한 고등학생 소녀 ‘벨라’는 집안 사정으로 워싱턴 주 포크스에 있는 아빠의 집으로 이사를 온다. 전학 첫날, ‘벨라’는 냉담하지만 자신을 무장 해제시킬 정도로 잘생긴 ‘에드워드’와 마주치고, 전율과 두려움 넘치는 인생의 전환을 맞이한다. ‘에드워드’와 돌이킬 수 없는 사랑에 빠져든 ‘벨라’. 하지만 ‘에드워드’와 그의 가족이 뱀파이어 일족이라는 사실을 알게 되고, 예기치 못한 운명에 빠져든다.','불길한, 긴장감 넘치는, 로맨틱','2시간 1분','2008','멀리사 로젠버그','크리스틴 스튜어트, 로버트 패틴슨, 빌리 버크, 피터 파시넬리, 엘리자베스 리저, 캠 지간데이, 애슐리 그린, 애나 켄드릭, 니키 리드, 테일러 로트너, 잭슨 라스본, 켈런 러츠',  1 ,'PG','FANTASY',NOW());
+INSERT INTO content_tb (
+    title, thumbnail, video_path, main_photo, poster_photo, text_photo,director, introduction,
+    characteristic, play_time, product_year, writers, actors, view_count, rate, genre, created_at
+) VALUES ('마스크','/static/images/dummy/mask/thumbnail.png','/static/images/dummy/mask/main-photo.png','/static/images/dummy/mask/main-photo.png','/static/images/dummy/mask/poster-photo.png','/static/images/dummy/mask/text-photo.png','척 러셀','우연히 고대의 마스크를 발견한 평범한 은행원. 호기심에 써보자 초인적 힘이 솟구치고 무한대의 능력이 발휘된다. 감히 넘보지 못했던 여성의 마음도 사로잡게 되지만 짜릿한 경험도 잠시. 마스크가 초래한 소동이 걷잡을 수 없이 번진다.','익살스러운, 허당 매력','1시간 41분','1994','마이크 워브, 마이클 팰런, 마크 베어하이든','짐 캐리, 카메론 디아즈, 피터 리거트, 피터 그린, 에이미 야스벡, 리처드 제니, 오레스테스 마타세나, 팀 배글리, 낸시 피시, 조니 윌리엄스',  3 ,'PG','FANTASY',NOW()),
+         ('쥬만지','/static/images/dummy/jumanji/thumnail.png','/static/images/dummy/jumanji/main-photo.webp','/static/images/dummy/jumanji/main-photo.webp','/static/images/dummy/jumanji/poster-photo.png','/static/images/dummy/jumanji/text-photo.png','제이크 캐스단','말썽을 피운 벌로 학교 창고를 청소하게 된 4명의 고등학생. 우연히 발견한 비디오 게임을 시작하는 순간, 게임 속 세계로 빨려 들어간다. 각자 선택한 아바타가 되어 임무를 수행해야 하는 네 사람. 과연 무사히 게임을 끝낼 수 있을까?','아드레날린 폭발, 상상의 나래, 흥미진진','1시간 59분','2017','크리스 매케나. 에릭 서머스, 스콧 로젠버그, 제프 핑크너','드웨인 존슨, 케빈 하트, 잭 블랙, 캐런 길런, 라이스 다비, 바비 캐너발리, 닉 조나스, 앨릭스 울프, 서대리어스 블레인, 매디슨 아이스먼, 모건 터너, 메리베스 먼로, 미시 파일, 마크 에번 잭슨',  2 ,'PG','FANTASY',NOW()),
+         ('도둑들','/static/images/dummy/thieves/thumbnail.png','/static/images/dummy/thieves/main-photo.webp','/static/images/dummy/thieves/main-photo.webp','/static/images/dummy/thieves/poster-photo.jpg','/static/images/dummy/thieves/text-photo.png','최동훈','한국과 홍콩에서 내로라하는 최고의 꾼들이 뭉쳤다. 목표는 마카오 카지노에서 희대의 다이아몬드 ‘태양의 눈물’을 빼오는 것. 목적은 다르지만 목표는 같은 각양각색 10인의 도둑이 일생일대의 도박을 시작한다.','아드레날린 폭발, 긴장감 넘치는, 흥미진진','2시간 15분','2012','최동훈, 이기철','김윤석, 이정재, 김혜수, 전지현, 임달화, 김해숙, 오달수, 김수현, 중국상, 리신제, 기국서, 최덕문, 채국희, 예수정',  2 ,'PG','ACTION',NOW()),
+         ('기생수','/static/images/dummy/parasites/thumbnail.webp','/static/images/dummy/parasites/main-photo.webp','/static/images/dummy/parasites/main-photo.webp','/static/images/dummy/parasites/poster-photo.webp','/static/images/dummy/parasites/text-photo.webp','야마자키 타카시','인간이 굶주린 기생생물의 제물이 되자, 한 소년이 인류를 구하기 위해 자기 몸에 침투한 생명체와 공생 관계를 형성한다.','색다른, 무서운, 긴장감 넘치는','1시간 49분','2014','야마자키 타카시','소메타니 쇼타, 후카츠 에리, 아베 사다오, 하시모토 아이, 히가시데 마사히로, 이와이 히데토, 야마나카 타카시, 오쿠이 슈지, 이케우치 만사쿠, 도요하라 고스케, 오모리 나오, 키타무라 카즈키, 요 키미코, 쿠니무라 준, 아사노 타다노부',  2 ,'R','ACTION',NOW()),
+         ('다크나이트','/static/images/dummy/darknight/thumbnail.webp','/static/images/dummy/darknight/main-photo.webp','/static/images/dummy/darknight/main-photo.webp','/static/images/dummy/darknight/poster-photo.jpg','/static/images/dummy/darknight/text-photo.webp','크리스토퍼 놀란','배트맨과 고든 형사 그리고 지방 검사가 고담 시의 지하 범죄 조직을 해체하려고 하지만 새로운 악당은 그들의 계획을 끊임없이 방해한다.','어두운, 흥미진진','2시간 32분 ','2008','조너선 놀런, 크리스토퍼 놀란, 데이비드 S.고이어','크리스천 베일, 히스 레저, 아론 에크하트, 마이클 케인, 매기 질렌할, 게리 올드먼, 모건 프리먼, 모닉 커넌',2,'PG','ACTION',NOW()),
+         ('존윅','/static/images/dummy/john_wick/thumbnail.webp','/static/images/dummy/john_wick/main-photo.webp','/static/images/dummy/john_wick/main-photo.webp','/static/images/dummy/john_wick/poster-photo.jpg','/static/images/dummy/john_wick/text-photo.webp','채드 스타헬스키','어느 조직 보스의 아들이 존 윅의 차를 훔치고 그의 반려견도 죽인다. 그러자 세상 무서울 것 없는 전직 킬러 존 윅은 조직 전체를 상대로 피비린내 나는 복수를 시작한다.','폭력적인, 어두운','1시간 41분','2014','데릭 콜스태드','키아누 리브스, 미카엘 니크비스트, 앨피 앨런, 윌럼 더포, 딘 윈터스, 아드리안 팔리키, 오메르 바르네아, 토비 레너드 무어, 다니엘 베른하르트, 브리짓 모이나한, 존 레귀자모, 이언 맥셰인, 데이비드 패트릭 켈리, 케빈 내쉬',2,'R','ACTION',NOW()),
+         ('러시아워','/static/images/dummy/rush_hour/thumbnail.webp','/static/images/dummy/rush_hour/main-photo.webp','/static/images/dummy/rush_hour/main-photo.webp','/static/images/dummy/rush_hour/poster-photo.jpg','/static/images/dummy/rush_hour/text-photo.webp','브렛 래트너','한 홍콩 형사가 유괴 사건 조사를 위해 로스앤젤레스로 소환되자, FBI는 그를 사건에서 떼어놓고자 사고뭉치 로스앤젤레스 경찰을 그의 파트너로 지정한다.','흥미진진','1시간 37분','1998','짐 카우프, 로스 라마','성룡, 크리스 터커, 톰 윌킨슨, 엘리자베스 페냐, 크리스 펜, 필립 베이커 홀, 마크 롤스톤, 타이 마, 렉스 린, 켄 렁',2,'PG','ACTION',NOW()),
+         ('나의 문어 선생님','/static/images/dummy/octopus_teacher/thumbnail.jpg','/static/images/dummy/octopus_teacher/main-photo.webp','/static/images/dummy/octopus_teacher/main-photo.webp','/static/images/dummy/octopus_teacher/poster-photo.jpg','/static/images/dummy/octopus_teacher/text-photo.webp','피파 얼릭, 제임스 리드','영리한 문어와 뜻밖의 우정을 나누는 영화감독의 이야기를 감동적으로 그린 다큐멘터리.','힐링, 진실을 찾아','1시간 25분','2020','피파 얼릭, 제임스 리드',null,null,'ALL','DOCUMENTARY',NOW()),
+         ('나는 신이다: 신이 배신한 사람들','/static/images/dummy/i_am_god/thumbnail.jpg','/static/images/dummy/i_am_god/main-photo.webp','/static/images/dummy/i_am_god/main-photo.webp','/static/images/dummy/i_am_god/poster-photo.webp','/static/images/dummy/i_am_god/text-photo.webp','조성현','대한민국의 네 교주와 그 신도들을 둘러싼 충격적인 이야기를 추적한 범죄 실화 다큐시리즈. 조성현이 연출을 맡았다.','진실을 찾아','1시간 xx분','2023','조성현',null,3,'R','DOCUMENTARY',NOW()),
+         ('언노운: 우주를 보는 타임머신','/static/images/dummy/unknown/thumbnail.jpg','/static/images/dummy/unknown/main-photo.webp','/static/images/dummy/unknown/main-photo.webp','/static/images/dummy/unknown/poster-photo.webp','/static/images/dummy/unknown/text-photo.webp','샤이 갈','먼 은하계의 모습을 놀랍도록 생생하게 담은 사진으로 우리의 상상력을 자극하는 제임스 웹 우주 망원경. 최초 구상 단계부터 발사까지, 그 역사적인 여정을 기록한 다큐멘터리.','진실을 찾아','1시간 4분','2023','샤이 갈',null,2,'ALL','DOCUMENTARY',NOW()),
+         ('어느 일란성 세 쌍둥이의 재회','/static/images/dummy/three_twins/thumbnail.webp','/static/images/dummy/three_twins/main-photo.webp','/static/images/dummy/three_twins/main-photo.webp','/static/images/dummy/three_twins/poster-photo.jpg','/static/images/dummy/three_twins/text-photo.webp','팀 워들','우연히 만난 세 명의 십 대 소년. 자신들이 갓난아기 때 헤어진 일란성 세쌍둥이 형제란 사실을 알고 크나큰 기쁨에 젖지만, 곧 충격적인 진실이 드러난다.','어두운','1시간 37분','2018','팀 워들',null,2,'PG','DOCUMENTARY',NOW()),
+         ('고양이는 왜 고양이일까?','/static/images/dummy/why_cat/thumbnail.jpg','/static/images/dummy/why_cat/main-photo.webp','/static/images/dummy/why_cat/main-photo.webp','/static/images/dummy/why_cat/poster-photo.jpg','/static/images/dummy/why_cat/text-photo.webp','앤디 미첼','고양이에 관한 즐겁고 유익한 다큐멘터리. 에미상 수상자 앤디 미첼이 고양이와 인간 사이의 매적인 관계를 절묘하게 포착했다.','눈을 뗄 수 없는, 동물은 우리의 친구','1시간 7분','2022','앤디 미첼',null,2,'ALL','DOCUMENTARY',NOW());
 
 
 
 
-
-
-
-
-
-
-
-
-
--- 생성 순서 : 4번, 결재 내역 정보 더미
+-- 생성 순서 : 5번, 결재 내역 정보 더미
 INSERT INTO purchase_history_tb (card_info_id, user_id, description, service_period, paymethod, amount, created_at)
 VALUES
     -- user_id 2
     (1, 2, '스트리밍 서비스', '2024-06-14~2024-07-13', 'CREDITCARD', 13500, '2024-06-14 12:00:00'),
     (2, 2, '스트리밍 서비스', '2024-05-14~2024-06-13', 'CREDITCARD', 13500, '2024-05-14 10:30:00'),
-
     -- user_id 3
     (3, 3, '스트리밍 서비스', '2024-06-14~2024-07-13', 'KAKAOPAY', 13500, '2024-06-14 15:45:00'),
     (3, 3, '스트리밍 서비스', '2024-05-14~2024-06-13', 'KAKAOPAY', 13500, '2024-05-14 09:00:00'),
-
     -- user_id 4
     (4, 4, '스트리밍 서비스', '2024-06-14~2024-07-13', 'CREDITCARD', 13500, '2024-06-14 09:15:00'),
     (4, 4, '스트리밍 서비스', '2024-05-14~2024-06-13', 'CREDITCARD', 13500, '2024-05-14 14:20:00'),
-
     -- user_id 5
     (5, 5, '스트리밍 서비스', '2024-06-14~2024-07-13', 'KAKAOPAY', 13500, '2024-06-14 08:30:00'),
     (5, 5, '스트리밍 서비스', '2024-05-14~2024-06-13', 'KAKAOPAY', 13500, '2024-05-14 11:45:00');
+
 
 --- 생성 순서 : 6번, mylist 테이블
 INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
