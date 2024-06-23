@@ -26,9 +26,9 @@ public class Refund {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user; // 사용자
+//    @JoinColumn(name = "user_id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private User user; // 사용자
 
     @Enumerated(EnumType.STRING)
     private Reason reason; // 환불 요청 사유
@@ -36,14 +36,13 @@ public class Refund {
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'PENDING'")
     private Refuse status; // 환불 상태 (디폴트 값 '대기중')
-
+    @JoinColumn(name = "user_id")
     @OneToOne(fetch = FetchType.LAZY)
     private PurchaseHistory purchaseHistory;
 
     @Builder
-    public Refund(Integer id, User user, Reason reason, Refuse status, PurchaseHistory purchaseHistory) {
+    public Refund(Integer id, Reason reason, Refuse status, PurchaseHistory purchaseHistory) {
         this.id = id;
-        this.user = user;
         this.reason = reason;
         this.status = status;
         this.purchaseHistory = purchaseHistory;

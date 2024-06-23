@@ -12,7 +12,7 @@ public interface RefundRepository extends JpaRepository<Refund, Integer> {
     @Query("""
             select r
             from Refund r
-            join fetch PurchaseHistory p on r.user.id = p.user.id
+            join fetch PurchaseHistory p on r.purchaseHistory.user.id = p.user.id
             """)
     List<Refund> findAllByUserId();
 }

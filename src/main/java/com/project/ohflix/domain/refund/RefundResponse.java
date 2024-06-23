@@ -26,21 +26,19 @@ public class RefundResponse {
             private String username;
             private String reason;
             private String status;
-            //private String createdAt;
+            private String createdAt;
 
             public RefundPage(Refund refund) {
                 this.id = refund.getId();
-                this.name = refund.getUser().getName();
-                this.username = refund.getUser().getUsername();
+                this.name = refund.getPurchaseHistory().getUser().getName();
+                this.username = refund.getPurchaseHistory().getUser().getUsername();
                 this.reason = refund.getReason().getValue();
                 this.status = refund.getStatus().getValue();
-//                if (refund.getPurchaseHistory().getCreatedAt() != null) {
-//                    // Convert Timestamp to LocalDate
-//                    LocalDate localDate = refund.getPurchaseHistory().getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//                    // Format the new date in "yyyy년 MM월 dd일" format
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
-//                    this.createdAt = localDate.format(formatter);
-//                }
+                // Convert Timestamp to LocalDate
+                LocalDate localDate = refund.getPurchaseHistory().getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                // Format the new date in "yyyy년 MM월 dd일" format
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
+                this.createdAt = localDate.format(formatter);
             }
         }
 
