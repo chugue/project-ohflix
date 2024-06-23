@@ -10,13 +10,15 @@ import lombok.Getter;
 @Getter
 public enum Rate {
 
-    PG("15세 이하 관람 불가"),
-    R("19세 이하 관람 불가"),
-    ALL("전체 관람가");
+    PG("15세 이하 관람 불가", "/static/images/system/rate_level/15.png"),
+    R("19세 이하 관람 불가" , "/static/images/system/rate_level/r.png"),
+    ALL("전체 관람가", "/static/images/system/rate_level/all.png");
 
     private final String value;
+    private final String imgPath;
 
-    Rate(String value) {
+    Rate(String value, String imgPath) {
         this.value = value;
+        this.imgPath = imgPath;
     }
 }

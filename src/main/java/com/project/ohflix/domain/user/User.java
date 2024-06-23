@@ -30,7 +30,10 @@ public class User {
     private String mobile; // 전화번호
 
     @Column(nullable = false)
-    private String username;
+    private String username; // 유저 아이디
+
+    @Column(nullable = false)
+    private String name; // 유저 성리
 
     @OneToOne
     private ProfileIcon profileIcon; // 프로필 아이콘
@@ -50,12 +53,13 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String email, String password, String mobile, String username, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
+    public User(Integer id, String email, String password, String mobile, String username, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.mobile = mobile;
         this.username = username;
+        this.name = name;
         this.profileIcon = profileIcon;
         this.status = status;
         this.userSaveRate = userSaveRate;

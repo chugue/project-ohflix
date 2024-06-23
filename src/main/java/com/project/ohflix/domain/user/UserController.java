@@ -1,11 +1,8 @@
 package com.project.ohflix.domain.user;
 
-import com.project.ohflix.domain.cardInfo.CardInfoRepository;
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -72,7 +69,12 @@ public class UserController {
     }
 
     @GetMapping("/api/sales-page")
-    public String getSales() {
+    public String getSales(HttpServletRequest request) {
+
+        List<UserResponse.SalesPageDTO> respDTO = userService.salesPage();
+
+        request.setAttribute("SalesPageDTO", respDTO);
+
         return "admin/sales-page";
     }
 
@@ -92,6 +94,8 @@ public class UserController {
 
     @GetMapping("/api/refund-page")
     public String getRefund() {
+
+
         return "user/refund-page";
     }
 
@@ -107,11 +111,8 @@ public class UserController {
     public String profileSetting(HttpServletRequest request) {
 
         //SessionUser user=session.getAttribute("sessionUser");
-
         UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
-
         request.setAttribute("ProfileSettingDTO",respDTO);
-
         return "profile/profile-setting";
     }
 }

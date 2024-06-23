@@ -42,28 +42,33 @@
                         <img src="/static/images/system/card.svg" />
                     </div>
                 </div>
-                <input type="text" id="card-number" class="card-input" required />
-                <input type="hidden" id="cardNumberHidden" name="cardNumberHidden">
+                <input type="text" id="card-number" class="card-input" required value="{{DetailDTO.cardNumber}}"/>
+                <input type="hidden" id="cardNumberHidden" name="cardNumberHidden" />
             </div>
 
 
             <div class="form-group">
                 <label for="expiry-date">유효기간</label>
-                <input type="text" id="expiry-date" placeholder="MM/YY" />
+                <input type="text" id="expiry-date" placeholder="MM/YY" value="{{DetailDTO.expiryMonth}}" />
             </div>
 
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" placeholder="이름" />
+                <input type="text" id="name" placeholder="이름" value="{{DetailDTO.cardOwner}}" />
             </div>
 
             <div class="form-group">
                 <label for="dob">생년월일</label>
-                <input type="date" id="dob" placeholder="생년월일" />
+                <input type="date" id="dob" placeholder="생년월일" value="{{DetailDTO.dateOfBirth}}"/>
             </div>
 
             <div class="checkbox-container">
-                <input type="checkbox" id="agreement" />
+                {{^ DetailDTO.isAgreedThird}}
+                    <input type="checkbox" id="agreement" />
+                {{/DetailDTO.isAgreedThird}}
+                {{# DetailDTO.isAgreedThird}}
+                    <input type="checkbox" id="agreement" checked />
+                {{/DetailDTO.isAgreedThird}}
                 <span for="agreement"
                 >본인의 개인 정보를 결제 서비스 업체에 제공하는 데에
               동의합니다.</span

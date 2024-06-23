@@ -6,21 +6,14 @@ import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentResponse;
-import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
@@ -129,7 +122,7 @@ public class UserResponse {
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
         private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
 
-        public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory,  List<Content> latestContentList) {
+        public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory, List<Content> latestContentList) {
             this.userId = user.getId();
             this.profile_icon_id = user.getProfileIcon().getId();
             this.path = user.getProfileIcon().getPath();
@@ -142,5 +135,50 @@ public class UserResponse {
         }
     }
 
+
+    // sales-page
+    @Data
+    public static class SalesPageUserDTO {
+        private String yearMonth;
+        private Long monthlyUserCount;
+        private Long cumulativeUserCount;
+
+        public SalesPageUserDTO(String yearMonth, Long monthlyUserCount, Long cumulativeUserCount) {
+            this.yearMonth = yearMonth;
+            this.monthlyUserCount = monthlyUserCount;
+            this.cumulativeUserCount = cumulativeUserCount;
+        }
+    }
+
+    // sales-page
+    @Data
+    public static class SalesPageSubscribeUserDTO {
+        private String yearMonth;
+        private Long subscribeUserCount;
+
+        public SalesPageSubscribeUserDTO(String yearMonth, Long subscribeUserCount) {
+            this.yearMonth = yearMonth;
+            this.subscribeUserCount = subscribeUserCount;
+        }
+
+    }
+
+    // sales-page
+    @Data
+    public static class SalesPageDTO {
+        private String yearMonth;
+        private Long subscribeUserCount;
+        private Long cumulativeUserCount;
+        private Long monthlySales;
+        private Long cumulativeSales;
+
+        public SalesPageDTO(String yearMonth, Long subscribeUserCount, Long cumulativeUserCount, Long monthlySales, Long cumulativeSales) {
+            this.yearMonth = yearMonth;
+            this.subscribeUserCount = subscribeUserCount;
+            this.cumulativeUserCount = cumulativeUserCount;
+            this.monthlySales = monthlySales;
+            this.cumulativeSales = cumulativeSales;
+        }
+    }
 }
 
