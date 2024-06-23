@@ -19,28 +19,12 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
     Optional<List<PurchaseHistory>> findByUserId(@Param("userId") Integer userId, @Param("oneYearAgo") Timestamp oneYearAgo);
 
     @Query("""
-            SELECT DISTINCT p
-            FROM PurchaseHistory p
-            JOIN FETCH p.user u
+            SELECT DISTINCT ph
+            FROM PurchaseHistory ph
+            JOIN FETCH ph.user u
+            JOIN FETCH u.profileIcon pi
             WHERE u.id = :id
             """)
     List<PurchaseHistory> findByUser(@Param("id") int id);
 
-    @Query("""
-            SELECT p.createdAt
-            FROM PurchaseHistory p
-            JOIN p.user u
-            WHERE u.id = :id
-            ORDER BY p.createdAt ASC
-            """)
-    LocalDateTime findOldestCreatedAtByUserId(@Param("id") int id);
-
-    @Query("""
-            SELECT p.servicePeriod
-            FROM PurchaseHistory p
-            JOIN p.user u
-            WHERE u.id = :id
-            ORDER BY p.servicePeriod DESC
-            """)
-    String findLatestServicePeriodByUserId(@Param("id") int id);
 }

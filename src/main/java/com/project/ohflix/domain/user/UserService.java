@@ -59,22 +59,23 @@ public class UserService {
 
         return respDTO;
     }
-    // 멤버쉽 취소
+
+    // 멤버쉽 취소 페이지
     public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
-        User user = userRepository.findById(sessionUserId).orElseThrow(() -> new Exception404("사용자를 찾을 수 없습니다."));
+        // 유저 아이콘 찾기
+        User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+        // 결제 내역 ( list ) 찾기
         List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
-//        List<Content> contentList =
+
+        // 최근 결제 내역과 최근 결제 내역
         PurchaseHistory oldestPurchaseHistory = null;
         PurchaseHistory latestPurchaseHistory = null;
-
         if (!purchaseHistoryList.isEmpty()) {
-            oldestPurchaseHistory = purchaseHistoryList.get(0);
-            latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1);
+            oldestPurchaseHistory = purchaseHistoryList.get(0); // first
+            latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1); // last
         }
 
-        // DTO 생성
         return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory);
-//        return null;
     }
 }
 

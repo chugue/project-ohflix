@@ -121,15 +121,17 @@ public class UserResponse {
     @Data
     public static class CancelPlanPageDTO{
         private Integer userId;                 // 세션 유저 ID
-        private Integer profile_icon_id;        // 프로필 아이콘
+        private Integer profile_icon_id;        // 프로필 아이콘 ID
+        private String path;                    // 프로필 아이콘 경로
         private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
         private Timestamp oldestCreatedAt;  // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
-//        private Content content;                // 떠나기 전 마지막 콘텐츠로 유혹하기 => 찜 한 콘텐트로?
+//        private List<Content> contentList;      // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
 
         public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory) {
             this.userId = user.getId();
             this.profile_icon_id = user.getProfileIcon().getId();
+            this.path = user.getProfileIcon().getPath();
             this.isSubscribe = user.getIsSubscribe();
             this.oldestCreatedAt = oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null;
             this.latestServicePeriod = latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null;

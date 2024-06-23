@@ -14,11 +14,12 @@
 </head>
 
 <body>
+{{#CancelPlanPageDTO}}
 <header>
     <div class="header-content">
         <a href="/"><img src="/static/images/OH!FLIX.png" alt="OH!FLIX Logo" class="logo"></a>
         <div class="profile">
-            <img src="/static/images/netflix-profile.png" alt="Profile Icon" class="profile-icon">
+            <img src={{path}} alt="Profile Icon" class="profile-icon">
             <button class="dropdown-button">
                 <span class="dropdown-icon">▼</span>
                 <div class="dropdown-content">
@@ -35,14 +36,10 @@
         <button class="back-btn">
             <span class="material-icons">arrow_back계정페이지로 돌아가기</span>
         </button>
-        {{#CancelPlanPageDTO}}
+
             <div class="top">
                 <h1>클릭 한 번으로 멤버십을 해지 또는 변경하세요</h1>
-                <p>어떤 선택을 하시든
-                    <b>
-                        {{latestServicePeriod}}
-                    </b>
-                    부터 효력이 발생합니다. 그때까지는 계속 시청하실 수 있습니다.</p>
+                <p>어떤 선택을 하시든<b>{{latestServicePeriod}}</b>부터 효력이 발생합니다. 그때까지는 계속 시청하실 수 있습니다.</p>
             </div>
             <div class="main">
                 <div class="card-container">
@@ -105,7 +102,7 @@
                     </div>
                 </div>
             </div>
-        {{/CancelPlanPageDTO}}
+
     </div>
 </main>
 <hr>
@@ -134,6 +131,7 @@
         <p>공정거래위원회 웹사이트</p>
     </div>
 </footer>
+{{/CancelPlanPageDTO}}
 </body>
 
 </html>
