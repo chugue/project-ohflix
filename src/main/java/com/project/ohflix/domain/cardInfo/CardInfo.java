@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @NoArgsConstructor
@@ -35,14 +35,14 @@ public class CardInfo {
     private String cardOwner; // 카드 소유자 이름
 
     @Column(nullable = false)
-    private Date dateOfBirth; // 카드 소유자 생일
+    private LocalDate dateOfBirth; // 카드 소유자 생일
 
     private Boolean isMain; // 실제 결제 사용 카드 여부?
 
     private Boolean isAgreedThird; // 제 3자 정보이용 동의
 
     @Builder
-    public CardInfo(Integer id, User user, String cardNumber, String lastDigit, String expiryMonth, String cardOwner, Date dateOfBirth, Boolean isMain, Boolean isAgreedThird) {
+    public CardInfo(Integer id, User user, String cardNumber, String lastDigit, String expiryMonth, String cardOwner, LocalDate dateOfBirth, Boolean isMain, Boolean isAgreedThird) {
         this.id = id;
         this.user = user;
         this.cardNumber = cardNumber;

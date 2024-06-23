@@ -12,7 +12,7 @@ public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
 
     @Query(""" 
              select c from CardInfo c join fetch c.user u where c.user.id = :userId and c.isMain = true
-             """) // user-check 페이지에서 사용하는 쿼리
+             """)  // user-check 페이지에서 사용하는 쿼리
     Optional<CardInfo> findUserInfo(@Param("userId") Integer userId);
 
     @Query("""
@@ -21,7 +21,7 @@ public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
     Optional<List<CardInfo>> findByUserId(@Param("userId") Integer userId);
 
     @Query("""
-            select c from CardInfo c where c.id = :cardInfoId 
+            select c from CardInfo c where c.id = :cardInfoId
             """)
     Optional<CardInfo> findCardInfoById(@Param("cardInfoId") Integer cardInfoId);
 }

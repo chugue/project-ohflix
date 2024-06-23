@@ -42,8 +42,8 @@ public class PurchaseHistoryController {
 
     @GetMapping("/api/paymethod-update-form/{cardInfoId}")
     public String getPaymethodUpdateForm(@PathVariable("cardInfoId") Integer cardInfoId,  HttpServletRequest request) {
-
-        cardInfoService.findCardInfoById(cardInfoId);
+        CardInfoResponse.DetailDTO respDTO = cardInfoService.findCardInfoById(cardInfoId);
+        request.setAttribute("DetailDTO", respDTO);
         return "paymethod/paymethod-update-form";
     }
 

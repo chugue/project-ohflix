@@ -10,9 +10,10 @@ public class CardInfoService {
     private final CardInfoRepository cardInfoRepository;
 
     // 카드 정보 업데이트 페이지 데이터
-    public void findCardInfoById(Integer cardInfoId) {
+    public CardInfoResponse.DetailDTO findCardInfoById(Integer cardInfoId) {
         CardInfo cardInfo = cardInfoRepository.findCardInfoById(cardInfoId)
                 .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+        return new CardInfoResponse.DetailDTO(cardInfo);
     }
 }
 
