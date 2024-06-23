@@ -3,15 +3,16 @@ package com.project.ohflix.domain.user;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
-import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.YearMonth;
@@ -27,6 +28,8 @@ public class UserService {
     private final UserNativeRepository userNativeRepository;
     private final CardInfoRepository cardInfoRepository;
     private final ProfileIconRepository profileIconRepository;
+    private final PurchaseHistoryRepository purchaseHistoryRepository;
+    private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
@@ -50,10 +53,10 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserResponse.UserProfileFormDTO userProfileForm(Integer sessionUserId) {
+    public UserResponse.ProfileFormDTO userProfileForm(Integer sessionUserId) {
         User userProfile = userRepository.findUserProfileById(sessionUserId);
         System.out.println(userProfile);
-        return new UserResponse.UserProfileFormDTO(userProfile);
+        return new UserResponse.ProfileFormDTO(userProfile);
     }
 
     //profile-setting 프로필 세팅 페이지
@@ -62,6 +65,32 @@ public class UserService {
         UserResponse.ProfileSettingDTO respDTO=new UserResponse.ProfileSettingDTO(user);
 
         return respDTO;
+    }
+
+    // 멤버쉽 취소 페이지
+    public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
+        // 유저 아이콘 찾기
+        User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        // 결제 내역 ( list ) 찾기
+        List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
+        // 최근 결제 내역과 최근 결제 내역
+        PurchaseHistory oldestPurchaseHistory = null;
+        PurchaseHistory latestPurchaseHistory = null;
+        if (!purchaseHistoryList.isEmpty()) {
+            oldestPurchaseHistory = purchaseHistoryList.get(0); // first
+            latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1); // last
+        }
+
+        // 최신 콘첸츠 가져오기
+        List<Content> latestContentList = contentRepository.findLatestContent();
+
+        // 최대 12개의 데이터만 저장
+        if (latestContentList.size() > 12) {
+            latestContentList = latestContentList.subList(0, 12);
+        }
+
+        return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory, latestContentList);
     }
 
     // sales-page

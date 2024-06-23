@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,14 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
             select p from PurchaseHistory p join fetch p.user pu where pu.id = :userId and p.createdAt > :oneYearAgo
             """)
     Optional<List<PurchaseHistory>> findByUserId(@Param("userId") Integer userId, @Param("oneYearAgo") Timestamp oneYearAgo);
+
+    @Query("""
+            SELECT DISTINCT ph
+            FROM PurchaseHistory ph
+            JOIN FETCH ph.user u
+            JOIN FETCH u.profileIcon pi
+            WHERE u.id = :id
+            """)
+    List<PurchaseHistory> findByUser(@Param("id") int id);
+
 }
