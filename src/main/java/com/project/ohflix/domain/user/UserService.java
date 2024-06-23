@@ -12,6 +12,7 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,12 +61,20 @@ public class UserService {
     }
     // 멤버쉽 취소
     public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
-        User user = userRepository.findUserPurchaseHistory(sessionUserId);
+        User user = userRepository.findById(sessionUserId).orElseThrow(() -> new Exception404("사용자를 찾을 수 없습니다."));
         List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
 //        List<Content> contentList =
+        PurchaseHistory oldestPurchaseHistory = null;
+        PurchaseHistory latestPurchaseHistory = null;
 
-//        return ;
-        return  new UserResponse.CancelPlanPageDTO(user, purchaseHistoryList);
+        if (!purchaseHistoryList.isEmpty()) {
+            oldestPurchaseHistory = purchaseHistoryList.get(0);
+            latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1);
+        }
+
+        // DTO 생성
+        return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory);
+//        return null;
     }
 }
 

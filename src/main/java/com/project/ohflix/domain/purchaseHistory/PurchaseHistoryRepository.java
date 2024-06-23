@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +25,22 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
             WHERE u.id = :id
             """)
     List<PurchaseHistory> findByUser(@Param("id") int id);
+
+    @Query("""
+            SELECT p.createdAt
+            FROM PurchaseHistory p
+            JOIN p.user u
+            WHERE u.id = :id
+            ORDER BY p.createdAt ASC
+            """)
+    LocalDateTime findOldestCreatedAtByUserId(@Param("id") int id);
+
+    @Query("""
+            SELECT p.servicePeriod
+            FROM PurchaseHistory p
+            JOIN p.user u
+            WHERE u.id = :id
+            ORDER BY p.servicePeriod DESC
+            """)
+    String findLatestServicePeriodByUserId(@Param("id") int id);
 }

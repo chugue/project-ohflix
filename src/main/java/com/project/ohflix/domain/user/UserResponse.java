@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
@@ -122,15 +123,17 @@ public class UserResponse {
         private Integer userId;                 // 세션 유저 ID
         private Integer profile_icon_id;        // 프로필 아이콘
         private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
-        private List<PurchaseHistory> purchaseHistoryList;// 결제 내역
+        private Timestamp oldestCreatedAt;  // 가장 오래된 createdAt
+        private String latestServicePeriod;     // 가장 최근의 servicePeriod
 //        private Content content;                // 떠나기 전 마지막 콘텐츠로 유혹하기 => 찜 한 콘텐트로?
 
-        public CancelPlanPageDTO(User user, List<PurchaseHistory> purchaseHistoryList) {
+        public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory) {
             this.userId = user.getId();
             this.profile_icon_id = user.getProfileIcon().getId();
             this.isSubscribe = user.getIsSubscribe();
-            this.purchaseHistoryList = purchaseHistoryList;
-//            this.content =
+            this.oldestCreatedAt = oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null;
+            this.latestServicePeriod = latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null;
+//            this.content = content;
         }
     }
 
