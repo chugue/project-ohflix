@@ -13,7 +13,7 @@ public class ContentApiController {
 
     @GetMapping("/api/content-info")
     public ResponseEntity<?> getContentInfo(){
-        Integer contentId = 2;
+        Integer contentId = 3;
         ContentResponse.DetailsDTO respDTO= contentService.getContetnDetails(contentId);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }

@@ -1,7 +1,6 @@
 package com.project.ohflix.domain.cardInfo;
 
 import com.project.ohflix.domain.user.User;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -38,9 +37,12 @@ public class CardInfo {
     @Column(nullable = false)
     private Date dateOfBirth; // 카드 소유자 생일
 
+    private Boolean isMain; // 실제 결제 사용 카드 여부?
+
     private Boolean isAgreedThird; // 제 3자 정보이용 동의
 
-    public CardInfo(Integer id, User user, String cardNumber, String lastDigit, String expiryMonth, String cardOwner, Date dateOfBirth, Boolean isAgreedThird) {
+    @Builder
+    public CardInfo(Integer id, User user, String cardNumber, String lastDigit, String expiryMonth, String cardOwner, Date dateOfBirth, Boolean isMain, Boolean isAgreedThird) {
         this.id = id;
         this.user = user;
         this.cardNumber = cardNumber;
@@ -48,6 +50,7 @@ public class CardInfo {
         this.expiryMonth = expiryMonth;
         this.cardOwner = cardOwner;
         this.dateOfBirth = dateOfBirth;
+        this.isMain = isMain;
         this.isAgreedThird = isAgreedThird;
     }
 }

@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.purchaseHistory;
 
 import com.project.ohflix.domain.cardInfo.CardInfoResponse;
+import com.project.ohflix.domain.cardInfo.CardInfoService;
 import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.content.ContentService;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class PurchaseHistoryController {
     private final PurchaseHistoryService purchaseHistoryService;
     private final ContentRepository contentRepository;
     private final ContentService contentService;
+    private final CardInfoService cardInfoService;
 
     @GetMapping("/api/paymethod-form")
     public String getPaymethodRegisterForm() {
@@ -31,17 +34,16 @@ public class PurchaseHistoryController {
     public String getPaymethodManage(HttpServletRequest request) {
 
         //SessionUser user=session.getAttribute("sessionUser");
-
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
         List<CardInfoResponse.paymethodManageDTO> respDTO = purchaseHistoryService.paymethodManagePage(2);
-
         request.setAttribute("paymethodManageDTO", respDTO);
         return "paymethod/paymethod-manage";
     }
 
-    @GetMapping("/api/paymethod-update-form")
-    public String getPaymethodUpdateForm(HttpServletRequest request) {
+    @GetMapping("/api/paymethod-update-form/{cardInfoId}")
+    public String getPaymethodUpdateForm(@PathVariable("cardInfoId") Integer cardInfoId,  HttpServletRequest request) {
 
+        cardInfoService.findCardInfoById(cardInfoId);
         return "paymethod/paymethod-update-form";
     }
 
@@ -49,10 +51,8 @@ public class PurchaseHistoryController {
     public String getPayment(HttpServletRequest request) {
 
         //SessionUser user=session.getAttribute("sessionUser");
-
         //유저정보를 넣을 수 없어서 2번유저를 바로 넣음!
         PurchaseHistoryResponse.purchaseHistoryDTO respDTO = purchaseHistoryService.purchaseHistories(2);
-        System.out.println("respDTO = " + respDTO);
         request.setAttribute("purchaseHistoryDTO", respDTO);
 
         return "paymethod/purchase-histories";

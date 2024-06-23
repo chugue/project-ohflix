@@ -38,13 +38,13 @@ VALUES
     ('user10@example.com', '1234', 'user10', '강유리', '010-1111-0000', 10, 'USER','R', true, false, false, false, NOW());
 
 -- 생성 순서 : 3번, 카드 정보 더미
-INSERT INTO card_info_tb (user_id, card_number, last_digit, expiry_month, card_owner, date_of_birth, is_agreed_third)
+INSERT INTO card_info_tb (user_id, card_number, last_digit, expiry_month, card_owner, date_of_birth, is_main, is_agreed_third)
 VALUES
-    (2, '1234567812345678', '5678', '12/23', 'User2', '1990-01-01', TRUE),
-    (2, '3334567812345678', '3333', '05/25', 'User2', '1990-01-01', TRUE),
-    (3, '8765432187654321', '4321', '11/22', 'User3', '1985-02-02', FALSE),
-    (4, '1111222233334444', '4444', '10/21', 'User4', '1975-03-03', TRUE),
-    (5, '5555666677778888', '8888', '09/20', 'User5', '2000-04-04', TRUE);
+    (2, '1234567812345678', '5678', '12/23', 'User2', '1990-01-01', TRUE, TRUE),
+    (2, '3334567812340078', '0078', '05/25', 'User2', '1990-01-01', FALSE, TRUE),
+    (3, '8765432187654321', '4321', '11/22', 'User3', '1985-02-02', TRUE, FALSE),
+    (4, '1111222233334444', '4444', '10/21', 'User4', '1975-03-03', TRUE, TRUE),
+    (5, '5555666677778888', '8888', '09/20', 'User5', '2000-04-04', TRUE, TRUE);
 
 
 --- 생성 순서 : 4번, content 테이블

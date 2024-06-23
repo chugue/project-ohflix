@@ -9,11 +9,11 @@ public class CardInfoResponse {
     @Data
     public static class paymethodManageDTO{
         Integer cardInfoId;
-        String cardNumber;
+        String lastDigit;
 
         public paymethodManageDTO(CardInfo cardInfo) {
             this.cardInfoId = cardInfo.getId();
-            this.cardNumber = cardInfo.getCardNumber();
+            this.lastDigit = cardInfo.getLastDigit();
         }
     }
 }
