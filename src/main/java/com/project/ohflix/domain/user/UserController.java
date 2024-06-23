@@ -57,7 +57,12 @@ public class UserController {
     }
 
     @GetMapping("/api/sales-page")
-    public String getSales() {
+    public String getSales(HttpServletRequest request) {
+
+        List<UserResponse.SalesPageDTO> respDTO = userService.salesPage();
+
+        request.setAttribute("SalesPageDTO", respDTO);
+
         return "admin/sales-page";
     }
 
