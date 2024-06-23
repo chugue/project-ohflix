@@ -111,5 +111,50 @@ public class UserResponse {
             this.iconPath = user.getProfileIcon().getPath();
         }
     }
+
+    // sales-page
+    @Data
+    public static class SalesPageUserDTO {
+        private String yearMonth;
+        private Long monthlyUserCount;
+        private Long cumulativeUserCount;
+
+        public SalesPageUserDTO(String yearMonth, Long monthlyUserCount, Long cumulativeUserCount) {
+            this.yearMonth = yearMonth;
+            this.monthlyUserCount = monthlyUserCount;
+            this.cumulativeUserCount = cumulativeUserCount;
+        }
+    }
+
+    // sales-page
+    @Data
+    public static class SalesPageSubscribeUserDTO {
+        private String yearMonth;
+        private Long subscribeUserCount;
+
+        public SalesPageSubscribeUserDTO(String yearMonth, Long subscribeUserCount) {
+            this.yearMonth = yearMonth;
+            this.subscribeUserCount = subscribeUserCount;
+        }
+
+    }
+
+    // sales-page
+    @Data
+    public static class SalesPageDTO {
+        private String yearMonth;
+        private Long subscribeUserCount;
+        private Long cumulativeUserCount;
+        private Long monthlySales;
+        private Long cumulativeSales;
+
+        public SalesPageDTO(String yearMonth, Long subscribeUserCount, Long cumulativeUserCount, Long monthlySales, Long cumulativeSales) {
+            this.yearMonth = yearMonth;
+            this.subscribeUserCount = subscribeUserCount;
+            this.cumulativeUserCount = cumulativeUserCount;
+            this.monthlySales = monthlySales;
+            this.cumulativeSales = cumulativeSales;
+        }
+    }
 }
 
