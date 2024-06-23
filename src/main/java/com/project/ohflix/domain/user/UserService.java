@@ -4,6 +4,8 @@ import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.content.ContentService;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
@@ -23,7 +25,7 @@ public class UserService {
     private final CardInfoRepository cardInfoRepository;
     private final ProfileIconRepository profileIconRepository;
     private final PurchaseHistoryRepository purchaseHistoryRepository;
-    private final ContentService contentService;
+    private final ContentRepository contentRepository;
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
@@ -64,9 +66,9 @@ public class UserService {
     public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
         // 유저 아이콘 찾기
         User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
         // 결제 내역 ( list ) 찾기
         List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
-
         // 최근 결제 내역과 최근 결제 내역
         PurchaseHistory oldestPurchaseHistory = null;
         PurchaseHistory latestPurchaseHistory = null;
@@ -75,7 +77,15 @@ public class UserService {
             latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1); // last
         }
 
-        return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory);
+        // 최신 콘첸츠 가져오기
+        List<Content> latestContentList = contentRepository.findLatestContent();
+
+        // 최대 12개의 데이터만 저장
+        if (latestContentList.size() > 12) {
+            latestContentList = latestContentList.subList(0, 12);
+        }
+
+        return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory, latestContentList);
     }
 }
 

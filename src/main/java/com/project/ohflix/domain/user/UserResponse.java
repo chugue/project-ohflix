@@ -5,6 +5,7 @@ import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.content.Content;
+import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
@@ -126,16 +127,18 @@ public class UserResponse {
         private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
         private Timestamp oldestCreatedAt;  // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
-//        private List<Content> contentList;      // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
+        private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
 
-        public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory) {
+        public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory,  List<Content> latestContentList) {
             this.userId = user.getId();
             this.profile_icon_id = user.getProfileIcon().getId();
             this.path = user.getProfileIcon().getPath();
             this.isSubscribe = user.getIsSubscribe();
             this.oldestCreatedAt = oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null;
             this.latestServicePeriod = latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null;
-//            this.content = content;
+            this.latestContentList = latestContentList.stream()
+                    .map(ContentResponse.CanclePlanPageContentDTO::new)
+                    .toList();
         }
     }
 

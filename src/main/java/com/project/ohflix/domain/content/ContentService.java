@@ -34,7 +34,7 @@ public class ContentService {
         return new ContentResponse.VideoManagePageDTO(contents);
     }
 
-
+    //
     public List<ContentResponse.LatestContentDTO> findLatestContent() {
         List<Content> latestContentList = contentRepository.findLatestContent();
         System.out.println(latestContentList);
@@ -42,6 +42,13 @@ public class ContentService {
         return latestContentList.stream().map(content
                 -> new ContentResponse.LatestContentDTO(content)).toList();
     }
+//    public List<ContentResponse.LatestContentDTO> findLatestContentCancelPlan() {
+//        List<Content> latestContentList = contentRepository.findLatestContentCancelPlan();
+//        System.out.println(latestContentList);
+//
+//        return latestContentList.stream().map(content
+//                -> new ContentResponse.LatestContentDTO(content)).toList();
+//    }
 }
 
 

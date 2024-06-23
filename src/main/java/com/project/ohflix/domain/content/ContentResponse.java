@@ -83,11 +83,26 @@ public class ContentResponse {
     public static class LatestContentDTO {
         private Integer id;
         private String thumbnail;       // 썸네일
+        private String posterPhoto;       // 썸네일
         private Timestamp createdAt;
 
         public LatestContentDTO(Content content) {
             this.id = content.getId();
             this.thumbnail = content.getThumbnail();
+            this.posterPhoto = content.getPosterPhoto();
+            this.createdAt = content.getCreatedAt();
+        }
+    }
+
+    @Data
+    public static class CanclePlanPageContentDTO {
+        private Integer id;
+        private String posterPhoto;       // 썸네일
+        private Timestamp createdAt;
+
+        public CanclePlanPageContentDTO(Content content) {
+            this.id = content.getId();
+            this.posterPhoto = content.getPosterPhoto();
             this.createdAt = content.getCreatedAt();
         }
     }
