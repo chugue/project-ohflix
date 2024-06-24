@@ -233,5 +233,34 @@ public class UserResponse {
         }
 
     }
+
+    // 멤버십 기본정보 페이지 DTO
+    @Data
+    public static class AccountMembershipInfoDTO {
+        private Integer userId;
+        private Integer profileIconId;
+        private String profileIconPath;
+        private String membershipStartDate;
+        private String membershipType;
+        private String nextPaymentDate;
+        private String cardLastFourDigits;
+
+        public AccountMembershipInfoDTO(User user, PurchaseHistory purchaseHistory, CardInfo cardInfo) {
+            this.userId = user.getId();
+            this.profileIconId = user.getProfileIcon().getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
+            this.membershipStartDate = user.getCreatedAt().toString(); // 예시 데이터
+            this.membershipType = user.getIsSubscribe() ? "스탠다드" : "구독 안됨";
+            this.nextPaymentDate = extractEndDate(purchaseHistory.getServicePeriod());
+            this.cardLastFourDigits = cardInfo.getLastDigit();
+        }
+
+        private String extractEndDate(String servicePeriod) {
+            if (servicePeriod != null && servicePeriod.contains("~")) {
+                return servicePeriod.split("~")[1];
+            }
+            return servicePeriod;
+        }
+    }
 }
 
