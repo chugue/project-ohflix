@@ -1,6 +1,7 @@
 package com.project.ohflix._core.intercepter;
 
 import com.project.ohflix._core.error.exception.Exception401;
+import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,11 +19,15 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         SessionUser sessionUser = (SessionUser) redisTemplate.opsForValue().get("sessionUser");
-        HttpSession session  = request.getSession();
+        HttpSession session = request.getSession();
         if (sessionUser == null) {
             throw new Exception401("로그인 하셔야 해요");
         }
-        session.setAttribute("sessionUser", sessionUser);
+        if (sessionUser.getStatus() == Status.ADMIN) {
+            session.setAttribute("adminUser", sessionUser);
+        } else if (sessionUser.getStatus() == Status.USER) {
+            session.setAttribute("sessionUser", sessionUser);
+        }
         return true;
     }
 }
