@@ -180,5 +180,17 @@ public class UserResponse {
             this.cumulativeSales = cumulativeSales;
         }
     }
+
+    //login
+    @Data
+    public static class LoginDTO {
+        private Integer Id;
+        private Status status;
+
+        public LoginDTO(Integer id, Status status) {
+            Id = id;
+            this.status = status;
+        }
+    }
 }
 

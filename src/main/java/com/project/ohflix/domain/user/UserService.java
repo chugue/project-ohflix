@@ -144,6 +144,12 @@ public class UserService {
         return respDTO;
     }
 
+    //login
+    public SessionUser login(UserRequest.LoginDTO reqestDTO) {
+        User user = userRepository.findByEmailAndPassword(reqestDTO.getEmail(), reqestDTO.getPassword()).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        return new SessionUser(user.getId(), user.getStatus());
+    }
 }
 
 
