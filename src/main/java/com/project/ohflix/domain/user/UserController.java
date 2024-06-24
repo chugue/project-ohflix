@@ -8,13 +8,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +22,9 @@ public class UserController {
 
 
     @GetMapping("/login-form")
-    public String getLoginForm() {return "user/login-form";}
+    public String getLoginForm() {
+        return "user/login-form";
+    }
 
 
     // 사용자 환불요청 페이지
@@ -37,18 +36,18 @@ public class UserController {
     }
 
     // 환불 액션
-//    @PostMapping("/refund")
-//    public String refund(RefundRequest.RequestDTO reqDTO) {
-//        userService.requestRefund(reqDTO);
-//        return "redirect:/api/account-view";
-//    }
+    @PostMapping("/refund")
+    public String refund(RefundRequest.RequestDTO reqDTO) {
+        userService.requestRefund(reqDTO);
+        return "redirect:/api/account-view";
+    }
 
 
     // 사용자 확인 방법 선택 페이지
     @GetMapping("/api/user-check")
     public String getUserCheck(HttpServletRequest request) {
         Integer sessionUserId = 2; //TODO : 세션이 구현되면 세션 사용자 아이디가 들어가야됨
-        UserResponse.UserCheckDTO respDTO =userService.userCheckPage(sessionUserId);
+        UserResponse.UserCheckDTO respDTO = userService.userCheckPage(sessionUserId);
         request.setAttribute("UserCheckDTO", respDTO);
         return "user/user-check";
     }
@@ -115,16 +114,11 @@ public class UserController {
     }
 
 
-
-
-
-
-
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
-        SessionUser sessionUser=(SessionUser) request.getAttribute("sessionUser");
-        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(sessionUser.getId());
-        request.setAttribute("ProfileSettingDTO",respDTO);
+        SessionUser sessionUser = (SessionUser) request.getAttribute("sessionUser");
+        UserResponse.ProfileSettingDTO respDTO = userService.profileSetting(sessionUser.getId());
+        request.setAttribute("ProfileSettingDTO", respDTO);
         return "profile/profile-setting";
     }
 
@@ -136,12 +130,12 @@ public class UserController {
     }
 
 
-
     @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqestDTO){
-        SessionUser responseDTO=userService.login(reqestDTO);
+    public String login(HttpSession session, UserRequest.LoginDTO requestDTO) {
+        SessionUser responseDTO = userService.login(requestDTO);
 
         redisTemplate.opsForValue().set("sessionUser", responseDTO);
-        return "redirect:/";
+        session.setAttribute("sessionUser", requestDTO);
+        return "redirect:/api/main-page";
     }
 }

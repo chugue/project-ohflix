@@ -8,8 +8,8 @@ import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
 import com.project.ohflix.domain.refund.Refund;
 import com.project.ohflix.domain.refund.RefundRepository;
@@ -17,7 +17,6 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -200,8 +199,9 @@ public class UserService {
     }
 
     //login
-    public SessionUser login(UserRequest.LoginDTO reqestDTO) {
-        User user = userRepository.findByEmailAndPassword(reqestDTO.getEmail(), reqestDTO.getPassword()).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+    public SessionUser login(UserRequest.LoginDTO requestDTO) {
+        User user = userRepository.findByEmailAndPassword(requestDTO.getEmail(), requestDTO.getPassword())
+                .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
         return new SessionUser(user.getId(), user.getStatus());
     }
