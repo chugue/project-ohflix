@@ -13,6 +13,10 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    // loginPage
+    Optional<User> findUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+    Optional<User> findByEmail(@Param("email") String email);
+
     // accountSecurityPage
     Optional<User> findById(@Param("id") Integer id);
 

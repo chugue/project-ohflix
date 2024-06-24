@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.error.exception.Exception401;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
@@ -17,15 +18,25 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +50,72 @@ public class UserService {
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
     private final RefundRepository refundRepository;
+    private RedisTemplate<String, Object> redisTemplate;
+
+
+    // login-page
+    public User getUser(UserRequest.LoginDTO reqDTO) { // login
+
+        return userRepository.findUserByEmailAndPassword(reqDTO.getEmail(), reqDTO.getPassword())
+                .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
+    }
+
+    /**
+     *  1. 카카오에서 사용자 정보 요청하기
+     *  2. code 방식과 동일
+     *  3. jwt(스프링서버) 생성해서 엡에게 전달
+     */
+    // kakaoLogin
+    @Transactional
+    public User kakaoLogin(String kakaoAccessToken) {
+
+//        // 1. RestTemplate 객체 생성
+//        RestTemplate rt = new RestTemplate();
+//
+//        // 2. 토큰으로 사용자 정보 받기 (PK, Email)
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+//        headers.add("Authorization", "Bearer " + kakaoAccessToken);
+//
+//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
+//
+//        ResponseEntity<KakaoResponse.KakaoUserDTO> response = rt.exchange(
+//                "https://kapi.kakao.com/v2/user/me",
+//                HttpMethod.GET,
+//                request,
+//                KakaoResponse.KakaoUserDTO.class);
+//
+//        // 3. 해당정보로 DB조회 (있을수, 없을수)
+//        String username = "kakao_" + response.getBody().getId();
+//        User userPS = userRepository.findByEmail(username).orElse(null);
+//
+//        // Redis 세션 키 생성
+//        String sessionKey = "session:" + UUID.randomUUID().toString();
+//
+//        // 4. 있으면? - 조회된 유저정보 리턴
+//        if (userPS != null) {
+//            saveSessionToRedis(sessionKey, userPS.getEmail().toString());
+//            return userPS;
+//        } else {
+//            // 5. 없으면? - 강제 회원가입
+//            User user = User.builder()
+//                    .username(username)
+//                    .password(UUID.randomUUID().toString())
+//                    .email(response.getBody().getProperties().getNickname() + "@nate.com")
+//                    .provider("kakao")
+//                    .build();
+//            User returnUser = userRepository.save(user);
+//            saveSessionToRedis(sessionKey, returnUser.getEmail().toString());
+//            return returnUser;
+//        }
+        return null;
+
+    }
+
+    private void saveSessionToRedis(String sessionKey, String userId) {
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(sessionKey, userId, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
+    }
 
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
@@ -199,12 +276,7 @@ public class UserService {
         return new UserResponse.AccountMembershipInfoDTO(user, purchaseHistory, cardInfo);
     }
 
-    //login
-    public SessionUser login(UserRequest.LoginDTO reqestDTO) {
-        User user = userRepository.findByEmailAndPassword(reqestDTO.getEmail(), reqestDTO.getPassword()).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
-        return new SessionUser(user.getId(), user.getStatus());
-    }
 }
 
 
