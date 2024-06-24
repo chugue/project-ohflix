@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="/static/css/admin-upload.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/admin-upload.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>account</title>
 </head>
 
@@ -15,10 +15,10 @@
 <nav>
     <div class="nav-div">
         <div>
-            <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo" />
+            <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
         </div>
         <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
+            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -32,7 +32,7 @@
 <!-- main start -->
 <main>
     <!-- main div left -->
-    <div class="main-div">
+    <div class="main-div-1">
         <div class="main-left-top">
             <div class="main-left-text">
                 <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
@@ -58,7 +58,7 @@
 
     <!-- main div right -->
 
-    <div class="main-div">
+    <div class="main-div-2">
         <!-- membership inforamtion -->
         <div class="main-right-header mb-20">영화 등록하기</div>
 
@@ -69,25 +69,22 @@
 
             <div class="membership-box m-20 pointer">
 
-                <form method="post" enctype="multipart/form-data" action="/upload/movie">
-                    <div class="mb-20 fast-link-div pointer">
-                        <div>
-                            <label for="file-upload" class="custom-file-upload">
-                                파일 선택
-                            </label>
-                            <input id="file-upload" type="file" name="movie" />
-                            <span class="file-name1 file-name" id="file-name1">영화 선택하기</span>
-                        </div>
-                        <div>
-                            <label for="upload-btn" class="custom-upload-button">영상 업로드 하기</label>
-                            <button id="upload-btn" type="submit" class="custom-upload-button">영상 업로드 하기</button>
-                        </div>
+
+                <div class="mb-20 fast-link-div pointer">
+                    <div>
+                        <label for="file-upload" class="custom-file-upload">
+                            파일 선택
+                        </label>
+                        <input id="file-upload" type="file" name="file"/>
+                        <span class="file-name1 file-name" id="file-name1">영화 선택하기</span>
                     </div>
-                </form>
+                    <div>
+                        <button id="upload-btn" type="button" class="custom-upload-button uploadMovie-btn">영상 업로드 하기</button>
+                    </div>
+                </div>
             </div>
 
         </div>
-
 
 
         <!-- 이미지 업로드 -->
@@ -101,19 +98,18 @@
                 <div class="membership-box m-20 pointer">
 
 
-
-                        <div class="mb-20 fast-link-div pointer">
-                            <div>
-                                <label for="image-upload1" class="custom-file-upload">
-                                    파일 선택
-                                </label>
-                                <input id="image-upload1" type="file" name="thumbnail" />
-                                <span class="file-name2 file-name" id="file-name2">썸네일 선택하기</span>
-                            </div>
-
-
+                    <div class="mb-20 fast-link-div pointer">
+                        <div>
+                            <label for="image-upload1" class="custom-file-upload">
+                                파일 선택
+                            </label>
+                            <input id="image-upload1" type="file" name="thumbnail"/>
+                            <span class="file-name2 file-name" id="file-name2">썸네일 선택하기</span>
                         </div>
-                        <hr class="mb-20">
+
+
+                    </div>
+                    <hr class="mb-20">
 
 
                     <div class="mb-20 fast-link-div pointer">
@@ -121,7 +117,7 @@
                             <label for="image-upload2" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload2" type="file" name="miniThumbnail" />
+                            <input id="image-upload2" type="file" name="miniThumbnail"/>
                             <span class="file-name3 file-name" id="file-name3">작은 썸네일 선택하기</span>
                         </div>
 
@@ -133,7 +129,7 @@
                             <label for="image-upload3" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload3" type="file" name="mainPhto" />
+                            <input id="image-upload3" type="file" name="mainPhto"/>
                             <span class="file-name4 file-name" id="file-name4">대표 사진 선택하기 (가로사이즈)</span>
                         </div>
 
@@ -144,7 +140,7 @@
                             <label for="image-upload4" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload4" type="file" name="subPhoto" />
+                            <input id="image-upload4" type="file" name="subPhoto"/>
                             <span class="file-name5 file-name" id="file-name5">대표 사진 선택하기 (세로사이즈 작은 ver)</span>
                         </div>
                     </div>
@@ -155,7 +151,7 @@
                             <label for="image-upload5" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload5" type="file" name="textPhoto" />
+                            <input id="image-upload5" type="file" name="textPhoto"/>
                             <span class="file-name6 file-name" id="file-name6">대표 텍스트 사진 선택하기</span>
                         </div>
                     </div>
@@ -234,7 +230,6 @@
             </div>
 
 
-
             <label for="upload-info-btn" class="membership-cancel custom-upload-button">영화 정보 등록</label>
             <button id="upload-info-btn" type="submit" class="custom-upload-button">영화 정보 등록</button>
 
@@ -247,7 +242,7 @@
 
 <!-- hr -->
 <div class="mt-70">
-    <hr />
+    <hr/>
 </div>
 <!-- hr -->
 
@@ -274,62 +269,7 @@
 <!-- footer end -->
 
 <!-- 자바 스크립트 -->
-<script>
-    // 영화 업로드
-    document.getElementById('file-upload').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name1').textContent = fileName;
-    });
-
-    // 썸네일
-    document.getElementById('image-upload1').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name2').textContent = fileName;
-    });
-
-    // 작은 썸네일
-    document.getElementById('image-upload2').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name3').textContent = fileName;
-    });
-
-    // 대표 사진
-    document.getElementById('image-upload3').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name4').textContent = fileName;
-    });
-
-    // 대표사진2
-    document.getElementById('image-upload4').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name5').textContent = fileName;
-    });
-
-    // 대표 텍스트 사진
-    document.getElementById('image-upload5').addEventListener('change', function () {
-        var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
-        document.getElementById('file-name6').textContent = fileName;
-    });
-
-
-
-
-    // 현재 연도 구하기
-    var currentYear = new Date().getFullYear();
-    // select 요소 가져오기
-    var selectElement = document.getElementById('productYear');
-
-    // 옵션 추가: 1900년부터 현재 연도까지
-    for (var year = currentYear; year >= 1900; year--) {
-        var option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        selectElement.appendChild(option);
-    }
-
-
-
-</script>
+<script src="/static/js/admin-upload.js"></script>
 </body>
 
 </html>
