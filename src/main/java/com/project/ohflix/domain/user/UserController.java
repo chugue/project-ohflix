@@ -37,11 +37,11 @@ public class UserController {
     }
 
     // 환불 액션
-    @PostMapping("/refund")
-    public String refund(RefundRequest.RequestDTO reqDTO) {
-        userService.requestRefund(reqDTO);
-        return "redirect:/api/account-view";
-    }
+//    @PostMapping("/refund")
+//    public String refund(RefundRequest.RequestDTO reqDTO) {
+//        userService.requestRefund(reqDTO);
+//        return "redirect:/api/account-view";
+//    }
 
 
     // 사용자 확인 방법 선택 페이지
