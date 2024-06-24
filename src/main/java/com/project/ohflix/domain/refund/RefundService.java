@@ -15,13 +15,4 @@ public class RefundService {
 
     private final RefundRepository refundRepository;
 
-    // refund-page
-    @Transactional
-    public RefundResponse.RefundPageDTO refundPageDTO() {
-
-        List<Refund> refunds = refundRepository.findAllByUserId();
-
-
-        return new RefundResponse.RefundPageDTO(refunds);
-    }
 }

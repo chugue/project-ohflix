@@ -18,13 +18,14 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +50,7 @@ public class UserService {
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
     private final RefundRepository refundRepository;
+    private RedisTemplate<String, Object> redisTemplate;
 
 
     // login-page
@@ -74,8 +77,7 @@ public class UserService {
 //        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 //        headers.add("Authorization", "Bearer " + kakaoAccessToken);
 //
-//        HttpEntity<MultiValueMap<String, String>> request =
-//                new HttpEntity<>(headers);
+//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
 //
 //        ResponseEntity<KakaoResponse.KakaoUserDTO> response = rt.exchange(
 //                "https://kapi.kakao.com/v2/user/me",
@@ -85,12 +87,15 @@ public class UserService {
 //
 //        // 3. 해당정보로 DB조회 (있을수, 없을수)
 //        String username = "kakao_" + response.getBody().getId();
-//        User userPS = userRepository.findByEmail(username)
-//                .orElse(null);
+//        User userPS = userRepository.findByEmail(username).orElse(null);
+//
+//        // Redis 세션 키 생성
+//        String sessionKey = "session:" + UUID.randomUUID().toString();
 //
 //        // 4. 있으면? - 조회된 유저정보 리턴
 //        if (userPS != null) {
-//            //return JwtUtil.create(userPS);
+//            saveSessionToRedis(sessionKey, userPS.getEmail().toString());
+//            return userPS;
 //        } else {
 //            // 5. 없으면? - 강제 회원가입
 //            User user = User.builder()
@@ -100,12 +105,18 @@ public class UserService {
 //                    .provider("kakao")
 //                    .build();
 //            User returnUser = userRepository.save(user);
-//            //return JwtUtil.create(returnUser);
+//            saveSessionToRedis(sessionKey, returnUser.getEmail().toString());
+//            return returnUser;
 //        }
-
-
         return null;
+
     }
+
+    private void saveSessionToRedis(String sessionKey, String userId) {
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(sessionKey, userId, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
+    }
+
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
