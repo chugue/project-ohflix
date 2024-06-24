@@ -95,7 +95,7 @@ public class UserController {
     // YSH : 멥버십 취소 페이지 TODO : SessionUserID 넣기
     @GetMapping("/api/cancel-plan")
     public String getCancelPlan(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(2);
 
         request.setAttribute("CancelPlanPageDTO", respDTO);
@@ -105,7 +105,7 @@ public class UserController {
     // YSH : 멤버십 상세정보 페이지 TODO : SessionUserID 넣기
     @GetMapping("/api/account-membership")
     public String getAccountMembership(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.AccountMembershipDTO respDTO = userService.accountMembership(3);
 
         request.setAttribute("AccountMembershipDTO", respDTO);
@@ -143,12 +143,6 @@ public class UserController {
         return "account/account-view";
     }
 
-
-
-
-
-
-
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
         SessionUser sessionUser=(SessionUser) request.getAttribute("sessionUser");
@@ -164,13 +158,4 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
-
-
-    @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqestDTO){
-        SessionUser responseDTO=userService.login(reqestDTO);
-
-        redisTemplate.opsForValue().set("sessionUser", responseDTO);
-        return "redirect:/";
-    }
 }

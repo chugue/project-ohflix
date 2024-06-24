@@ -53,7 +53,7 @@ public class UserService {
     // login-page
     public User getUser(UserRequest.LoginDTO reqDTO) { // login
 
-        return userRepository.findByEmailAndPassword(reqDTO.getEmail(), reqDTO.getPassword())
+        return userRepository.findUserByEmailAndPassword(reqDTO.getEmail(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
     }
 
