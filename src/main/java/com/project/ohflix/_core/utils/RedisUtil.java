@@ -17,20 +17,18 @@ public class RedisUtil {
     private final HttpSession session;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public void saveSessionUser(SessionUser sessionUser){
+    public void saveSessionUser(SessionUser sessionUser) {
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
     }
 
     public SessionUser getSessionUser() {
-        SessionUser sessionUser=(SessionUser) redisTemplate.opsForValue().get("sessionUser");
-        log.info("user : "+sessionUser.toString());
+        SessionUser sessionUser = (SessionUser) redisTemplate.opsForValue().get("sessionUser");
+        log.info("user : " + sessionUser.toString());
         return sessionUser;
     }
 
     public void deleteSessionUser() {
-        redisTemplate.delete(session.getId());
-        session.invalidate();
 
     }
 }

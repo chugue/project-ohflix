@@ -1,8 +1,6 @@
 package com.project.ohflix.domain.user;
 
-import com.project.ohflix._core.utils.RedisUtil;
-import com.project.ohflix.domain.cardInfo.CardInfoRepository;
-import com.project.ohflix.domain.refund.RefundResponse;
+
 import com.project.ohflix.domain.refund.RefundService;
 import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -34,14 +31,15 @@ public class UserController {
     }
 
     // kakao 로그인
-    //http://localhost:8080/oauth/kakao/callback
+    // http://localhost:8080/oauth/kakao/callback
     @GetMapping("/oauth/kakao/callback")
     public String oauthKakaoCallback(String kakaoAccessToken) {
-        System.out.println("우와 콜백됐다!" + kakaoAccessToken);
+
         User sessionUser = userService.kakaoLogin(kakaoAccessToken);
+        redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
-        return "redirect:/";
+        return "redirect:/api/main-page";
     }
 
 
@@ -156,10 +154,11 @@ public class UserController {
         return "redirect:/api/main-page";
     }
 
-//    @GetMapping("/logout")
-//    public String logout(){
-//        redisTemplate.deleteSessionUser();
-//
-//        return "redirect:/login-form";
-//    }
+    @GetMapping("/logout")
+    public String logout(){
+        redisTemplate.delete("sessionUser");
+        session.invalidate();
+
+        return "redirect:/login-form";
+    }
 }
