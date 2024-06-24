@@ -51,9 +51,11 @@ public class User {
 
     @CreationTimestamp
     private Timestamp createdAt;
+    private String address;
+    private String provider; // kakao, naver
 
     @Builder
-    public User(Integer id, String email, String password, String mobile, String username, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
+    public User(Integer id, String email, String password, String mobile, String username, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt, String address, String provider) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -68,6 +70,8 @@ public class User {
         this.isAutoPlay = isAutoPlay;
         this.isSubscribe = isSubscribe;
         this.createdAt = createdAt;
+        this.address = address;
+        this.provider = provider;
     }
 
     
