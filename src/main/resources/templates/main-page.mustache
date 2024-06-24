@@ -55,54 +55,16 @@
         <div class="dropdown">
             <button class="dropdown-button"><i class="far fa-bell"></i></button>
             <div class="dropdown-notification">
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify1.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">브리저튼</div>
-                        <div class="notification-time">5일</div>
+                {{#MainPageDTO.navbarList}}
+                    <div class="notification-item">
+                        <img src="{{itemThumbnail}}" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">{{itemTitle}}</div>
+                            <div class="notification-time">{{createdSince}}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify2.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">울트라맨</div>
-                        <div class="notification-time">7일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify3.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">블랙클로버</div>
-                        <div class="notification-time">10일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify4.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">하이라키</div>
-                        <div class="notification-time">12일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify5.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">히트맨</div>
-                        <div class="notification-time">15일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify6.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">그놈이다</div>
-                        <div class="notification-time">18일</div>
-                    </div>
-                </div>
+                {{/MainPageDTO.navbarList}}
             </div>
         </div>
         <!--  알람 드롭 다운 메뉴 종료  -->
@@ -157,7 +119,7 @@
             <div class="swiper-wrapper">
                 <!-- top1 -->
                 <div class="swiper-slide">
-                    <svg class="rank" width="100%" height="100%" viewbox="-20 0 70 154" >
+                    <svg class="rank" width="100%" height="100%" viewbox="-20 0 70 154">
                         <path stroke="#595959" stroke-linejoin="square" stroke-width="4"
                               d="M35.377 152H72V2.538L2 19.362v30.341l33.377-8.459V152z"></path>
                     </svg>
@@ -172,7 +134,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_02.jpg"
-                         alt="top10_02" />
+                         alt="top10_02"/>
                 </div>
                 <!-- top3 -->
                 <div class="swiper-slide">
@@ -182,7 +144,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_03.jpg"
-                         alt="top10_03" />
+                         alt="top10_03"/>
                 </div>
                 <!-- top4 -->
                 <div class="swiper-slide">
@@ -192,7 +154,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_04.jpg"
-                         alt="top10_04" />
+                         alt="top10_04"/>
                 </div>
                 <!-- top5 -->
                 <div class="swiper-slide">
@@ -202,7 +164,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_05.jpg"
-                         alt="top10_05" />
+                         alt="top10_05"/>
                 </div>
                 <!-- top6 -->
                 <div class="swiper-slide">
@@ -212,7 +174,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_06.jpg"
-                         alt="top10_06" />
+                         alt="top10_06"/>
                 </div>
                 <!-- top7 -->
                 <div class="swiper-slide">
@@ -222,7 +184,7 @@
                               stroke-linejoin="square"></path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_07.jpg"
-                         alt="top10_07" />
+                         alt="top10_07"/>
                 </div>
                 <!-- top8 -->
                 <div class="swiper-slide">
@@ -232,7 +194,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_08.jpg"
-                         alt="top10_08" />
+                         alt="top10_08"/>
                 </div>
                 <!-- top9 -->
                 <div class="swiper-slide">
@@ -243,7 +205,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_09.jpg"
-                         alt="top10_09" />
+                         alt="top10_09"/>
                 </div>
                 <!-- top10 -->
                 <div class="swiper-slide">
@@ -253,7 +215,7 @@
                         </path>
                     </svg>
                     <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_10.jpg"
-                         alt="top10_10" />
+                         alt="top10_10"/>
                 </div>
             </div>
 
