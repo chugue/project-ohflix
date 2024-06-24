@@ -13,6 +13,9 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    // loginPage
+    Optional<User> findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
     // accountSecurityPage
     Optional<User> findById(@Param("id") Integer id);
 
@@ -28,4 +31,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             select u from User u join fetch u.profileIcon pu where u.id = :userId
             """)
     Optional<User> findUsernameAndIcon(@Param("userId") Integer userId);
+
 }

@@ -52,6 +52,8 @@ public class User {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    private String provider; // kakao, naver
+
     @Builder
     public User(Integer id, String email, String password, String mobile, String username, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt) {
         this.id = id;

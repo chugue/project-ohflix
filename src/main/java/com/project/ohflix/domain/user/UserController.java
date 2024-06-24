@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -20,7 +21,19 @@ public class UserController {
     private final RefundService refundService;
 
     @GetMapping("/login-form")
-    public String getLoginForm() {return "user/login-form";}
+    public String getLoginForm() {
+
+        return "user/login-form";
+    }
+
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO reqDTO) {
+        // 로그인 정보 세션에 저장
+        User sessionUser = userService.getUser(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
+
+        return "redirect:/";
+    }
 
     // 사용자 확인 방법 선택 페이지
     @GetMapping("/api/user-check")

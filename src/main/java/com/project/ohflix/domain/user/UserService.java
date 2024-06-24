@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.error.exception.Exception401;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
@@ -17,6 +18,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final CardInfoRepository cardInfoRepository;
     private final ProfileIconRepository profileIconRepository;
+
+    // login-page
+    public User getUser(UserRequest.LoginDTO reqDTO) { // login
+
+        return userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+                .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
+    }
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
