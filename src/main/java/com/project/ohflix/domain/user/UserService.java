@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
@@ -10,7 +11,13 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
+import com.project.ohflix.domain.refund.Refund;
+import com.project.ohflix.domain.refund.RefundRepository;
+import com.project.ohflix.domain.refund.RefundRequest;
+import com.project.ohflix.domain.refund.RefundResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +39,7 @@ public class UserService {
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
     private final RefundRepository refundRepository;
+
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {

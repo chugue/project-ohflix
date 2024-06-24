@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory, Integer> {
 
+    Optional<PurchaseHistory> findFirstByUserIdOrderByCreatedAtDesc(Integer userId);
+
     @Query("""
             select p from PurchaseHistory p join fetch p.user pu where pu.id = :userId and p.createdAt > :oneYearAgo
             """)

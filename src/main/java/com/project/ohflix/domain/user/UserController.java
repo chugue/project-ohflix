@@ -6,6 +6,7 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import java.util.List;
 public class UserController {
     private final HttpSession httpSession;
     private final UserService userService;
+    private final RedisTemplate<String, Object> redisTemplate;
+
 
     @GetMapping("/login-form")
     public String getLoginForm() {return "user/login-form";}
@@ -34,11 +37,11 @@ public class UserController {
     }
 
     // 환불 액션
-    @PostMapping("/refund")
-    public String refund(RefundRequest.RequestDTO reqDTO) {
-        userService.requestRefund(reqDTO);
-        return "redirect:/api/account-view";
-    }
+//    @PostMapping("/refund")
+//    public String refund(RefundRequest.RequestDTO reqDTO) {
+//        userService.requestRefund(reqDTO);
+//        return "redirect:/api/account-view";
+//    }
 
 
     // 사용자 확인 방법 선택 페이지
@@ -119,10 +122,8 @@ public class UserController {
 
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
-
-        SessionUser user=(SessionUser) httpSession.getAttribute("sessionUser");
-        System.out.println(user);
-        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(user.getId());
+        SessionUser sessionUser=(SessionUser) request.getAttribute("sessionUser");
+        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(sessionUser.getId());
         request.setAttribute("ProfileSettingDTO",respDTO);
         return "profile/profile-setting";
     }
@@ -138,9 +139,9 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO reqestDTO){
-        System.out.println("reqestDTO = " + reqestDTO);
         SessionUser responseDTO=userService.login(reqestDTO);
-        httpSession.setAttribute("sessionUser", responseDTO);
+
+        redisTemplate.opsForValue().set("sessionUser", responseDTO);
         return "redirect:/";
     }
 }
