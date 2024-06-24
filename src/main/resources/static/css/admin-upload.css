@@ -130,7 +130,15 @@ main {
     /* 간격 설정 */
 }
 
-.main-div {
+.main-div-1 {
+    width: 100%;
+    margin: 5px;
+    text-align: start;
+    margin-top: 35px;
+}
+
+.main-div-2 {
+    width: 100%;
     margin: 5px;
     text-align: start;
     margin-top: 35px;
@@ -397,9 +405,65 @@ tr td:first-child{
     .custom-upload-info-button:hover {
         background-color: #4b4b4b;
     }
-
-
 }
+
+
+/*"""""""""""""""""""""" upload button animation""""""""""""""""""""""""*/
+
+
+@keyframes shimmering {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.shimmering {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmering::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    animation: shimmering 2s infinite linear;
+}
+
+.upload-complete {
+    background-color: #28a745; /* 초록색 */
+    border: 1px solid #28a745;
+    color: white;
+}
+
+.upload-btn {
+    /* 초기 버튼 스타일 정의 */
+    background-color: #d10000; /* 빨간색 */
+    color: white;
+    border: 1px solid #d10000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.uploadMovie-btn:disabled {
+    background-color: #28a745; /* 업로드 완료 시 초록색 */
+    border: 1px solid #28a745;
+    cursor: not-allowed;
+    color: white;
+}
+
+.uploadMovie-btn:disabled:hover {
+    background-color: #28a745; /* 비활성화된 상태에서는 호버 색상 변화 없음 */
+}
+
 
 /* """"""""""""""""""""""""""""footer"""""""""""""""""""""""""""" */
 footer {

@@ -37,7 +37,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             """)
     User findUserPurchaseHistory(@Param("id") Integer id);
 
-
     @Query("""
             SELECT u
             FROM User u
