@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.utils.RedisUtil;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.refund.RefundResponse;
 import com.project.ohflix.domain.refund.RefundService;
@@ -130,7 +131,6 @@ public class UserController {
         return "account/account-view";
     }
 
-
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
         SessionUser sessionUser=(SessionUser) session.getAttribute("sessionUser");
@@ -155,4 +155,11 @@ public class UserController {
         session.setAttribute("sessionUser", requestDTO);
         return "redirect:/api/main-page";
     }
+
+//    @GetMapping("/logout")
+//    public String logout(){
+//        redisTemplate.deleteSessionUser();
+//
+//        return "redirect:/login-form";
+//    }
 }

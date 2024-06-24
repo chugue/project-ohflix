@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginInterceptor implements HandlerInterceptor {
     private final RedisTemplate<String, Object> redisTemplate;
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         SessionUser sessionUser = (SessionUser) redisTemplate.opsForValue().get("sessionUser");
