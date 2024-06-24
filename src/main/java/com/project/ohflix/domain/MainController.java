@@ -1,9 +1,14 @@
 package com.project.ohflix.domain;
 
 
+import com.project.ohflix._core.utils.EnumEditor;
+import com.project.ohflix.domain._enums.Reason;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -17,19 +22,11 @@ public class MainController {
         return "outer-page";
     }
 
-    @GetMapping("/api/account-refund")
-    public String getAccountRefundPage() {
-        return "account/account-refund";
-    }
-
-    @PostMapping("/refund")
-    public String refund() {
-        return null;
-    }
 
     @GetMapping("/api/info-copy")
     public String getInfoCopyPage() {
         return "admin/info-copy";
     }
+
 
 }

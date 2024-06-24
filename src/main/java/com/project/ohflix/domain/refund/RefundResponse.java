@@ -1,48 +1,52 @@
 package com.project.ohflix.domain.refund;
 
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
+
+import com.project.ohflix.domain._enums.Refuse;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RefundResponse {
 
-    // refund-page 페이지
     @Data
-    public static class RefundPageDTO{
-        private List<RefundPage> refundPageDTO;
+    public static class ListDTO {
+        private List<RefundInfo> refundInfos = new ArrayList<>();
 
-        public RefundPageDTO(List<Refund> refunds){
-            this.refundPageDTO = refunds.stream().map(refundPage -> new RefundPage(refundPage)).toList();
+        public ListDTO(List<Refund> refunds) {
+            this.refundInfos = IntStream.range(0, refunds.size())
+                    .mapToObj(i -> new RefundInfo(i + 1, refunds.get(i)))
+                    .collect(Collectors.toList());
         }
 
         @Data
-        public static class RefundPage{
-            private int id;
-            private String name;
+        public class RefundInfo {
+            private Integer num;
             private String username;
+            private String email;
             private String reason;
-            private String status;
-            private String createdAt;
+            private String purchasedDate;
+            private Boolean isApproved;
 
-            public RefundPage(Refund refund) {
-                this.id = refund.getId();
-                this.name = refund.getPurchaseHistory().getUser().getName();
-                this.username = refund.getPurchaseHistory().getUser().getUsername();
-                this.reason = refund.getReason().getValue();
-                this.status = refund.getStatus().getValue();
-                // Convert Timestamp to LocalDate
-                LocalDate localDate = refund.getPurchaseHistory().getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                // Format the new date in "yyyy년 MM월 dd일" format
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
-                this.createdAt = localDate.format(formatter);
+            public RefundInfo(Integer num, Refund refund) {
+                this.num = num;
+                this.username = refund.getUser().getUsername();
+                this.email = refund.getUser().getEmail();
+                this.reason = refund.getReason().getTitle();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                this.purchasedDate = formatter.format(refund.getPurchasedDate());
+                if (refund.getStatus().equals(Refuse.PENDING)){
+                    this.isApproved = false;
+                } else if (refund.getStatus().equals(Refuse.ACCEPTED)){
+                    this.isApproved = true;
+                } else {
+                    this.isApproved = false;
+                }
             }
         }
-
-
     }
 
 }

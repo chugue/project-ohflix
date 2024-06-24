@@ -15,7 +15,11 @@ spring:
     servlet:
       expose-session-attributes: true
       expose-request-attributes: true
-
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:test;MODE=MySQL
@@ -42,8 +46,8 @@ spring:
     open-in-view: true
   servlet:
     multipart:
-      maxFileSize: 10MB # 파일 하나의 최대 크기
-      maxRequestSize: 30MB
+      maxFileSize: 200MB # 파일 하나의 최대 크기
+      maxRequestSize: 200MB
 logging:
   level:
     org.hibernate.orm.jdbc.bind: TRACE

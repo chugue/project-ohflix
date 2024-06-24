@@ -79,5 +79,17 @@ public class PurchaseHistoryResponse {
         }
     }
 
+    // sales-page
+    @Data
+    public static class SalesPageSalesDTO {
+        private String yearMonth;
+        private Long monthlySales;
+
+        public SalesPageSalesDTO(String yearMonth, Long monthlySales) {
+            this.yearMonth = yearMonth;
+            this.monthlySales = monthlySales;
+        }
+
+    }
 }
 

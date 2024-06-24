@@ -14,21 +14,26 @@
         <img src="/static/images/OH!FLIX.png" alt="Netflix Logo"/>
     </div>
     <div class="login-container">
-        <form class="login-form">
+        <form action="/login" method="post" class="login-form">
             <h1>로그인</h1>
             <input
                     class="input-field"
                     type="email"
+                    name="email"
+                    value="user2@example.com"
                     placeholder="이메일 주소"
                     required
             />
             <input
                     class="input-field"
                     type="password"
+                    name="password"
+                    value="1234"
                     placeholder="비밀번호"
                     required
             />
             <button type="submit">로그인</button>
+        </form>
             <div class="kakao-container">
                 <img src="/static/images/kakaobutton.png"/>
                 <a href="https://kauth.kakao.com/oauth/authorize?redirect_uri=http://localhost:8080/oauth/kakao/callback&response_type=code&client_id=095ce8eec66971e270230eac398260a8"> 카카오 로그인 </a>
@@ -45,7 +50,7 @@
                     <p>Netflix 회원이 아닌가요? <a href="#">지금 가입하세요.</a></p>
                 </div>
             </div>
-        </form>
+
     </div>
 </div>
 <footer>

@@ -33,4 +33,19 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             """)
     Optional<User> findUsernameAndIcon(@Param("userId") Integer userId);
 
+    @Query("""
+            SELECT u
+            FROM User u
+            JOIN FETCH PurchaseHistory p on u.id = p.user.id
+            WHERE u.id = :id
+            """)
+    User findUserPurchaseHistory(@Param("id") Integer id);
+
+    @Query("""
+            SELECT u
+            FROM User u
+            WHERE u.email = :email AND u.password = :password
+            """)
+    Optional<User> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
 }

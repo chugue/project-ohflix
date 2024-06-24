@@ -34,13 +34,28 @@ public class ContentService {
         return new ContentResponse.VideoManagePageDTO(contents);
     }
 
-
+    //
     public List<ContentResponse.LatestContentDTO> findLatestContent() {
         List<Content> latestContentList = contentRepository.findLatestContent();
         System.out.println(latestContentList);
 
         return latestContentList.stream().map(content
                 -> new ContentResponse.LatestContentDTO(content)).toList();
+    }
+
+    // 영화 상세정보 페이지 데이터
+    public ContentResponse.DetailsDTO getContetnDetails(Integer contentId) {
+        Content content = contentRepository.findById(contentId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+
+        return new ContentResponse.DetailsDTO(content);
+    }
+
+    // 메인 페이지 영화 상세정보 가져오는 모달 - 비동기 통신
+    public ContentResponse.DetailsDTO getContentInfo(Integer contentId) {
+        Content content = contentRepository.findById(contentId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+        return new ContentResponse.DetailsDTO(content);
     }
 }
 

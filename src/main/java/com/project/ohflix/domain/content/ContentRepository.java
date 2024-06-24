@@ -24,13 +24,21 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
     // videoManage
     List<Content> findAll();
 
-
+    // 최신 컨텐츠 페이지
     @Query("""
             SELECT c
             FROM Content c
             ORDER BY c.createdAt DESC
             """)
     List<Content> findLatestContent();
+
+    // 멤버쉽 해지 페이지에 뿌릴 컨텐츠 포스터
+    @Query("""
+            SELECT c
+            FROM Content c
+            ORDER BY c.createdAt DESC
+            """)
+    List<Content> findLatestContentCancelPlan();
 
     List<Content> findALLByOrderByIdDesc();
 }
