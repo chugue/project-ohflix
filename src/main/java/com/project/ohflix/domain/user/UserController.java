@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.utils.EnumEditor;
+import com.project.ohflix._core.utils.RedisUtil;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import java.util.List;
 public class UserController {
     private final HttpSession httpSession;
     private final UserService userService;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisUtil redisUtil;
 
 
     @GetMapping("/login-form")
@@ -115,14 +116,9 @@ public class UserController {
     }
 
 
-
-
-
-
-
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
-        SessionUser sessionUser=(SessionUser) request.getAttribute("sessionUser");
+        SessionUser sessionUser=redisUtil.getSessionUser();
         UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(sessionUser.getId());
         request.setAttribute("ProfileSettingDTO",respDTO);
         return "profile/profile-setting";
@@ -141,7 +137,14 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqestDTO){
         SessionUser responseDTO=userService.login(reqestDTO);
 
-        redisTemplate.opsForValue().set("sessionUser", responseDTO);
+        redisUtil.saveSessionUser(responseDTO);
         return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        redisUtil.deleteSessionUser();
+
+        return "redirect:/login-form";
     }
 }

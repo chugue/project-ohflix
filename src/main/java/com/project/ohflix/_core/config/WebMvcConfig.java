@@ -13,13 +13,13 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @RequiredArgsConstructor
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    private final RedisTemplate<String, Object> redisTemplate;
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginInterceptor(redisTemplate))
-//                .addPathPatterns("/api/**");
-//    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/api/**");
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
