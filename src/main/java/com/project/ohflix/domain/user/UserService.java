@@ -1,6 +1,7 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
@@ -10,8 +11,13 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
+import com.project.ohflix.domain.refund.Refund;
+import com.project.ohflix.domain.refund.RefundRepository;
+import com.project.ohflix.domain.refund.RefundRequest;
+import com.project.ohflix.domain.refund.RefundResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -19,6 +25,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +38,7 @@ public class UserService {
     private final PurchaseHistoryRepository purchaseHistoryRepository;
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
+    private final RefundRepository refundRepository;
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
@@ -41,10 +49,10 @@ public class UserService {
 
     // user-check 페이지 데이터
     public UserResponse.UserCheckDTO userCheckPage(Integer sessionUserId) {
-       CardInfo cardInfo =  cardInfoRepository.findUserInfo(sessionUserId)
-               .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+        CardInfo cardInfo = cardInfoRepository.findUserInfo(sessionUserId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
 
-      return new UserResponse.UserCheckDTO(cardInfo);
+        return new UserResponse.UserCheckDTO(cardInfo);
     }
 
     public List<UserResponse.MembersDTO> MembersDTOList() {
@@ -61,8 +69,8 @@ public class UserService {
 
     //profile-setting 프로필 세팅 페이지
     public UserResponse.ProfileSettingDTO profileSetting(int userId) {
-        User user=userRepository.findUsernameAndIcon(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
-        UserResponse.ProfileSettingDTO respDTO=new UserResponse.ProfileSettingDTO(user);
+        User user = userRepository.findUsernameAndIcon(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+        UserResponse.ProfileSettingDTO respDTO = new UserResponse.ProfileSettingDTO(user);
 
         return respDTO;
     }
@@ -103,7 +111,6 @@ public class UserService {
         List<PurchaseHistoryResponse.SalesPageSalesDTO> saleStats = purchaseHistoryNativeRepository.findMonthlySalesStats(startDate, currentDate);
 
 
-
         Map<String, UserResponse.SalesPageUserDTO> userStatsMap = userStats.stream()
                 .collect(Collectors.toMap(UserResponse.SalesPageUserDTO::getYearMonth, stat -> stat));
         Map<String, UserResponse.SalesPageSubscribeUserDTO> subscribeUserStatsMap = subscribeUserStats.stream()
@@ -125,7 +132,7 @@ public class UserService {
             UserResponse.SalesPageSubscribeUserDTO subScribeUserStat = subscribeUserStatsMap.getOrDefault(monthString, new UserResponse.SalesPageSubscribeUserDTO(monthString, 0L));
             PurchaseHistoryResponse.SalesPageSalesDTO saleStat = saleStatsMap.getOrDefault(monthString, new PurchaseHistoryResponse.SalesPageSalesDTO(monthString, 0L));
 
-            cumulativeUserCount +=userStat.getMonthlyUserCount();
+            cumulativeUserCount += userStat.getMonthlyUserCount();
             cumulativeSales += saleStat.getMonthlySales();
 
 
@@ -144,6 +151,23 @@ public class UserService {
         return respDTO;
     }
 
+    // 환불 요청 생성
+    @Transactional
+    public void requestRefund(RefundRequest.RequestDTO reqDTO) {
+        PurchaseHistory p = purchaseHistoryRepository.findByUserIdWithRecentInfo(reqDTO.getUserId())
+                .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+        refundRepository.save(Refund.builder()
+                .user(p.getUser())
+                .reason(reqDTO.getRefundReason())
+                .purchasedDate(p.getCreatedAt())
+                .status(Refuse.PENDING).build());
+    }
+
+    // 환불 요청 목록 불러우기
+    public RefundResponse.ListDTO getRefundBoard() {
+        List<Refund> refundList = refundRepository.findAll();
+        return new RefundResponse.ListDTO(refundList);
+    }
 }
 
 

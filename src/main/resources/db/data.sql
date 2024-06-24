@@ -139,3 +139,10 @@ VALUES
     (1, 2, '00:30:00', 'WATCHING', NOW()),
     (1, 3, '00:00:00', 'FAVORITE', NOW());
 
+
+--- 생성 순서 : 7번, 환불요청 테이블
+INSERT INTO refund_tb (user_id, reason, status, purchased_date, refuse_message, created_at) VALUES
+    (2, 'CONTENT_ISSUE', 'ACCEPTED','2024-03-02','', NOW()),
+    (3, 'TECHNICAL_ISSUE', 'REJECTED','2024-03-02', '죄송합니다.', NOW()),
+    (4, 'SUBSCRIPTION_ISSUE', 'REJECTED','2024-03-02', '죄송합니다', NOW()),
+    (5, 'PAYMENT_ISSUE', 'PENDING','2024-03-02','', NOW());

@@ -36,4 +36,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             WHERE u.id = :id
             """)
     User findUserPurchaseHistory(@Param("id") Integer id);
+
+
+
 }

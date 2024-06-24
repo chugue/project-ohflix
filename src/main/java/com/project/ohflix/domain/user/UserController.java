@@ -1,12 +1,15 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.utils.EnumEditor;
+import com.project.ohflix.domain._enums.Reason;
+import com.project.ohflix.domain.refund.RefundRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,6 +20,23 @@ public class UserController {
 
     @GetMapping("/login-form")
     public String getLoginForm() {return "user/login-form";}
+
+
+    // 사용자 환불요청 페이지
+    @GetMapping("/api/refund-request-form")
+    public String getAccountRefundPage(HttpServletRequest request) {
+        Integer sessionUserId = 2;
+        request.setAttribute("sessionUserId", sessionUserId);
+        return "account/refund-request-form";
+    }
+
+    // 환불 액션
+    @PostMapping("/refund")
+    public String refund(RefundRequest.RequestDTO reqDTO) {
+        userService.requestRefund(reqDTO);
+        return "redirect:/api/account-view";
+    }
+
 
     // 사용자 확인 방법 선택 페이지
     @GetMapping("/api/user-check")
@@ -68,42 +88,18 @@ public class UserController {
         return "restriction/restriction-manage";
     }
 
-    @GetMapping("/api/sales-page")
-    public String getSales(HttpServletRequest request) {
-
-        List<UserResponse.SalesPageDTO> respDTO = userService.salesPage();
-
-        request.setAttribute("SalesPageDTO", respDTO);
-
-        return "admin/sales-page";
-    }
-
-    @GetMapping("/admin/members-manage")
-    public String getMembers(HttpServletRequest request) {
-        List<UserResponse.MembersDTO> members = userService.MembersDTOList();
-        long subscriberCount = members.stream().filter(UserResponse.MembersDTO::getIsSubscribe).count();
-        request.setAttribute("members", members);
-        request.setAttribute("subscriberCount", subscriberCount);
-        return "admin/members-manage";
-    }
 
     @GetMapping("/api/account-view")
     public String getAccountPage() {
         return "account/account-view";
     }
 
-    @GetMapping("/api/refund-page")
-    public String getRefund() {
 
-
-        return "user/refund-page";
-    }
 
     @GetMapping("/api/account-membership")
     public String getAccountMembership() {
         return "account/account-membership";
     }
-
 
 
 
@@ -114,5 +110,12 @@ public class UserController {
         UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
         request.setAttribute("ProfileSettingDTO",respDTO);
         return "profile/profile-setting";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Reason.class, new EnumEditor<>(Reason.class));
+        // 다른 enum 타입에 대해 추가 등록 가능
+        // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 }
