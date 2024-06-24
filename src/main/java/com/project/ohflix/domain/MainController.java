@@ -1,20 +1,23 @@
 package com.project.ohflix.domain;
 
 
-import com.project.ohflix._core.utils.EnumEditor;
-import com.project.ohflix.domain._enums.Reason;
+import com.project.ohflix.domain.user.SessionUser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
 
     @GetMapping("/")
-    public String getMainPage() {
+    public String getLoginForm() {
+        return "user/login-form";
+    }
+
+    @GetMapping("/api/main-page")
+    public String getMainPage(HttpSession session) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        System.out.println("👉👉👉👉👉" + sessionUser.getId());
         return "main-page";
     }
     @GetMapping("/outer-page")

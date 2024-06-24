@@ -15,11 +15,11 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 public class WebMvcConfig implements WebMvcConfigurer {
     private final RedisTemplate<String, Object> redisTemplate;
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginInterceptor(redisTemplate))
-//                .addPathPatterns("/api/**");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor(redisTemplate))
+                .addPathPatterns("/api/**");
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

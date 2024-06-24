@@ -9,8 +9,8 @@ import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
 import com.project.ohflix.domain.refund.Refund;
 import com.project.ohflix.domain.refund.RefundRepository;
@@ -276,7 +276,13 @@ public class UserService {
         return new UserResponse.AccountMembershipInfoDTO(user, purchaseHistory, cardInfo);
     }
 
+    //login
+    public SessionUser login(UserRequest.LoginDTO requestDTO) {
+        User user = userRepository.findByEmailAndPassword(requestDTO.getEmail(), requestDTO.getPassword())
+                .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
+        return new SessionUser(user.getId(), user.getStatus());
+    }
 }
 
 
