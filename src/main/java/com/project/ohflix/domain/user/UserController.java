@@ -39,15 +39,25 @@ public class UserController {
         return "profile/profile-form";
     }
 
-    // YSH : 맴버십 취소 페이지
+    // YSH : 멥버십 취소 페이지 TODO : SessionUserID 넣기
     @GetMapping("/api/cancel-plan")
     public String getCancelPlan(HttpServletRequest request) {
         User sessionUser = (User) httpSession.getAttribute("sessionUser");
-//        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(sessionUser.getId());
         UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(2);
 
         request.setAttribute("CancelPlanPageDTO", respDTO);
         return "user/cancel-plan";
+    }
+
+    // YSH : 멤버십 상세정보 페이지 TODO : SessionUserID 넣기
+    @GetMapping("/api/account-membership")
+    public String getAccountMembership(HttpServletRequest request) {
+        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        UserResponse.AccountMembershipDTO respDTO = userService.accountMembership(3);
+
+        request.setAttribute("AccountMembershipDTO", respDTO);
+
+        return "account/account-membership";
     }
 
     @GetMapping("/api/view-history")
@@ -101,10 +111,7 @@ public class UserController {
         return "user/refund-page";
     }
 
-    @GetMapping("/api/account-membership")
-    public String getAccountMembership() {
-        return "account/account-membership";
-    }
+
 
 
 
