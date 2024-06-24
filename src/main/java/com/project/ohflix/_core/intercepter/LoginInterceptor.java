@@ -14,11 +14,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginInterceptor implements HandlerInterceptor {
     private final RedisTemplate<String, Object> redisTemplate;
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         SessionUser sessionUser = (SessionUser) redisTemplate.opsForValue().get("sessionUser");
-
-        HttpSession session = request.getSession();
+        HttpSession session  = request.getSession();
         if (sessionUser == null) {
             throw new Exception401("로그인 하셔야 해요");
         }
