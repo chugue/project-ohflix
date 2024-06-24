@@ -26,10 +26,22 @@ public class UserController {
         return "user/login-form";
     }
 
+    // login
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO reqDTO) {
         // 로그인 정보 세션에 저장
         User sessionUser = userService.getUser(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
+
+        return "redirect:/";
+    }
+
+    // kakao 로그인
+    //http://localhost:8080/oauth/kakao/callback
+    @GetMapping("/oauth/kakao/callback")
+    public String oauthKakaoCallback(String kakaoAccessToken) {
+        System.out.println("우와 콜백됐다!" + kakaoAccessToken);
+        User sessionUser = userService.kakaoLogin(kakaoAccessToken);
         session.setAttribute("sessionUser", sessionUser);
 
         return "redirect:/";
