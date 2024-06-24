@@ -6,6 +6,7 @@ import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
