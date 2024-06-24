@@ -12,6 +12,7 @@
 
 <body>
 <!-- nav start -->
+{{#AccountMembershipDTO}}
 <nav>
     <div class="nav-div">
         <div>
@@ -20,7 +21,7 @@
             </a>
         </div>
         <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile" />
+            <img src={{profileIconPath}} alt="오류" class="nav-profile" />
             <div>
                 <i class="fa-solid fa-caret-down fa-xs"></i>
             </div>
@@ -59,9 +60,9 @@
             <div class="fast-link m-20">
                 <div class="membership-box pointer">
                     <div class="mb-10">프리미엄 멤버십</div>
-                    <div class="mb-10">다음 결제일 : 2024년 6월 24일</div>
+                    <div class="mb-10">다음 결제일 : {{servicePeriod}}</div>
                     <div class="mb-15">
-                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· 1234
+                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· {{lastDigit}}
                     </div>
                 </div>
                 <hr class="mb-20" />
@@ -117,6 +118,7 @@
 <!-- footer start -->
 {{> /_components/white-footer}}
 <!-- footer end -->
+{{/AccountMembershipDTO}}
 </body>
 
 </html>

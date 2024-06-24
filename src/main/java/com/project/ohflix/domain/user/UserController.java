@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,15 +60,25 @@ public class UserController {
         return "profile/profile-form";
     }
 
-    // YSH : 맴버십 취소 페이지
+    // YSH : 멥버십 취소 페이지 TODO : SessionUserID 넣기
     @GetMapping("/api/cancel-plan")
     public String getCancelPlan(HttpServletRequest request) {
         User sessionUser = (User) httpSession.getAttribute("sessionUser");
-//        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(sessionUser.getId());
         UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(2);
 
         request.setAttribute("CancelPlanPageDTO", respDTO);
         return "user/cancel-plan";
+    }
+
+    // YSH : 멤버십 상세정보 페이지 TODO : SessionUserID 넣기
+    @GetMapping("/api/account-membership")
+    public String getAccountMembership(HttpServletRequest request) {
+        User sessionUser = (User) httpSession.getAttribute("sessionUser");
+        UserResponse.AccountMembershipDTO respDTO = userService.accountMembership(3);
+
+        request.setAttribute("AccountMembershipDTO", respDTO);
+
+        return "account/account-membership";
     }
 
     @GetMapping("/api/view-history")
@@ -90,24 +103,26 @@ public class UserController {
 
 
     @GetMapping("/api/account-view")
-    public String getAccountPage() {
+    public String getAccountPage(HttpServletRequest request) {
+        Integer sessionUserId = 3; // 임의의 세션 유저 ID
+        UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUserId);
+
+        request.setAttribute("accountMembershipInfo", respDTO);
         return "account/account-view";
     }
 
 
 
-    @GetMapping("/api/account-membership")
-    public String getAccountMembership() {
-        return "account/account-membership";
-    }
+
 
 
 
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
 
-        //SessionUser user=session.getAttribute("sessionUser");
-        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
+        SessionUser user=(SessionUser) httpSession.getAttribute("sessionUser");
+        System.out.println(user);
+        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(user.getId());
         request.setAttribute("ProfileSettingDTO",respDTO);
         return "profile/profile-setting";
     }
@@ -117,5 +132,15 @@ public class UserController {
         binder.registerCustomEditor(Reason.class, new EnumEditor<>(Reason.class));
         // 다른 enum 타입에 대해 추가 등록 가능
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
+    }
+
+
+
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO reqestDTO){
+        System.out.println("reqestDTO = " + reqestDTO);
+        SessionUser responseDTO=userService.login(reqestDTO);
+        httpSession.setAttribute("sessionUser", responseDTO);
+        return "redirect:/";
     }
 }

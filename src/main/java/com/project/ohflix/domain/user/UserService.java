@@ -1,7 +1,6 @@
 package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.error.exception.Exception404;
-import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
@@ -11,13 +10,8 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryResponse;
-import com.project.ohflix.domain.refund.Refund;
-import com.project.ohflix.domain.refund.RefundRepository;
-import com.project.ohflix.domain.refund.RefundRequest;
-import com.project.ohflix.domain.refund.RefundResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -25,7 +19,6 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,11 +71,11 @@ public class UserService {
     // 멤버쉽 취소 페이지
     public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
         // 유저 아이콘 찾기
-        User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+        User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
 
         // 결제 내역 ( list ) 찾기
         List<PurchaseHistory> purchaseHistoryList = purchaseHistoryRepository.findByUser(sessionUserId);
-        // 최근 결제 내역과 최근 결제 내역
+        // 최초 결제 내역과 최근 결제 내역
         PurchaseHistory oldestPurchaseHistory = null;
         PurchaseHistory latestPurchaseHistory = null;
         if (!purchaseHistoryList.isEmpty()) {
@@ -90,15 +83,28 @@ public class UserService {
             latestPurchaseHistory = purchaseHistoryList.get(purchaseHistoryList.size() - 1); // last
         }
 
-        // 최신 콘첸츠 가져오기
+        // 최신 콘텐츠 가져오기
         List<Content> latestContentList = contentRepository.findLatestContent();
-
-        // 최대 12개의 데이터만 저장
+        // 12개의 콘텐츠 저장
         if (latestContentList.size() > 12) {
             latestContentList = latestContentList.subList(0, 12);
         }
 
         return new UserResponse.CancelPlanPageDTO(user, oldestPurchaseHistory, latestPurchaseHistory, latestContentList);
+    }
+
+    // 멤버십 상세정보 페이지
+    public UserResponse.AccountMembershipDTO accountMembership(Integer sessionUserId) {
+        // 유저 아이콘
+        User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
+
+        // 결제 내역 찾기
+        PurchaseHistory purchaseHistory = purchaseHistoryRepository.findById(sessionUserId).orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
+
+        // 카드 정보 찾기
+        CardInfo cardInfo = cardInfoRepository.findUserInfo(sessionUserId).orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
+
+        return new UserResponse.AccountMembershipDTO(user, purchaseHistory, cardInfo);
     }
 
     // sales-page
@@ -167,6 +173,29 @@ public class UserService {
     public RefundResponse.ListDTO getRefundBoard() {
         List<Refund> refundList = refundRepository.findAll();
         return new RefundResponse.ListDTO(refundList);
+    }
+    public UserResponse.AccountMembershipInfoDTO accountMembershipInfo(Integer sessionUserId) {
+
+        // 유저 정보 확인
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
+
+        // 결제 내역 찾기
+        PurchaseHistory purchaseHistory = purchaseHistoryRepository.findFirstByUserIdOrderByCreatedAtDesc(sessionUserId)
+                .orElseThrow(() -> new Exception404("결제 정보를 찾을 수 없습니다."));
+
+        // 카드 정보 찾기
+        CardInfo cardInfo = cardInfoRepository.findMainCardInfoByUserId(sessionUserId)
+                .orElseThrow(() -> new Exception404("카드 정보를 찾을 수 없습니다."));
+
+        return new UserResponse.AccountMembershipInfoDTO(user, purchaseHistory, cardInfo);
+    }
+
+    //login
+    public SessionUser login(UserRequest.LoginDTO reqestDTO) {
+        User user = userRepository.findByEmailAndPassword(reqestDTO.getEmail(), reqestDTO.getPassword()).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        return new SessionUser(user.getId(), user.getStatus());
     }
 }
 

@@ -18,12 +18,14 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
             """)
     Optional<List<PurchaseHistory>> findByUserId(@Param("userId") Integer userId, @Param("oneYearAgo") Timestamp oneYearAgo);
 
+    // PurchaseHistory id로 내림차순 ( 오래 된 결제 내역이 먼저 저장되게 )
     @Query("""
             SELECT DISTINCT ph
             FROM PurchaseHistory ph
             JOIN FETCH ph.user u
             JOIN FETCH u.profileIcon pi
             WHERE u.id = :id
+            ORDER BY ph.id DESC
             """)
     List<PurchaseHistory> findByUser(@Param("id") int id);
 

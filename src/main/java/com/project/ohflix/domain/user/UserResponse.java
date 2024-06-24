@@ -7,12 +7,14 @@ import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.profileIcon.ProfileIconResponse;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -45,7 +47,7 @@ public class UserResponse {
 
     // admin/member-manage 페이지
     @Data
-    public static class MembersDTO{
+    public static class MembersDTO {
         private Integer id;
         private String username;
         private Boolean isSubscribe;
@@ -94,8 +96,8 @@ public class UserResponse {
             this.profileIconPath = user.getProfileIcon().getPath();
         }
     }
-  
-      //profile-setting
+
+    //profile-setting
     @Data
     public static class ProfileSettingDTO {
         private Integer userId;
@@ -113,22 +115,47 @@ public class UserResponse {
 
     // 맴버십 취소 페이지 폼 데이터
     @Data
-    public static class CancelPlanPageDTO{
+    public static class CancelPlanPageDTO {
         private Integer userId;                 // 세션 유저 ID
-        private Integer profile_icon_id;        // 프로필 아이콘 ID
-        private String path;                    // 프로필 아이콘 경로
+        private Integer profileIconId;          // 프로필 아이콘 ID
+        private String profileIconPath;         // 프로필 아이콘 경로
         private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
-        private Timestamp oldestCreatedAt;  // 가장 오래된 createdAt
+        private String oldestServicePeriod;     // 가장 오래된 servicePeriod
+        //        private Timestamp oldestCreatedAt;     // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
+        private String oldestPurchaseHistory;     // 가장 최근의 servicePeriod
         private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
+
+        // ~ 뒤의 날짜를 추출
+        private String endDate(String servicePeriod) {
+            if (servicePeriod != null && servicePeriod.contains("~")) {
+                return servicePeriod.split("~")[1];
+            }
+            return servicePeriod;
+        }
+
+        // ~ 앞의 날짜를 추출
+        private String startDate(String servicePeriod) {
+            if (servicePeriod != null && servicePeriod.contains("~")) {
+                return servicePeriod.split("~")[0].trim();
+            }
+            return servicePeriod;
+        }
+//        // Timestamp에서 연월일을 추출하는 메서드
+//        private String formatDate(Timestamp timestamp) {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//            return dateFormat.format(timestamp);
+//        }
 
         public CancelPlanPageDTO(User user, PurchaseHistory oldestPurchaseHistory, PurchaseHistory latestPurchaseHistory, List<Content> latestContentList) {
             this.userId = user.getId();
-            this.profile_icon_id = user.getProfileIcon().getId();
-            this.path = user.getProfileIcon().getPath();
+            this.profileIconId = user.getProfileIcon().getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
             this.isSubscribe = user.getIsSubscribe();
-            this.oldestCreatedAt = oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null;
-            this.latestServicePeriod = latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null;
+//            this.oldestCreatedAt = formatDate(oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null);
+//            this.oldestCreatedAt = oldestPurchaseHistory != null ? oldestPurchaseHistory.getCreatedAt() : null;
+            this.oldestServicePeriod = startDate(oldestPurchaseHistory != null ? oldestPurchaseHistory.getServicePeriod() : null);
+            this.latestServicePeriod = endDate(latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null);
             this.latestContentList = latestContentList.stream()
                     .map(ContentResponse.CanclePlanPageContentDTO::new)
                     .toList();
@@ -178,6 +205,75 @@ public class UserResponse {
             this.cumulativeUserCount = cumulativeUserCount;
             this.monthlySales = monthlySales;
             this.cumulativeSales = cumulativeSales;
+        }
+    }
+
+    // 멤버십 상세정보 페이지 DTO
+    @Data
+    public static class AccountMembershipDTO {
+        private Integer userId;                 // 세션 유저 ID
+        private Integer profileIconId;          // 프로필 아이콘 ID
+        private String profileIconPath;         // 프로필 아이콘 경로 ▶ profile_icon
+        private String servicePeriod;           // 다음 결제일 ▶ purchase_history
+        private String lastDigit;              // 카드 끝 4자리 ▶ card_info
+
+        // ~ 뒤의 날짜를 추출
+        private String extractEndDate(String servicePeriod) {
+            if (servicePeriod != null && servicePeriod.contains("~")) {
+                return servicePeriod.split("~")[1];
+            }
+            return servicePeriod;
+        }
+
+        public AccountMembershipDTO(User user, PurchaseHistory purchaseHistory, CardInfo cardInfo) {
+            this.userId = user.getId();
+            this.profileIconId = user.getProfileIcon().getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
+            this.servicePeriod = extractEndDate(purchaseHistory.getServicePeriod());
+            this.lastDigit = cardInfo.getLastDigit();
+        }
+
+    }
+
+
+    // 멤버십 기본정보 페이지 DTO
+    @Data
+    public static class AccountMembershipInfoDTO {
+        private Integer userId;
+        private Integer profileIconId;
+        private String profileIconPath;
+        private String membershipStartDate;
+        private String membershipType;
+        private String nextPaymentDate;
+        private String cardLastFourDigits;
+
+        public AccountMembershipInfoDTO(User user, PurchaseHistory purchaseHistory, CardInfo cardInfo) {
+            this.userId = user.getId();
+            this.profileIconId = user.getProfileIcon().getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
+            this.membershipStartDate = user.getCreatedAt().toString(); // 예시 데이터
+            this.membershipType = user.getIsSubscribe() ? "스탠다드" : "구독 안됨";
+            this.nextPaymentDate = extractEndDate(purchaseHistory.getServicePeriod());
+            this.cardLastFourDigits = cardInfo.getLastDigit();
+        }
+
+        private String extractEndDate(String servicePeriod) {
+            if (servicePeriod != null && servicePeriod.contains("~")) {
+                return servicePeriod.split("~")[1];
+            }
+            return servicePeriod;
+        }
+    }
+
+    //login
+    @Data
+    public static class LoginDTO {
+        private Integer Id;
+        private Status status;
+
+        public LoginDTO(Integer id, Status status) {
+            Id = id;
+            this.status = status;
         }
     }
 }
