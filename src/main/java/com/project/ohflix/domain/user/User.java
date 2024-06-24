@@ -69,4 +69,6 @@ public class User {
         this.isSubscribe = isSubscribe;
         this.createdAt = createdAt;
     }
+
+    
 }

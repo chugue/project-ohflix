@@ -9,4 +9,10 @@ import lombok.NoArgsConstructor;
 
 public class UserRequest {
 
+    //login
+    @Data
+    public class LoginDTO{
+        private String email;
+        private String password;
+    }
 }

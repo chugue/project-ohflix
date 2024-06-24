@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Comparator;
 import java.util.List;
@@ -117,9 +119,20 @@ public class UserController {
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
 
-        //SessionUser user=session.getAttribute("sessionUser");
-        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(2);
+        SessionUser user=(SessionUser) httpSession.getAttribute("sessionUser");
+        System.out.println(user);
+        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(user.getId());
         request.setAttribute("ProfileSettingDTO",respDTO);
         return "profile/profile-setting";
+    }
+
+
+
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO reqestDTO){
+        System.out.println("reqestDTO = " + reqestDTO);
+        SessionUser responseDTO=userService.login(reqestDTO);
+        httpSession.setAttribute("sessionUser", responseDTO);
+        return "redirect:/";
     }
 }

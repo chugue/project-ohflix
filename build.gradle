@@ -49,6 +49,8 @@ dependencies {
     implementation group: 'org.qlrm', name: 'qlrm', version: '4.0.1'
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'commons-codec:commons-codec:1.15'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.session:spring-session-data-redis'
 }
 
 tasks.named('test') {
