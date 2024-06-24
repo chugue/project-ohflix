@@ -31,6 +31,7 @@ public class UserService {
     private final PurchaseHistoryRepository purchaseHistoryRepository;
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
+    private final RefundRepository refundRepository;
 
     // 시청레벨 설정에서 사용자 관람등급 가져오기
     public UserResponse.RestrictionLevelDTO UserRestrictionInfo(Integer sessionUserId) {
@@ -156,6 +157,23 @@ public class UserService {
         return respDTO;
     }
 
+    // 환불 요청 생성
+    @Transactional
+    public void requestRefund(RefundRequest.RequestDTO reqDTO) {
+        PurchaseHistory p = purchaseHistoryRepository.findByUserIdWithRecentInfo(reqDTO.getUserId())
+                .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+        refundRepository.save(Refund.builder()
+                .user(p.getUser())
+                .reason(reqDTO.getRefundReason())
+                .purchasedDate(p.getCreatedAt())
+                .status(Refuse.PENDING).build());
+    }
+
+    // 환불 요청 목록 불러우기
+    public RefundResponse.ListDTO getRefundBoard() {
+        List<Refund> refundList = refundRepository.findAll();
+        return new RefundResponse.ListDTO(refundList);
+    }
     public UserResponse.AccountMembershipInfoDTO accountMembershipInfo(Integer sessionUserId) {
 
         // 유저 정보 확인
