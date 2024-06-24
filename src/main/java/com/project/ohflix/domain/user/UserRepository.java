@@ -36,4 +36,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             WHERE u.id = :id
             """)
     User findUserPurchaseHistory(@Param("id") Integer id);
+
+
+    @Query("""
+            SELECT u
+            FROM User u
+            WHERE u.email = :email AND u.password = :password
+            """)
+    Optional<User> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
 }

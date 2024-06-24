@@ -47,7 +47,7 @@ public class UserResponse {
 
     // admin/member-manage 페이지
     @Data
-    public static class MembersDTO{
+    public static class MembersDTO {
         private Integer id;
         private String username;
         private Boolean isSubscribe;
@@ -96,8 +96,8 @@ public class UserResponse {
             this.profileIconPath = user.getProfileIcon().getPath();
         }
     }
-  
-      //profile-setting
+
+    //profile-setting
     @Data
     public static class ProfileSettingDTO {
         private Integer userId;
@@ -115,13 +115,13 @@ public class UserResponse {
 
     // 맴버십 취소 페이지 폼 데이터
     @Data
-    public static class CancelPlanPageDTO{
+    public static class CancelPlanPageDTO {
         private Integer userId;                 // 세션 유저 ID
         private Integer profileIconId;          // 프로필 아이콘 ID
         private String profileIconPath;         // 프로필 아이콘 경로
         private boolean isSubscribe;            // 구독 중인지, => 익섹셥 걸기
         private String oldestServicePeriod;     // 가장 오래된 servicePeriod
-//        private Timestamp oldestCreatedAt;     // 가장 오래된 createdAt
+        //        private Timestamp oldestCreatedAt;     // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
         private String oldestPurchaseHistory;     // 가장 최근의 servicePeriod
         private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
@@ -133,6 +133,7 @@ public class UserResponse {
             }
             return servicePeriod;
         }
+
         // ~ 앞의 날짜를 추출
         private String startDate(String servicePeriod) {
             if (servicePeriod != null && servicePeriod.contains("~")) {
@@ -234,6 +235,7 @@ public class UserResponse {
 
     }
 
+
     // 멤버십 기본정보 페이지 DTO
     @Data
     public static class AccountMembershipInfoDTO {
@@ -260,6 +262,18 @@ public class UserResponse {
                 return servicePeriod.split("~")[1];
             }
             return servicePeriod;
+        }
+    }
+
+    //login
+    @Data
+    public static class LoginDTO {
+        private Integer Id;
+        private Status status;
+
+        public LoginDTO(Integer id, Status status) {
+            Id = id;
+            this.status = status;
         }
     }
 }
