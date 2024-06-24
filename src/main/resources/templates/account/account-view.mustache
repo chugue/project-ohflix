@@ -45,14 +45,14 @@
         <div class="mb-20">멤버십 정보</div>
         <div class="main-right-div1 mb-20">
             <div class="membership-date">
-                <div>멤버십 시작:2020년 1월</div>
+                <div>멤버십 시작: {{accountMembershipInfo.membershipStartDate}}</div>
             </div>
             <div class="membership-box m-20">
                 <div class="pointer">
-                    <div class="mb-10">프리미엄 멤버십</div>
-                    <div class="mb-10">다음 결제일 : 2024년 6월 24일</div>
+                    <div class="mb-10">{{accountMembershipInfo.membershipType}}</div>
+                    <div class="mb-10">다음 결제일 : {{accountMembershipInfo.nextPaymentDate}}</div>
                     <div class="mb-15">
-                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· 1234
+                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· {{accountMembershipInfo.cardLastFourDigits}}
                     </div>
                 </div>
 

@@ -100,7 +100,11 @@ public class UserController {
     }
 
     @GetMapping("/api/account-view")
-    public String getAccountPage() {
+    public String getAccountPage(HttpServletRequest request) {
+        Integer sessionUserId = 3; // 임의의 세션 유저 ID
+        UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUserId);
+
+        request.setAttribute("accountMembershipInfo", respDTO);
         return "account/account-view";
     }
 

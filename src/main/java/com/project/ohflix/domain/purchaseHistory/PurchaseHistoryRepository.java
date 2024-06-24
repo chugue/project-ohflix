@@ -29,4 +29,6 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
             """)
     List<PurchaseHistory> findByUser(@Param("id") int id);
 
+    Optional<PurchaseHistory> findFirstByUserIdOrderByCreatedAtDesc(Integer userId);
+
 }

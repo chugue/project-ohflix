@@ -41,10 +41,10 @@ public class UserService {
 
     // user-check 페이지 데이터
     public UserResponse.UserCheckDTO userCheckPage(Integer sessionUserId) {
-       CardInfo cardInfo =  cardInfoRepository.findUserInfo(sessionUserId)
-               .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+        CardInfo cardInfo = cardInfoRepository.findUserInfo(sessionUserId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
 
-      return new UserResponse.UserCheckDTO(cardInfo);
+        return new UserResponse.UserCheckDTO(cardInfo);
     }
 
     public List<UserResponse.MembersDTO> MembersDTOList() {
@@ -61,8 +61,8 @@ public class UserService {
 
     //profile-setting 프로필 세팅 페이지
     public UserResponse.ProfileSettingDTO profileSetting(int userId) {
-        User user=userRepository.findUsernameAndIcon(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
-        UserResponse.ProfileSettingDTO respDTO=new UserResponse.ProfileSettingDTO(user);
+        User user = userRepository.findUsernameAndIcon(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+        UserResponse.ProfileSettingDTO respDTO = new UserResponse.ProfileSettingDTO(user);
 
         return respDTO;
     }
@@ -116,7 +116,6 @@ public class UserService {
         List<PurchaseHistoryResponse.SalesPageSalesDTO> saleStats = purchaseHistoryNativeRepository.findMonthlySalesStats(startDate, currentDate);
 
 
-
         Map<String, UserResponse.SalesPageUserDTO> userStatsMap = userStats.stream()
                 .collect(Collectors.toMap(UserResponse.SalesPageUserDTO::getYearMonth, stat -> stat));
         Map<String, UserResponse.SalesPageSubscribeUserDTO> subscribeUserStatsMap = subscribeUserStats.stream()
@@ -138,7 +137,7 @@ public class UserService {
             UserResponse.SalesPageSubscribeUserDTO subScribeUserStat = subscribeUserStatsMap.getOrDefault(monthString, new UserResponse.SalesPageSubscribeUserDTO(monthString, 0L));
             PurchaseHistoryResponse.SalesPageSalesDTO saleStat = saleStatsMap.getOrDefault(monthString, new PurchaseHistoryResponse.SalesPageSalesDTO(monthString, 0L));
 
-            cumulativeUserCount +=userStat.getMonthlyUserCount();
+            cumulativeUserCount += userStat.getMonthlyUserCount();
             cumulativeSales += saleStat.getMonthlySales();
 
 
@@ -157,6 +156,22 @@ public class UserService {
         return respDTO;
     }
 
+    public UserResponse.AccountMembershipInfoDTO accountMembershipInfo(Integer sessionUserId) {
+
+        // 유저 정보 확인
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
+
+        // 결제 내역 찾기
+        PurchaseHistory purchaseHistory = purchaseHistoryRepository.findFirstByUserIdOrderByCreatedAtDesc(sessionUserId)
+                .orElseThrow(() -> new Exception404("결제 정보를 찾을 수 없습니다."));
+
+        // 카드 정보 찾기
+        CardInfo cardInfo = cardInfoRepository.findMainCardInfoByUserId(sessionUserId)
+                .orElseThrow(() -> new Exception404("카드 정보를 찾을 수 없습니다."));
+
+        return new UserResponse.AccountMembershipInfoDTO(user, purchaseHistory, cardInfo);
+    }
 
     //login
     public SessionUser login(UserRequest.LoginDTO reqestDTO) {
