@@ -36,6 +36,7 @@ public class UserController {
     public String oauthKakaoCallback(String kakaoAccessToken) {
 
         User sessionUser = userService.kakaoLogin(kakaoAccessToken);
+        System.out.println("🔹👉👉👉👉👉👉"+ kakaoAccessToken);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 

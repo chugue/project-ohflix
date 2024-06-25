@@ -69,52 +69,52 @@ public class UserService {
     @Transactional
     public User kakaoLogin(String kakaoAccessToken) {
 
-//        // 1. RestTemplate 객체 생성
-//        RestTemplate rt = new RestTemplate();
-//
-//        // 2. 토큰으로 사용자 정보 받기 (PK, Email)
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//        headers.add("Authorization", "Bearer " + kakaoAccessToken);
-//
-//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
-//
-//        ResponseEntity<KakaoResponse.KakaoUserDTO> response = rt.exchange(
-//                "https://kapi.kakao.com/v2/user/me",
-//                HttpMethod.GET,
-//                request,
-//                KakaoResponse.KakaoUserDTO.class);
-//
-//        // 3. 해당정보로 DB조회 (있을수, 없을수)
-//        String username = "kakao_" + response.getBody().getId();
-//        User userPS = userRepository.findByEmail(username).orElse(null);
-//
-//        // Redis 세션 키 생성
-//        String sessionKey = "session:" + UUID.randomUUID().toString();
-//
-//        // 4. 있으면? - 조회된 유저정보 리턴
-//        if (userPS != null) {
-//            saveSessionToRedis(sessionKey, userPS.getEmail().toString());
-//            return userPS;
-//        } else {
-//            // 5. 없으면? - 강제 회원가입
-//            User user = User.builder()
-//                    .username(username)
-//                    .password(UUID.randomUUID().toString())
-//                    .email(response.getBody().getProperties().getNickname() + "@nate.com")
-//                    .provider("kakao")
-//                    .build();
-//            User returnUser = userRepository.save(user);
-//            saveSessionToRedis(sessionKey, returnUser.getEmail().toString());
-//            return returnUser;
-//        }
-        return null;
+        // 1. RestTemplate 객체 생성
+        RestTemplate rt = new RestTemplate();
+
+        // 2. 토큰으로 사용자 정보 받기 (PK, Email)
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        headers.add("Authorization", "Bearer " + kakaoAccessToken);
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
+
+        ResponseEntity<KakaoResponse.KakaoUserDTO> response = rt.exchange(
+                "https://kapi.kakao.com/v2/user/me",
+                HttpMethod.GET,
+                request,
+                KakaoResponse.KakaoUserDTO.class);
+
+        // 3. 해당정보로 DB조회 (있을수, 없을수)
+        String username = "kakao_" + response.getBody().getId();
+        User userPS = userRepository.findByEmail(username).orElse(null);
+
+        // Redis 세션 키 생성
+        String sessionKey = "session:" + UUID.randomUUID().toString();
+
+        // 4. 있으면? - 조회된 유저정보 리턴
+        if (userPS != null) {
+            saveSessionToRedis("sessionUser", userPS);
+            return userPS;
+        } else {
+            // 5. 없으면? - 강제 회원가입
+            User user = User.builder()
+                    .username(username)
+                    .password(UUID.randomUUID().toString())
+                    .email(response.getBody().getProperties().getNickname() + "@nate.com")
+                    .provider("kakao")
+                    .build();
+            User returnUser = userRepository.save(user);
+            saveSessionToRedis(sessionKey, user);
+            return returnUser;
+        }
+
 
     }
 
-    private void saveSessionToRedis(String sessionKey, String userId) {
+    private void saveSessionToRedis(String sessionKey, User user) {
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(sessionKey, userId, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
+        valueOperations.set(sessionKey, user, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
     }
 
 
