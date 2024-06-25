@@ -106,6 +106,15 @@ function previewImage(inputId, imgId) {
     });
 }
 
+//영상 파일 이름 추가
+document.getElementById('file-upload').addEventListener('change', function () {
+    var fileName = this.files[0] ? this.files[0].name : '선택된 파일 없음';
+    document.getElementById('file-name1').textContent = fileName;
+    document.getElementById('file-name-input').value = fileName;
+});
+
+
+
 previewImage('image-upload1', 'preview-img1');
 previewImage('image-upload2', 'preview-img2');
 previewImage('image-upload3', 'preview-img3');

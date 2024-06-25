@@ -57,6 +57,10 @@ public class ContentService {
                 .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
         return new ContentResponse.DetailsDTO(content);
     }
+
+    public void saveContent(ContentRequest.AdminUploadDTO requestDTO) {
+        contentRepository.save(requestDTO.toEntity());
+    }
 }
 
 

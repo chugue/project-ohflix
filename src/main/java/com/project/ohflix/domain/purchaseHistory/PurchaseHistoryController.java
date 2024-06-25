@@ -69,10 +69,6 @@ public class PurchaseHistoryController {
         return "account/account-security";
     }
 
-    @GetMapping("/admin/admin-upload")
-    public String adminUpload() {
-        return "admin/admin-upload";
-    }
 
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink() {
@@ -98,10 +94,7 @@ public class PurchaseHistoryController {
         return null;
     }
 
-    @PostMapping("/upload/info")
-    public String uploadInfo() {
-        return null;
-    }
+
 
     @PostMapping("/update/movie")
     public String updateMovie() {
