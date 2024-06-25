@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈 - 오플릭스</title>
+
+    <!-- SHAKA PLAYER-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
+
     <!-- 라이브러리 -->
     <!-- google Icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -101,7 +105,7 @@
     <!-- 자동 재생 영상 섹션 -->
     <section class="movie">
         <!--        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>-->
-        <video src="/static/images/oppenheimer.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
+        <video id="videoPlayer"  data-video-url="spiderman.mpd" src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
         </video>
         <div class="movie_info">
             <img class="shrink-img" src="/static/images/oppenheimer_logo.jpg" alt=""/>
@@ -125,7 +129,7 @@
                             <img src="{{rankPath}}" alt="Rank 01">
                         </div>
                         <div class="poster">
-                            <img src="{{top10PosterPhoto}}" alt="top10_01"
+                            <img class="top10-movie-img" src="{{top10PosterPhoto}}" alt="top10_01"
                                   id="popupImg-{{top10Id}}" data-content-id="{{top10Id}}" style="cursor: pointer;">
                         </div>
                     </div>
