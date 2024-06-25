@@ -162,4 +162,10 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
+    // 회원가입 페이지 1/3
+    @GetMapping("/sign-up-page")
+    public String singUpPage() {
+
+        return "sign-up-page";
+    }
 }
