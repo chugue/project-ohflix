@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈 - 오플릭스</title>
+
+    <!-- SHAKA PLAYER-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
+
     <!-- 라이브러리 -->
     <!-- google Icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,6 +18,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- SHAKA PLAYER-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
+
     <!-- swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -101,7 +108,7 @@
     <!-- 자동 재생 영상 섹션 -->
     <section class="movie">
         <!--        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>-->
-        <video src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
+        <video id="videoPlayer"  data-video-url="spiderman.mpd" src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
         </video>
         <div class="movie_info">
             <img src="/static/images/oppenheimer_logo.jpg" alt=""/>
