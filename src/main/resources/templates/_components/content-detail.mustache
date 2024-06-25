@@ -57,7 +57,14 @@
                                 </div>
                                 <div class="buttons">
                                     <a href="#" class="play-button">▶ 재생</a>
-                                    <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>
+                                    ${data.response.isFavorite ?
+                                `<form action="/api/users/${contentId}/unfavorite" method="post">
+                            <button type="submit" class="icon"><i class="fa-regular fa-circle-check"></i></button>
+                         </form>` :
+                                `<form action="/api/users/${contentId}/favorite" method="post">
+                            <button type="submit" class="icon"><i class="fa-solid fa-plus"></i></button>
+                         </form>`
+                        }
                                     <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
                                 </div>
                             </div>

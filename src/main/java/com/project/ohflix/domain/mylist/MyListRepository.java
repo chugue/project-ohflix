@@ -18,6 +18,10 @@ public interface MyListRepository extends JpaRepository<MyList, Integer> {
             """)
     List<MyList> findMyListByUserId(@Param("id") int id);
 
-
+    @Query("""
+            SELECT m
+            FROM MyList m
+            WHERE m.user.id = :userId AND m.content.id = :contentId AND m.watchOrFav = 'FAVORITE'
+            """)
     Optional<MyList>findByUserIdAndContentId(@Param("userId") int userId, @Param("contentId") int contentId);
 }
