@@ -4,6 +4,7 @@ import com.project.ohflix._core.utils.ApiUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContentApiController {
     private final ContentService contentService;
 
-    @GetMapping("/api/content-info")
-    public ResponseEntity<?> getContentInfo(){
-        Integer contentId = 3;
-        ContentResponse.DetailsDTO respDTO= contentService.getContetnDetails(contentId);
+
+    // 메인페이지 모달 영화 정보 가져오기
+    @GetMapping("/api/content-info/{contentId}")
+    public ResponseEntity<?> getContentInfo(@PathVariable Integer contentId){
+        ContentResponse.DetailsDTO respDTO= contentService.getContentDetails(contentId);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
