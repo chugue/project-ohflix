@@ -18,9 +18,6 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <!-- SHAKA PLAYER-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
-
     <!-- swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -111,8 +108,8 @@
         <video id="videoPlayer"  data-video-url="spiderman.mpd" src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
         </video>
         <div class="movie_info">
-            <img src="/static/images/oppenheimer_logo.jpg" alt=""/>
-            <p>오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
+            <img class="shrink-img" src="/static/images/oppenheimer_logo.jpg" alt=""/>
+            <p class="fade-out">오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
             <div class="movie-info-btn">
                 <button><i class="fa-solid fa-play"></i>재생</button>
                 <button id="popupImg-1"><i class="fa-solid fa-circle-info"></i> 상세 정보</button>
@@ -128,9 +125,13 @@
                 <!-- top1 -->
                 {{#MainPageDTO.top10List}}
                     <div class="swiper-slide">
-                        <img class="rank" src="{{rankPath}}" alt="Rank 01">
-                        <img class="top10-movie-img" src="{{top10PosterPhoto}}" alt="top10_01"
-                             id="popupImg-{{top10Id}}" data-content-id="{{top10Id}}" style="cursor: pointer;">
+                        <div class="rank">
+                            <img src="{{rankPath}}" alt="Rank 01">
+                        </div>
+                        <div class="poster">
+                            <img src="{{top10PosterPhoto}}" alt="top10_01"
+                                  id="popupImg-{{top10Id}}" data-content-id="{{top10Id}}" style="cursor: pointer;">
+                        </div>
                     </div>
                 {{/MainPageDTO.top10List}}
             </div>
