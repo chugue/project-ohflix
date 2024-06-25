@@ -5,6 +5,7 @@ import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundService;
+import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,9 +35,10 @@ public class UserController {
     // kakao 로그인
     // http://localhost:8080/oauth/kakao/callback
     @GetMapping("/oauth/kakao/callback")
-    public String oauthKakaoCallback(String kakaoAccessToken) {
+    public String oauthKakaoCallback(String code) {
 
-        User sessionUser = userService.kakaoLogin(kakaoAccessToken);
+        User sessionUser = userService.kakaoLogin(code);
+        System.out.println("👉👉👉👉👉👉👉👉👉"+ code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 

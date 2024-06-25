@@ -4,12 +4,8 @@ import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
@@ -48,4 +44,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             """)
     Optional<User> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
+    @Query("select u from User u where u.nickname = :nickname")
+    Optional<User> findByNickname(@Param("nickname") String nickname);
 }
