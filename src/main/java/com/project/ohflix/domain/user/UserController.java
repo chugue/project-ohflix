@@ -33,10 +33,11 @@ public class UserController {
     // kakao 로그인
     // http://localhost:8080/oauth/kakao/callback
     @GetMapping("/oauth/kakao/callback")
-    public String oauthKakaoCallback(String kakaoAccessToken) {
+    public String oauthKakaoCallback(String code) {
 
-        User sessionUser = userService.kakaoLogin(kakaoAccessToken);
-        System.out.println("🔹👉👉👉👉👉👉"+ kakaoAccessToken);
+        User user = userService.kakaoLogin(code);
+        SessionUser sessionUser = new SessionUser(user);
+        System.out.println("👉👉👉👉👉👉👉👉👉"+ code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
@@ -137,9 +138,9 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(HttpSession session, UserRequest.LoginDTO requestDTO) {
-        SessionUser responseDTO = userService.login(requestDTO);
+        SessionUser sessionUser = userService.login(requestDTO);
 
-        redisTemplate.opsForValue().set("sessionUser", responseDTO);
+        redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", requestDTO);
         return "redirect:/api/main-page";
     }

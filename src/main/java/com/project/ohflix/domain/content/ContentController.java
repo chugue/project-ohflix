@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ContentController {
     @GetMapping("/api/content-details")
     public String getContentDetails(HttpServletRequest request) { //TODO : 나중에 여기 PathVariable로 contentID 설정해야됨
         Integer contentId = 2;
-        ContentResponse.DetailsDTO respDTO= contentService.getContetnDetails(contentId);
+        ContentResponse.DetailsDTO respDTO= contentService.getContentDetails(contentId);
         request.setAttribute("DetailsDTO", respDTO);
         return "content/content-details";
     }

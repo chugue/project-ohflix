@@ -4,6 +4,7 @@ package com.project.ohflix.domain;
 import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.content.ContentService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
     private final ContentService contentService;
+    private final HttpSession session;
 
     @GetMapping("/")
     public String getLoginForm() {
@@ -34,5 +36,10 @@ public class MainController {
         return "admin/info-copy";
     }
 
+
+    @GetMapping("/err/400")
+    public String getErrorPage() {
+        return "err";
+    }
 
 }

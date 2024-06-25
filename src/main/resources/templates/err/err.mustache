@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/err.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>account</title>
+</head>
+
+<body>
+<!-- nav start -->
+<nav>
+    <div class="nav-div">
+        <div>
+            <a href="/api/main-page">
+                <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
+            </a>
+        </div>
+    </div>
+</nav>
+<!-- nav end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- main start -->
+<main>
+    <!-- main div left -->
+    <!-- 사이드 바 메뉴 시작 -->
+    <!-- 사이드 바 메뉴 끝 -->
+
+    <!-- main div right -->
+    <div class="main-div">
+        <!-- membership inforamtion -->
+        <div class="main-right-header mb-20">{{errorCode}}</div>
+        <div class="explain">{{msg}}</div>
+
+        <!-- fast link -->
+
+            <button class="mb-20">
+                <a href="/login-form">로그인 페이지로 가기</a></button>
+
+
+
+
+    </div>
+</main>
+<!-- nav start end-->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- hr -->
+<div class="mt-70">
+    <hr/>
+</div>
+<!-- hr -->
+
+<!-- ------------------------------------------------------------------------------------------------ -->
+
+<!-- footer start -->
+{{> /_components/white-footer}}
+<!-- footer end -->
+</body>
+
+</html>

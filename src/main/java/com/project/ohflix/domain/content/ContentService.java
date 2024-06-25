@@ -63,7 +63,7 @@ public class ContentService {
     }
 
     // 영화 상세정보 페이지 데이터
-    public ContentResponse.DetailsDTO getContetnDetails(Integer contentId) {
+    public ContentResponse.DetailsDTO getContentDetails(Integer contentId) {
         Content content = contentRepository.findById(contentId)
                 .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
 
