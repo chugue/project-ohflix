@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface MyListRepository extends JpaRepository<MyList, Integer> {
@@ -16,4 +17,7 @@ public interface MyListRepository extends JpaRepository<MyList, Integer> {
             WHERE u.id = :id
             """)
     List<MyList> findMyListByUserId(@Param("id") int id);
+
+
+    Optional<MyList>findByUserIdAndContentId(@Param("userId") int userId, @Param("contentId") int contentId);
 }
