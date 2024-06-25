@@ -32,8 +32,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String nickname; // 유저 닉네임, 유니크
 
-    @Column(nullable = false)
-    private String name; // 유저 성리
+    private String name; // 유저 이름
 
     @OneToOne
     private ProfileIcon profileIcon; // 프로필 아이콘

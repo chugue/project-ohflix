@@ -3,6 +3,7 @@ package com.project.ohflix.domain.user;
 import com.project.ohflix._core.error.exception.Exception401;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.Refuse;
+import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
@@ -51,7 +52,7 @@ public class UserService {
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
     private final RefundRepository refundRepository;
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
 
     // login-page
@@ -81,7 +82,7 @@ public class UserService {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", "ade1e7fe23c3912374047ed33db5eff7");
-        body.add("redirect_uri", "http://localhost:8080/oauth/callback");
+        body.add("redirect_uri", "http://localhost:8080/oauth/kakao/callback");
         body.add("code", code);
 
         // 1.4 body+header 객체 만들기
@@ -125,16 +126,18 @@ public class UserService {
                     .password(UUID.randomUUID().toString())
                     .email(response.getBody().getProperties().getNickname() + "@ohflix.com")
                     .provider("kakao")
+                    .status(Status.USER)
                     .build();
             User returnUser = userRepository.save(user);
-            saveSessionToRedis("sessionUser", userPS);
+            saveSessionToRedis("sessionUser", returnUser);
             return returnUser;
         }
     }
 
     private void saveSessionToRedis(String sessionKey, User user) {
+        SessionUser sessionUser = new SessionUser(user);
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(sessionKey, user, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
+        valueOperations.set(sessionKey, sessionUser, 1, TimeUnit.HOURS); // 세션 유효기간 1시간
     }
 
 
@@ -301,7 +304,7 @@ public class UserService {
         User user = userRepository.findByEmailAndPassword(requestDTO.getEmail(), requestDTO.getPassword())
                 .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
-        return new SessionUser(user.getId(), user.getStatus());
+        return new SessionUser(user);
     }
 }
 
