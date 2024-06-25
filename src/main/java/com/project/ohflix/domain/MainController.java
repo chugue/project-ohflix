@@ -1,13 +1,16 @@
 package com.project.ohflix.domain;
 
 
-import com.project.ohflix.domain.user.SessionUser;
-import jakarta.servlet.http.HttpSession;
+import com.project.ohflix.domain.content.ContentResponse;
+import com.project.ohflix.domain.content.ContentService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+@RequiredArgsConstructor
 @Controller
 public class MainController {
+    private final ContentService contentService;
 
     @GetMapping("/")
     public String getLoginForm() {
@@ -15,9 +18,9 @@ public class MainController {
     }
 
     @GetMapping("/api/main-page")
-    public String getMainPage(HttpSession session) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        System.out.println("👉👉👉👉👉" + sessionUser.getId());
+    public String getMainPage(HttpServletRequest request) {
+        ContentResponse.MainPageDTO respDTO =  contentService.getMainPageData();
+        request.setAttribute("MainPageDTO", respDTO);
         return "main-page";
     }
     @GetMapping("/outer-page")

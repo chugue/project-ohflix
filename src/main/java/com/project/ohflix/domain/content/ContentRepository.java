@@ -1,16 +1,11 @@
 package com.project.ohflix.domain.content;
 
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
-import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
-import com.project.ohflix.domain.user.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.query.Param;
-
-import java.util.List;
-import java.util.Optional;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,4 +36,20 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
     List<Content> findLatestContentCancelPlan();
 
     List<Content> findALLByOrderByIdDesc();
+
+    // 메인 페이지 제일 인기영상을 화면에 뿌리기
+    @Query("SELECT c FROM Content c ORDER BY c.viewCount DESC")
+    Page<Content> findOneMostViewed(Pageable pageable);
+
+    // 시청률 높은걸로 인기순 정렬 TOP 10
+    @Query("SELECT c FROM Content c ORDER BY c.viewCount DESC")
+    List<Content> findTop10(Pageable pageable);
+
+    // 최신컨텐츠 10개 반환
+    @Query("select c from Content c order by c.createdAt desc")
+    List<Content> findNewVideos(Pageable pageable);
+
+    // 메인페이지 navbar 최신 미니 아이템
+    @Query("select c from Content c order by c.createdAt desc")
+    List<Content> findNewFive(Pageable fiveItems);
 }

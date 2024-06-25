@@ -80,6 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   border-radius: 3px;
   height: 41px;
 }
@@ -91,6 +92,7 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
+  align-items: center;
 }
 .kakao-container a:hover {
   color: black;

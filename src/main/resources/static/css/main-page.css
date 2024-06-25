@@ -351,7 +351,7 @@ nav ul li a {
     position: relative;
     overflow: hidden;
     border-radius: .2vw;
-
+    height: 200px;
 }
 
 .rank {
@@ -361,11 +361,15 @@ nav ul li a {
     height: 100%;
     overflow: hidden;
     align-items: center; /* 세로 중앙 정렬 */
+    object-fit: fill;
 }
 
-.top10-moive-img {
-    width: 50%;
+.top10-movie-img {
+    width: 130px;
+    height: inherit; /* 높이를 자동으로 설정하여 비율을 유지 */
     margin-left: 50%;
+    object-fit: fill;
+    z-index: 3;
 }
 
 .swiper-button-prev,
@@ -408,8 +412,10 @@ nav ul li a {
     cursor: pointer;
 }
 
-.item img {
+.item img{
     width: 100%;
+    height: 100%; /* 이미지 높이를 부모 요소에 맞게 설정 */
+    object-fit: cover; /* 이미지의 가로 세로 비율을 유지하면서 부모 요소에 맞추기 */
 }
 
 @media (min-width: 1100px) {
