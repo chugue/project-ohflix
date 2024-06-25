@@ -33,7 +33,7 @@ public class RefundResponse {
 
             public RefundInfo(Integer num, Refund refund) {
                 this.num = num;
-                this.username = refund.getUser().getUsername();
+                this.username = refund.getUser().getNickname();
                 this.email = refund.getUser().getEmail();
                 this.reason = refund.getReason().getTitle();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -5,14 +5,86 @@ import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
 import lombok.Data;
-
+import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ContentResponse {
 
-    // 메인 페이지 모달 - 컨텐츠 상세정보 데이터
-    @Data
+    @Data  // 메인 페이지 데이터
+    public static class MainPageDTO {
+        private MainContent mainContent;
+        private List<Top10> top10List;
+        private List<New> newList;
+        private List<Navbar> navbarList;
+
+        public MainPageDTO(Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+            this.mainContent = new MainContent(mainContent);
+            this.top10List = top10List.stream().map(Top10::new).toList();
+            this.newList = newList.stream().map(New::new).toList();
+            this.navbarList = navbarItemsList.stream().map(Navbar::new).toList();
+        }
+
+        @Data
+        public class MainContent {
+            private Integer mainContentId;
+            private String mainTextPhoto;
+            private String mainIntroduction;
+
+            public MainContent(Content content) {
+                this.mainContentId = content.getId();
+                this.mainTextPhoto = content.getTextPhoto();
+                this.mainIntroduction = content.getIntroduction();
+            }
+        }
+
+        @Data
+        public class Top10 {
+            private Integer top10Id;
+            private String top10PosterPhoto;
+
+            public Top10(Content content) {
+                this.top10Id = content.getId();
+                this.top10PosterPhoto = content.getPosterPhoto();
+            }
+        }
+
+        @Data
+        public class New {
+            private Integer newId;
+            private String newThumbnail;
+
+            public New(Content content) {
+                this.newId = content.getId();
+                this.newThumbnail = content.getThumbnail();
+            }
+        }
+
+        @Data
+        public class Navbar {
+            private Integer navbarItemId;
+            private String itemTitle;
+            private String itemThumbnail;
+            private String createdSince;
+
+            public Navbar(Content content) {
+                this.navbarItemId = content.getId();
+                this.itemTitle = content.getTitle();
+                this.itemThumbnail = content.getThumbnail();
+                Timestamp createdAtTimeStamp = content.getCreatedAt();
+                LocalDateTime createdAt = createdAtTimeStamp.toLocalDateTime();
+                LocalDateTime now = LocalDateTime.now();
+                long daysBetween = ChronoUnit.DAYS.between(createdAt, now);
+                this.createdSince = daysBetween + "일";
+            }
+        }
+    }
+
+
+
+
+    @Data // 메인 페이지 모달 - 컨텐츠 상세정보 데이터
     public static class InfoDTO {
         private Integer id;
         private String title;
@@ -173,5 +245,7 @@ public class ContentResponse {
             this.createdAt = content.getCreatedAt();
         }
     }
+
+
 }
 

@@ -56,7 +56,7 @@ public class UserResponse {
 
         public MembersDTO(User user) {
             this.id = user.getId();
-            this.username = user.getUsername();
+            this.username = user.getNickname();
             this.isSubscribe = user.getIsSubscribe();
             this.createdAt = user.getCreatedAt();
             this.monthsSubscribed = calculateMonthsSubscribed(user.getCreatedAt());
@@ -86,7 +86,7 @@ public class UserResponse {
 
         public ProfileFormDTO(User user) {
             this.id = user.getId();
-            this.username = user.getUsername();
+            this.username = user.getNickname();
             this.email = user.getEmail();
             this.profileIcon = user.getProfileIcon();
             this.userSaveRate = user.getUserSaveRate();
@@ -107,7 +107,7 @@ public class UserResponse {
 
         public ProfileSettingDTO(User user) {
             this.userId = user.getId();
-            this.username = user.getUsername();
+            this.username = user.getNickname();
             this.iconId = user.getProfileIcon().getId();
             this.iconPath = user.getProfileIcon().getPath();
         }

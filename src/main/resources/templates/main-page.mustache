@@ -55,54 +55,16 @@
         <div class="dropdown">
             <button class="dropdown-button"><i class="far fa-bell"></i></button>
             <div class="dropdown-notification">
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify1.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">브리저튼</div>
-                        <div class="notification-time">5일</div>
+                {{#MainPageDTO.navbarList}}
+                    <div class="notification-item">
+                        <img src="{{itemThumbnail}}" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">{{itemTitle}}</div>
+                            <div class="notification-time">{{createdSince}}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify2.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">울트라맨</div>
-                        <div class="notification-time">7일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify3.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">블랙클로버</div>
-                        <div class="notification-time">10일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify4.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">하이라키</div>
-                        <div class="notification-time">12일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify5.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">히트맨</div>
-                        <div class="notification-time">15일</div>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify6.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">그놈이다</div>
-                        <div class="notification-time">18일</div>
-                    </div>
-                </div>
+                {{/MainPageDTO.navbarList}}
             </div>
         </div>
         <!--  알람 드롭 다운 메뉴 종료  -->
