@@ -118,65 +118,13 @@
         <div class="swiper mySwiper top10-movies">
             <div class="swiper-wrapper">
                 <!-- top1 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank01.svg" alt="Rank 01">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_01.jpg" alt="top10_01"
-                         id="popupImg" style="cursor: pointer;">
-                </div>
-                <!-- top2 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank02.svg" alt="Rank 02">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_02.jpg"
-                         alt="top10_02" />
-                </div>
-                <!-- top3 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank03.svg" alt="Rank 03">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_03.jpg"
-                         alt="top10_03" />
-                </div>
-                <!-- top4 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank04.svg" alt="Rank 04">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_04.jpg"
-                         alt="top10_04" />
-                </div>
-                <!-- top5 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank05.svg" alt="Rank 05">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_05.jpg"
-                         alt="top10_05" />
-                </div>
-                <!-- top6 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank06.svg" alt="Rank 06">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_06.jpg"
-                         alt="top10_06" />
-                </div>
-                <!-- top7 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank07.svg" alt="Rank 07">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_07.jpg"
-                         alt="top10_07" />
-                </div>
-                <!-- top8 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank08.svg" alt="Rank 08">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_08.jpg"
-                         alt="top10_08" />
-                </div>
-                <!-- top9 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank09.svg" alt="Rank 09">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_09.jpg"
-                         alt="top10_09" />
-                </div>
-                <!-- top10 -->
-                <div class="swiper-slide">
-                    <img class="rank" src="/static/images/rank_svg/rank10.svg" alt="Rank 10">
-                    <img class="top10-moive-img" src="/static/images/top10_movie/top10_movie_10.jpg"
-                         alt="top10_10" />
-                </div>
+                {{#MainPageDTO.top10List}}
+                    <div class="swiper-slide">
+                        <img class="rank" src="{{rankPath}}" alt="Rank 01">
+                        <img class="top10-movie-img" src="{{top10PosterPhoto}}" alt="top10_01"
+                             id="popupImg-{{top10Id}}" data-content-id="{{top10Id}}" style="cursor: pointer;">
+                    </div>
+                {{/MainPageDTO.top10List}}
             </div>
 
             <!-- <button id="next5btn"><i class="fa-solid fa-chevron-right"></i></button> -->
@@ -202,28 +150,10 @@
         <h2>새로 올라온 시리즈</h2>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10"/>
-                </div>
-                <div class="swiper-slide"><img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11"/>
-                </div>
+                {{#MainPageDTO.newList}}
+                    <div class="swiper-slide" new-content-id="{{newId}}"><img src="{{newThumbnail}}" alt="new_01"/>
+                    </div>
+                {{/MainPageDTO.newList}}
             </div>
             <div class="swiper-button-next "></div>
             <div class="swiper-button-prev"></div>
