@@ -53,3 +53,6 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
     com.example.final_project: DEBUG
 
+custom:
+  video:
+    request-url: http://localhost:7000/
