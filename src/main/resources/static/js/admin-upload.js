@@ -90,3 +90,25 @@ for (var year = currentYear; year >= 1900; year--) {
     selectElement.appendChild(option);
 }
 
+// 사진 미리보기
+function previewImage(inputId, imgId) {
+    document.getElementById(inputId).addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewImg = document.getElementById(imgId);
+                previewImg.src = e.target.result;
+                previewImg.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+previewImage('image-upload1', 'preview-img1');
+previewImage('image-upload2', 'preview-img2');
+previewImage('image-upload3', 'preview-img3');
+previewImage('image-upload4', 'preview-img4');
+previewImage('image-upload5', 'preview-img5');
+

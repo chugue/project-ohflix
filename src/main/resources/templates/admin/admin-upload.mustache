@@ -106,7 +106,10 @@
                             <input id="image-upload1" type="file" name="thumbnail"/>
                             <span class="file-name2 file-name" id="file-name2">썸네일 선택하기</span>
                         </div>
-
+                        <!--썸네일 미리보기-->
+                        <div class="image-preview">
+                            <img id="preview-img1" src="" alt="썸네일 미리보기 이미지" style="display: none;" />
+                        </div>
 
                     </div>
                     <hr class="mb-20">
@@ -120,7 +123,10 @@
                             <input id="image-upload2" type="file" name="miniThumbnail"/>
                             <span class="file-name3 file-name" id="file-name3">작은 썸네일 선택하기</span>
                         </div>
-
+                        <!--작은 썸네일 미리보기-->
+                        <div class="image-preview">
+                            <img id="preview-img2" src="" alt="미리보기 이미지" style="display: none;" />
+                        </div>
 
                     </div>
                     <hr class="mb-20">
@@ -132,7 +138,10 @@
                             <input id="image-upload3" type="file" name="mainPhto"/>
                             <span class="file-name4 file-name" id="file-name4">대표 사진 선택하기 (가로사이즈)</span>
                         </div>
-
+                        <!--대표 사진 미리보기-->
+                        <div class="image-preview">
+                            <img id="preview-img3" src="" alt="미리보기 이미지" style="display: none;" />
+                        </div>
                     </div>
                     <hr class="mb-20">
                     <div class="mb-20 fast-link-div pointer">
@@ -141,7 +150,11 @@
                                 파일 선택
                             </label>
                             <input id="image-upload4" type="file" name="subPhoto"/>
-                            <span class="file-name5 file-name" id="file-name5">대표 사진 선택하기 (세로사이즈 작은 ver)</span>
+                            <span class="file-name5 file-name" id="file-name5">포스터 사진 선택하기</span>
+                        </div>
+                        <!--포스터 사진 미리보기-->
+                        <div class="image-preview">
+                            <img id="preview-img4" src="" alt="미리보기 이미지" style="display: none;" />
                         </div>
                     </div>
 
@@ -153,6 +166,10 @@
                             </label>
                             <input id="image-upload5" type="file" name="textPhoto"/>
                             <span class="file-name6 file-name" id="file-name6">대표 텍스트 사진 선택하기</span>
+                        </div>
+                        <!--대표 텍스트 사진 미리보기-->
+                        <div class="image-preview">
+                            <img id="preview-img5" src="" alt="미리보기 이미지" style="display: none;" />
                         </div>
                     </div>
 
@@ -270,6 +287,7 @@
 
 <!-- 자바 스크립트 -->
 <script src="/static/js/admin-upload.js"></script>
+
 </body>
 
 </html>
