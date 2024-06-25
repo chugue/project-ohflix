@@ -9,9 +9,12 @@ import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,27 +115,39 @@ public class PurchaseHistoryController {
 
     @PostMapping("/api/payment/ready")
     @ResponseBody
-    public PurchaseHistoryResponse.KakaoPayReadyDTO readyToPay(@RequestParam int userId, @RequestParam String itemName, @RequestParam int totalAmount, @RequestParam int vatAmount) {
-        return purchaseHistoryService.preparePayment(userId, itemName, totalAmount, vatAmount);
+    public ResponseEntity<Map<String, String>> readyToPay(@RequestParam int userId, @RequestParam String itemName, @RequestParam int totalAmount, @RequestParam int vatAmount) {
+        PurchaseHistoryResponse.KakaoPayReadyDTO kakaoPayReadyDTO = purchaseHistoryService.preparePayment(userId, itemName, totalAmount, vatAmount);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", kakaoPayReadyDTO.getNextRedirectPcUrl());
+        return ResponseEntity.ok(response);
     }
-    // 결제 승인 API 엔드포인트
-    @GetMapping("/api/payment/success")
-    public String paymentSuccess(@RequestParam String pg_token, @RequestParam int userId) {
+
+
+
+    @GetMapping("/api/kakaoPaySuccess")
+    public String paymentSuccess(@RequestParam String code, Model model) {
+        // 여기서 카카오페이 결제 승인 로직을 추가할 수 있습니다.
+        // 예를 들어, userId와 tid를 사용하여 결제 승인을 요청합니다.
+        int userId = 2; // 실제 유저 ID로 변경
         String tid = "T1234567890123456789"; // 실제로는 저장된 tid를 사용
-        PurchaseHistoryResponse.KakaoPayApproveDTO response = purchaseHistoryService.approvePayment(userId, tid, pg_token);
-        // 승인 후 처리 로직 추가
-        return "redirect:/api/paymethod-manage";
+
+        PurchaseHistoryResponse.KakaoPayApproveDTO response = purchaseHistoryService.approvePayment(userId, tid, code);
+
+        model.addAttribute("code", response.getAid());
+        return "paymethod/success";
     }
 
-    @GetMapping("/api/payment/fail")
-    public String paymentFail() {
-        return "redirect:/api/paymethod-manage?status=fail";
+    @GetMapping("/api/kakaoPayFail")
+    public String kakaoPayFail() {
+        return "결제 실패 페이지"; // 실제로는 결제 실패 페이지로 리다이렉트합니다.
     }
 
-    @GetMapping("/api/payment/cancel")
-    public String paymentCancel() {
-        return "redirect:/api/paymethod-manage?status=cancel";
+    @GetMapping("/api/kakaoPayCancel")
+    public String kakaoPayCancel() {
+        return "결제 취소 페이지"; // 실제로는 결제 취소 페이지로 리다이렉트합니다.
     }
+
 
     // 정기 결제 요청 API 엔드포인트
     @PostMapping("/api/payment/subscription")

@@ -86,7 +86,7 @@ public class PurchaseHistoryService {
         body.put("total_amount", totalAmount);
         body.put("vat_amount", vatAmount);
         body.put("tax_free_amount", 0);
-        body.put("approval_url", kakaoPayConfig.getRedirectUrl() + "/success");
+        body.put("approval_url", kakaoPayConfig.getRedirectUrl() + "/paymethod/pay-success");
         body.put("fail_url", kakaoPayConfig.getRedirectUrl() + "/fail");
         body.put("cancel_url", kakaoPayConfig.getRedirectUrl() + "/cancel");
 
