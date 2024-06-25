@@ -4,11 +4,15 @@ package com.project.ohflix.domain.content;
 import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
+import com.project.ohflix.domain._enums.Top10Enum;
 import lombok.Data;
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ContentResponse {
 
@@ -21,7 +25,20 @@ public class ContentResponse {
 
         public MainPageDTO(Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
             this.mainContent = new MainContent(mainContent);
-            this.top10List = top10List.stream().map(Top10::new).toList();
+            // Top10 list mapping with rankPath assignment
+            List<Top10> sortedTop10List = top10List.stream()
+                    .sorted(Comparator.comparing(Content::getViewCount).reversed()) // Assuming Content has a getPopularity method
+                    .map(Top10::new)
+                    .collect(Collectors.toList());
+
+            this.top10List = IntStream.range(0, sortedTop10List.size())
+                    .mapToObj(i -> {
+                        Top10 item = sortedTop10List.get(i);
+                        item.setRankPath(Top10Enum.values()[i].getValue());
+                        return item;
+                    })
+                    .collect(Collectors.toList());
+//            this.top10List = top10List.stream().map(Top10::new).toList();
             this.newList = newList.stream().map(New::new).toList();
             this.navbarList = navbarItemsList.stream().map(Navbar::new).toList();
         }
@@ -43,6 +60,7 @@ public class ContentResponse {
         public class Top10 {
             private Integer top10Id;
             private String top10PosterPhoto;
+            private String rankPath;
 
             public Top10(Content content) {
                 this.top10Id = content.getId();
@@ -245,6 +263,7 @@ public class ContentResponse {
             this.createdAt = content.getCreatedAt();
         }
     }
+
 
 
 }

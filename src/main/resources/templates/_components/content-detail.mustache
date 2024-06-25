@@ -12,20 +12,41 @@
 </style>
 
 <script>
-    const img = document.getElementById("popupImg"); // 모달을 띄우는 버튼 요소 가져오기
-    const modal = document.getElementById("modalWrap"); // 모달 창 요소 가져오기
-    const closeBtn = document.getElementById("closeBtn"); // 모달을 닫는 버튼(X) 요소 가져오기
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('.top10-movie-img');
+        const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
+        const closeBtn = document.getElementById('closeBtn'); // 모달을 닫는 버튼(X) 요소 가져오기
+        const modalData = document.getElementById('modalData'); // 모달 내용 요소 가져오기
 
+        images.forEach(img => {
+            img.addEventListener('click', function () {
+                const contentId = this.dataset.contentId;
+                showModal(contentId);
+            });
+        });
 
-    img.onclick = function () {
-        modal.style.display = "block"; // 버튼을 클릭하면 모달을 보이게 함
-        document.body.style.overflow = "hidden";
-        // AJAX 통신으로 데이터 가져오기
-        fetch('/api/content-info')
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    modalData.innerHTML = `
+        closeBtn.onclick = function () {
+            modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김
+            document.body.style.overflow = "auto";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        function showModal(contentId) {
+            modal.style.display = "block"; // 모달을 보이게 함
+            document.body.style.overflow = "hidden";
+
+            // AJAX 통신으로 데이터 가져오기
+            fetch(`/api/content-info/${contentId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        modalData.innerHTML = `
                     <div class="body-container">
                         <!-- 헤더 start -->
                         <div class="header-container">
@@ -80,24 +101,12 @@
                             </div>
                         </div>
                     </div>
-                    `
-                })
-                .catch(error => {
-                    modalData.innerText = 'Error loading data';
-                    console.error('Error:', error);
-                });
-
-    };
-
-    closeBtn.onclick = function () {
-        modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김
-        document.body.style.overflow = "auto";
-    };
-
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김
-            document.body.style.overflow = "auto";
+                `;
+                    })
+                    .catch(error => {
+                        modalData.innerText = 'Error loading data';
+                        console.error('Error:', error);
+                    });
         }
-    };
+    });
 </script>
