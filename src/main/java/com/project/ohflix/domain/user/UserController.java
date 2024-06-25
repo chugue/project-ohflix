@@ -1,31 +1,46 @@
 package com.project.ohflix.domain.user;
 
+
 import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
+import com.project.ohflix.domain.refund.RefundService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-    private final HttpSession httpSession;
+    private final HttpSession session;
     private final UserService userService;
+    private final RefundService refundService;
     private final RedisTemplate<String, Object> redisTemplate;
 
 
     @GetMapping("/login-form")
-    public String getLoginForm() {return "user/login-form";}
+    public String getLoginForm() {
+
+        return "user/login-form";
+    }
+
+    // kakao 로그인
+    // http://localhost:8080/oauth/kakao/callback
+    @GetMapping("/oauth/kakao/callback")
+    public String oauthKakaoCallback(String kakaoAccessToken) {
+
+        User sessionUser = userService.kakaoLogin(kakaoAccessToken);
+        redisTemplate.opsForValue().set("sessionUser", sessionUser);
+        session.setAttribute("sessionUser", sessionUser);
+
+        return "redirect:/api/main-page";
+    }
 
 
     // 사용자 환불요청 페이지
@@ -37,50 +52,47 @@ public class UserController {
     }
 
     // 환불 액션
-//    @PostMapping("/refund")
-//    public String refund(RefundRequest.RequestDTO reqDTO) {
-//        userService.requestRefund(reqDTO);
-//        return "redirect:/api/account-view";
-//    }
+    @PostMapping("/refund")
+    public String refund(RefundRequest.RequestDTO reqDTO) {
+        userService.requestRefund(reqDTO);
+        return "redirect:/api/account-view";
+    }
 
 
     // 사용자 확인 방법 선택 페이지
     @GetMapping("/api/user-check")
     public String getUserCheck(HttpServletRequest request) {
-        Integer sessionUserId = 2; //TODO : 세션이 구현되면 세션 사용자 아이디가 들어가야됨
-        UserResponse.UserCheckDTO respDTO =userService.userCheckPage(sessionUserId);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.UserCheckDTO respDTO = userService.userCheckPage(sessionUser.getId());
         request.setAttribute("UserCheckDTO", respDTO);
         return "user/user-check";
     }
 
-    // 사용자 프로필 변경 페이지 TODO : SessionUserID 넣기
+    // 사용자 프로필 변경 페이지
     @GetMapping("/api/profile-form")
     public String getProfileView(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
-//        User respDTO = userService.userProfileForm(sessionUser.getId());
-        UserResponse.ProfileFormDTO respDTO = userService.userProfileForm(4);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.ProfileFormDTO respDTO = userService.userProfileForm(sessionUser.getId());
         request.setAttribute("UserProfileFormDTO", respDTO);
         return "profile/profile-form";
     }
 
-    // YSH : 멥버십 취소 페이지 TODO : SessionUserID 넣기
+    // YSH : 멥버십 취소 페이지
     @GetMapping("/api/cancel-plan")
     public String getCancelPlan(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
-        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(2);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(sessionUser.getId());
 
         request.setAttribute("CancelPlanPageDTO", respDTO);
         return "user/cancel-plan";
     }
 
-    // YSH : 멤버십 상세정보 페이지 TODO : SessionUserID 넣기
+    // YSH : 멤버십 상세정보 페이지
     @GetMapping("/api/account-membership")
     public String getAccountMembership(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
-        UserResponse.AccountMembershipDTO respDTO = userService.accountMembership(3);
-
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.AccountMembershipDTO respDTO = userService.accountMembership(sessionUser.getId());
         request.setAttribute("AccountMembershipDTO", respDTO);
-
         return "account/account-membership";
     }
 
@@ -107,27 +119,40 @@ public class UserController {
 
     @GetMapping("/api/account-view")
     public String getAccountPage(HttpServletRequest request) {
-        Integer sessionUserId = 3; // 임의의 세션 유저 ID
-        UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUserId);
-
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUser.getId());
         request.setAttribute("accountMembershipInfo", respDTO);
         return "account/account-view";
     }
 
-
-
-
-
-
-
     @GetMapping("/api/profile-setting")
     public String profileSetting(HttpServletRequest request) {
-        SessionUser sessionUser=(SessionUser) request.getAttribute("sessionUser");
-        UserResponse.ProfileSettingDTO respDTO= userService.profileSetting(sessionUser.getId());
-        request.setAttribute("ProfileSettingDTO",respDTO);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.ProfileSettingDTO respDTO = userService.profileSetting(sessionUser.getId());
+        request.setAttribute("ProfileSettingDTO", respDTO);
         return "profile/profile-setting";
     }
 
+
+    @PostMapping("/login")
+    public String login(HttpSession session, UserRequest.LoginDTO requestDTO) {
+        SessionUser responseDTO = userService.login(requestDTO);
+
+        redisTemplate.opsForValue().set("sessionUser", responseDTO);
+        session.setAttribute("sessionUser", requestDTO);
+        return "redirect:/api/main-page";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        redisTemplate.delete("sessionUser");
+        session.invalidate();
+
+        return "redirect:/login-form";
+    }
+
+
+    // enum 스트링을 다시 enum으로 바꾸기 위해서 이게 필요함
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Reason.class, new EnumEditor<>(Reason.class));
@@ -135,13 +160,4 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
-
-
-    @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqestDTO){
-        SessionUser responseDTO=userService.login(reqestDTO);
-
-        redisTemplate.opsForValue().set("sessionUser", responseDTO);
-        return "redirect:/";
-    }
 }

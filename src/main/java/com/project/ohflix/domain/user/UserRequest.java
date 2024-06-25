@@ -1,18 +1,19 @@
 package com.project.ohflix.domain.user;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 
 public class UserRequest {
 
-    //login
+    // login - page
     @Data
-    public class LoginDTO{
+    public static class LoginDTO{
+        @NotBlank(message = "아이디는 필수 항목입니다.")
         private String email;
-        private String password;
+
+
+        @NotBlank(message = "비밀번호는 필수 항목입니다.")
+        private String password; // TODO: 암호화
+
     }
 }
