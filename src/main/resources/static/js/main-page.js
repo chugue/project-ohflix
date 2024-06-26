@@ -59,61 +59,14 @@ function initPlayer() {
     player.addEventListener('error', onErrorEvent);
 
     // 비디오 URL 설정
-    const videoFilename = video.getAttribute('data-video-url');
+    // const videoFilename = video.getAttribute('data-video-url');
+    const videoFilename = "https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/spiderman/spiderman.mpd";
+
 
     // 비디오 URL 설정
-    fetchVideoUrl(videoFilename);
-
-    // 특정 구간 재생 설정
-    video.addEventListener('loadedmetadata', function() {
-        const startTime = 10; // 재생 시작 시간 (초)
-        const endTime = 180;   // 재생 종료 시간 (초)
-
-        video.currentTime = startTime;
-
-        video.addEventListener('timeupdate', function() {
-            if (video.currentTime >= endTime) {
-                video.pause();
-                video.classList.add('fade-out');
-                video.currentTime = 0;
-            }
-        });
-
-        video.play();
-    });
+    loadVideo(videoFilename);
 
 }
-// jQuery AJAX 요청을 통해 비디오 URL을 가져오는 함수
-function fetchVideoUrl(filename) {
-    $.ajax({
-        url: 'http://localhost:7000/videos?filename=' + encodeURIComponent(filename),
-        method: 'GET',
-        dataType: 'text', // Ensure that the response is interpreted as text
-        success: function(response) {
-            console.log("AJAX response received");
-            console.log(response); // 응답 내용을 출력하여 확인
-
-            try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(response, "application/xml");
-                if (xmlDoc.getElementsByTagName('MPD').length == 0) {
-                    throw new Error("Invalid MPD XML");
-                }
-
-            const videoBlob = new Blob([response], { type: 'application/dash+xml' });
-            const videoUrl = "http://localhost:7000/videolocation/spiderman/spiderman.mpd";
-            console.log("Blob URL: " + videoUrl);
-            loadVideo(videoUrl); // loadVideo 함수 호출
-            } catch (e) {
-                onError({ code: 7001, message: e.message });
-            }
-        },
-        error: function(xhr, status, error) {
-            onError('Failed to fetch video URL: ' + error);
-        }
-    });
-}
-
 
 function loadVideo(videoUrl) {
     const player = window.player;
