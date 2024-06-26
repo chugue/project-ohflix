@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -37,7 +35,7 @@ public class UserController {
 
         User user = userService.kakaoLogin(code);
         SessionUser sessionUser = new SessionUser(user);
-        System.out.println("👉👉👉👉👉👉👉👉👉"+ code);
+        System.out.println("👉👉👉👉👉👉👉👉👉" + code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
@@ -162,15 +160,21 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
-    // 회원가입 페이지 1/3
-    @GetMapping("/signup")
-    public String singUpPage(String email, String password) {
-        userService.SignUp(email, password);
-        return "sign-up-page-step1";
+    // 회원가입 페이지
+    @GetMapping("/signup-page")
+    public String singUpPage() {
+        return "user/sign-up-page";
     }
-    @GetMapping("/sign-up-page-step2")
+
+    @PostMapping("/signup")
+    public String singUpPost(UserRequest.SignupDTO reqDTO) {
+        userService.Signup(reqDTO);
+        return "redirect:/signup-page-step2";
+    }
+
+    @GetMapping("/signup-page-step2")
     public String singUpPageStep2() {
 
-        return "sign-up-page-step2";
+        return "user/sign-up-page-step2";
     }
 }

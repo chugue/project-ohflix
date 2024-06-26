@@ -113,7 +113,7 @@ footer{
     font-size: 18px;
     color: #999;
     pointer-events: none;
-    transition:  .2s ease;
+    transition:  .1s ease;
 }
 
 /* 입력시 label 좌측상단 이동 */
