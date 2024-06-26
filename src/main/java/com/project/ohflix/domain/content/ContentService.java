@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.content;
 
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain.like.Like;
+import com.project.ohflix.domain.like.LikeRepository;
 import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.mylist.MyListRepository;
 import com.project.ohflix.domain.mylist.MyListResponse;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class ContentService {
     private final ContentRepository contentRepository;
     private final MyListRepository myListRepository;
+    private final LikeRepository likeRepository;
 
     // main page data
     public ContentResponse.MainPageDTO getMainPageData() {
@@ -75,19 +78,34 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
+
+    // 영화 상세정보 페이지 + 찜 여부 + 좋아요 여부 데이터
     public ContentResponse.MainContent getMainContent(Integer sessionUserId, Integer contentId) {
         Content content = contentRepository.findById(contentId)
                 .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
-        Optional<MyList> like = myListRepository.findByUserIdAndContentId(sessionUserId, contentId);
+
+        // 찜 여부
+        Optional<MyList> favorite = myListRepository.findByUserIdAndContentId(sessionUserId, contentId);
         boolean isFavorite;
-        if (like.isPresent()) {
+        if (favorite.isPresent()) {
             isFavorite = true;
         } else {
             isFavorite = false;
         }
 
-        return new ContentResponse.MainContent(content, isFavorite);
+        // 좋아요 여부
+        Optional<Like> like = likeRepository.findByUserIdAndContentId(sessionUserId, contentId);
+        boolean isLike;
+        if (like.isPresent()) {
+            isLike = true;
+        } else {
+            isLike = false;
+        }
+
+
+        return new ContentResponse.MainContent(content, isFavorite, isLike);
     }
+
 
     // 메인 페이지 영화 상세정보 가져오는 모달 - 비동기 통신
     public ContentResponse.DetailsDTO getContentInfo(Integer contentId) {
