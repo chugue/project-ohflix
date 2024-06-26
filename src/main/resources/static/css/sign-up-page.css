@@ -8,63 +8,24 @@ html {
 * {
     box-sizing: border-box;
 }
-
-.align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-top: 5px;
+/* 전환 애니메이션 */
+section {
+    transition: transform 5s ease, opacity 0.2s ease;
+    transform: translateX(0);
+    opacity: 1;
 }
 
-.options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    flex-direction: column;
+/* 애니메이션 효과 적용 */
+section.hide {
+    transform: translateX(-100%);
+    opacity: 0;
 }
-
-.options a {
-    color: #b3b3b3;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.options a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: rgba(0, 0, 0);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-}
-
-.grid-list-container {
-    width: 100%;
-}
-
-.grid-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 두 개의 열로 나누기 */
-    gap: 10px; /* 항목 간격 */
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    text-align: left;
+section.hide2 {
+    transform: translateX(500%);
+    opacity: 0;
 }
 
 /* ------------------------------------------- */
-.main {
-    display: flex;
-    flex-direction: column;
-    min-height: 70vh; /* 최소 높이를 화면 높이만큼 설정 */
-    margin: 0;
-}
-
 header {
     display: flex;
     justify-content: space-between;
@@ -84,22 +45,43 @@ header {
     font-size: 19px;
 }
 
-/* 메인 시작 */
-.container{
+/* section 시작 */
+body{
+    display: flex;
+    flex-direction: column;
+}
+section{
+    flex: 1;
+    padding-bottom: 100px;
+}
+footer{
+    display: block;
+}
+
+
+.main {
+    padding: 50px 0 100px;
+}
+
+.container {
+    flex: 1;
     width: 440px;
     margin: 0 auto;
     padding: 40px;
 }
-.container-head{
+
+.container-head {
     margin-bottom: 20px;
 }
-.step{
+
+.step-count {
     font-size: 14px;
+    margin-bottom: 10px;
 }
 
-.container h1{
+.container h1 {
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 40px;
     margin-bottom: 10px;
 }
@@ -108,10 +90,9 @@ header {
     font-size: 18px;
     line-height: 25px;
 }
-
+/* input ( 이메일, 회원가입 ) */
 .input-container {
     position: relative;
-    margin-bottom: 20px;
 }
 
 .input-container input {
@@ -127,29 +108,31 @@ header {
 .input-container label {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-70%);
     left: 10px;
     font-size: 18px;
     color: #999;
     pointer-events: none;
-    transition: all 0.2s ease;
+    transition:  .2s ease;
 }
-/* 입력시 label 이동 */
-.input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label {
+
+/* 입력시 label 좌측상단 이동 */
+.input-container input:focus+label,
+.input-container input:not(:placeholder-shown)+label {
     top: 15px;
     left: 10px;
     font-size: 10px;
     color: #333;
 }
-
+/* 인풋 체크박스 섹션 */
 .checkbox-group {
     align-items: center;
     margin-bottom: 20px;
     text-align: left;
     line-height: 1.2rem;
 }
-.checkbox-group div{
+
+.checkbox-group div {
     margin-bottom: 10px;
 }
 
@@ -175,13 +158,82 @@ header {
 }
 
 .submit-button:hover {
-    background-color: #d40813;
+    background-color: #f6121d;
+}
+
+/* step2 page */
+.container-head-step2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.big-check-icon .material-icons{
+    color: #e50914;
+    font-size: 50px;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.check-info{
+    width: 300px;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 24px;
+}
+.check-info li {
+    display: flex;
+    margin: 10px 0;
+}
+.check-icon .material-icons{
+    font-size: 24px;
+    color: #e50914;
+    margin-right: 10px;
+}
+/* 버튼 친구들들 */
+.button-friends{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.next-time-button{
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    color: #fff;
+    background: #999;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.next-time-button:hover{
+    background: #aaa;
 }
 /* main 종료 */
 
 
 /* footer 시작 */
-.white-footer-container ul {
+footer {
+    background: #f5f5f5;
+    display: block;
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    /* 화면 하단에 위치하도록 설정 */
+}
+
+footer a {
+    color: #777;
+    text-decoration: none;
+}
+
+footer ul {
     list-style: none;
     padding: 0;
     font-size: 15px;
@@ -193,38 +245,28 @@ header {
 
 .grid-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 두 개의 열로 나누기 */
-    gap: 10px; /* 항목 간격 */
+    grid-template-columns: repeat(4, 1fr);
+    /* 두 개의 열로 나누기 */
+    gap: 10px;
+    /* 항목 간격 */
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
     text-align: left;
 }
 
-.white-footer {
-    background-color: #f8f8f8;
-    color: #666;
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid #e6e6e6;
-}
-
 .white-footer-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start; /* 수정된 부분 */
+    align-items: flex-start;
+    /* 수정된 부분 */
     padding: 20px 100px 20px 100px;
     width: 100%;
 }
 
 .white-footer-container ul li {
     margin: 0 10px;
-}
-
-.white-footer-container ul li a {
-    color: #0071eb;
-    text-decoration: none;
 }
 
 .white-footer-container ul li a:hover {
@@ -234,6 +276,7 @@ header {
 .white-footer-container p {
     margin: 5px 0;
 }
+
 .footer-bt {
     display: flex;
     flex-direction: column;

@@ -19,7 +19,23 @@
             </div>
             <div class="buttons">
                 <a href="#" class="play-button">▶ 재생</a>
-                <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>
+
+                <!--찜하기-->
+                {{^FavoriteCheck.isFavorite}}
+                    <form action="/api/users/{contentId}/favorite" method="post">
+                        <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                    </form>
+                {{/FavoriteCheck.isFavorite}}
+                <!--찜하기-->
+
+                <!--찜취소-->
+                {{#FavoriteCheck.isFavorite}}
+                    <form action="/api/users/{contentId}/unfavorite" method="post">
+                        <span class="icon"><i class="fa-regular fa-circle-check"></i></span>
+                    </form>
+                {{/FavoriteCheck.isFavorite}}
+                <!--찜취소-->
+
                 <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
             </div>
         </div>

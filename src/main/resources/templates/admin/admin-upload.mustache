@@ -75,11 +75,13 @@
                         <label for="file-upload" class="custom-file-upload">
                             파일 선택
                         </label>
-                        <input id="file-upload" type="file" name="file"/>
+                        <input id="file-upload" type="file" name="file" onchange="updateFileName()"/>
                         <span class="file-name1 file-name" id="file-name1">영화 선택하기</span>
+
                     </div>
                     <div>
-                        <button id="upload-btn" type="button" class="custom-upload-button uploadMovie-btn">영상 업로드 하기</button>
+                        <button id="upload-btn" type="button" class="custom-upload-button uploadMovie-btn">영상 업로드 하기
+                        </button>
                     </div>
                 </div>
             </div>
@@ -89,8 +91,9 @@
 
         <!-- 이미지 업로드 -->
 
-        <form method="post" enctype="multipart/form-data" action="/upload/info">
-
+        <form method="post" enctype="multipart/form-data" action="/admin/admin-upload">
+            <!-- 숨겨진 입력 필드 추가 -->
+            <input type="hidden" id="file-name-input" name="fileName"/>
             <div class="mb-20">이미지 업로드</div>
             <div class="main-right-div1 mb-20">
                 <div class="membership-deco ml-20"></div>
@@ -108,39 +111,25 @@
                         </div>
                         <!--썸네일 미리보기-->
                         <div class="image-preview">
-                            <img id="preview-img1" src="" alt="썸네일 미리보기 이미지" style="display: none;" />
+                            <img id="preview-img1" src="" alt="썸네일 미리보기 이미지" style="display: none;"/>
                         </div>
 
                     </div>
                     <hr class="mb-20">
 
-
-                    <div class="mb-20 fast-link-div pointer">
-                        <div>
-                            <label for="image-upload2" class="custom-file-upload">
-                                파일 선택
-                            </label>
-                            <input id="image-upload2" type="file" name="miniThumbnail"/>
-                            <span class="file-name3 file-name" id="file-name3">작은 썸네일 선택하기</span>
-                        </div>
-                        <!--작은 썸네일 미리보기-->
-                        <div class="image-preview">
-                            <img id="preview-img2" src="" alt="미리보기 이미지" style="display: none;" />
-                        </div>
-
-                    </div>
+                    <!-- TODO : 이부분 지워하는데 막으면 영상업로드가 안됨-->
                     <hr class="mb-20">
                     <div class="mb-20 fast-link-div pointer">
                         <div>
                             <label for="image-upload3" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload3" type="file" name="mainPhto"/>
+                            <input id="image-upload3" type="file" name="mainPhoto"/>
                             <span class="file-name4 file-name" id="file-name4">대표 사진 선택하기 (가로사이즈)</span>
                         </div>
                         <!--대표 사진 미리보기-->
                         <div class="image-preview">
-                            <img id="preview-img3" src="" alt="미리보기 이미지" style="display: none;" />
+                            <img id="preview-img3" src="" alt="미리보기 이미지" style="display: none;"/>
                         </div>
                     </div>
                     <hr class="mb-20">
@@ -149,12 +138,12 @@
                             <label for="image-upload4" class="custom-file-upload">
                                 파일 선택
                             </label>
-                            <input id="image-upload4" type="file" name="subPhoto"/>
+                            <input id="image-upload4" type="file" name="posterPhoto"/>
                             <span class="file-name5 file-name" id="file-name5">포스터 사진 선택하기</span>
                         </div>
                         <!--포스터 사진 미리보기-->
                         <div class="image-preview">
-                            <img id="preview-img4" src="" alt="미리보기 이미지" style="display: none;" />
+                            <img id="preview-img4" src="" alt="미리보기 이미지" style="display: none;"/>
                         </div>
                     </div>
 
@@ -169,7 +158,7 @@
                         </div>
                         <!--대표 텍스트 사진 미리보기-->
                         <div class="image-preview">
-                            <img id="preview-img5" src="" alt="미리보기 이미지" style="display: none;" />
+                            <img id="preview-img5" src="" alt="미리보기 이미지" style="display: none;"/>
                         </div>
                     </div>
 
@@ -185,7 +174,7 @@
                     <table class="movie-info-table">
                         <tr>
                             <td>영 화 제 목</td>
-                            <td><input type="text" name="title" class="movie-info"></td>
+                            <td><input type="text" name="title" class="movie-info" value="도라에몽"></td>
                         </tr>
                         <tr>
                             <td>제 작 년 도</td>
@@ -197,42 +186,49 @@
                         </tr>
                         <tr>
                             <td>상 영 시 간</td>
-                            <td><input type="number" name="playTime" class="movie-info"></td>
+                            <td><input type="number" name="playTime" class="movie-info" value="90"></td>
                         </tr>
                         <tr>
                             <td>관 람 등 급</td>
                             <td>
                                 <select name="rate" class="movie-info">
                                     <option value="">관람 등급 선택</option>
-                                    <option value="전체 관람가">전체 관람가</option>
-                                    <option value="12세 관람가">12세 관람가</option>
-                                    <option value="청소년 관람 불가">청소년 관람 불가</option>
+                                    {{#rate}}
+                                        <option value="{{this}}">{{this.value}}</option>
+                                    {{/rate}}
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>장 르</td>
-                            <td><input type="text" name="genre" class="movie-info"></td>
+                            <td>
+                                <select name="genre" class="movie-info">
+                                    <option value="">관람 등급 선택</option>
+                                    {{#genre}}
+                                    <option value="{{this}}">{{this.value}}</option>
+                                    {{/genre}}
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>감 독</td>
-                            <td><input type="text" name="director" class="movie-info"></td>
+                            <td><input type="text" name="director" class="movie-info" value="최주호"></td>
                         </tr>
                         <tr>
                             <td>주 연 배 우</td>
-                            <td><input type="text" name="actors" class="movie-info"></td>
+                            <td><input type="text" name="actors" class="movie-info" value="김성훈"></td>
                         </tr>
                         <tr>
                             <td>각 본</td>
-                            <td><input type="text" name="writers" class="movie-info"></td>
+                            <td><input type="text" name="writers" class="movie-info" value="이소연"></td>
                         </tr>
                         <tr>
                             <td>연 출</td>
-                            <td><input type="text" name="subDirector" class="movie-info"></td>
+                            <td><input type="text" name="subDirector" class="movie-info" value="장현정"></td>
                         </tr>
                         <tr>
                             <td>특 징</td>
-                            <td><input type="text" name="characteristic" class="movie-info"></td>
+                            <td><input type="text" name="characteristic" class="movie-info" value="쾌활한"></td>
                         </tr>
                         <tr>
                             <td style="vertical-align: middle; padding-bottom: 5px;">소 개</td>

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface MyListRepository extends JpaRepository<MyList, Integer> {
@@ -13,7 +14,14 @@ public interface MyListRepository extends JpaRepository<MyList, Integer> {
             FROM MyList m
             JOIN FETCH m.user u
             JOIN FETCH m.content c
-            WHERE u.id = :id
+            WHERE u.id = :id AND m.watchOrFav = 'FAVORITE'
             """)
     List<MyList> findMyListByUserId(@Param("id") int id);
+
+    @Query("""
+            SELECT m
+            FROM MyList m
+            WHERE m.user.id = :userId AND m.content.id = :contentId AND m.watchOrFav = 'FAVORITE'
+            """)
+    Optional<MyList>findByUserIdAndContentId(@Param("userId") int userId, @Param("contentId") int contentId);
 }
