@@ -45,7 +45,7 @@ public class MyListController {
         reqDTO.setUserId(sessionUser.getId());
         reqDTO.setContentId(contentId);
 
-        myListService.removeLike(reqDTO);
+        myListService.removeFavorite(reqDTO);
 
         return ResponseEntity.ok(new ApiUtil<>(true));  // 찜 취소 성공 여부를 JSON으로 반환
     }
