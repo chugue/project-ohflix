@@ -1,26 +1,28 @@
 // 영화 검색
 $(document).ready(function () {
-    // input.earche-input 값 저장
     $('.search-input').on('keyup', function () {
         var searchText = $(this).val().toLowerCase();
-        // div.scroll img 에서 해당 값 검색
-        $('.item').each(function () {
-            var title = $(this).data('title') ? $(this).data('title').toLowerCase() : "";
-            var genre = $(this).data('genre') ? $(this).data('genre').toLowerCase() : "";
-            // 있으면 show, 없으면 hide
-            if (title.includes(searchText) || genre.includes(searchText)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-
-        // 'searchText'가 ''이면 숨기기, 아니면 텍스트와 표시
         if (searchText !== '') {
-            $('#search-section').show();
-            $('#search-text').text(searchText).show();
-            $('.category').hide();
-            $('.movie').hide();
+            $.ajax({
+                url: '/api/search',
+                type: 'GET',
+                data: { query: searchText },
+                success: function (data) {
+                    var searchResults = $('#search-section .item-list');
+                    searchResults.empty();
+                    data.forEach(function (item) {
+                        var itemHTML = `
+                            <div class="item" data-title="${item.title}">
+                                <img src="${item.thumbnail}" alt="${item.title}">
+                            </div>
+                        `;
+                        searchResults.append(itemHTML);
+                    });
+                    $('#search-section').show();
+                    $('.category').hide();
+                    $('.movie').hide();
+                }
+            });
         } else {
             $('#search-section').hide();
             $('.category').show();
@@ -28,6 +30,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 
 // 영상 재생 로직
