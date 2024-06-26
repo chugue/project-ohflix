@@ -38,7 +38,7 @@ public class LikeService {
         Like like = new Like();
         like.setUser(user);
         like.setContent(content);
-        like.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
         likeRepository.save(like);
 
         return new LikeResponse.AddLikeDTO(reqDTO);
