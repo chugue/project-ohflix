@@ -277,39 +277,21 @@ public class UserResponse {
         }
     }
 
-    // 회원가입 DTO
+    // 회원가입 응답 DTO
     @Data
     public static class SignupDTO{
         // 회원가입 입력 값.
         private String email;
-        private String password;
         private String nickname;
-        private String name;
-        private String mobile;
+        private String password;
         // Default 값
-        private ProfileIcon profileIcon;// 프로필 아이콘
         private Status status;          // USER(사용자) / ADMIN(관리자)
-        private Rate userSaveRate;      // 사용자가 설정한 관람등급
-        private Boolean isKids;         // 키즈 등급 제한 여부
-        private Boolean loginSave;      // 로그인 정보 저장 여부
-        private Boolean isAutoPlay;     // 자동 재생 여부
-        private Boolean isSubscribe;    // 구독/비구독 회원
-        private Timestamp createdAt;
 
         public SignupDTO(User user) {
             this.email = user.getEmail();
             this.password = user.getPassword();
             this.nickname = user.getNickname();
-            this.name = user.getName();
-            this.mobile = user.getMobile();
-            this.profileIcon = user.getProfileIcon();
             this.status = user.getStatus();
-            this.userSaveRate = user.getUserSaveRate();
-            this.isKids = user.getIsKids();
-            this.loginSave = user.getLoginSave();
-            this.isAutoPlay = user.getIsAutoPlay();
-            this.isSubscribe = user.getIsSubscribe();
-            this.createdAt = user.getCreatedAt();
         }
     }
 }

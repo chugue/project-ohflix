@@ -2,12 +2,14 @@ package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.error.exception.Exception401;
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
@@ -307,9 +309,23 @@ public class UserService {
 
     // 회원가입 signUp
     @Transactional
-    public void Signup(UserRequest.SignupDTO reqDTO) {
-        User user = userRepository.save(reqDTO.toEntity());
-        new UserResponse.SignupDTO(user);
+    public UserResponse.SignupDTO Signup(UserRequest.SignupDTO reqDTO) {
+
+        User user = User.builder()
+                .email(reqDTO.getEmail())
+                .password(reqDTO.getPassword())
+                .nickname(reqDTO.getNickname())
+                .status(Status.USER)
+                .profileIcon(ProfileIcon.builder().id(1).build())
+                .userSaveRate(Rate.ALL)
+                .isKids(false)
+                .loginSave(false)
+                .isAutoPlay(false)
+                .isSubscribe(false)
+                .build();
+        User singupUser = userRepository.save(user);
+
+        return new UserResponse.SignupDTO(singupUser);
     }
 }
 
