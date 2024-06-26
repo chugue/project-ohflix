@@ -5,7 +5,6 @@ import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundService;
-import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -165,9 +163,14 @@ public class UserController {
     }
 
     // 회원가입 페이지 1/3
-    @GetMapping("/sign-up-page")
-    public String singUpPage() {
+    @GetMapping("/sign-up-page-step1")
+    public String singUpPageStep1() {
 
-        return "sign-up-page";
+        return "sign-up-page-step1";
+    }
+    @GetMapping("/sign-up-page-step2")
+    public String singUpPageStep2() {
+
+        return "sign-up-page-step2";
     }
 }
