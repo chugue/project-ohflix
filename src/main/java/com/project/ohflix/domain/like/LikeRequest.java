@@ -11,7 +11,7 @@ public class LikeRequest {
     public static class AddLikeDTO {
         private Integer userId;
         private Integer contentId;
-        private Timestamp createdAt;
+
     }
 
     // 좋아요 취소
@@ -19,6 +19,6 @@ public class LikeRequest {
     public static class RemoveLikeDTO {
         private Integer userId;
         private Integer contentId;
-        private Timestamp createdAt;
+
     }
 }
