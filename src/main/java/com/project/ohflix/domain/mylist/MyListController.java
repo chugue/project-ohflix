@@ -1,8 +1,6 @@
 package com.project.ohflix.domain.mylist;
 
-import com.project.ohflix.domain.profileIcon.ProfileIconResponse;
-import com.project.ohflix.domain.profileIcon.ProfileIconService;
-import com.project.ohflix.domain.user.User;
+import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +17,8 @@ public class MyListController {
 
     @GetMapping("/api/my-favorite-list")
     public String getMyFavList(HttpServletRequest request) {
-        User sessionUser = (User) httpSession.getAttribute("sessionUser");
-        // TODO : 로그인 구현 할 시 1대신 sessionUser.getId() 사용하기
-        List<MyListResponse.MyFavoriteListDTO> respDTOList = myListService.findMyListById(1);
+        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("sessionUser");
+        List<MyListResponse.MyFavoriteListDTO> respDTOList = myListService.findMyListById(sessionUser.getId());
         request.setAttribute("myFavoriteList", respDTOList);
         return "mylist/my-favorite-list";
     }

@@ -29,11 +29,10 @@ public class User {
 
     private String mobile; // 전화번호
 
-    @Column(nullable = false)
-    private String username; // 유저 아이디
+    @Column(unique = true, nullable = false)
+    private String nickname; // 유저 닉네임, 유니크
 
-    @Column(nullable = false)
-    private String name; // 유저 성리
+    private String name; // 유저 이름
 
     @OneToOne
     private ProfileIcon profileIcon; // 프로필 아이콘
@@ -55,12 +54,12 @@ public class User {
     private String provider; // kakao, naver
 
     @Builder
-    public User(Integer id, String email, String password, String mobile, String username, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt, String address, String provider) {
+    public User(Integer id, String email, String password, String mobile, String nickname, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Status isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt, String address, String provider) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.mobile = mobile;
-        this.username = username;
+        this.nickname = nickname;
         this.name = name;
         this.profileIcon = profileIcon;
         this.status = status;
