@@ -327,7 +327,38 @@ nav ul li a {
     color: #fff;
     background-color: #6d6d6eb3;
 }
+/* 설명 숨기, 이미지 작아지기 */
+@keyframes fadeOutAndShrink  {
+    0% {
+        opacity: 1;
+        max-height: 4.5vw;
+    }
+    33%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        max-height: 0;
+    }
+}
+@keyframes shrinkImg {
+    0% {
+        max-width: 100%;
+    }
+    100% {
+        max-width: 60%;
+    }
+}
+.shrink-img{
+    animation: shrinkImg  1.3s ease-out forwards;
+    animation-delay: 5s; /* 5초 후에 애니메이션 시작 */
+}
 
+.fade-out {
+    animation: fadeOutAndShrink  1.3s ease-out forwards;
+    animation-delay: 5s; /* 5초 후에 애니메이션 시작 */
+}
+/* 설명 숨기, 이미지 작아지기 */
 /* 영상 섹션 종료 */
 
 /* 카테고리 섹션 시작 */
@@ -346,12 +377,14 @@ nav ul li a {
     /* margin: 0 4%; */
     padding: 0 4%;
 }
-
+.swiper-wrapper{
+    height: 100%;
+}
 .swiper-slide {
     position: relative;
     overflow: hidden;
     border-radius: .2vw;
-
+    height: 13vw;
 }
 
 .rank {
@@ -361,11 +394,23 @@ nav ul li a {
     height: 100%;
     overflow: hidden;
     align-items: center; /* 세로 중앙 정렬 */
+    object-fit: fill;
 }
 
-.top10-moive-img {
+.poster{
     width: 50%;
+    height: 100%;
+    overflow: hidden;
     margin-left: 50%;
+}
+
+.rank img{
+    height: 100%;
+}
+.poster img{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .swiper-button-prev,
@@ -408,8 +453,10 @@ nav ul li a {
     cursor: pointer;
 }
 
-.item img {
+.item img{
     width: 100%;
+    height: 100%; /* 이미지 높이를 부모 요소에 맞게 설정 */
+    object-fit: cover; /* 이미지의 가로 세로 비율을 유지하면서 부모 요소에 맞추기 */
 }
 
 @media (min-width: 1100px) {

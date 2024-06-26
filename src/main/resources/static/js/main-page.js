@@ -28,3 +28,68 @@ $(document).ready(function () {
         }
     });
 });
+
+
+// 영상 재생 로직
+document.addEventListener('DOMContentLoaded', initApp);
+
+function initApp() {
+    // Install built-in polyfills to patch browser incompatibilities.
+    shaka.polyfill.installAll();
+
+    // Check if the browser supports the basic APIs Shaka needs.
+    if (shaka.Player.isBrowserSupported()) {
+        // Everything looks good!
+        initPlayer();
+    } else {
+        // This browser does not have the minimum set of APIs we need.
+        console.error('Browser not supported!');
+    }
+}
+
+function initPlayer() {
+    // Create a Player instance.
+    const video = document.getElementById('videoPlayer');
+    const player = new shaka.Player(video);
+
+    // Attach player to the window to make it easy to access in the JS console.
+    window.player = player;
+
+    // Listen for error events.
+    player.addEventListener('error', onErrorEvent);
+
+    // 비디오 URL 설정
+    const videoUrl = video.getAttribute('data-video-url');
+
+    console.log(videoUrl)
+    // Load the video
+    loadVideo('/path/to/your/video.mpd');
+}
+
+function loadVideo(videoUrl) {
+    const player = window.player;
+
+    // Try to load a manifest.
+    // This is an asynchronous process.
+    try {
+        player.load(videoUrl).then(function () {
+            // This runs if the asynchronous load is successful.
+            console.log('The video has now been loaded!');
+        }).catch(onError);  // onError is executed if the asynchronous load fails.
+    } catch (e) {
+        onError(e);
+    }
+}
+
+function onErrorEvent(event) {
+    // Extract the shaka.util.Error object from the event.
+    onError(event.detail);
+}
+
+function onError(error) {
+    // Log the error.
+    console.error('Error code', error.code, 'object', error);
+    if (error.code === 7002) {
+        console.error('Manifest loading error. Please check the manifest URL and CORS settings.');
+    }
+}
