@@ -134,7 +134,7 @@ public class ContentResponse {
         }
     }
 
-    // 메인  상세 정보 페이지 + 찜 여부
+    // 메인  상세 정보 페이지 + 찜 여부 + 좋아요 여부
     @Data
     public static class MainContent {
         private Integer id;
@@ -153,8 +153,9 @@ public class ContentResponse {
         private String director;
 
         private boolean isFavorite;
+        private boolean isLike;
 
-        public MainContent(Content content, boolean isFavorite) {
+        public MainContent(Content content, boolean isFavorite, boolean isLike) {
             this.id = content.getId();
             this.mainPhoto = content.getMainPhoto();
             this.title = content.getTitle();
@@ -170,7 +171,8 @@ public class ContentResponse {
             this.characteristics = content.getCharacteristic();
             this.introduction = content.getIntroduction();
 
-            this.isFavorite = isFavorite;
+            this.isFavorite = isFavorite; // 찜 여부
+            this.isLike = isLike; // 좋아요 여부
         }
     }
 
