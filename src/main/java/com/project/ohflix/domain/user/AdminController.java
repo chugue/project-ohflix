@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
 
+import com.project.ohflix.domain._enums.Genre;
+import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain.content.ContentRequest;
 import com.project.ohflix.domain.content.ContentService;
 import com.project.ohflix.domain.refund.RefundResponse;
@@ -56,8 +58,9 @@ public class AdminController {
 
     // 영화 업로드
     @GetMapping("/admin/admin-upload")
-    public String adminUpload() {
-
+    public String adminUpload(HttpServletRequest request) {
+        request.setAttribute("genre", Genre.values());
+        request.setAttribute("rate", Rate.values());
         return "admin/admin-upload";
     }
 

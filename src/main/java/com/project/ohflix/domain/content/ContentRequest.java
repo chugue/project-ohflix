@@ -28,25 +28,14 @@ public class ContentRequest {
         private MultipartFile textPhoto;
 
         public Content toEntity() {
-            Rate entityRate = null;
-            Genre entityGenre = null;
-            for (Rate enumRate : Rate.values()) {
-                if (enumRate.getValue().equalsIgnoreCase(rate)) {
-                    entityRate=enumRate;
-                }
-            }
-            for (Genre enumGenre : Genre.values()) {
-                if (enumGenre.getValue().equalsIgnoreCase(genre)) {
-                    entityGenre=enumGenre;
-                }
-            }
+            String pasingFileName=fileName.toString().replace(".mp4", "");
             return Content.builder()
                     .title(title)
                     .thumbnail("src/main/resources/static/images/movie/"+thumbnail.getOriginalFilename())
                     .mainPhoto("src/main/resources/static/images/movie/"+mainPhoto.getOriginalFilename())
                     .posterPhoto("src/main/resources/static/images/movie/"+posterPhoto.getOriginalFilename())
                     .textPhoto("src/main/resources/static/images/movie/"+textPhoto.getOriginalFilename())
-                    .videoPath(fileName)
+                    .videoPath("videolocation/"+pasingFileName+"/"+pasingFileName+".mpd")
                     .director(director)
                     .introduction(introduction)
                     .characteristic(characteristic)
@@ -54,8 +43,8 @@ public class ContentRequest {
                     .productYear(productYear)
                     .writers(writers)
                     .actors(actors)
-                    .rate(entityRate)
-                    .genre(entityGenre)
+                    .rate(Rate.valueOf(rate))
+                    .genre(Genre.valueOf(genre))
                     .build();
         }
     }
