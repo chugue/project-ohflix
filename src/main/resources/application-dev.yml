@@ -30,7 +30,7 @@ spring:
       enabled: true
   sql:
     init:
-      mode: always
+      mode: never
       data-locations:
         - classpath:db/data.sql
 
@@ -53,3 +53,8 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
     com.example.final_project: DEBUG
 
+kakao:
+  pay:
+    cid: 75C2792C3E7F40A5ACD9
+    secret-key: DEV52EF90C7687B197A07671E2022D8CA2216CD
+    redirect-url: http://localhost:8080/api/payment
