@@ -96,6 +96,7 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
+    //content sava
     public void saveContent(ContentRequest.AdminUploadDTO requestDTO) {
         contentRepository.save(requestDTO.toEntity());
     }

@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 @RequiredArgsConstructor
 @Controller
 public class MainController {
@@ -40,6 +42,12 @@ public class MainController {
     @GetMapping("/err/400")
     public String getErrorPage() {
         return "err";
+    }
+
+    @GetMapping("/api/contentId/play")
+    public String getMainPage(@PathVariable String contentId, HttpServletRequest request) {
+
+        return "main-page";
     }
 
 }
