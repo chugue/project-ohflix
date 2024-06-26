@@ -54,15 +54,15 @@ public class MyListService {
 
     // 찜 취소 기능
     @Transactional
-    public MyListResponse.RemoveFavoriteDTO removeLike(MyListRequest.RemoveFavoriteDTO reqDTO) {
-        Optional<MyList> like = myListRepository.findByUserIdAndContentId(reqDTO.getUserId(), reqDTO.getContentId());
-        if (like.isPresent()) {
-            myListRepository.delete(like.get());
+    public MyListResponse.RemoveFavoriteDTO removeFavorite(MyListRequest.RemoveFavoriteDTO reqDTO) {
+        Optional<MyList> favorite = myListRepository.findByUserIdAndContentId(reqDTO.getUserId(), reqDTO.getContentId());
+        if (favorite.isPresent()) {
+            myListRepository.delete(favorite.get());
             boolean isFavorite = false;
             isFavorite(isFavorite);
             return new MyListResponse.RemoveFavoriteDTO(reqDTO);
         } else {
-            throw new Exception404("해당 좋아요가 존재하지 않습니다.");
+            throw new Exception404("해당 컨텐츠가 존재하지 않습니다.");
         }
     }
 

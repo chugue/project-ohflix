@@ -62,9 +62,11 @@
                                 <div class="buttons">
                                     <a href="#" class="play-button playButton" data-filename="videolocation/spiderman/spiderman.mpd">▶ 재생</a>
                                     <button id="favoriteButton" class="icon">
-                                        ${data.response.isFavorite ? '<i class="fa-regular fa-circle-check"></i>' : '<i class="fa-solid fa-plus"></i>'}
+                                        ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>'}
                                     </button>
-                                    <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
+                                    <button id="likeButton" class="icon">
+                                        ${data.response.isLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>'}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +118,12 @@
                         favoriteButton.addEventListener('click', function () {
                             toggleFavorite(contentId, data.response.isFavorite, favoriteButton);
                         });
+
+                        // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
+                        const likeButton = document.getElementById('likeButton');
+                        likeButton.addEventListener('click', function () {
+                            toggleLike(contentId, data.response.isLike, likeButton);
+                        });
                         // 비디오 재생 버튼 클릭 이벤트 리스너 추가
                         document.querySelector('.playButton').addEventListener('click', function (event) {
                             event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
@@ -142,7 +150,7 @@
                             // 찜 상태를 반대로 변경
                             const newIsFavorite = !isFavorite;
                             // 버튼 아이콘 업데이트
-                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-regular fa-circle-check"></i>' : '<i class="fa-solid fa-plus"></i>';
+                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
                             // 다음 클릭 시의 상태를 업데이트
                             favoriteButton.onclick = function () {
                                 toggleFavorite(contentId, newIsFavorite, favoriteButton);
@@ -155,6 +163,29 @@
                         console.error('Error:', error);
                     });
         }
+
+        function toggleLike(contentId, isLike, likeButton) {
+            const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
+            fetch(url, { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            // 찜 상태를 반대로 변경
+                            const newIsLike = !isLike;
+                            // 버튼 아이콘 업데이트
+                            likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
+                            // 다음 클릭 시의 상태를 업데이트
+                            likeButton.onclick = function () {
+                                toggleLike(contentId, newIsLike, likeButton);
+                            };
+                        } else {
+                            console.error('Failed to update like status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+        }
+
 
         document.addEventListener('DOMContentLoaded', initApp2);
 
