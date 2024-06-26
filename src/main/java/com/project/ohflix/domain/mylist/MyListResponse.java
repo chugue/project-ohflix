@@ -18,7 +18,7 @@ public class MyListResponse {
         Content content;        // 콘텐츠 테이블
         Timestamp createdAt;
         String playedTime;      // 이어보기 재생시간
-        WatchOrFav watchOrFav;  // WATCHING or FAVORITE
+        Boolean isFavorite;  // WATCHING or FAVORITE
 
         public MyFavoriteListDTO(MyList myList) {
             this.id = myList.getId();
@@ -26,7 +26,12 @@ public class MyListResponse {
             this.content = myList.getContent();
             this.createdAt = myList.getCreatedAt();
             this.playedTime = myList.getPlayedTime();
-            this.watchOrFav = myList.getWatchOrFav();
+            if(myList.getWatchOrFav() == WatchOrFav.FAVORITE){
+                this.isFavorite = true;
+            } else{
+                this.isFavorite = false;
+            }
+
         }
     }
 

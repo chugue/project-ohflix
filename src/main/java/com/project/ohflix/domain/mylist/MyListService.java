@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.mylist;
 
+import com.project.ohflix._core.error.exception.Exception400;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.WatchOrFav;
 import com.project.ohflix.domain.content.Content;
@@ -32,6 +33,9 @@ public class MyListService {
     // 찜 기능
     @Transactional
     public MyListResponse.AddFavoriteDTO addFavorite(MyListRequest.AddFavoriteDTO reqDTO) {
+        if (myListRepository.findByUserIdAndContentId(reqDTO.getUserId(), reqDTO.getContentId()).isPresent()) {
+            throw new Exception400("이미 찜 되어있는 컨텐츠입니다.");
+        }
 
         User user = userRepository.findById(reqDTO.getUserId()).orElseThrow(() -> new Exception404("해당하는 사용자를 찾을 수 없습니다."));
         Content content = contentRepository.findById(reqDTO.getContentId()).orElseThrow(() -> new Exception404("해당하는 컨텐츠를 찾을 수 없습니다."));

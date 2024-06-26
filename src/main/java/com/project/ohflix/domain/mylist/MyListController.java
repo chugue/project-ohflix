@@ -1,9 +1,11 @@
 package com.project.ohflix.domain.mylist;
 
+import com.project.ohflix._core.utils.ApiUtil;
 import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,27 +28,25 @@ public class MyListController {
         return "mylist/my-favorite-list";
     }
 
-    // 찜하기
     @PostMapping("/api/users/{contentId}/favorite")
-    public String addFavorite(@PathVariable int contentId, MyListRequest.AddFavoriteDTO reqDTO) {
+    public ResponseEntity<?> addFavorite(@PathVariable int contentId, MyListRequest.AddFavoriteDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         reqDTO.setUserId(sessionUser.getId());
         reqDTO.setContentId(contentId);
 
         myListService.addFavorite(reqDTO);
 
-        return "redirect:/my-favorite-list";
+        return ResponseEntity.ok(new ApiUtil<>(true));  // 찜 성공 여부를 JSON으로 반환
     }
 
-    // 찜 취소
     @PostMapping("/api/users/{contentId}/unfavorite")
-    public String RemoveFavorite(@PathVariable int contentId, MyListRequest.RemoveFavoriteDTO reqDTO) {
+    public ResponseEntity<?> removeFavorite(@PathVariable int contentId, MyListRequest.RemoveFavoriteDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         reqDTO.setUserId(sessionUser.getId());
         reqDTO.setContentId(contentId);
 
         myListService.removeLike(reqDTO);
 
-        return "redirect:/my-favorite-list";
+        return ResponseEntity.ok(new ApiUtil<>(true));  // 찜 취소 성공 여부를 JSON으로 반환
     }
 }
