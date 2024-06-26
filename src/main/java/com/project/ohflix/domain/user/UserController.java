@@ -163,9 +163,9 @@ public class UserController {
     }
 
     // 회원가입 페이지 1/3
-    @GetMapping("/sign-up-page-step1")
-    public String singUpPageStep1() {
-
+    @GetMapping("/signup")
+    public String singUpPage(String email, String password) {
+        userService.SignUp(email, password);
         return "sign-up-page-step1";
     }
     @GetMapping("/sign-up-page-step2")

@@ -306,6 +306,15 @@ public class UserService {
 
         return new SessionUser(user);
     }
+
+    // 회원가입 signUp
+    public void SignUp(String email, String password){
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+
+        userRepository.save(user);
+    }
 }
 
 
