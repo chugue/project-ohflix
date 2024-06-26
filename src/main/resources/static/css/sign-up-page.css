@@ -10,7 +10,7 @@ html {
 }
 /* 전환 애니메이션 */
 section {
-    transition: transform 5s ease, opacity 0.2s ease;
+    transition: transform .2s ease, opacity .2s ease;
     transform: translateX(0);
     opacity: 1;
 }
@@ -21,7 +21,7 @@ section.hide {
     opacity: 0;
 }
 section.hide2 {
-    transform: translateX(500%);
+    transform: translateX(100%);
     opacity: 0;
 }
 

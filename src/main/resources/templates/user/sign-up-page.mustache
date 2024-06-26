@@ -42,18 +42,9 @@
                         <label for="password">비밀번호를 입력해주세요</label>
                     </div>
                     <div class="input-container">
-                        <input type="text" id="name" name="name" required value="쌀보리">
-                        <label for="name">이름을 입력해주세요</label>
-                    </div>
-                    <div class="input-container">
                         <input type="text" id="nickname" name="nickname" required value="쌀쌀">
                         <label for="nickname">닉네임을 입력해주세요</label>
                     </div>
-                    <div class="input-container">
-                        <input type="tel" id="mobile" name="mobile" required value="010-9999-9999">
-                        <label for="mobile">전화번호를 입력해주세요</label>
-                    </div>
-                    <!-- 전화번호 입력-->
                 </div>
                 <div class="checkbox-group">
                     <div>
@@ -61,7 +52,7 @@
                         <label for="privacy1">예, 저는 개인정보 처리방침에 따른 개인정보 수집 및 활용에 동의합니다. (상세 정보)</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="privacy2" name="privacy2" unchecked>
+                        <input type="checkbox" id="privacy2" name="privacy2">
                         <label for="privacy2">예, 오플릭스 특별 할인 알림 이메일을 보내주세요 (선택사항)</label>
                     </div>
                 </div>
@@ -72,7 +63,7 @@
                     // 폼 제출 시 hide 클래스 추가
                     document.querySelector("section").classList.add("hide");
 
-                    // 0.5초 후에 hide 클래스 제거
+                    // 0.5초 후에 hide 클래스 제거 - 500ms 작동X
                     setTimeout(function () {
                         document.querySelector("section").classList.remove("hide");
                     }, 500);

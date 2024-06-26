@@ -24,17 +24,12 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
-
+    @Column(unique = true, nullable = false)
+    private String nickname; // 유저 닉네임, 유니크
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     private String mobile; // 전화번호
-
-    @Column(unique = true, nullable = false)
-    private String nickname; // 유저 닉네임, 유니크
-
-    @Column(nullable = false)
     private String name; // 유저 이름
 
     @ManyToOne

@@ -66,6 +66,7 @@
                     // 0.5초 후에 지정된 URL로 이동 (여기서는 홈페이지)
                     setTimeout(function () {
                         window.location.href = "/";
+                        document.querySelector("section").classList.remove("hide2")
                     }, 500);
                 });
             </script>
