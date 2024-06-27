@@ -78,5 +78,9 @@ public class User {
         this.provider = provider;
     }
 
+    public void updatePassword (UserRequest.UpdatePasswordDTO reqDTO) {
+        this.password = reqDTO.getNewPasswordCheck();
+    }
+
     
 }
