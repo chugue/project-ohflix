@@ -370,6 +370,11 @@ nav ul li a {
     position: relative;
 }
 
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
 .category h2 {
     padding: 20px;
     font-size: 2vw;

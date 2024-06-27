@@ -34,7 +34,7 @@
 {{#MyFavoriteListDTO}}
 <!-- 헤더 -->
 <header>
-    <a href="/">
+    <a href="/api/main-page">
         <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
     </a>
     <nav>
@@ -207,84 +207,6 @@
 {{/MyFavoriteListDTO}}
 </body>
 <!--  모달 내용-->
-{{> /_components/content-detail}}
-<!--<div id="modalWrap"> &lt;!&ndash; 모달 창을 감싸는 div &ndash;&gt;-->
-<!--    <div id="modalBody">-->
-<!--        <span id="closeBtn">&times;</span> &lt;!&ndash; 모달을 닫는 X 버튼 &ndash;&gt;-->
-<!--        <div class="body-container">-->
-<!--            &lt;!&ndash; 헤더 start &ndash;&gt;-->
-<!--            <div class="header-container">-->
-<!--                <div class="play">-->
-<!--                    <div class="title">서울의 봄</div>-->
-<!--                    <div class="buttons">-->
-<!--                        <a href="#" class="play-button">▶ 재생</a>-->
-<!--                        <a href="#" class="icon"><i class="fa-solid fa-plus"></i></a>-->
-<!--                        <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; 헤더 end &ndash;&gt;-->
-
-<!--            <div class="containermargin">-->
-<!--                <div class="container">-->
-<!--                    <div class="container1">-->
-<!--                        <div class="introduce">-->
-<!--                            <div class="info">-->
-<!--                                <span class="match">98% 일치</span>-->
-<!--                                <span>2023</span>-->
-<!--                                <span>2시간 21분</span>-->
-<!--                                <span>HD</span>-->
-<!--                            </div>-->
-<!--                            <div class="metadata">-->
-<!--                                <div><img src="/static/images/12.png" alt=""/></div>-->
-<!--                            </div>-->
-<!--                            <div class="description">-->
-<!--                                대통령의 죽음으로 군부대가 뒤흔들린 시기. 보안사령관이 서울-->
-<!--                                장악을 목표로 무자비한 계략을 밀어붙이면서 온 나라가 혼란에 빠질-->
-<!--                                위기에 처한다.-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="details">-->
-<!--                            <div class="cast">출연: 황정민, 정우성, 이성민, 더 보기</div>-->
-<!--                            <div class="genre">장르: 스릴러 영화</div>-->
-<!--                            <div class="features">영화 특징: 긴장감 넘치는</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="container2">-->
-<!--                    <div class="title2">서울의 봄 상세 정보</div>-->
-<!--                    <div class="details2">-->
-<!--                        <div>감독: 김성수</div>-->
-<!--                        <div>출연: 황정민, 정우성, 이성민, 박해준, 김성균</div>-->
-<!--                        <div>각본: 홍인표, 홍원찬, 이영풍, 김성수</div>-->
-<!--                        <div>장르: 스릴러 영화</div>-->
-<!--                        <div>영화 특징: 긴장감 넘치는</div>-->
-<!--                        <div class="rating">-->
-<!--                            <span>관람등급: <img src="/static/images/12.png" alt=""/>12세 이상관람가</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+{{> /_components/favorite-content-detail}}
+<!--  모달 끝-->
 </html>
-<!--<script>-->
-<!--    const img = document.getElementById("popupImg"); // 모달을 띄우는 버튼 요소 가져오기-->
-<!--    const modal = document.getElementById("modalWrap"); // 모달 창 요소 가져오기-->
-<!--    const closeBtn = document.getElementById("closeBtn"); // 모달을 닫는 버튼(X) 요소 가져오기-->
-
-<!--    img.onclick = function () {-->
-<!--        modal.style.display = "block"; // 버튼을 클릭하면 모달을 보이게 함-->
-<!--    };-->
-
-<!--    closeBtn.onclick = function () {-->
-<!--        modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김-->
-<!--    };-->
-
-<!--    window.onclick = function (event) {-->
-<!--        if (event.target == modal) {-->
-<!--            modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김-->
-<!--        }-->
-<!--    };-->
-<!--</script>-->
