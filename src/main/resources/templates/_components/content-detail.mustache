@@ -60,7 +60,7 @@
                                     <img src="${data.response.textPhoto}" />
                                 </div>
                                 <div class="buttons">
-                                    <a href="#" class="play-button playButton" data-filename="videolocation/spiderman/spiderman.mpd">▶ 재생</a>
+                                    <a href="#" class="play-button playButton" data-filename="${data.response.videoPath}">▶ 재생</a>
                                     <button id="favoriteButton" class="icon">
                                         ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>'}
                                     </button>
@@ -129,7 +129,8 @@
                             event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
                             const filename = this.dataset.filename;
                             if (filename) {
-                                const videoUrl = `http://localhost:7000/videos?filename=spiderman.mpd`;
+                                const s3BaseUrl = 'https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/';
+                                const videoUrl = `${s3BaseUrl}${filename}`;
                                 loadVideo2(videoUrl);
                             } else {
                                 alert('먼저 동영상을 업로드해주세요.');

@@ -139,6 +139,7 @@ public class ContentResponse {
     public static class MainContent {
         private Integer id;
         private String title;
+        private String videoPath;
         private String mainPhoto;
         private String productYear;
         private String playTime;
@@ -157,6 +158,7 @@ public class ContentResponse {
 
         public MainContent(Content content, boolean isFavorite, boolean isLike) {
             this.id = content.getId();
+            this.videoPath = content.getVideoPath();
             this.mainPhoto = content.getMainPhoto();
             this.title = content.getTitle();
             this.productYear = content.getProductYear();
