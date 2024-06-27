@@ -34,7 +34,7 @@ $(document).ready(function () {
 
 
 
-// 영상 재생 로직
+// ▶️⏯️영상 재생 로직
 document.addEventListener('DOMContentLoaded', initApp);
 
 function initApp() {
