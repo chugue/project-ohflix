@@ -24,10 +24,14 @@ public class MyListService {
     private final UserRepository userRepository;
     private final ContentRepository contentRepository;
 
-    public List<MyListResponse.MyFavoriteListDTO> findMyListById(Integer sessionUserId) {
+    @Transactional
+    public MyListResponse.MyFavoriteListDTO findMyListById(Integer sessionUserId) {
+        // 헤더 유저 가져오기 ( 프로필 아이콘 )
+        User user = userRepository.findUserProfileById(sessionUserId);
+
         List<MyList> myFavoriteList = myListRepository.findMyListByUserId(sessionUserId);
 
-        return myFavoriteList.stream().map(myList -> new MyListResponse.MyFavoriteListDTO(myList)).toList();
+        return new MyListResponse.MyFavoriteListDTO(user, myFavoriteList);
     }
 
     // 찜 기능

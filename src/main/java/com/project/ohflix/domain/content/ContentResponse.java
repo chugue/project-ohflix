@@ -5,7 +5,11 @@ import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Top10Enum;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.user.User;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
+
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,12 +22,14 @@ public class ContentResponse {
 
     @Data  // 메인 페이지 데이터
     public static class MainPageDTO {
+        private ProfileIcon profileIcon;
         private MainContent mainContent;
         private List<Top10> top10List;
         private List<New> newList;
         private List<Navbar> navbarList;
 
-        public MainPageDTO(Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+        public MainPageDTO(User user, Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+            this.profileIcon =  user.getProfileIcon();
             this.mainContent = new MainContent(mainContent);
             // Top10 list mapping with rankPath assignment
             List<Top10> sortedTop10List = top10List.stream()
@@ -275,29 +281,41 @@ public class ContentResponse {
             }
         }
     }
-
     @Data
-    public static class LatestContentDTO {
-        private Integer contentId;
-        private String thumbnail;       // 썸네일
-        private String posterPhoto;       // 썸네일
-        private Timestamp createdAt;
+    public static class LatestContentDTO{
+        private ProfileIcon profileIcon;
+        private List<LatestContentList> latestContentList;
 
-        public LatestContentDTO(Content content) {
-            this.contentId = content.getId();
-            this.thumbnail = content.getThumbnail();
-            this.posterPhoto = content.getPosterPhoto();
-            this.createdAt = content.getCreatedAt();
+        public LatestContentDTO(User user, List<Content> latestContentList) {
+            this.profileIcon = user.getProfileIcon();
+            this.latestContentList = latestContentList.stream().map(LatestContentList::new).toList();
+        }
+
+        @Data
+        public static class LatestContentList {
+            private Integer contentId;
+            private String thumbnail;       // 썸네일
+            private String posterPhoto;       // 썸네일
+            private Timestamp createdAt;
+
+            public LatestContentList(Content content) {
+                this.contentId = content.getId();
+                this.thumbnail = content.getThumbnail();
+                this.posterPhoto = content.getPosterPhoto();
+                this.createdAt = content.getCreatedAt();
+            }
         }
     }
 
+
+
     @Data
-    public static class CanclePlanPageContentDTO {
+    public static class CancelPlanPageContentDTO {
         private Integer id;
         private String posterPhoto;       // 썸네일
         private Timestamp createdAt;
 
-        public CanclePlanPageContentDTO(Content content) {
+        public CancelPlanPageContentDTO(Content content) {
             this.id = content.getId();
             this.posterPhoto = content.getPosterPhoto();
             this.createdAt = content.getCreatedAt();

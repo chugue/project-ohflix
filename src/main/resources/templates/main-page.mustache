@@ -42,8 +42,8 @@
     </a>
     <nav>
         <ul>
-            <li><a href="/">홈</a></li>
-            <li><a href="/">영화</a></li>
+            <li><a href="/api/main-page">홈</a></li>
+            <li><a href="/api/main-page">영화</a></li>
             <li><a href="/api/latest-content">최신 콘텐츠</a></li>
             <li><a href="/api/my-favorite-list">내가 찜한 콘텐츠</a></li>
         </ul>
@@ -76,7 +76,7 @@
         <!--  알람 드롭 다운 메뉴 종료  -->
         <!--  프로필 드롭 다운 메뉴 시작  -->
         <div class="dropdown">
-            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
+            <button class="dropdown-button"><img src={{MainPageDTO.profileIcon.path}} alt="Profile"/></button>
             <div class="dropdown-content">
                 <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
                 <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>

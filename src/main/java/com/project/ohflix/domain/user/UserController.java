@@ -84,7 +84,7 @@ public class UserController {
     @GetMapping("/api/cancel-plan")
     public String getCancelPlan(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        UserResponse.CancelPlanPageDTO respDTO = userService.userCanclePlan(sessionUser.getId());
+        UserResponse.CancelPlanPageDTO respDTO = userService.userCancelPlan(sessionUser.getId());
 
         request.setAttribute("CancelPlanPageDTO", respDTO);
         return "user/cancel-plan";
