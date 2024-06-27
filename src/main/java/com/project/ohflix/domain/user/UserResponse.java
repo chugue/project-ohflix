@@ -21,6 +21,17 @@ import java.util.List;
 
 public class UserResponse {
 
+    // 비밀번호 변경 페이지
+    @Data
+    public static class UpdatePasswordDTO {
+        private String newPassword;
+
+
+        public UpdatePasswordDTO(User user) {
+            this.newPassword = user.getPassword();
+        }
+    }
+
     // 로그인 사용자의 관람등급 가져오기
     @Data
     public static class RestrictionLevelDTO {
