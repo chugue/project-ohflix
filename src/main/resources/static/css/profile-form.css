@@ -38,6 +38,7 @@ header h1 {
     border-radius: 5%;
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 
 .clip-icon {

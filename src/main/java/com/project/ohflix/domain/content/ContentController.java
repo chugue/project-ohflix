@@ -1,6 +1,10 @@
 package com.project.ohflix.domain.content;
 
+import com.project.ohflix.domain.user.SessionUser;
+import com.project.ohflix.domain.user.User;
+import com.project.ohflix.domain.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +18,13 @@ import java.util.List;
 @Controller
 public class ContentController {
     private final ContentService contentService;
+    private final HttpSession session;
     
     // 최신 콘텐츠 페이지
     @GetMapping("/api/latest-content")
     public String getLatest(HttpServletRequest request) {
-        List<ContentResponse.LatestContentDTO> respDTOList = contentService.findLatestContent();
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        ContentResponse.LatestContentDTO respDTOList = contentService.findLatestContent(sessionUser.getId());
         request.setAttribute("latestContentDTO", respDTOList);
 
         return "content/latest-content";

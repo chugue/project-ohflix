@@ -135,7 +135,7 @@ public class UserResponse {
         //        private Timestamp oldestCreatedAt;     // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
         private String oldestPurchaseHistory;     // 가장 최근의 servicePeriod
-        private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
+        private List<ContentResponse.CancelPlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
 
         // ~ 뒤의 날짜를 추출
         private String endDate(String servicePeriod) {
@@ -168,7 +168,7 @@ public class UserResponse {
             this.oldestServicePeriod = startDate(oldestPurchaseHistory != null ? oldestPurchaseHistory.getServicePeriod() : null);
             this.latestServicePeriod = endDate(latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null);
             this.latestContentList = latestContentList.stream()
-                    .map(ContentResponse.CanclePlanPageContentDTO::new)
+                    .map(ContentResponse.CancelPlanPageContentDTO::new)
                     .toList();
         }
     }

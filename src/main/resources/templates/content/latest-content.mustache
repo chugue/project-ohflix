@@ -31,179 +31,180 @@
 </head>
 
 <body>
-<!-- 헤더 -->
-<header>
-    <a href="/api/main-page">
-        <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
-    </a>
-    <nav>
-        <ul>
-            <li><a href="/api/main-page">홈</a></li>
-            <li><a href="/api/main-page">영화</a></li>
-            최신
-            <li><a href="/api/latest-content"> 콘텐츠</a></li>
-            <li><a href="/api/my-favorite-list">내가 찜한 콘텐츠</a></li>
-        </ul>
-    </nav>
-    <div class="right_menu">
-        <!-- 검색 메뉴 -->
-        <div class="search-container">
-            <!-- <i class="fa-solid fa-magnifying-glass search-icon"></i> -->
-            <span class="material-icons search-icon">search</span>
-            <input type="text" class="search-input" placeholder="제목, 사람, 장르">
-        </div>
-        <!--  알람 드롭 다운 메뉴  -->
-        <div class="dropdown">
-            <button class="dropdown-button"><i class="far fa-bell"></i></button>
-            <div class="dropdown-notification">
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify1.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">브리저튼</div>
-                        <div class="notification-time">5일</div>
+{{#latestContentDTO}}
+    <!-- 헤더 -->
+    <header>
+        <a href="/">
+            <div class="logo"><img src="/static/images/OH!FLIX.png" alt="로고 이미지"></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="/api/main-page">홈</a></li>
+                <li><a href="/api/main-page">영화</a></li>
+                <li><a href="/api/latest-content">최신 콘텐츠</a></li>
+                <li><a href="/api/my-favorite-list">내가 찜한 콘텐츠</a></li>
+            </ul>
+        </nav>
+        <div class="right_menu">
+            <!-- 검색 메뉴 -->
+            <div class="search-container">
+                <!-- <i class="fa-solid fa-magnifying-glass search-icon"></i> -->
+                <span class="material-icons search-icon">search</span>
+                <input type="text" class="search-input" placeholder="제목, 사람, 장르">
+            </div>
+            <!--  알람 드롭 다운 메뉴  -->
+            <div class="dropdown">
+                <button class="dropdown-button"><i class="far fa-bell"></i></button>
+                <div class="dropdown-notification">
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify1.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">브리저튼</div>
+                            <div class="notification-time">5일</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify2.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">울트라맨</div>
-                        <div class="notification-time">7일</div>
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify2.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">울트라맨</div>
+                            <div class="notification-time">7일</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify3.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">블랙클로버</div>
-                        <div class="notification-time">10일</div>
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify3.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">블랙클로버</div>
+                            <div class="notification-time">10일</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify4.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">하이라키</div>
-                        <div class="notification-time">12일</div>
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify4.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">하이라키</div>
+                            <div class="notification-time">12일</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify5.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">히트맨</div>
-                        <div class="notification-time">15일</div>
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify5.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">히트맨</div>
+                            <div class="notification-time">15일</div>
+                        </div>
                     </div>
-                </div>
-                <div class="notification-item">
-                    <img src="/static/images/notification/notify6.jpg" class="notification-image">
-                    <div class="notification-details">
-                        <div class="notification-subtitle">신규 콘텐츠</div>
-                        <div class="notification-subtitle">그놈이다</div>
-                        <div class="notification-time">18일</div>
+                    <div class="notification-item">
+                        <img src="/static/images/notification/notify6.jpg" class="notification-image">
+                        <div class="notification-details">
+                            <div class="notification-subtitle">신규 콘텐츠</div>
+                            <div class="notification-subtitle">그놈이다</div>
+                            <div class="notification-time">18일</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--  알람 드롭 다운 메뉴 종료  -->
-        <!--  프로필 드롭 다운 메뉴 시작  -->
-        <div class="dropdown">
-            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
-            <div class="dropdown-content">
-                <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
-                <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>
-                <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
-                <a href="#">넷플릭스에서 로그아웃</a>
+            <!--  알람 드롭 다운 메뉴 종료  -->
+            <!--  프로필 드롭 다운 메뉴 시작  -->
+            <div class="dropdown">
+                <button class="dropdown-button"><img src="{{profileIcon.path}}" alt="Profile"/></button>
+                <div class="dropdown-content">
+                    <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
+                    <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>
+                    <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
+                    <a href="#">넷플릭스에서 로그아웃</a>
+                </div>
             </div>
+            <!--  프로필 드롭 다운 메뉴 종료  -->
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+            <script>
+                document.querySelector('.search-icon').addEventListener('click', function () {
+                    const searchInput = document.querySelector('.search-input');
+                    if (searchInput.classList.contains('show')) {
+                        searchInput.classList.remove('show');
+                    } else {
+                        searchInput.classList.add('show');
+                        searchInput.focus();
+                    }
+                });
+            </script>
         </div>
-        <!--  프로필 드롭 다운 메뉴 종료  -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    </header>
 
-        <script>
-            document.querySelector('.search-icon').addEventListener('click', function () {
-                const searchInput = document.querySelector('.search-input');
-                if (searchInput.classList.contains('show')) {
-                    searchInput.classList.remove('show');
-                } else {
-                    searchInput.classList.add('show');
-                    searchInput.focus();
-                }
-            });
-        </script>
-    </div>
-</header>
+    <!-- 메인 -->
+    <main>
 
-<!-- 메인 -->
-<main>
-
-    <!-- 최신 콘텐츠 -->
-    <section class="margin-section" id="latest-section">
-        <h2>최신 콘텐츠</h2>
-        <div class="movies">
-            <div class="item-list">
-                {{#latestContentDTO}}
-                    <div class="item content" data-content-id="{{contentId}}">
-                        <!-- TODO : 상세 페이지 모달 달기 -->
-                        <img src={{thumbnail}} alt="new_{{contentId}}">
+        <!-- 최신 콘텐츠 -->
+        <section class="margin-section" id="latest-section">
+            <h2>최신 콘텐츠</h2>
+            <div class="movies">
+                <div class="item-list">
+                    {{#LatestContentList}}
+                        <div class="item content" data-content-id="{{contentId}}">
+                            <!-- TODO : 상세 페이지 모달 달기 -->
+                            <img src={{thumbnail}} alt="new_{{contentId}}">
+                        </div>
+                    {{/LatestContentList}}
+                    <!-- 프론트 더미 -->
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01">
                     </div>
-                {{/latestContentDTO}}
-                <!-- 프론트 더미 -->
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_01.jpg" alt="new_01">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10">
-                </div>
-                <div class="item">
-                    <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11">
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10">
+                    </div>
+                    <div class="item">
+                        <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
-<!-- 푸터 -->
-<footer>
-    <div class="footer-sns">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-    </div>
-    <div class="footer-info">
-        <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
-        <p>대표: 레지널드 숀 톰프슨</p>
-        <p>이메일 주소: korea@netflix.com</p>
-        <p>주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</p>
-        <p>사업자등록번호: 165-87-00119</p>
-        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
-    </div>
-</footer>
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-sns">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="footer-info">
+            <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
+            <p>대표: 레지널드 숀 톰프슨</p>
+            <p>이메일 주소: korea@netflix.com</p>
+            <p>주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</p>
+            <p>사업자등록번호: 165-87-00119</p>
+            <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+        </div>
+    </footer>
+{{/latestContentDTO}}
 </body>
 <!--  모달 내용-->
 {{> /_components/content-detail}}
