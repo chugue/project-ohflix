@@ -78,7 +78,7 @@ public class UserResponse {
         private String username;            // 이름
         private String email;               // 이메일
         private Rate userSaveRate;          // 관람등급
-        private Status isKids;              // 키즈 시청 제한 여부
+        private Boolean isKids;              // 키즈 시청 제한 여부
         private Boolean isAutoPlay;         // 자동 재생 여부
         private Timestamp createdAt;
         private String profileIconPath;
@@ -274,6 +274,24 @@ public class UserResponse {
         public LoginDTO(Integer id, Status status) {
             Id = id;
             this.status = status;
+        }
+    }
+
+    // 회원가입 응답 DTO
+    @Data
+    public static class SignupDTO{
+        // 회원가입 입력 값.
+        private String email;
+        private String nickname;
+        private String password;
+        // Default 값
+        private Status status;          // USER(사용자) / ADMIN(관리자)
+
+        public SignupDTO(User user) {
+            this.email = user.getEmail();
+            this.password = user.getPassword();
+            this.nickname = user.getNickname();
+            this.status = user.getStatus();
         }
     }
 }

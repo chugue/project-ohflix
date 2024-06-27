@@ -19,7 +19,7 @@
         </div>
     </a>
     <div class="login">
-        <a href="#">로그인</a>
+        <a href="/login">로그인</a>
     </div>
 </header>
 <section>
@@ -28,18 +28,22 @@
             <div class="container-head">
                 <div class="step-count">1/3단계</div>
                 <h1>비밀번호를 설정해 멤버십을 시작하세요</h1>
-                <p>몇 단계만 더 거치면 넷플릭스 가입 완료!</p>
+                <p>몇 단계만 더 거치면 오!플릭스 가입 완료!</p>
                 <p>복잡한 단계는 모두 없앴습니다.</p>
             </div>
-            <form id="sign-up-form">
+            <form action="/signup" method="post" enctype="multipart/form-data" id="sign-up-form">
                 <div class="input-group">
                     <div class="input-container">
-                        <input type="email" id="email" name="email" placeholder=" " required>
-                        <label for="email">이메일 주소</label>
+                        <input type="email" id="email" name="email" required value="ssar@nate.com">
+                        <label for="email">이메일을 입력해주세요</label>
                     </div>
                     <div class="input-container">
-                        <input type="password" id="password" name="password" placeholder=" " required>
-                        <label for="password">비밀번호를 추가하세요</label>
+                        <input type="password" id="password" name="password" required value="1234">
+                        <label for="password">비밀번호를 입력해주세요</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" id="nickname" name="nickname" required value="쌀쌀">
+                        <label for="nickname">닉네임을 입력해주세요</label>
                     </div>
                 </div>
                 <div class="checkbox-group">
@@ -48,38 +52,23 @@
                         <label for="privacy1">예, 저는 개인정보 처리방침에 따른 개인정보 수집 및 활용에 동의합니다. (상세 정보)</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="privacy2" name="privacy2" unchecked>
-                        <label for="privacy2">예, 넷플릭스 특별 할인 알림 이메일을 보내주세요 (선택사항)</label>
+                        <input type="checkbox" id="privacy2" name="privacy2">
+                        <label for="privacy2">예, 오플릭스 특별 할인 알림 이메일을 보내주세요 (선택사항)</label>
                     </div>
                 </div>
-                <button type="submit" class="submit-button" >동의하고 계속</button>
-                <script>
-                    document.getElementById("sign-up-form").addEventListener("submit", function(event) {
-                        event.preventDefault(); // 기본 동작을 막음
-                        // email, password 가져오기
-                        const email = document.getElementById("email").value;
-                        const password = document.getElementById("password").value;
-                        // 입력되었는지 확인
-                        if (email && password) {
-                            // 됐으면 hide추가
-                            document.querySelector("section").classList.add("hide");
-                            // 0.5s 후 다음 페이지로 이동
-                            setTimeout(function() {
-                                window.location.href = "/sign-up-page-step2"; // 넘어갈 페이지
-                            }, 500);
-                        } else {
-                            // 이메일이나 비밀번호가 입력되지 않은 경우
-                            if (!emailInput.value) {
-                                alert("이메일 주소를 입력해주세요.");
-                                emailInput.focus();
-                            } else if (!passwordInput.value) {
-                                alert("비밀번호를 입력해주세요.");
-                                passwordInput.focus();
-                            }
-                        }
-                    });
-                </script>
+                <button type="submit" class="submit-button">동의하고 계속</button>
             </form>
+            <script>
+                document.getElementById("sign-up-form").addEventListener("submit", function (event) {
+                    // 폼 제출 시 hide 클래스 추가
+                    document.querySelector("section").classList.add("hide");
+
+                    // 0.5초 후에 hide 클래스 제거 - 500ms 작동X
+                    setTimeout(function () {
+                        document.querySelector("section").classList.remove("hide");
+                    }, 500);
+                });
+            </script>
         </div>
     </div>
 </section>
@@ -90,7 +79,7 @@
             <ul class="grid-list">
                 <li><a href="#">자주 묻는 질문</a></li>
                 <li><a href="#">고객 센터</a></li>
-                <li><a href="#">넷플릭스 스토어</a></li>
+                <li><a href="#">오!플릭스 스토어</a></li>
                 <li><a href="#">이용 약관</a></li>
                 <li><a href="#">회사 정보</a></li>
                 <li><a href="#">개인정보 처리방침</a></li>
@@ -98,7 +87,7 @@
             </ul>
         </div>
         <div class="footer-bt">
-            <p>넷플릭스서비스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
+            <p>오!플릭스서비스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
             <p>대표: 레지널드 숀 톰프슨</p>
             <p>이메일 주소: korea@netflix.com</p>
             <p>주소: 대한민국 서울특별시 종로구 종로 26, 서울특별시 종로구 종로 26, 03161</p>
