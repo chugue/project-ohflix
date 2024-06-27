@@ -17,7 +17,7 @@ public class MyListResponse {
         User user;              // 사용자 테이블
         Content content;        // 콘텐츠 테이블
         Timestamp createdAt;
-        String playedTime;      // 이어보기 재생시간
+        Double playedTime;      // 이어보기 재생시간
         Boolean isFavorite;  // WATCHING or FAVORITE
 
         public MyFavoriteListDTO(MyList myList) {

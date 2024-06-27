@@ -8,10 +8,17 @@ import com.project.ohflix.domain.mylist.MyListRepository;
 import com.project.ohflix.domain.mylist.MyListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -21,6 +28,7 @@ public class ContentService {
     private final ContentRepository contentRepository;
     private final MyListRepository myListRepository;
     private final LikeRepository likeRepository;
+
 
     // main page data
     public ContentResponse.MainPageDTO getMainPageData() {
@@ -114,7 +122,7 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
-    //content sava
+    //content save
     public void saveContent(ContentRequest.AdminUploadDTO requestDTO) {
         contentRepository.save(requestDTO.toEntity());
     }

@@ -5,6 +5,7 @@ import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.WatchOrFav;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.content.ContentRequest;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.profileIcon.ProfileIconResponse;
 import com.project.ohflix.domain.user.User;
@@ -71,6 +72,35 @@ public class MyListService {
         boolean isFavorite = value;
 
         return new MyListResponse.FavoriteCheck(isFavorite);
+    }
+
+    //영화 시청한 시간 저장하기
+    @Transactional
+    public void savePlayedTime(ContentRequest.VideoProgressDTO videoProgressDTO, Integer sessionUserId) {
+        User user = userRepository.findById(sessionUserId).orElseThrow(() -> new Exception404("해당하는 사용자를 찾을 수 없습니다."));
+        Content content = contentRepository.findByVideoPath(videoProgressDTO.getFilename()).orElseThrow(() -> new Exception404("해당하는 컨텐츠를 찾을 수 없습니다."));
+        MyList myList = myListRepository.findMyListByUserIdAndContentIdAndWatch(user.getId(), content.getId()).orElse(null);
+        System.out.println("myList = " + myList);
+        if (myList != null){
+            myListRepository.deleteByUserIdAndContentId(user.getId(), content.getId());
+            myListRepository.save(videoProgressDTO.toEntity(user, content, videoProgressDTO));
+        }else {
+            myListRepository.save(videoProgressDTO.toEntity(user, content, videoProgressDTO));
+        }
+    }
+
+    //영화 시청한 시간 가져오기
+    @Transactional
+    public Double getPlayedTime(Integer sessionUserId, String filename) {
+        User user = userRepository.findById(sessionUserId).orElseThrow(() -> new Exception404("해당하는 사용자를 찾을 수 없습니다."));
+        Content content = contentRepository.findByVideoPath(filename).orElseThrow(() -> new Exception404("해당하는 컨텐츠를 찾을 수 없습니다."));
+        MyList myList = myListRepository.findMyListByUserIdAndContentIdAndWatch(user.getId(), content.getId()).orElse(null);
+        System.out.println("myList = " + myList);
+        if (myList != null){
+            return myList.getPlayedTime();
+        }else {
+            return 0.0;
+        }
     }
 }
 

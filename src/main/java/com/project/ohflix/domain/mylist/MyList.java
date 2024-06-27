@@ -28,7 +28,7 @@ public class MyList {
     @ManyToOne(fetch = FetchType.LAZY)
     private Content content;
 
-    private String playedTime;
+    private Double playedTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "watch_or_fav")
@@ -38,7 +38,7 @@ public class MyList {
     private Timestamp createdAt;
 
     @Builder
-    public MyList(Integer id, User user, Content content, String playedTime, WatchOrFav watchOrFav, Timestamp createdAt) {
+    public MyList(Integer id, User user, Content content, Double playedTime, WatchOrFav watchOrFav, Timestamp createdAt) {
         this.id = id;
         this.user = user;
         this.content = content;

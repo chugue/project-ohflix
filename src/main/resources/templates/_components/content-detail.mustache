@@ -60,9 +60,9 @@
                                     <img src="${data.response.textPhoto}" />
                                 </div>
                                 <div class="buttons">
-                                    <a href="#" class="play-button playButton" data-filename="videolocation/spiderman/spiderman.mpd">▶ 재생</a>
-                                    <button id="favoriteButton" class="icon">
-                                        ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>'}
+                                    <a href="#" class="play-button playButton" data-filename="${data.response.videoPath}">▶ 재생</a>
+                                    <button id="favoriteButton" class="icon">s">
+                                        ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plu</i>'}
                                     </button>
                                     <button id="likeButton" class="icon">
                                         ${data.response.isLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>'}
@@ -120,17 +120,17 @@
                         });
 
                         // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
-                        const likeButton = document.getElementById('likeButton');
-                        likeButton.addEventListener('click', function () {
-                            toggleLike(contentId, data.response.isLike, likeButton);
-                        });
+                        // const likeButton = document.getElementById('likeButton');
+                        // likeButton.addEventListener('click', function () {
+                        //     toggleLike(contentId, data.response.isLike, likeButton);
+                        // });
                         // 비디오 재생 버튼 클릭 이벤트 리스너 추가
                         document.querySelector('.playButton').addEventListener('click', function (event) {
                             event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
                             const filename = this.dataset.filename;
-                            if (filename) {
-                                const videoUrl = `http://localhost:7000/videos?filename=spiderman.mpd`;
-                                loadVideo2(videoUrl);
+                            if (filename) { //TODO : filename넣기
+                                const videoUrl =  'https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/'+filename;
+                                loadVideo2(videoUrl, filename);
                             } else {
                                 alert('먼저 동영상을 업로드해주세요.');
                             }
@@ -214,26 +214,28 @@
             // Listen for error events.
             window.addEventListener('error', onErrorEvent);
         }
-        function createVideoElement() {
+        function createVideoElement(filename) {
             const videoContainer = document.getElementById('videoContainer');
             videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
 
             const video = document.createElement('video');
-            video.id = 'videoPlayer';
+            video.id = 'videoPlayer2';
             video.controls = true;
             video.autoplay = true;
             video.muted = true;
+            video.setAttribute('data-filename', filename); // filename 설정
+            console.log('Setting data-filename attribute:', filename); // Debugging
 
             videoContainer.appendChild(video);
             videoContainer.style.display = 'block'; // 비디오 컨테이너를 표시
             return video;
         }
 
-        function loadVideo2(videoUrl) {
+        function loadVideo2(videoUrl, filename) {
             console.log("Loading video from URL:", videoUrl); // 추가 로그
 
             const videoContainer = document.getElementById('videoContainer');
-            const video = createVideoElement();
+            const video = createVideoElement(filename);
             const player = new shaka.Player(video);
 
             window.player = player;
@@ -241,34 +243,60 @@
             player.addEventListener('error', onErrorEvent);
 
             // 매니페스트를 로드합니다.
-            try {
-                player.load(videoUrl).then(function() {
-                    console.log('The video has now been loaded!');
-                    video.play();
-
-                    // 비디오 재생 시작 시 전체화면 모드로 전환합니다.
-                    if (!document.fullscreenElement) {
-                        videoContainer.requestFullscreen().catch(err => {
-                            console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                        });
-                    }
-                }).catch(function(error) {
-                    console.error('Error during player.load:', error);
-                    onError(error);
-                });
-            } catch (e) {
-                console.error('Error during player.load try-catch:', e);
-                onError(e);
-            }
+            fetch('/api/video/current-time?filename=' + filename)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Saved time from server:', data.currentTime);  // 서버에서 받아온 현재 시간을 콘솔에 출력
+                        try {
+                            player.load(videoUrl).then(function() {
+                                console.log('The video has now been loaded!');
+                                if (data.currentTime) {
+                                    video.currentTime = data.currentTime;
+                                }
+                                video.play();
+                                if (!document.fullscreenElement) {
+                                    videoContainer.requestFullscreen().catch(err => {
+                                        console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                                    });
+                                }
+                            }).catch(onError);
+                        } catch (e) {
+                            onError(e);
+                        }
+                    }).catch(error => {
+                console.error('Failed to fetch current time:', error); // 에러 로그 추가
+            });
         }
 
 
         function onFullscreenChange() {
-            console.log('Fullscreen change event triggered');
             const videoContainer = document.getElementById('videoContainer');
-            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+            const videoPlayer2 = document.getElementById('videoPlayer2');
+            console.log('videoContainer:', videoContainer); // videoContainer 존재 확인
+            console.log('videoPlayer2:', videoPlayer2); // videoPlayer 존재 확인
+
+
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement && videoContainer) {
                 videoContainer.style.display = 'none'; // 전체화면에서 나가면 비디오 컨테이너를 숨깁니다.
                 videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
+                if (videoPlayer) {
+                    const currentTime = videoPlayer2.currentTime;
+                    const filename = videoPlayer2.getAttribute('data-filename'); // data-filename 속성 사용
+                    console.log('Saving current time:', currentTime); // 현재 시간을 콘솔에 출력
+                    console.log('Saving filename:', filename); // 현재 시간을 콘솔에 출력
+                    $.ajax({
+                        url: '/api/video/save-time',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ filename: filename, currentTime: currentTime }),
+                        success: function (response) {
+                            console.log('Current time saved:', currentTime);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Failed to save current time:', error);F
+                        }
+                    });
+                }
             }
         }
         function onErrorEvent(event) {
