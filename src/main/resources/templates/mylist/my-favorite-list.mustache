@@ -31,6 +31,7 @@
 </head>
 
 <body>
+{{#MyFavoriteListDTO}}
 <!-- 헤더 -->
 <header>
     <a href="/">
@@ -108,7 +109,8 @@
         <!--  알람 드롭 다운 메뉴 종료  -->
         <!--  프로필 드롭 다운 메뉴 시작  -->
         <div class="dropdown">
-            <button class="dropdown-button"><img src="/static/images/profile.png" alt="Profile"/></button>
+            <button class="dropdown-button"><img src={{profileIcon.path}}
+                                                 alt="Profile"/></button>
             <div class="dropdown-content">
                 <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
                 <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>
@@ -141,44 +143,44 @@
         <h2>내가 찜한 콘텐츠</h2>
         <div class="movies">
             <div class="item-list">
-                {{#myFavoriteList}}
-                    {{#content}}
-                        <div class="item content" data-content-id="{{id}}">
-                            <img src={{thumbnail}} alt="{{id}}">
-                        </div>
-                    {{/content}}
-                {{/myFavoriteList}}
+                    {{#MyFavoriteList}}
+                        {{#content}}
+                            <div class="item content" data-content-id="{{id}}">
+                                <img src={{thumbnail}} alt="{{id}}">
+                            </div>
+                        {{/content}}
+                    {{/MyFavoriteList}}
                 <!-- 프론트 더미 -->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10">-->
-<!--                </div>-->
-<!--                <div class="item">-->
-<!--                    <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11">-->
-<!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_03.jpg" alt="new_03">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_04.jpg" alt="new_04">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_05.jpg" alt="new_05">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_06.jpg" alt="new_06">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_07.jpg" alt="new_07">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_08.jpg" alt="new_08">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_09.jpg" alt="new_09">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_10.jpg" alt="new_10">-->
+                <!--                </div>-->
+                <!--                <div class="item">-->
+                <!--                    <img src="/static/images/new_contents/new_contents_11.jpg" alt="new_11">-->
+                <!--                </div>-->
             </div>
         </div>
     </section>
@@ -202,6 +204,7 @@
     </div>
 </footer>
 
+{{/MyFavoriteListDTO}}
 </body>
 <!--  모달 내용-->
 {{> /_components/content-detail}}

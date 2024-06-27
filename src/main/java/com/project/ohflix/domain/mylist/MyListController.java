@@ -1,10 +1,13 @@
 package com.project.ohflix.domain.mylist;
 
 import com.project.ohflix._core.utils.ApiUtil;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.user.SessionUser;
+import com.project.ohflix.domain.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +22,13 @@ import java.util.List;
 public class MyListController {
     private final HttpSession session;
     private final MyListService myListService;
+    private final UserService userService;
 
     @GetMapping("/api/my-favorite-list")
     public String getMyFavList(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        List<MyListResponse.MyFavoriteListDTO> respDTOList = myListService.findMyListById(sessionUser.getId());
-        request.setAttribute("myFavoriteList", respDTOList);
+        MyListResponse.MyFavoriteListDTO respDTO = myListService.findMyListById(sessionUser.getId());
+        request.setAttribute("MyFavoriteListDTO", respDTO);
         return "mylist/my-favorite-list";
     }
 
