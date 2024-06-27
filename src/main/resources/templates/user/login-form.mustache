@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/static/css/login-form.css"/>
     <title>Login Page</title>
+    <script>
+        function showAlert(message){
+            alert(message);
+        }
+    </script>
 </head>
 
 <body>
@@ -84,5 +89,10 @@
         </div>
     </div>
 </footer>
+{{#error}}
+    <script>
+        showAlert("{{error}}");
+    </script>
+{{/error}}
 </body>
 </html>
