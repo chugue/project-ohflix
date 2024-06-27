@@ -342,9 +342,6 @@ public class UserService {
             throw new Exception403("비밀번호를 변경할 권한이 없습니다.");
         }
 
-        System.out.println("현재 비밀번호 입력 : " + reqDTO.getCurrentPassword());
-        System.out.println("현재 비밀번호 : " + user.getPassword());
-
         // 현재 비밀번호 체크
         if (!Objects.equals(reqDTO.getCurrentPassword(), user.getPassword())) {
             throw new Exception400("현재 비밀번호가 틀렸습니다.");
@@ -354,8 +351,6 @@ public class UserService {
         if (!Objects.equals(reqDTO.getNewPassword(), reqDTO.getNewPasswordCheck())) {
             throw new Exception400("새 비밀번호가 일치하지 않습니다.");
         }
-        System.out.println("변경할 비밀번호 : " + reqDTO.getNewPassword());
-        System.out.println("변경할 비밀번호 체크 : " + reqDTO.getNewPasswordCheck());
 
         user.updatePassword(reqDTO);
 
