@@ -65,15 +65,17 @@ function initPlayer() {
     player.addEventListener('error', onErrorEvent);
 
     // 비디오 URL 설정
-    const videoUrl = video.getAttribute('data-video-url');
+    // const videoUrl = "http://localhost:7000/videos?filename=" + video.getAttribute('data-video-url');
+    const videoUrl = "https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/videolocation/oppenheimer/oppenheimer.mpd";
 
     console.log(videoUrl)
     // Load the video
-    loadVideo('http://localhost:7000/videos?filename=spiderman.mpd');
+    loadVideo(videoUrl);
 }
 
 function loadVideo(videoUrl) {
     const player = window.player;
+    console.log("👉👉👉👉👉👉👉👉" + videoUrl)
 
     // Try to load a manifest.
     // This is an asynchronous process.
