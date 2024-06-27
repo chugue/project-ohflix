@@ -114,8 +114,15 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
+    //content sava
     public void saveContent(ContentRequest.AdminUploadDTO requestDTO) {
         contentRepository.save(requestDTO.toEntity());
+    }
+
+    // 검색
+    public List<ContentResponse.SearchResultDTO> searchContentsByTitle(String title) {
+        List<Content> contents = contentRepository.findByTitleContaining(title);
+        return contents.stream().map(ContentResponse.SearchResultDTO::new).toList();
     }
 }
 

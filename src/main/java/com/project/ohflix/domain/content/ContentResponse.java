@@ -304,7 +304,18 @@ public class ContentResponse {
         }
     }
 
+    @Data
+    public static class SearchResultDTO {
+        private final Integer id;
+        private final String title;
+        private final String thumbnail;
 
+        public SearchResultDTO(Content content) {
+            this.id = content.getId();
+            this.title = content.getTitle();
+            this.thumbnail = content.getThumbnail();
+        }
+    }
 
 }
 

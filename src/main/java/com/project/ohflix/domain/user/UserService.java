@@ -2,12 +2,14 @@ package com.project.ohflix.domain.user;
 
 import com.project.ohflix._core.error.exception.Exception401;
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Refuse;
 import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
@@ -34,10 +36,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -63,9 +62,9 @@ public class UserService {
     }
 
     /**
-     *  1. 카카오에서 사용자 정보 요청하기
-     *  2. code 방식과 동일
-     *  3. jwt(스프링서버) 생성해서 엡에게 전달
+     * 1. 카카오에서 사용자 정보 요청하기
+     * 2. code 방식과 동일
+     * 3. jwt(스프링서버) 생성해서 엡에게 전달
      */
     // kakaoLogin
     @Transactional
@@ -117,7 +116,7 @@ public class UserService {
 
         // 4. 있으면? - 조회된 유저정보 리턴
         if (userPS != null) {
-            saveSessionToRedis("sessionUser",userPS);
+            saveSessionToRedis("sessionUser", userPS);
             return userPS;
         } else {
             // 5. 없으면? - 강제 회원가입
@@ -282,6 +281,7 @@ public class UserService {
         List<Refund> refundList = refundRepository.findAll();
         return new RefundResponse.ListDTO(refundList);
     }
+
     public UserResponse.AccountMembershipInfoDTO accountMembershipInfo(Integer sessionUserId) {
 
         // 유저 정보 확인
@@ -305,6 +305,27 @@ public class UserService {
                 .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
 
         return new SessionUser(user);
+    }
+
+    // 회원가입 signUp
+    @Transactional
+    public UserResponse.SignupDTO Signup(UserRequest.SignupDTO reqDTO) {
+
+        User user = User.builder()
+                .email(reqDTO.getEmail())
+                .password(reqDTO.getPassword())
+                .nickname(reqDTO.getNickname())
+                .status(Status.USER)
+                .profileIcon(ProfileIcon.builder().id(1).build())
+                .userSaveRate(Rate.ALL)
+                .isKids(false)
+                .loginSave(false)
+                .isAutoPlay(false)
+                .isSubscribe(false)
+                .build();
+        User singupUser = userRepository.save(user);
+
+        return new UserResponse.SignupDTO(singupUser);
     }
 }
 
