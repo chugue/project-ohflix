@@ -66,7 +66,7 @@ function initPlayer() {
 
     // 비디오 URL 설정
     // const videoUrl = "http://localhost:7000/videos?filename=" + video.getAttribute('data-video-url');
-    const videoUrl = "https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/spiderman/spiderman.mpd";
+    const videoUrl = "https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/videolocation/spiderman/spiderman.mpd";
 
     console.log(videoUrl)
     // Load the video
