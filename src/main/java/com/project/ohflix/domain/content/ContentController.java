@@ -14,11 +14,12 @@ import java.util.List;
 @Controller
 public class ContentController {
     private final ContentService contentService;
-
+    
+    // 최신 콘텐츠 페이지
     @GetMapping("/api/latest-content")
     public String getLatest(HttpServletRequest request) {
         List<ContentResponse.LatestContentDTO> respDTOList = contentService.findLatestContent();
-        request.setAttribute("latestContentList", respDTOList);
+        request.setAttribute("latestContentDTO", respDTOList);
 
         return "content/latest-content";
     }

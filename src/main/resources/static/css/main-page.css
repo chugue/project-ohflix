@@ -327,13 +327,14 @@ nav ul li a {
     color: #fff;
     background-color: #6d6d6eb3;
 }
+
 /* 설명 숨기, 이미지 작아지기 */
-@keyframes fadeOutAndShrink  {
+@keyframes fadeOutAndShrink {
     0% {
         opacity: 1;
         max-height: 4.5vw;
     }
-    33%{
+    33% {
         opacity: 0;
     }
     100% {
@@ -341,6 +342,7 @@ nav ul li a {
         max-height: 0;
     }
 }
+
 @keyframes shrinkImg {
     0% {
         max-width: 100%;
@@ -349,15 +351,17 @@ nav ul li a {
         max-width: 60%;
     }
 }
-.shrink-img{
-    animation: shrinkImg  1.3s ease-out forwards;
+
+.shrink-img {
+    animation: shrinkImg 1.3s ease-out forwards;
     animation-delay: 5s; /* 5초 후에 애니메이션 시작 */
 }
 
 .fade-out {
-    animation: fadeOutAndShrink  1.3s ease-out forwards;
+    animation: fadeOutAndShrink 1.3s ease-out forwards;
     animation-delay: 5s; /* 5초 후에 애니메이션 시작 */
 }
+
 /* 설명 숨기, 이미지 작아지기 */
 /* 영상 섹션 종료 */
 
@@ -377,13 +381,19 @@ nav ul li a {
     /* margin: 0 4%; */
     padding: 0 4%;
 }
-.swiper-wrapper{
+
+.swiper-wrapper {
     height: 100%;
+    transition: transform .5s cubic-bezier(1, 0, .1, 1) 0s;
 }
+
 .swiper-slide {
     position: relative;
     overflow: hidden;
     border-radius: .2vw;
+}
+/* rank 영화 */
+.top10-movies {
     height: 13vw;
 }
 
@@ -397,30 +407,60 @@ nav ul li a {
     object-fit: fill;
 }
 
-.poster{
+.poster {
     width: 50%;
     height: 100%;
     overflow: hidden;
     margin-left: 50%;
 }
 
-.rank img{
+.rank img {
     height: 100%;
 }
-.poster img{
+
+.poster img {
     height: 100%;
     width: 100%;
     overflow: hidden;
 }
-
-.swiper-button-prev,
-.swiper-button-next {
-    color: #fff;
+/* modal 콘텐츠 */
+.content{
+    cursor: pointer;
 }
 
 
+/* 스와이퍼 */
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    /*color: transparent;*/
+    /*background: none;*/
+    margin-top: 0;
+    height: 100%;
+    width: 4%;
+    top: 0;
+    color: transparent;
+    transition: .1s;
+}
+
+.swiper-button-prev {
+    left: 0;
+    /*transform: translateY(18%);*/
+}
+
+
+.swiper-button-next {
+    right: 0;
+}
+
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
+    color: #fff;
+    background: #0005;
 }
 
 /* 검색 섹션 */
@@ -453,7 +493,7 @@ nav ul li a {
     cursor: pointer;
 }
 
-.item img{
+.item img {
     width: 100%;
     height: 100%; /* 이미지 높이를 부모 요소에 맞게 설정 */
     object-fit: cover; /* 이미지의 가로 세로 비율을 유지하면서 부모 요소에 맞추기 */
@@ -507,8 +547,6 @@ footer {
 }
 
 
-
-
 /*--------모달 사용 css-------*/
 
 .play {
@@ -542,7 +580,6 @@ footer {
     border-radius: 5px;
     font-size: 1em;
 }
-
 
 
 .icon {
@@ -606,7 +643,6 @@ footer {
     font-size: 1.0em;
     line-height: 1.5em;
 }
-
 
 
 .metadata {
@@ -687,6 +723,7 @@ footer {
     gap: 20px;
     /* 세로 정렬 */
 }
+
 .header-container {
     position: relative;
     height: 100%;

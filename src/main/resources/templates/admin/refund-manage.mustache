@@ -28,27 +28,32 @@
 <main>
     <div class="main-div">
         <div class="main-left-top">
+            <a href="/api/main-page">
             <div class="main-left-text">
                 <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
                 돌아가기
             </div>
+            </a>
             <ul class="custom-list">
-                <li><i class="fa-solid fa-upload"></i>영상 업로드</li>
-                <li>
-                    <i class="fa-solid fa-photo-film"></i>영상 관리
-                </li>
-                <li>
-                    <i class="fa-solid fa-users-gear"></i>회원 관리
-                </li>
-                <li>
-                    <i class="fa-solid fa-comment-dots"></i>멤버십 해지 요청
-                </li>
-                <li>
-                    <i class="fa-solid fa-comment-dots"></i>환불 요청
-                </li>
-                <li>
-                    <i class="fa-solid fa-chart-line"></i>매출 관리
-                </li>
+                <a href="/admin/admin-upload">
+                    <li><i class="fa-solid fa-upload"></i>영상 업로드</li>
+                </a>
+
+                <a href="/api/video-manage">
+                    <li><i class="fa-solid fa-photo-film"></i>영상 관리</li>
+                </a>
+
+                <a href="/admin/members-manage">
+                    <li><i class="fa-solid fa-users-gear"></i>회원 관리</li>
+                </a>
+
+                <a href="/admin/refund-manage">
+                    <li><i class="fa-solid fa-comment-dots"></i>멤버십 해지 요청</li>
+                </a>
+
+                <a href="/api/sales-page">
+                    <li><i class="fa-solid fa-chart-line"></i>매출 관리</li>
+                </a>
             </ul>
         </div>
     </div>
