@@ -1,3 +1,4 @@
+
 // 영화 검색
 $(document).ready(function () {
     $('.search-input').on('keyup', function () {
@@ -48,6 +49,8 @@ function initApp() {
         // This browser does not have the minimum set of APIs we need.
         console.error('Browser not supported!');
     }
+
+
 }
 
 function initPlayer() {
@@ -66,7 +69,7 @@ function initPlayer() {
 
     console.log(videoUrl)
     // Load the video
-    loadVideo('/path/to/your/video.mpd');
+    loadVideo('http://localhost:7000/videos?filename=spiderman.mpd');
 }
 
 function loadVideo(videoUrl) {
