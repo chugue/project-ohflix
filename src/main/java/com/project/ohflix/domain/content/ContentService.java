@@ -6,6 +6,8 @@ import com.project.ohflix.domain.like.LikeRepository;
 import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.mylist.MyListRepository;
 import com.project.ohflix.domain.mylist.MyListResponse;
+import com.project.ohflix.domain.user.User;
+import com.project.ohflix.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,16 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ContentService {
+    private final UserRepository userRepository;
     private final ContentRepository contentRepository;
     private final MyListRepository myListRepository;
     private final LikeRepository likeRepository;
 
     // main page data
-    public ContentResponse.MainPageDTO getMainPageData() {
+    public ContentResponse.MainPageDTO getMainPageData(Integer sessionUserId) {
+        // 헤더 유저 가져오기 ( 프로필 아이콘 )
+        User user = userRepository.findUserProfileById(sessionUserId);
+
         // 제일 인기많은 영상을 메인페이지 대문으로 뿌리기
         PageRequest pickOne = PageRequest.of(0, 1);
         Content mostViewed = contentRepository.findOneMostViewed(pickOne).getContent().get(0);
@@ -39,7 +45,7 @@ public class ContentService {
         PageRequest fiveItems = PageRequest.of(0, 5);
         List<Content> navbarItems = contentRepository.findNewFive(fiveItems);
 
-        return new ContentResponse.MainPageDTO(mostViewed, top10List, newList, navbarItems);
+        return new ContentResponse.MainPageDTO(user, mostViewed, top10List, newList, navbarItems);
     }
 
     // ContentUpdateLinkPage

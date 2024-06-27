@@ -27,7 +27,7 @@ VALUES
 INSERT INTO user_tb (email, password, nickname, name, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, created_at)
 VALUES
     ('admin@example.com', '1234', 'adminUser', '관리자', '010-1111-1111', 1, 'ADMIN', 'R', false, true, true, true, NOW()),
-    ('user2@example.com', '1234', 'user2', '김성훈', '010-2222-2222', 2, 'USER', 'ALL', false, false, true, true, NOW()),
+    ('user2@example.com', '1234', 'user2', '김성훈', '010-2222-2222', 17, 'USER', 'ALL', false, false, true, true, NOW()),
     ('user3@example.com', '1234', 'user3', '박동기', '010-3333-3333', 3, 'USER', 'ALL', true, false, true, false, NOW()),
     ('user4@example.com', '1234', 'user4', '공지영', '010-4444-4444', 4, 'USER', 'PG', false, true, false, true, NOW()),
     ('user5@example.com', '1234', 'user5', '양승호', '010-5555-5555', 5, 'USER', 'ALL', false, false, true, false, NOW()),

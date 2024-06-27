@@ -3,6 +3,7 @@ package com.project.ohflix.domain;
 
 import com.project.ohflix.domain.content.ContentResponse;
 import com.project.ohflix.domain.content.ContentService;
+import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,8 @@ public class MainController {
 
     @GetMapping("/api/main-page")
     public String getMainPage(HttpServletRequest request) {
-        ContentResponse.MainPageDTO respDTO =  contentService.getMainPageData();
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        ContentResponse.MainPageDTO respDTO =  contentService.getMainPageData(sessionUser.getId());
         request.setAttribute("MainPageDTO", respDTO);
         return "main-page";
     }

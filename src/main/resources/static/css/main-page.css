@@ -148,10 +148,10 @@ nav ul li a {
 }
 
 .dropdown-button img {
-    width: 100%;
-    border-radius: 20%;
-    height: 3vw;
-
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    object-fit: cover;
 }
 
 

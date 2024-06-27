@@ -5,6 +5,8 @@ import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Top10Enum;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.user.User;
 import lombok.Data;
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
@@ -18,12 +20,14 @@ public class ContentResponse {
 
     @Data  // 메인 페이지 데이터
     public static class MainPageDTO {
+        private ProfileIcon profileIcon;
         private MainContent mainContent;
         private List<Top10> top10List;
         private List<New> newList;
         private List<Navbar> navbarList;
 
-        public MainPageDTO(Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+        public MainPageDTO(User user, Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+            this.profileIcon =  user.getProfileIcon();
             this.mainContent = new MainContent(mainContent);
             // Top10 list mapping with rankPath assignment
             List<Top10> sortedTop10List = top10List.stream()
