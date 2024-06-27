@@ -99,9 +99,6 @@ public class ContentResponse {
         }
     }
 
-
-
-
     @Data // 메인 페이지 모달 - 컨텐츠 상세정보 데이터
     public static class InfoDTO {
         private Integer id;
@@ -136,6 +133,49 @@ public class ContentResponse {
             this.introduction = content.getIntroduction();
         }
     }
+
+    // 메인  상세 정보 페이지 + 찜 여부 + 좋아요 여부
+    @Data
+    public static class MainContent {
+        private Integer id;
+        private String title;
+        private String mainPhoto;
+        private String productYear;
+        private String playTime;
+        private String textPhoto;
+        private String actors;
+        private String writers;
+        private String genre;
+        private String characteristics;
+        private String introduction;
+        private String rateImg;
+        private String rate;
+        private String director;
+
+        private boolean isFavorite;
+        private boolean isLike;
+
+        public MainContent(Content content, boolean isFavorite, boolean isLike) {
+            this.id = content.getId();
+            this.mainPhoto = content.getMainPhoto();
+            this.title = content.getTitle();
+            this.productYear = content.getProductYear();
+            this.playTime = content.getPlayTime();
+            this.actors = content.getActors();
+            this.textPhoto = content.getTextPhoto();
+            this.director = content.getDirector();
+            this.genre = content.getGenre().getValue();
+            this.rateImg = content.getRate().getImgPath();
+            this.rate = content.getRate().getValue();
+            this.writers = content.getWriters();
+            this.characteristics = content.getCharacteristic();
+            this.introduction = content.getIntroduction();
+
+            this.isFavorite = isFavorite; // 찜 여부
+            this.isLike = isLike; // 좋아요 여부
+        }
+    }
+
 
     // 상세정보 페이지 데이터
     @Data
@@ -264,7 +304,18 @@ public class ContentResponse {
         }
     }
 
+    @Data
+    public static class SearchResultDTO {
+        private final Integer id;
+        private final String title;
+        private final String thumbnail;
 
+        public SearchResultDTO(Content content) {
+            this.id = content.getId();
+            this.title = content.getTitle();
+            this.thumbnail = content.getThumbnail();
+        }
+    }
 
 }
 

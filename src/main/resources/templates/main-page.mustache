@@ -55,6 +55,8 @@
             <span class="material-icons search-icon">search</span>
             <input type="text" class="search-input" placeholder="제목, 사람, 장르">
         </div>
+        <div id="search-results"></div>
+
         <!--  알람 드롭 다운 메뉴  -->
         <div class="dropdown">
             <button class="dropdown-button"><i class="far fa-bell"></i></button>
@@ -96,6 +98,28 @@
                     searchInput.focus();
                 }
             });
+
+            async function search() {
+                const query = document.getElementById('search-input').value;
+                const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+                const results = await response.json();
+
+                displayResults(results);
+            }
+
+            function displayResults(results) {
+                const resultsContainer = document.getElementById('search-results');
+                resultsContainer.innerHTML = ''; // Clear previous results
+
+                results.forEach(result => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.innerHTML = `
+                    <h2>${result.title}</h2>
+                    <img src="${result.thumbnail}" alt="${result.title} thumbnail">
+                `;
+                    resultsContainer.appendChild(resultDiv);
+                });
+            }
         </script>
     </div>
 </header>

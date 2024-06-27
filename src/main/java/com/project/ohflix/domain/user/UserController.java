@@ -5,17 +5,13 @@ import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundService;
-import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -39,7 +35,7 @@ public class UserController {
 
         User user = userService.kakaoLogin(code);
         SessionUser sessionUser = new SessionUser(user);
-        System.out.println("👉👉👉👉👉👉👉👉👉"+ code);
+        System.out.println("👉👉👉👉👉👉👉👉👉" + code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
@@ -164,4 +160,21 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
+    // 회원가입 페이지
+    @GetMapping("/signup-page")
+    public String singUpPage() {
+        return "user/sign-up-page";
+    }
+
+    @PostMapping("/signup")
+    public String singUpPost(UserRequest.SignupDTO reqDTO) {
+        userService.Signup(reqDTO);
+        return "redirect:/signup-page-step2";
+    }
+
+    @GetMapping("/signup-page-step2")
+    public String singUpPageStep2() {
+
+        return "user/sign-up-page-step2";
+    }
 }

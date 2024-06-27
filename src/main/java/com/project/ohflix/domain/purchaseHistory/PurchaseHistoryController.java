@@ -9,12 +9,14 @@ import com.project.ohflix.domain.user.SessionUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -67,10 +69,6 @@ public class PurchaseHistoryController {
         return "account/account-security";
     }
 
-    @GetMapping("/admin/admin-upload")
-    public String adminUpload() {
-        return "admin/admin-upload";
-    }
 
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink() {
@@ -96,10 +94,7 @@ public class PurchaseHistoryController {
         return null;
     }
 
-    @PostMapping("/upload/info")
-    public String uploadInfo() {
-        return null;
-    }
+
 
     @PostMapping("/update/movie")
     public String updateMovie() {
@@ -109,5 +104,62 @@ public class PurchaseHistoryController {
     @PostMapping("/update/info")
     public String updateInfo() {
         return null;
+    }
+
+    @PostMapping("/api/payment/ready")
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> readyToPay(@RequestParam int userId, @RequestParam String itemName, @RequestParam int totalAmount, @RequestParam int vatAmount) {
+        PurchaseHistoryResponse.KakaoPayReadyDTO kakaoPayReadyDTO = purchaseHistoryService.preparePayment(userId, itemName, totalAmount, vatAmount);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", kakaoPayReadyDTO.getNextRedirectPcUrl());
+        return ResponseEntity.ok(response);
+    }
+
+
+
+    @GetMapping("/api/kakaoPaySuccess")
+    public String paymentSuccess(@RequestParam String code, Model model) {
+        // 여기서 카카오페이 결제 승인 로직을 추가할 수 있습니다.
+        // 예를 들어, userId와 tid를 사용하여 결제 승인을 요청합니다.
+        int userId = 2; // 실제 유저 ID로 변경
+        String tid = "T1234567890123456789"; // 실제로는 저장된 tid를 사용
+
+        PurchaseHistoryResponse.KakaoPayApproveDTO response = purchaseHistoryService.approvePayment(userId, tid, code);
+
+        model.addAttribute("code", response.getAid());
+        return "paymethod/success";
+    }
+
+    @GetMapping("/api/kakaoPayFail")
+    public String kakaoPayFail() {
+        return "결제 실패 페이지"; // 실제로는 결제 실패 페이지로 리다이렉트합니다.
+    }
+
+    @GetMapping("/api/kakaoPayCancel")
+    public String kakaoPayCancel() {
+        return "결제 취소 페이지"; // 실제로는 결제 취소 페이지로 리다이렉트합니다.
+    }
+
+
+    // 정기 결제 요청 API 엔드포인트
+    @PostMapping("/api/payment/subscription")
+    @ResponseBody
+    public Map<String, Object> subscriptionPayment(@RequestParam int userId, @RequestParam String sid, @RequestParam int totalAmount) {
+        return purchaseHistoryService.subscriptionPayment(userId, sid, totalAmount);
+    }
+
+    // 정기 결제 비활성화 API 엔드포인트
+    @PostMapping("/api/payment/deactivate")
+    @ResponseBody
+    public Map<String, Object> deactivateSubscription(@RequestParam int userId, @RequestParam String sid) {
+        return purchaseHistoryService.deactivateSubscription(userId, sid);
+    }
+
+    // 정기 결제 상태 조회 API 엔드포인트
+    @PostMapping("/api/payment/status")
+    @ResponseBody
+    public Map<String, Object> checkSubscriptionStatus(@RequestParam int userId, @RequestParam String sid) {
+        return purchaseHistoryService.checkSubscriptionStatus(userId, sid);
     }
 }
