@@ -23,6 +23,7 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -303,8 +304,12 @@ public class UserService {
 
     //login
     public SessionUser login(UserRequest.LoginDTO requestDTO) {
-        User user = userRepository.findByEmailAndPassword(requestDTO.getEmail(), requestDTO.getPassword())
+        User user = userRepository.findByEmail(requestDTO.getEmail())
                 .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        if (!BCrypt.checkpw(requestDTO.getPassword(), user.getPassword())) {
+            throw new Exception401("비밀번호가 일치하지 않습니다.");
+        }
 
         return new SessionUser(user);
     }
@@ -312,6 +317,8 @@ public class UserService {
     // 회원가입 signUp
     @Transactional
     public UserResponse.SignupDTO Signup(UserRequest.SignupDTO reqDTO) {
+
+        String hashedPassword = BCrypt.hashpw(reqDTO.getPassword(), BCrypt.gensalt());
 
         User user = User.builder()
                 .email(reqDTO.getEmail())

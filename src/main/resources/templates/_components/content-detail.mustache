@@ -13,7 +13,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const images = document.querySelectorAll('.top10-movie-img');
+        const contents = document.querySelectorAll('.content');
         const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
         const closeBtn = document.getElementById('closeBtn'); // 모달을 닫는 버튼(X) 요소 가져오기
         const modalData = document.getElementById('modalData'); // 모달 내용 요소 가져오기
@@ -22,8 +22,8 @@
         document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
         document.addEventListener('msfullscreenchange', onFullscreenChange); // IE/Edge
 
-        images.forEach(img => {
-            img.addEventListener('click', function () {
+        contents.forEach(content => {``
+            content.addEventListener('click', function () {
                 const contentId = this.dataset.contentId;
                 showModal(contentId);
             });

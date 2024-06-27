@@ -81,7 +81,7 @@
                 <a href="/api/profile-form"><i class="material-icons">edit</i> 프로필 관리</a>
                 <a href="/api/account-view"><i class="material-icons">account_circle</i> 계정</a>
                 <a href="#"><i class="material-icons">help_outline</i> 고객 센터</a>
-                <a href="#"><i class="material-icons">help_outline</i> 관리자 모드</a>
+                <a href="/admin/sales-page"><i class="material-icons">help_outline</i> 관리자 모드</a>
                 <a href="/logout">넷플릭스에서 로그아웃</a>
             </div>
         </div>
@@ -129,11 +129,13 @@
     <!-- 자동 재생 영상 섹션 -->
     <section class="movie">
         <!--        <img src="/static/images/oppenheimer.jpg" alt="Oppenheimer"/>-->
-        <video id="videoPlayer"  data-video-url="spiderman.mpd" src="/static/images/오펜하이머저화질.mp4" poster="/static/images/oppenheimer.jpg" autoplay muted loop>
+        <video id="videoPlayer" data-video-url="spiderman.mpd" src="/static/images/오펜하이머저화질.mp4"
+               poster="/static/images/oppenheimer.jpg" autoplay muted loop>
         </video>
         <div class="movie_info">
             <img class="shrink-img" src="/static/images/oppenheimer_logo.jpg" alt=""/>
-            <p class="fade-out">오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고 평했다.</p>
+            <p class="fade-out">오스카와 골든글로브에서 작품상을 수상한 영화. 원자 폭탄을 만든 오펜하이머의 이야기로, 《NPR》에서 '천재의 오만과 과학에 대한 기념비적' 작품이라고
+                평했다.</p>
             <div class="movie-info-btn">
                 <button><i class="fa-solid fa-play"></i>재생</button>
                 <button id="popupImg-1"><i class="fa-solid fa-circle-info"></i> 상세 정보</button>
@@ -141,7 +143,7 @@
         </div>
     </section>
 
-    <!-- Top10 영화 섹션 -->
+    <!-- Top10 영화 섹션 시작 -->
     <section class="category">
         <h2>오늘 대한민국의 TOP10 영화</h2>
         <div class="swiper mySwiper top10-movies">
@@ -150,21 +152,19 @@
                 {{#MainPageDTO.top10List}}
                     <div class="swiper-slide">
                         <div class="rank">
-                            <img src="{{rankPath}}" alt="Rank 01">
+                            <img src="{{rankPath}}" alt="Rank Number">
                         </div>
-                        <div class="poster">
+                        <div class="poster content" data-content-id="{{top10Id}}">
                             <img class="top10-movie-img" src="{{top10PosterPhoto}}" alt="top10_01"
-                                  id="popupImg-{{top10Id}}" data-content-id="{{top10Id}}" style="cursor: pointer;">
+                                 id="popupImg-{{top10Id}}">
                         </div>
                     </div>
                 {{/MainPageDTO.top10List}}
             </div>
-
-            <!-- <button id="next5btn"><i class="fa-solid fa-chevron-right"></i></button> -->
-            <!-- <button id="prev5btn"><i class="fa-solid fa-chevron-left"></i></button> -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
+        <!-- swiper 스크립트 -->
         <script>
             var swiper = new Swiper(".mySwiper", {
                 slidesPerView: 5,   // 화면에 보일 아이템 수
@@ -178,16 +178,22 @@
             });
         </script>
     </section>
-    <!-- 추가 카테고리 섹션들 -->
+    <!-- Top10 영화 섹션 종료 -->
+
+    <!-- 추가 카테고리 섹션시작 -->
     <section class="category">
-        <h2>새로 올라온 시리즈</h2>
+        <h2>새로 올라온 콘텐츠</h2>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 {{#MainPageDTO.newList}}
-                    <div class="swiper-slide" new-content-id="{{newId}}"><img src="{{newThumbnail}}" alt="new_01"/>
+                    <div class="swiper-slide content-list" >
+                        <div class="content" data-content-id="{{newId}}">
+                            <img src="{{newThumbnail}}" alt="new_01"/>
+                        </div>
                     </div>
                 {{/MainPageDTO.newList}}
             </div>
+            <!-- Swiper 슬라이드  -->
             <div class="swiper-button-next "></div>
             <div class="swiper-button-prev"></div>
             <script>
@@ -204,6 +210,8 @@
             </script>
         </div>
     </section>
+    <!-- 추가 카테고리 섹션 종료 -->
+
 </main>
 
 <!-- 검색결과섹션 -->
