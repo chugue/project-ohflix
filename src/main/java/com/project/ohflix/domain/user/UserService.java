@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.error.exception.Exception400;
 import com.project.ohflix._core.error.exception.Exception401;
+import com.project.ohflix._core.error.exception.Exception403;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Refuse;
@@ -21,6 +23,7 @@ import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -301,8 +304,12 @@ public class UserService {
 
     //login
     public SessionUser login(UserRequest.LoginDTO requestDTO) {
-        User user = userRepository.findByEmailAndPassword(requestDTO.getEmail(), requestDTO.getPassword())
+        User user = userRepository.findByEmail(requestDTO.getEmail())
                 .orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+
+        if (!BCrypt.checkpw(requestDTO.getPassword(), user.getPassword())) {
+            throw new Exception401("비밀번호가 일치하지 않습니다.");
+        }
 
         return new SessionUser(user);
     }
@@ -310,6 +317,8 @@ public class UserService {
     // 회원가입 signUp
     @Transactional
     public UserResponse.SignupDTO Signup(UserRequest.SignupDTO reqDTO) {
+
+        String hashedPassword = BCrypt.hashpw(reqDTO.getPassword(), BCrypt.gensalt());
 
         User user = User.builder()
                 .email(reqDTO.getEmail())
@@ -326,6 +335,32 @@ public class UserService {
         User singupUser = userRepository.save(user);
 
         return new UserResponse.SignupDTO(singupUser);
+    }
+
+    // 비밀번호 변경
+    @Transactional
+    public void updatePassword(UserRequest.UpdatePasswordDTO reqDTO, Integer sessionUserId) {
+        // 조회 및 예외 처리
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+
+        // 권한 처리
+        if (sessionUserId != user.getId()) {
+            throw new Exception403("비밀번호를 변경할 권한이 없습니다.");
+        }
+
+        // 현재 비밀번호 체크
+        if (!Objects.equals(reqDTO.getCurrentPassword(), user.getPassword())) {
+            throw new Exception400("현재 비밀번호가 틀렸습니다.");
+        }
+
+        // 새 비밀번호, 새 비밀번호 동일 체크
+        if (!Objects.equals(reqDTO.getNewPassword(), reqDTO.getNewPasswordCheck())) {
+            throw new Exception400("새 비밀번호가 일치하지 않습니다.");
+        }
+
+        user.updatePassword(reqDTO);
+
     }
 }
 
