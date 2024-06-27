@@ -134,7 +134,7 @@ public class ContentResponse {
         }
     }
 
-    // 메인  상세 정보 페이지 + 찜 여부
+    // 메인  상세 정보 페이지 + 찜 여부 + 좋아요 여부
     @Data
     public static class MainContent {
         private Integer id;
@@ -153,8 +153,9 @@ public class ContentResponse {
         private String director;
 
         private boolean isFavorite;
+        private boolean isLike;
 
-        public MainContent(Content content, boolean isFavorite) {
+        public MainContent(Content content, boolean isFavorite, boolean isLike) {
             this.id = content.getId();
             this.mainPhoto = content.getMainPhoto();
             this.title = content.getTitle();
@@ -170,7 +171,8 @@ public class ContentResponse {
             this.characteristics = content.getCharacteristic();
             this.introduction = content.getIntroduction();
 
-            this.isFavorite = isFavorite;
+            this.isFavorite = isFavorite; // 찜 여부
+            this.isLike = isLike; // 좋아요 여부
         }
     }
 
@@ -276,13 +278,13 @@ public class ContentResponse {
 
     @Data
     public static class LatestContentDTO {
-        private Integer id;
+        private Integer contentId;
         private String thumbnail;       // 썸네일
         private String posterPhoto;       // 썸네일
         private Timestamp createdAt;
 
         public LatestContentDTO(Content content) {
-            this.id = content.getId();
+            this.contentId = content.getId();
             this.thumbnail = content.getThumbnail();
             this.posterPhoto = content.getPosterPhoto();
             this.createdAt = content.getCreatedAt();
@@ -302,7 +304,18 @@ public class ContentResponse {
         }
     }
 
+    @Data
+    public static class SearchResultDTO {
+        private final Integer id;
+        private final String title;
+        private final String thumbnail;
 
+        public SearchResultDTO(Content content) {
+            this.id = content.getId();
+            this.title = content.getTitle();
+            this.thumbnail = content.getThumbnail();
+        }
+    }
 
 }
 

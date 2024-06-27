@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
 
+import com.project.ohflix._core.error.exception.Exception401;
+import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
@@ -10,10 +12,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +26,7 @@ public class UserController {
 
 
     @GetMapping("/login-form")
-    public String getLoginForm() {
+    public String getLoginForm(Model model) {
 
         return "user/login-form";
     }
@@ -37,7 +38,7 @@ public class UserController {
 
         User user = userService.kakaoLogin(code);
         SessionUser sessionUser = new SessionUser(user);
-        System.out.println("👉👉👉👉👉👉👉👉👉"+ code);
+        System.out.println("👉👉👉👉👉👉👉👉👉" + code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
@@ -103,9 +104,19 @@ public class UserController {
         return "user/view-history";
     }
 
+    // 비밀번호 변경 페이지
     @GetMapping("/api/password-change-form")
     public String getPasswordChangeForm() {
         return "user/password-change-form";
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/update/password")
+    public String updatePassword(UserRequest.UpdatePasswordDTO reqDTO) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        userService.updatePassword(reqDTO, sessionUser.getId());
+
+        return "redirect:/login-form";
     }
 
     @GetMapping("/api/restriction-pass")
@@ -137,12 +148,21 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public String login(HttpSession session, UserRequest.LoginDTO requestDTO) {
-        SessionUser sessionUser = userService.login(requestDTO);
-
-        redisTemplate.opsForValue().set("sessionUser", sessionUser);
-        session.setAttribute("sessionUser", requestDTO);
-        return "redirect:/api/main-page";
+    public String login(UserRequest.LoginDTO requestDTO, Model model) {
+        try {
+            SessionUser sessionUser = userService.login(requestDTO);
+            redisTemplate.opsForValue().set("sessionUser", sessionUser);
+            session.setAttribute("sessionUser", sessionUser);
+            return "redirect:/api/main-page";
+        } catch (Exception401 e) {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            model.addAttribute("email", requestDTO.getEmail()); // 이메일 유지
+            return "user/login-form";
+        } catch (Exception404 e) {
+            model.addAttribute("error", "유저 정보가 없습니다.");
+            model.addAttribute("email", requestDTO.getEmail()); // 이메일 유지
+            return "user/login-form";
+        }
     }
 
     @GetMapping("/logout")
@@ -162,15 +182,21 @@ public class UserController {
         // binder.registerCustomEditor(AnotherEnum.class, new EnumEditor<>(AnotherEnum.class));
     }
 
-    // 회원가입 페이지 1/3
-    @GetMapping("/sign-up-page-step1")
-    public String singUpPageStep1() {
-
-        return "sign-up-page-step1";
+    // 회원가입 페이지
+    @GetMapping("/signup-page")
+    public String singUpPage() {
+        return "user/sign-up-page";
     }
-    @GetMapping("/sign-up-page-step2")
+
+    @PostMapping("/signup")
+    public String singUpPost(UserRequest.SignupDTO reqDTO) {
+        userService.Signup(reqDTO);
+        return "redirect:/signup-page-step2";
+    }
+
+    @GetMapping("/signup-page-step2")
     public String singUpPageStep2() {
 
-        return "sign-up-page-step2";
+        return "user/sign-up-page-step2";
     }
 }

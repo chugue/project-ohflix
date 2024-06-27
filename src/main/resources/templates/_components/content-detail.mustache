@@ -13,13 +13,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const images = document.querySelectorAll('.top10-movie-img');
+        const contents = document.querySelectorAll('.content');
         const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
         const closeBtn = document.getElementById('closeBtn'); // 모달을 닫는 버튼(X) 요소 가져오기
         const modalData = document.getElementById('modalData'); // 모달 내용 요소 가져오기
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
+        document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
+        document.addEventListener('msfullscreenchange', onFullscreenChange); // IE/Edge
 
-        images.forEach(img => {
-            img.addEventListener('click', function () {
+        contents.forEach(content => {``
+            content.addEventListener('click', function () {
                 const contentId = this.dataset.contentId;
                 showModal(contentId);
             });
@@ -56,11 +60,13 @@
                                     <img src="${data.response.textPhoto}" />
                                 </div>
                                 <div class="buttons">
-                                    <a href="#" class="play-button">▶ 재생</a>
+                                    <a href="#" class="play-button playButton" data-filename="videolocation/spiderman/spiderman.mpd">▶ 재생</a>
                                     <button id="favoriteButton" class="icon">
-                                        ${data.response.isFavorite ? '<i class="fa-regular fa-circle-check"></i>' : '<i class="fa-solid fa-plus"></i>'}
+                                        ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>'}
                                     </button>
-                                    <a href="#" class="icon"><i class="fa-regular fa-thumbs-up"></i></a>
+                                    <button id="likeButton" class="icon">
+                                        ${data.response.isLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>'}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +107,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="videoContainer"></div> <!-- 비디오를 동적으로 추가할 컨테이너 -->
+                            <div id="qualityLevels"></div> <!-- 화질 선택 버튼을 표시할 영역 -->
                         </div>
                     </div>
                 `;
@@ -109,6 +117,23 @@
                         const favoriteButton = document.getElementById('favoriteButton');
                         favoriteButton.addEventListener('click', function () {
                             toggleFavorite(contentId, data.response.isFavorite, favoriteButton);
+                        });
+
+                        // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
+                        const likeButton = document.getElementById('likeButton');
+                        likeButton.addEventListener('click', function () {
+                            toggleLike(contentId, data.response.isLike, likeButton);
+                        });
+                        // 비디오 재생 버튼 클릭 이벤트 리스너 추가
+                        document.querySelector('.playButton').addEventListener('click', function (event) {
+                            event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
+                            const filename = this.dataset.filename;
+                            if (filename) {
+                                const videoUrl = `http://localhost:7000/videos?filename=spiderman.mpd`;
+                                loadVideo2(videoUrl);
+                            } else {
+                                alert('먼저 동영상을 업로드해주세요.');
+                            }
                         });
                     })
                     .catch(error => {
@@ -125,7 +150,7 @@
                             // 찜 상태를 반대로 변경
                             const newIsFavorite = !isFavorite;
                             // 버튼 아이콘 업데이트
-                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-regular fa-circle-check"></i>' : '<i class="fa-solid fa-plus"></i>';
+                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
                             // 다음 클릭 시의 상태를 업데이트
                             favoriteButton.onclick = function () {
                                 toggleFavorite(contentId, newIsFavorite, favoriteButton);
@@ -138,7 +163,131 @@
                         console.error('Error:', error);
                     });
         }
+
+        function toggleLike(contentId, isLike, likeButton) {
+            const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
+            fetch(url, { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            // 찜 상태를 반대로 변경
+                            const newIsLike = !isLike;
+                            // 버튼 아이콘 업데이트
+                            likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
+                            // 다음 클릭 시의 상태를 업데이트
+                            likeButton.onclick = function () {
+                                toggleLike(contentId, newIsLike, likeButton);
+                            };
+                        } else {
+                            console.error('Failed to update like status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', initApp2);
+
+        function initApp2() {
+            // Install built-in polyfills to patch browser incompatibilities.
+            shaka.polyfill.installAll();
+
+            // Check if the browser supports the basic APIs Shaka needs.
+            if (shaka.Player.isBrowserSupported()) {
+                // Everything looks good!
+                initPlayer2();
+            } else {
+                // This browser does not have the minimum set of APIs we need.
+                console.error('Browser not supported!');
+            }
+
+            // 전체화면 모드 변경 이벤트 리스너 추가
+            // document.addEventListener('fullscreenchange', onFullscreenChange);
+            // document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
+            // document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
+            // document.addEventListener('MSFullscreenChange', onFullscreenChange); // IE/Edge
+
+        }
+
+        function initPlayer2() {
+            // Listen for error events.
+            window.addEventListener('error', onErrorEvent);
+        }
+        function createVideoElement() {
+            const videoContainer = document.getElementById('videoContainer');
+            videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
+
+            const video = document.createElement('video');
+            video.id = 'videoPlayer';
+            video.controls = true;
+            video.autoplay = true;
+            video.muted = true;
+
+            videoContainer.appendChild(video);
+            videoContainer.style.display = 'block'; // 비디오 컨테이너를 표시
+            return video;
+        }
+
+        function loadVideo2(videoUrl) {
+            console.log("Loading video from URL:", videoUrl); // 추가 로그
+
+            const videoContainer = document.getElementById('videoContainer');
+            const video = createVideoElement();
+            const player = new shaka.Player(video);
+
+            window.player = player;
+
+            player.addEventListener('error', onErrorEvent);
+
+            // 매니페스트를 로드합니다.
+            try {
+                player.load(videoUrl).then(function() {
+                    console.log('The video has now been loaded!');
+                    video.play();
+
+                    // 비디오 재생 시작 시 전체화면 모드로 전환합니다.
+                    if (!document.fullscreenElement) {
+                        videoContainer.requestFullscreen().catch(err => {
+                            console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                        });
+                    }
+                }).catch(function(error) {
+                    console.error('Error during player.load:', error);
+                    onError(error);
+                });
+            } catch (e) {
+                console.error('Error during player.load try-catch:', e);
+                onError(e);
+            }
+        }
+
+
+        function onFullscreenChange() {
+            console.log('Fullscreen change event triggered');
+            const videoContainer = document.getElementById('videoContainer');
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+                videoContainer.style.display = 'none'; // 전체화면에서 나가면 비디오 컨테이너를 숨깁니다.
+                videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
+            }
+        }
+        function onErrorEvent(event) {
+            // Extract the shaka.util.Error object from the event.
+            onError(event.detail);
+        }
+
+        function onError(error) {
+            // Log the error.
+            // Log the error with additional information
+            console.error('Error code', error.code, 'object', error);
+
+            if (error.code === 7002) {
+                console.error('Manifest loading error. Please check the manifest URL and CORS settings.');
+            } else if (error.code === 7000) {
+                console.error('Network request failure. Please check the network connection.');
+            } else {
+                console.error('An unknown error occurred.');
+            }
+        }
     });
-
-
 </script>
