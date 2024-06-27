@@ -68,12 +68,12 @@ public class ContentService {
     }
 
     //
-    public List<ContentResponse.LatestContentDTO> findLatestContent() {
+    public ContentResponse.LatestContentDTO findLatestContent(Integer sessionUser) {
+        User user = userRepository.findUserProfileById(sessionUser);
         List<Content> latestContentList = contentRepository.findLatestContent();
         System.out.println(latestContentList);
 
-        return latestContentList.stream().map(content
-                -> new ContentResponse.LatestContentDTO(content)).toList();
+        return new ContentResponse.LatestContentDTO(user, latestContentList);
     }
 
     // 영화 상세정보 페이지 데이터

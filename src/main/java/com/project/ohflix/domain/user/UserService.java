@@ -177,7 +177,7 @@ public class UserService {
     }
 
     // 멤버쉽 취소 페이지
-    public UserResponse.CancelPlanPageDTO userCanclePlan(Integer sessionUserId) {
+    public UserResponse.CancelPlanPageDTO userCancelPlan(Integer sessionUserId) {
         // 유저 아이콘 찾기
         User user = userRepository.findUsernameAndIcon(sessionUserId).orElseThrow(() -> new Exception404("사용자 정보를 찾을 수 없습니다."));
 
