@@ -18,7 +18,7 @@ public class AdminController {
     private final UserService userService;
 
 
-    @GetMapping("/api/sales-page")
+    @GetMapping("/admin/sales-page")
     public String getSales(HttpServletRequest request) {
         List<UserResponse.SalesPageDTO> respDTO = userService.salesPage();
         request.setAttribute("SalesPageDTO", respDTO);
