@@ -48,7 +48,7 @@ function uploadFile(file, uploadBtn) {
     var formData = new FormData();
     formData.append('file', file);
 
-    fetch('http://localhost:7000/upload', {
+    fetch('https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/upload', {
         method: 'POST',
         body: formData
     })
