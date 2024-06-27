@@ -1,6 +1,8 @@
 package com.project.ohflix.domain.user;
 
+import com.project.ohflix._core.error.exception.Exception400;
 import com.project.ohflix._core.error.exception.Exception401;
+import com.project.ohflix._core.error.exception.Exception403;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Refuse;
@@ -326,6 +328,37 @@ public class UserService {
         User singupUser = userRepository.save(user);
 
         return new UserResponse.SignupDTO(singupUser);
+    }
+
+    // 비밀번호 변경
+    @Transactional
+    public void updatePassword(UserRequest.UpdatePasswordDTO reqDTO, Integer sessionUserId) {
+        // 조회 및 예외 처리
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+
+        // 권한 처리
+        if (sessionUserId != user.getId()) {
+            throw new Exception403("비밀번호를 변경할 권한이 없습니다.");
+        }
+
+        System.out.println("현재 비밀번호 입력 : " + reqDTO.getCurrentPassword());
+        System.out.println("현재 비밀번호 : " + user.getPassword());
+
+        // 현재 비밀번호 체크
+        if (!Objects.equals(reqDTO.getCurrentPassword(), user.getPassword())) {
+            throw new Exception400("현재 비밀번호가 틀렸습니다.");
+        }
+
+        // 새 비밀번호, 새 비밀번호 동일 체크
+        if (!Objects.equals(reqDTO.getNewPassword(), reqDTO.getNewPasswordCheck())) {
+            throw new Exception400("새 비밀번호가 일치하지 않습니다.");
+        }
+        System.out.println("변경할 비밀번호 : " + reqDTO.getNewPassword());
+        System.out.println("변경할 비밀번호 체크 : " + reqDTO.getNewPasswordCheck());
+
+        user.updatePassword(reqDTO);
+
     }
 }
 

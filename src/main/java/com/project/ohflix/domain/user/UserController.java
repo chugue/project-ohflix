@@ -101,9 +101,19 @@ public class UserController {
         return "user/view-history";
     }
 
+    // 비밀번호 변경 페이지
     @GetMapping("/api/password-change-form")
     public String getPasswordChangeForm() {
         return "user/password-change-form";
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/update/password")
+    public String updatePassword(UserRequest.UpdatePasswordDTO reqDTO) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        userService.updatePassword(reqDTO, sessionUser.getId());
+
+        return "redirect:/login-form";
     }
 
     @GetMapping("/api/restriction-pass")
