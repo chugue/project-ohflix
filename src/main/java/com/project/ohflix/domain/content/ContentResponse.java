@@ -278,13 +278,13 @@ public class ContentResponse {
 
     @Data
     public static class LatestContentDTO {
-        private Integer id;
+        private Integer contentId;
         private String thumbnail;       // 썸네일
         private String posterPhoto;       // 썸네일
         private Timestamp createdAt;
 
         public LatestContentDTO(Content content) {
-            this.id = content.getId();
+            this.contentId = content.getId();
             this.thumbnail = content.getThumbnail();
             this.posterPhoto = content.getPosterPhoto();
             this.createdAt = content.getCreatedAt();
