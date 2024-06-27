@@ -71,19 +71,19 @@ public class PurchaseHistoryController {
 
 
     @GetMapping("/admin/content-update-link")
-    public String contentUpdateLink() {
+    public String contentUpdateLink(HttpServletRequest request) {
         // contentUpdateLinkPage 데이터 바인딩
         ContentResponse.ContentUpdateLinkPageDTO respDTO = contentService.contentUpdateLinkPageDTO(1);
-        session.setAttribute("ContentUpdateLinkDTO", respDTO);
+        request.setAttribute("ContentUpdateLinkDTO", respDTO);
 
         return "admin/content-update-link";
     }
 
     @GetMapping("/api/video-manage")
-    public String videoManage() {
+    public String videoManage(HttpServletRequest request) {
         // videoManagePage 데이터 바인딩
         ContentResponse.VideoManagePageDTO respDTO = contentService.videoManagePageDTO();
-        session.setAttribute("VideoManagePageDTO", respDTO);
+        request.setAttribute("VideoManagePageDTO", respDTO);
 
         return "admin/video-manage";
     }
