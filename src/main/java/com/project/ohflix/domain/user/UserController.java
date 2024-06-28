@@ -7,6 +7,7 @@ import com.project.ohflix._core.utils.EnumEditor;
 import com.project.ohflix.domain._enums.Reason;
 import com.project.ohflix.domain.refund.RefundRequest;
 import com.project.ohflix.domain.refund.RefundService;
+import com.project.ohflix.domain.watchingHistory.WatchingHistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class UserController {
     private final UserService userService;
     private final RefundService refundService;
     private final RedisTemplate<String, Object> redisTemplate;
-
+    private final WatchingHistoryService watchingHistoryService;
 
     @GetMapping("/login-form")
     public String getLoginForm(Model model) {
@@ -100,10 +101,7 @@ public class UserController {
         return "account/account-membership";
     }
 
-    @GetMapping("/api/view-history")
-    public String getViewed() {
-        return "user/view-history";
-    }
+
 
     // 비밀번호 변경 페이지
     @GetMapping("/api/password-change-form")

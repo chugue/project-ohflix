@@ -28,6 +28,8 @@
         contents.forEach(content => {``
             content.addEventListener('click', function () {
                 const contentId = this.dataset.contentId;
+                console.log(`Content clicked: ${contentId}`); // 추가 로그
+
                 showModal(contentId);
             });
         });

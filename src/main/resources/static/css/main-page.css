@@ -495,6 +495,10 @@ nav ul li a {
     box-sizing: border-box;
     border-radius: .5vw;
     overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 10px;
 }
 
 .item img {
@@ -841,6 +845,19 @@ footer {
     height: 100%;
     object-fit: cover; /* 비디오를 화면에 꽉 차게 만듦 */
     object-position: center; /* 비디오의 중앙 부분을 중심으로 */
+}
 
+/*프로그레스바 설정*/
+.progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
+.progress-bar {
+    height: 100%;
+    background-color: red;
 }
