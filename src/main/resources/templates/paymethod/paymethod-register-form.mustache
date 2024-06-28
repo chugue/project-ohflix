@@ -8,6 +8,40 @@
     <link rel="stylesheet" href="/static/css/paymethod-form.css">
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="/static/js/kakao-paymethod-form.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        function requestPay() {
+            IMP.init('imp37577772'); // 가맹점 식별 코드
+            IMP.request_pay({
+                pg : 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid : 'merchant_'+new Date().getTime(),
+                name : '결제테스트',
+                amount : 100,
+                buyer_email : 'iamport@siot.do',
+                buyer_name : '구매자',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                console.log(rsp);
+                if (rsp.success) {
+                    var msg = '결제가 완료되었습니다.';
+                    alert(msg);
+                    location.href = "결제 완료 후 이동할 페이지 url"
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                    alert(msg);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="white-header">
@@ -28,7 +62,7 @@
     </div>
     <div class="payment-container">
         <div class="payment-methods">
-            <div class="method">
+            <div class="method" onclick="requestPay()">
                 <div>
                     <p>신용카드 또는 체크카드</p>
                     <div class="icons">
