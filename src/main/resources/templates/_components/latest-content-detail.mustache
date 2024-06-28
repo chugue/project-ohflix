@@ -10,8 +10,11 @@
 
 
 </style>
+<!-- SHAKA PLAYER-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
 
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
         const contents = document.querySelectorAll('.content');
         const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
@@ -128,9 +131,10 @@
                         document.querySelector('.playButton').addEventListener('click', function (event) {
                             event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
                             const filename = this.dataset.filename;
-                            if (filename) { //TODO : filename넣기
-                                const videoUrl =  'https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/'+filename;
-                                loadVideo2(videoUrl, filename);
+                            if (filename) {
+                                const s3BaseUrl = 'https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/';
+                                const videoUrl = `${s3BaseUrl}${filename}`;
+                                loadVideo2(videoUrl);
                             } else {
                                 alert('먼저 동영상을 업로드해주세요.');
                             }
@@ -214,29 +218,26 @@
             // Listen for error events.
             window.addEventListener('error', onErrorEvent);
         }
-        function createVideoElement(filename) {
+        function createVideoElement() {
             const videoContainer = document.getElementById('videoContainer');
             videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
 
             const video = document.createElement('video');
-            video.id = 'videoPlayer2';
+            video.id = 'videoPlayer';
             video.controls = true;
             video.autoplay = true;
             video.muted = false;
-            video.setAttribute('data-filename', filename); // filename 설정
-            console.log('Setting data-filename attribute:', filename); // Debugging
-
 
             videoContainer.appendChild(video);
             videoContainer.style.display = 'block'; // 비디오 컨테이너를 표시
             return video;
         }
 
-        function loadVideo2(videoUrl, filename) {
+        function loadVideo2(videoUrl) {
             console.log("Loading video from URL:", videoUrl); // 추가 로그
 
             const videoContainer = document.getElementById('videoContainer');
-            const video = createVideoElement(filename);
+            const video = createVideoElement();
             const player = new shaka.Player(video);
 
             window.player = player;
@@ -244,60 +245,34 @@
             player.addEventListener('error', onErrorEvent);
 
             // 매니페스트를 로드합니다.
-            fetch('/api/video/current-time?filename=' + filename)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Saved time from server:', data.currentTime);  // 서버에서 받아온 현재 시간을 콘솔에 출력
-                        try {
-                            player.load(videoUrl).then(function() {
-                                console.log('The video has now been loaded!');
-                                if (data.currentTime) {
-                                    video.currentTime = data.currentTime;
-                                }
-                                video.play();
-                                if (!document.fullscreenElement) {
-                                    videoContainer.requestFullscreen().catch(err => {
-                                        console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                                    });
-                                }
-                            }).catch(onError);
-                        } catch (e) {
-                            onError(e);
-                        }
-                    }).catch(error => {
-                console.error('Failed to fetch current time:', error); // 에러 로그 추가
-            });
+            try {
+                player.load(videoUrl).then(function() {
+                    console.log('The video has now been loaded!');
+                    video.play();
+
+                    // 비디오 재생 시작 시 전체화면 모드로 전환합니다.
+                    if (!document.fullscreenElement) {
+                        videoContainer.requestFullscreen().catch(err => {
+                            console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                        });
+                    }
+                }).catch(function(error) {
+                    console.error('Error during player.load:', error);
+                    onError(error);
+                });
+            } catch (e) {
+                console.error('Error during player.load try-catch:', e);
+                onError(e);
+            }
         }
 
 
         function onFullscreenChange() {
+            console.log('Fullscreen change event triggered');
             const videoContainer = document.getElementById('videoContainer');
-            const videoPlayer2 = document.getElementById('videoPlayer2');
-            console.log('videoContainer:', videoContainer); // videoContainer 존재 확인
-            console.log('videoPlayer2:', videoPlayer2); // videoPlayer 존재 확인
-
-
-            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement && videoContainer) {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
                 videoContainer.style.display = 'none'; // 전체화면에서 나가면 비디오 컨테이너를 숨깁니다.
                 videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
-                if (videoPlayer) {
-                    const currentTime = videoPlayer2.currentTime;
-                    const filename = videoPlayer2.getAttribute('data-filename'); // data-filename 속성 사용
-                    console.log('Saving current time:', currentTime); // 현재 시간을 콘솔에 출력
-                    console.log('Saving filename:', filename); // 현재 시간을 콘솔에 출력
-                    $.ajax({
-                        url: '/api/video/save-time',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({ filename: filename, currentTime: currentTime }),
-                        success: function (response) {
-                            console.log('Current time saved:', currentTime);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('Failed to save current time:', error);F
-                        }
-                    });
-                }
             }
         }
         function onErrorEvent(event) {

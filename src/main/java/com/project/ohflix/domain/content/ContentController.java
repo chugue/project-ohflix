@@ -21,7 +21,8 @@ public class ContentController {
 
     @GetMapping("/api/latest-content")
     public String getLatest(HttpServletRequest request) {
-        List<ContentResponse.LatestContentDTO> respDTOList = contentService.findLatestContent();
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        ContentResponse.LatestContentDTO respDTOList = contentService.findLatestContent(sessionUser.getId());
         request.setAttribute("latestContentDTO", respDTOList);
 
         return "content/latest-content";
