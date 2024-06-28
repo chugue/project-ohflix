@@ -51,6 +51,8 @@ public class User {
     private Boolean isAutoPlay;     // 자동 재생 여부
     @ColumnDefault("'FALSE'")
     private Boolean isSubscribe;    // 구독/비구독 회원
+    @ColumnDefault("")
+    private String subscribeKey;    // 구독 회원일 경우 subsribeKey를 발급받음
 
     @CreationTimestamp
     private Timestamp createdAt;
@@ -58,12 +60,12 @@ public class User {
     private String provider; // kakao, naver
 
     @Builder
-    public User(Integer id, String email, String password, String mobile, String nickname, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, Timestamp createdAt, String address, String provider) {
+    public User(Integer id, String email, String nickname, String password, String mobile, String name, ProfileIcon profileIcon, Status status, Rate userSaveRate, Boolean isKids, Boolean loginSave, Boolean isAutoPlay, Boolean isSubscribe, String subscribeKey, Timestamp createdAt, String address, String provider) {
         this.id = id;
         this.email = email;
+        this.nickname = nickname;
         this.password = password;
         this.mobile = mobile;
-        this.nickname = nickname;
         this.name = name;
         this.profileIcon = profileIcon;
         this.status = status;
@@ -72,6 +74,7 @@ public class User {
         this.loginSave = loginSave;
         this.isAutoPlay = isAutoPlay;
         this.isSubscribe = isSubscribe;
+        this.subscribeKey = subscribeKey;
         this.createdAt = createdAt;
         this.address = address;
         this.provider = provider;
@@ -80,6 +83,4 @@ public class User {
     public void updatePassword (UserRequest.UpdatePasswordDTO reqDTO) {
         this.password = reqDTO.getNewPasswordCheck();
     }
-
-    
 }
