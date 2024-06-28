@@ -13,7 +13,7 @@ $(document).ready(function () {
                     searchResults.empty();
                     data.forEach(function (item) {
                         var itemHTML = `
-                            <div class="item" data-title="${item.title}">
+                            <div class="item content" data-title="${item.title}" data-content-id="${item.id}">
                                 <img src="${item.thumbnail}" alt="${item.title}">
                             </div>
                         `;
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 
 function initApp() {
     // Install built-in polyfills to patch browser incompatibilities.
+    // Shaka 플레이어 polyfill 설치
     shaka.polyfill.installAll();
 
     // Check if the browser supports the basic APIs Shaka needs.
@@ -61,15 +62,18 @@ function initPlayer() {
     // Attach player to the window to make it easy to access in the JS console.
     window.player = player;
 
-    // Listen for error events.
+    // player 오류 이벤트 리스너 추가
     player.addEventListener('error', onErrorEvent);
+
+    // 비디오 종료 이벤트 리스너 추가
+    video.addEventListener('ended', onVideoEnded);
 
     // 비디오 URL 설정
     // const videoUrl = "http://localhost:7000/videos?filename=" + video.getAttribute('data-video-url');
     const videoUrl = "https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/videolocation/oppenheimer/oppenheimer.mpd";
 
     console.log(videoUrl)
-    // Load the video
+    // video 로드
     loadVideo(videoUrl);
 }
 
@@ -90,7 +94,11 @@ function loadVideo(videoUrl) {
 }
 
 
-
+// 비디오 종료 시 poster 표시 함수
+function onVideoEnded() {
+    const video = document.getElementById('videoPlayer');
+    video.load(); // 비디오 소스를 다시 설정하여 포스터를 다시 표시
+}
 
 function onErrorEvent(event) {
     // Extract the shaka.util.Error object from the event.

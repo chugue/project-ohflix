@@ -11,6 +11,7 @@ import com.project.ohflix.domain.watchingHistory.WatchingHistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.SessionInitializerFilter;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,7 +105,10 @@ public class UserController {
 
     // 비밀번호 변경 페이지
     @GetMapping("/api/password-change-form")
-    public String getPasswordChangeForm() {
+    public String getPasswordChangeForm(HttpServletRequest request) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.PasswordChangePageDTO respDTO = userService.passwordChangePage(sessionUser.getId());
+        request.setAttribute("passwordChangePageDTO", respDTO);
         return "user/password-change-form";
     }
 
@@ -132,7 +136,7 @@ public class UserController {
     public String getAccountPage(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUser.getId());
-        request.setAttribute("accountMembershipInfo", respDTO);
+        request.setAttribute("accountMembershipInfoDTO", respDTO);
         return "account/account-view";
     }
 

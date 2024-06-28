@@ -68,12 +68,14 @@ public class PurchaseHistoryResponse {
     @Data
     public static class AccountSecurityDTO {
         private Integer id; // userId
+        private String profileIconPath;
         private String email;
         private String mobile;
 
 
         public AccountSecurityDTO(User user) {
             this.id = user.getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
             this.email = user.getEmail();
             this.mobile = user.getMobile();
         }
@@ -94,8 +96,7 @@ public class PurchaseHistoryResponse {
 
     // 결제 준비 DTO
     @Data
-    public static class KakaoPayReadyDTO{
-
+    public static class KakaoPayReadyDTO {
         private String tid;
         private String nextRedirectAppUrl;
         private String nextRedirectMobileUrl;
@@ -103,7 +104,6 @@ public class PurchaseHistoryResponse {
         private String androidAppScheme;
         private String iosAppScheme;
         private Timestamp createdAt;
-
 
         public KakaoPayReadyDTO(String tid, String nextRedirectAppUrl, String nextRedirectMobileUrl, String nextRedirectPcUrl, String androidAppScheme, String iosAppScheme, Timestamp createdAt) {
             this.tid = tid;
@@ -114,13 +114,12 @@ public class PurchaseHistoryResponse {
             this.iosAppScheme = iosAppScheme;
             this.createdAt = createdAt;
         }
-
-
     }
+
 
     // 카카오페이 결제 승인 응답 DTO
     @Data
-    public static class KakaoPayApproveDTO{
+    public static class KakaoPayApproveDTO {
         private String aid;
         private String tid;
         private String cid;

@@ -371,7 +371,7 @@ nav ul li a {
 }
 
 .fade-out {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 1s ease-out;
 }
 
