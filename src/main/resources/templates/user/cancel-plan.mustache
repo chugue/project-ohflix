@@ -15,28 +15,22 @@
 
 <body>
 {{#CancelPlanPageDTO}}
-<header>
-    <div class="header-content">
-        <a href="/api/main-page"><img src="/static/images/OH!FLIX.png" alt="OH!FLIX Logo" class="logo"></a>
-        <div class="profile">
-            <img src={{profileIconPath}} alt="Profile Icon" class="profile-icon">
-            <button class="dropdown-button">
-                <span class="dropdown-icon">▼</span>
-                <div class="dropdown-content">
-                    <a href="#">프로필 1</a>
-                    <a href="#">프로필 2</a>
-                    <a href="#">프로필 3</a>
+    <header>
+        <div class="header-content">
+            <a href="/api/main-page"><img src="/static/images/OH!FLIX.png" alt="OH!FLIX Logo" class="logo"></a>
+            <div class="profile">
+                <img src={{profileIconPath}} alt="Profile Icon" class="profile-icon">
+                <div class="logout">
+                    <a href="/logout">로그아웃</a>
                 </div>
-            </button>
+            </div>
         </div>
-    </div>
-</header>
-<main>
-    <div class="cancel-plan-container">
-        <button class="back-btn">
-            <span class="material-icons">arrow_back계정페이지로 돌아가기</span>
-        </button>
-
+    </header>
+    <main>
+        <div class="cancel-plan-container">
+            <a href="/api/account-view" class="back-btn">
+                <span class="material-icons">arrow_back계정페이지로 돌아가기</span>
+            </a>
             <div class="top">
                 <h1>클릭 한 번으로 멤버십을 해지 또는 변경하세요</h1>
                 <p>어떤 선택을 하시든 <b>{{latestServicePeriod}}</b> 부터 효력이 발생합니다. 그때까지는 계속 시청하실 수 있습니다.</p>
@@ -48,13 +42,13 @@
                         <div class="membership-date">
                             <p>멤버십 시작 : {{oldestServicePeriod}}</p>
                         </div>
-                        <button class="black-btn">해지 하기</button>
+                        <a href="/" class="black-btn">해지 하기</a>
                         <p>멤버십을 해지하면 맞춤형 추천작을 시청할 수 없게 됩니다.</p>
                     </div>
                     <div class="card">
                         <p>넷플릭스를 계속 이용하시겠습니까?</p>
                         <p>회원님의 현 멤버십은 그대로 유지됩니다.</p>
-                        <button class="gray-btn">다시 계속 시청하기</button>
+                        <a href="/api/main-page" class="gray-btn">다시 계속 시청하기</a>
                     </div>
                 </div>
                 <div class="card-container">
@@ -62,44 +56,44 @@
                         <p>떠나기 전에 다음 콘텐츠를 시청해 보세요</p>
                         <div class="item-list">
                             {{#latestContentList}}
-                            <div class="item">
-                                <img src={{posterPhoto}} alt="">
-                            </div>
+                                <div class="item">
+                                    <img src={{posterPhoto}} alt="">
+                                </div>
                             {{/latestContentList}}
                         </div>
-                        <button class="gray-btn">더 살펴보기</button>
+                        <a href="/api/main-page" class="gray-btn">더 살펴보기</a>
                     </div>
                 </div>
             </div>
 
-    </div>
-</main>
-<hr>
-<footer>
-    <div class="footer-links">
-        <p class="footer-subtitle">질문이 있으신가요? 고객 센터에 문의하세요.</p>
-        <a href="#">음성 및 자막</a>
-        <a href="#">고객 센터</a>
-        <a href="#">기프트카드</a>
-        <a href="#">투자 정보(IR)</a>
-        <a href="#">미디어 센터</a>
-        <a href="#">입사 정보</a>
-        <a href="#">쿠키 설정</a>
-        <a href="#">이용 약관</a>
-        <a href="#">개인정보 처리방침</a>
-    </div>
-    <div class="service-code">
-        <p>서비스 코드</p>
-    </div>
-    <div class="service-code-content">
-        <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</p>
-        <p>대표: 레지널드 숀 톰프슨</p>
-        <p>이메일 주소: korea@netflix.com</p>
-        <p>주소: 대한민국 서울특별시 종로구 종로 26, 그랑서울 A동 20층 우편번호 03161</p>
-        <p>클라우드 호스팅: Amazon Web Services Inc.</p>
-        <p>공정거래위원회 웹사이트</p>
-    </div>
-</footer>
+        </div>
+    </main>
+    <hr>
+    <footer>
+        <div class="footer-links">
+            <p class="footer-subtitle">질문이 있으신가요? 고객 센터에 문의하세요.</p>
+            <a href="#">음성 및 자막</a>
+            <a href="#">고객 센터</a>
+            <a href="#">기프트카드</a>
+            <a href="#">투자 정보(IR)</a>
+            <a href="#">미디어 센터</a>
+            <a href="#">입사 정보</a>
+            <a href="#">쿠키 설정</a>
+            <a href="#">이용 약관</a>
+            <a href="#">개인정보 처리방침</a>
+        </div>
+        <div class="service-code">
+            <p>서비스 코드</p>
+        </div>
+        <div class="service-code-content">
+            <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</p>
+            <p>대표: 레지널드 숀 톰프슨</p>
+            <p>이메일 주소: korea@netflix.com</p>
+            <p>주소: 대한민국 서울특별시 종로구 종로 26, 그랑서울 A동 20층 우편번호 03161</p>
+            <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+            <p>공정거래위원회 웹사이트</p>
+        </div>
+    </footer>
 {{/CancelPlanPageDTO}}
 </body>
 

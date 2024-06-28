@@ -370,6 +370,13 @@ public class UserService {
         user.updatePassword(reqDTO);
 
     }
+
+    public UserResponse.PasswordChangePageDTO passwordChangePage(Integer sessionUserId) {
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("사용자를 찾을 수 없습니다."));
+
+        return new UserResponse.PasswordChangePageDTO(user);
+    }
 }
 
 

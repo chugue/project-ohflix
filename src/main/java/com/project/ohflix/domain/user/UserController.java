@@ -10,6 +10,7 @@ import com.project.ohflix.domain.refund.RefundService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.SessionInitializerFilter;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,7 +107,10 @@ public class UserController {
 
     // 비밀번호 변경 페이지
     @GetMapping("/api/password-change-form")
-    public String getPasswordChangeForm() {
+    public String getPasswordChangeForm(HttpServletRequest request) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.PasswordChangePageDTO respDTO = userService.passwordChangePage(sessionUser.getId());
+        request.setAttribute("passwordChangePageDTO", respDTO);
         return "user/password-change-form";
     }
 

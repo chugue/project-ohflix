@@ -21,6 +21,15 @@ import java.util.List;
 
 public class UserResponse {
 
+    @Data
+    public static class PasswordChangePageDTO{
+        private String profileIconPath;
+
+        public PasswordChangePageDTO(User user) {
+            this.profileIconPath = user.getProfileIcon().getPath();
+        }
+    }
+
     // 비밀번호 변경 페이지
     @Data
     public static class UpdatePasswordDTO {
