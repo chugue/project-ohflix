@@ -1,6 +1,5 @@
 package com.project.ohflix.domain.user;
 
-import com.project.ohflix.domain._enums.Paymethod;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Status;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;

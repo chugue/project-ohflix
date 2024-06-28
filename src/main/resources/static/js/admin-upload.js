@@ -48,7 +48,7 @@ function uploadFile(file, uploadBtn) {
     var formData = new FormData();
     formData.append('file', file);
 
-    fetch('http://localhost:7000/upload', {
+    fetch('http://localhost:7000/upload2', {
         method: 'POST',
         body: formData
     })
