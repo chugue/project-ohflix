@@ -134,7 +134,7 @@ public class UserController {
     public String getAccountPage(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         UserResponse.AccountMembershipInfoDTO respDTO = userService.accountMembershipInfo(sessionUser.getId());
-        request.setAttribute("accountMembershipInfo", respDTO);
+        request.setAttribute("accountMembershipInfoDTO", respDTO);
         return "account/account-view";
     }
 

@@ -106,22 +106,26 @@ public class PurchaseHistoryController {
         return null;
     }
 
-    @PostMapping("/api/payment/ready")
+    @PostMapping("/kakaoPay/ready")
     @ResponseBody
-    public ResponseEntity<Map<String, String>> readyToPay(@RequestParam int userId, @RequestParam String itemName, @RequestParam int totalAmount, @RequestParam int vatAmount) {
+    public ResponseEntity<Map<String, String>> readyToKakaoPay(@RequestBody Map<String, Object> request) {
+        int userId = (int) request.get("userId");
+        String itemName = (String) request.get("itemName");
+        int totalAmount = (int) request.get("totalAmount");
+        int vatAmount = (int) request.get("vatAmount");
+
         PurchaseHistoryResponse.KakaoPayReadyDTO kakaoPayReadyDTO = purchaseHistoryService.preparePayment(userId, itemName, totalAmount, vatAmount);
 
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", kakaoPayReadyDTO.getNextRedirectPcUrl());
+
         return ResponseEntity.ok(response);
     }
 
 
-
     @GetMapping("/api/kakaoPaySuccess")
     public String paymentSuccess(@RequestParam String code, Model model) {
-        // 여기서 카카오페이 결제 승인 로직을 추가할 수 있습니다.
-        // 예를 들어, userId와 tid를 사용하여 결제 승인을 요청합니다.
+        // 실제 유저 ID와 tid를 사용하여 결제 승인을 요청합니다.
         int userId = 2; // 실제 유저 ID로 변경
         String tid = "T1234567890123456789"; // 실제로는 저장된 tid를 사용
 
