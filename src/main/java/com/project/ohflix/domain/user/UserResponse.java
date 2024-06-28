@@ -72,7 +72,7 @@ public class UserResponse {
             this.username = user.getNickname();
             this.isSubscribe = user.getIsSubscribe();
             this.createdAt = user.getCreatedAt();
-            this.formattedCreatedAt = new SimpleDateFormat("MM-dd").format(user.getCreatedAt());
+            this.formattedCreatedAt = new SimpleDateFormat("yyyy-MM-dd").format(user.getCreatedAt());
             this.monthsSubscribed = calculateMonthsSubscribed(user.getCreatedAt());
             this.index = index;
         }
