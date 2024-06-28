@@ -68,12 +68,14 @@ public class PurchaseHistoryResponse {
     @Data
     public static class AccountSecurityDTO {
         private Integer id; // userId
+        private String profileIconPath;
         private String email;
         private String mobile;
 
 
         public AccountSecurityDTO(User user) {
             this.id = user.getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
             this.email = user.getEmail();
             this.mobile = user.getMobile();
         }

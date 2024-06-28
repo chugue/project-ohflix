@@ -7,127 +7,131 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>account</title>
+    <!-- 파비콘 ( 아이콘 ) -->
+    <link rel="icon" href="/static/images/OH!.ico">
+    <title>계정 보안 - 오플릭스</title>
 </head>
 
 <body>
-<!-- nav start -->
-<nav>
-    <div class="nav-div">
-        <div>
-            <a href="/api/main-page">
-                <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
-            </a>
-        </div>
-        <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
+{{#AccountSecurityDTO}}
+
+    <!-- nav start -->
+    <nav>
+        <div class="nav-div">
             <div>
-                <i class="fa-solid fa-caret-down fa-xs"></i>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- nav end-->
-
-<!-- ------------------------------------------------------------------------------------------------ -->
-
-<!-- main start -->
-<main>
-    <!-- main div left -->
-    <!-- 사이드 바 메뉴 시작 -->
-    {{> /_components/custom-list}}
-    <!-- 사이드 바 메뉴 끝 -->
-
-    <!-- main div right -->
-<div class="main-div">
-    <!-- membership inforamtion -->
-    <div class="main-right-header mb-20">보안</div>
-    <div class="mb-20">계정 정보</div>
-    {{#AccountSecurityDTO}}
-        <!-- fast link -->
-        <div class="main-right-div2 mb-20">
-            <div class="setting m-20">
-                <a href="/api/password-change-form">
-                    <div class="setting-div mb-20 pointer">
-                        <div class="setting-text">
-                            <i class="fa-solid fa-lock"></i>
-                            <div>비밀번호</div>
-                        </div>
-                        <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                    </div>
-                </a>
-                <hr class="mb-20"/>
-                <a href="/api/user-check">
-                    <div class="setting-div mb-20 pointer">
-                        <div class="setting-text">
-                            <div class="icon-wrapper">
-                                <i class="fa-regular fa-envelope"></i>
-                                <div class="notification-dot"></div>
-                            </div>
-                            <div class="text-container">
-                                <div>이메일</div>
-                                <div>{{email}}</div>
-                            </div>
-                        </div>
-                        <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                    </div>
-                </a>
-                <hr class="mb-20"/>
-                <a href="/api/user-check">
-                    <div class="setting-div mb-20 pointer">
-                        <div class="setting-text">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
-                            <div class="text-container">
-                                <div>휴대폰</div>
-                                <div>{{mobile}}</div>
-                            </div>
-                        </div>
-                        <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
-                    </div>
+                <a href="/api/main-page">
+                    <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
                 </a>
             </div>
-        </div>
-
-        <div class="mb-20">엑세스 및 개인정보</div>
-        <div class="main-right-div3 mb-20">
-            <div class="setting m-20">
-                <div class="setting-div mb-20 pointer">
-                    <div class="setting-text">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <div class="text-container">
-                            <div>개인 정보 및 액세스</div>
-                            <div>개인 정보 사본 요청</div>
-                        </div>
-                    </div>
-                    <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+            <div>
+                <div class="profile-icon">
+                    <img src={{profileIconPath}} alt="오류" class="nav-profile"/>
+                </div>
+                <div class="logout">
+                    <a href="/logout">로그아웃</a>
                 </div>
             </div>
         </div>
+    </nav>
+    <!-- nav end-->
 
-        <div class="main-right-div4 mb-20 pointer">
-            <div class="profile-cancel m-15">
-                <i class="fa-regular fa-trash-can"></i>
-                계정 삭제
+    <!-- ------------------------------------------------------------------------------------------------ -->
+
+    <!-- main start -->
+    <main>
+        <div class="main-div">
+            <!-- 사이드 바 메뉴 -->
+            {{> /_components/custom-list}}
+            <!-- 계정 보안 정보 -->
+            <div class="main-section">
+
+                <div class="main-right-header mb-20">보안</div>
+                <div class="mb-20">계정 정보</div>
+                <!-- fast link -->
+                <div class="main-right-div2 mb-20">
+                    <div class="setting m-20">
+                        <a href="/api/password-change-form">
+                            <div class="setting-div mb-20 pointer">
+                                <div class="setting-text">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <div class="ptb-15">비밀번호</div>
+                                </div>
+                                <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                            </div>
+                        </a>
+                        <hr class="mb-20"/>
+                        <a href="/api/user-check">
+                            <div class="setting-div mb-20 pointer">
+                                <div class="setting-text">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <div class="notification-dot"></div>
+                                    </div>
+                                    <div class="text-container">
+                                        <div>이메일</div>
+                                        <div>{{email}}</div>
+                                    </div>
+                                </div>
+                                <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                            </div>
+                        </a>
+                        <hr class="mb-20"/>
+                        <a href="/api/user-check">
+                            <div class="setting-div mb-20 pointer">
+                                <div class="setting-text">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    <div class="text-container">
+                                        <div>휴대폰</div>
+                                        <div>{{mobile}}</div>
+                                    </div>
+                                </div>
+                                <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mb-20">엑세스 및 개인정보</div>
+                <div class="main-right-div3 mb-20">
+                    <div class="setting m-20">
+                        <div class="setting-div mb-20 pointer">
+                            <div class="setting-text">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <div class="text-container">
+                                    <div>개인 정보 및 액세스</div>
+                                    <div>개인 정보 사본 요청</div>
+                                </div>
+                            </div>
+                            <div><span><i class="fa-solid fa-chevron-right"></i></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-right-div4 mb-20 pointer">
+                    <div class="profile-cancel m-15">
+                        <i class="fa-regular fa-trash-can"></i>
+                        계정 삭제
+                    </div>
+                </div>
             </div>
         </div>
+    </main>
+    <!-- nav start end-->
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+
+    <!-- hr -->
+    <div class="mt-70">
+        <hr/>
     </div>
-    {{/AccountSecurityDTO}}
-</main>
-<!-- nav start end-->
+    <!-- hr -->
 
-<!-- ------------------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------------------ -->
 
-<!-- hr -->
-<div class="mt-70">
-    <hr/>
-</div>
-<!-- hr -->
-
-<!-- ------------------------------------------------------------------------------------------------ -->
-
-<!-- footer start -->
-{{> /_components/white-footer}}
-<!-- footer end -->
+    <!-- footer start -->
+    {{> /_components/white-footer}}
+    <!-- footer end -->
+{{/AccountSecurityDTO}}
 </body>
 
 </html>
