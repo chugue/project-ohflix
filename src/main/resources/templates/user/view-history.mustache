@@ -37,48 +37,26 @@
 <main>
     <div class="top">
         <div>
-            <h1>캡틴콩 프로필의 시청 기록</h1>
+            <h1>{{watchingHistory.nickname}}의 시청 기록</h1>
             <span>보고 있는 콘텐츠 | </span><a href="">평가</a>
         </div>
         <div>
-            <img src="/static/images/netflix-profile.png" alt="">
+            <img src="{{watchingHistory.profileIcon}}" alt="">
         </div>
     </div>
 
     <table>
         <tbody>
+        {{#watchingHistory.WatchingHistories}}
         <tr>
-            <td class="viewed-date">24.12.23</td>
-            <td class="viewed-title"><a href="">올드보이</a></td>
+            <td class="viewed-date">{{watchingTime}}</td>
+            <td class="viewed-title"><a href="">{{contentTitle}}</a></td>
             <td class="viewed-report"><a href="">버그/문제 신고</a></td>
             <td class="viewed-delete">
                 <button class="btn"><span class="material-icons">block</span></button>
             </td>
         </tr>
-        <tr>
-            <td class="viewed-date">24.6.23</td>
-            <td class="viewed-title"><a href="">metacoting 최주호</a></td>
-            <td class="viewed-report"><a href="">버그/문제 신고</a></td>
-            <td class="viewed-delete">
-                <button class="btn"><span class="material-icons">block</span></button>
-            </td>
-        </tr>
-        <tr>
-            <td class="viewed-date">24.6.23</td>
-            <td class="viewed-title"><a href="">비 오는 날 듣는 슴슴한 음악</a></td>
-            <td class="viewed-report"><a href="">버그/문제 신고</a></td>
-            <td class="viewed-delete">
-                <button class="btn"><span class="material-icons">block</span></button>
-            </td>
-        </tr>
-        <tr>
-            <td class="viewed-date">24.6.23</td>
-            <td class="viewed-title"><a href="">펭귄 출신이 듣는 겨울 노래</a></td>
-            <td class="viewed-report"><a href="">버그/문제 신고</a></td>
-            <td class="viewed-delete">
-                <button class="btn"><span class="material-icons">block</span></button>
-            </td>
-        </tr>
+        {{/watchingHistory.WatchingHistories}}
         </tbody>
         <!-- 반복문 -->
     </table>
