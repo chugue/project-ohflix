@@ -28,7 +28,7 @@ public class MyListResponse {
             private Integer id;             // PKMyFavoriteListDTO
             private Content content;        // 콘텐츠 테이블
             private Timestamp createdAt;
-            private String playedTime;      // 이어보기 재생시간
+            private Double playedTime;      // 이어보기 재생시간
 
             public MyFavoriteList(MyList myList) {
                 this.id = myList.getId();
@@ -36,6 +36,7 @@ public class MyListResponse {
                 this.createdAt = myList.getCreatedAt();
                 this.playedTime = myList.getPlayedTime();
             }
+
         }
     }
 

@@ -166,6 +166,7 @@ public class ContentResponse {
             this.id = content.getId();
             this.videoPath = content.getVideoPath();
             this.mainPhoto = content.getMainPhoto();
+            this.videoPath = content.getVideoPath();
             this.title = content.getTitle();
             this.productYear = content.getProductYear();
             this.playTime = content.getPlayTime();

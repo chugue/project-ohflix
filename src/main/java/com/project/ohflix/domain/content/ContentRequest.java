@@ -3,8 +3,15 @@ package com.project.ohflix.domain.content;
 
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
+import com.project.ohflix.domain.mylist.MyList;
+import com.project.ohflix.domain.user.User;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+
+import static com.project.ohflix.domain._enums.WatchOrFav.WATCHING;
 
 public class ContentRequest {
 
@@ -45,6 +52,29 @@ public class ContentRequest {
                     .actors(actors)
                     .rate(Rate.valueOf(rate))
                     .genre(Genre.valueOf(genre))
+                    .build();
+        }
+    }
+
+    @Data
+    public static class VideoProgressDTO {
+        private String filename;
+        private Double currentTime;
+
+        public VideoProgressDTO() {
+        }
+
+        public VideoProgressDTO(String filename, Double currentTime) {
+            this.filename = filename;
+            this.currentTime = currentTime;
+        }
+        public MyList toEntity(User sessionUser, Content content, ContentRequest.VideoProgressDTO videoProgressDTO){
+            return MyList.builder()
+                    .playedTime(videoProgressDTO.getCurrentTime())
+                    .watchOrFav(WATCHING)
+                    .createdAt(Timestamp.from(Instant.now()))
+                    .user(sessionUser)
+                    .content(content)
                     .build();
         }
     }
