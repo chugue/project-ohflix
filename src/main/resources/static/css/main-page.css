@@ -371,7 +371,7 @@ nav ul li a {
 }
 
 .fade-out {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 1s ease-out;
 }
 
@@ -495,7 +495,6 @@ nav ul li a {
     box-sizing: border-box;
     border-radius: .5vw;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .item img {
