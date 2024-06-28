@@ -112,13 +112,13 @@ public class UserResponse {
     @Data
     public static class ProfileSettingDTO {
         private Integer userId;
-        private String username;
+        private String nickname;
         private Integer iconId;
         private String iconPath;
 
         public ProfileSettingDTO(User user) {
             this.userId = user.getId();
-            this.username = user.getNickname();
+            this.nickname = user.getNickname();
             this.iconId = user.getProfileIcon().getId();
             this.iconPath = user.getProfileIcon().getPath();
         }
