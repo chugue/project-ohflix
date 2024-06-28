@@ -1,5 +1,6 @@
 package com.project.ohflix.domain.purchaseHistory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.ohflix._core.config.KakaoPayConfig;
 import com.project.ohflix._core.error.exception.Exception404;
 import com.project.ohflix.domain.content.ContentRepository;
@@ -9,19 +10,20 @@ import com.project.ohflix.domain.cardInfo.CardInfo;
 import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.cardInfo.CardInfoResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,8 @@ public class PurchaseHistoryService {
     private final RestTemplate restTemplate;
     private final HttpHeaders kakaoPayHeaders;
     private final KakaoPayConfig kakaoPayConfig;
+    private final ObjectMapper objectMapper;
+    private static final Logger logger = LoggerFactory.getLogger(PurchaseHistoryService.class);
 
     //paymethod-manage
     public List<CardInfoResponse.paymethodManageDTO> paymethodManagePage(int userId) {
@@ -73,28 +77,52 @@ public class PurchaseHistoryService {
 
     // 결제 준비
     public PurchaseHistoryResponse.KakaoPayReadyDTO preparePayment(int userId, String itemName, int totalAmount, int vatAmount) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
+        String url = "https://kapi.kakao.com/v1/payment/ready";
 
-        String url = "https://open-api.kakaopay.com/v1/payment/ready";
+        String cid = kakaoPayConfig.getCid();
+        if (cid == null) {
+            logger.error("CID can't be null.");
+            throw new IllegalArgumentException("CID can't be null.");
+        }
 
-        Map<String, Object> body = new HashMap<>();
-        body.put("cid", kakaoPayConfig.getCid());
-        body.put("partner_order_id", "order_id_" + userId);
-        body.put("partner_user_id", String.valueOf(userId));
-        body.put("item_name", itemName);
-        body.put("quantity", "1");
-        body.put("total_amount", totalAmount);
-        body.put("vat_amount", vatAmount);
-        body.put("tax_free_amount", 0);
-        body.put("approval_url", kakaoPayConfig.getRedirectUrl() + "/paymethod/pay-success");
-        body.put("fail_url", kakaoPayConfig.getRedirectUrl() + "/fail");
-        body.put("cancel_url", kakaoPayConfig.getRedirectUrl() + "/cancel");
+        logger.info("Preparing payment with CID: {}", cid);
+        System.out.println("CID: " + cid);
+        System.out.println("AdminKey: " + kakaoPayConfig.getAdminKey());
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Authorization", "KakaoAK " + kakaoPayConfig.getAdminKey());
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, kakaoPayHeaders);
-        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("cid", cid);
+        body.add("partner_order_id", "order_id_" + userId);
+        body.add("partner_user_id", String.valueOf(userId));
+        body.add("item_name", itemName);
+        body.add("quantity", "1");
+        body.add("total_amount", String.valueOf(totalAmount));
+        body.add("vat_amount", String.valueOf(vatAmount));
+        body.add("tax_free_amount", "0");
+        body.add("approval_url", kakaoPayConfig.getRedirectUrl() + "/api/kakaoPaySuccess");
+        body.add("fail_url", kakaoPayConfig.getRedirectUrl() + "/api/kakaoPayFail");
+        body.add("cancel_url", kakaoPayConfig.getRedirectUrl() + "/api/kakaoPayCancel");
+
+        logger.info("Request body: {}", body);
+
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<Map> response;
+        try {
+            response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+            logger.info("KakaoPay ready response: {}", response);
+        } catch (HttpClientErrorException e) {
+            logger.error("HttpClientErrorException: Status code: {}, Response body: {}", e.getStatusCode(), e.getResponseBodyAsString());
+            throw e;
+        }
 
         Map<String, Object> responseBody = response.getBody();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime createdAt = LocalDateTime.parse((String) responseBody.get("created_at"), formatter);
+
         return new PurchaseHistoryResponse.KakaoPayReadyDTO(
                 (String) responseBody.get("tid"),
                 (String) responseBody.get("next_redirect_app_url"),
@@ -102,7 +130,7 @@ public class PurchaseHistoryService {
                 (String) responseBody.get("next_redirect_pc_url"),
                 (String) responseBody.get("android_app_scheme"),
                 (String) responseBody.get("ios_app_scheme"),
-                Timestamp.valueOf((String) responseBody.get("created_at"))
+                Timestamp.valueOf(createdAt)
         );
     }
 
@@ -110,6 +138,13 @@ public class PurchaseHistoryService {
     public PurchaseHistoryResponse.KakaoPayApproveDTO approvePayment(int userId, String tid, String pgToken) {
         String url = "https://open-api.kakaopay.com/v1/payment/approve";
 
+        String cid = kakaoPayConfig.getCid();
+        if (cid == null) {
+            logger.error("CID can't be null.");
+            throw new IllegalArgumentException("CID can't be null.");
+        }
+
+        logger.info("Approving payment with CID: {}", cid);
         Map<String, Object> body = Map.of(
                 "cid", kakaoPayConfig.getCid(),
                 "tid", tid,
