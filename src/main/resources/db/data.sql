@@ -137,9 +137,9 @@ VALUES
 --- 생성 순서 : 6번, mylist 테이블
 INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
 VALUES
-    (2, 1, '00:15:00', 'WATCHING', NOW()),
-    (2, 2, '00:30:00', 'WATCHING', NOW()),
-    (2, 3, '00:00:00', 'FAVORITE', NOW());
+    (1, 1, 0, 'WATCHING', NOW()),
+    (1, 2, 0, 'WATCHING', NOW()),
+    (1, 3, 0, 'FAVORITE', NOW());
 
 
 --- 생성 순서 : 7번, 환불요청 테이블

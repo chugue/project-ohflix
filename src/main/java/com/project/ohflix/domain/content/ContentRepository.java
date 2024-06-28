@@ -55,4 +55,8 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
 
     @Query("SELECT c FROM Content c WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :title, '%'))")
     List<Content> findByTitleContaining(@Param("title") String title);
+
+
+    @Query("SELECT c FROM Content c WHERE c.videoPath = :videoPath")
+    Optional<Content> findByVideoPath(@Param("videoPath") String videoPath);
 }
