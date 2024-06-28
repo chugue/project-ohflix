@@ -1,31 +1,24 @@
 package com.project.ohflix.domain.payment;
 
-import com.siot.IamportRestClient.IamportClient;
-import jakarta.annotation.PostConstruct;
+import com.project.ohflix._core.utils.ApiUtil;
+import com.project.ohflix.domain.content.ContentResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+
+@RestController
 @RequiredArgsConstructor
 public class PaymentController {
-    private IamportClient iamportClient;
 
+    private final PaymentService paymentService;
 
-    @Value("${imp.api.key}")
-    private String apiKey;
-
-    @Value("${imp.api.secretkey}")
-    private String secretKey;
-
-    @PostConstruct
-    public void init() {
-        this.iamportClient = new IamportClient(apiKey, secretKey);
-    }
-
-    @GetMapping("/payment/page")
-    public String paymentPage() {
-        return "payment/payment";
+    @PostMapping("api/pay/info")
+    public ResponseEntity<?> getContentInfo(@RequestBody CreditPayRequest.CreditPayDTO reqDTO){
+        paymentService.savePayment(reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(paymentService.savePayment(reqDTO)));
     }
 }
