@@ -13,7 +13,7 @@ a {
 }
 
 /* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
-.mt-70{
+.mt-70 {
     margin-top: 70px;
 }
 
@@ -40,6 +40,7 @@ a {
 .m-15 {
     margin: 15px;
 }
+
 .m-5 {
     margin: 5px;
 }
@@ -48,19 +49,20 @@ a {
     font-weight: bold;
 }
 
-.pointer{
+.pointer {
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
 }
-.pointer:hover{
+
+.pointer:hover {
     background: #f5f5f5;
 }
 
-hr{
-    background:rgb(223, 223, 223);
-    height:1px;
-    border:0;
+hr {
+    background: rgb(223, 223, 223);
+    height: 1px;
+    border: 0;
 }
 
 /* """"""""""""""""""""""""""""body"""""""""""""""""""""""""""" */
@@ -95,7 +97,7 @@ nav {
     align-items: center;
 }
 
-.nav-div div{
+.nav-div div {
     display: flex;
     align-items: center;
 }
@@ -112,14 +114,17 @@ nav {
     overflow: hidden;
     margin-right: 13px;
 }
-.profile-icon img{
+
+.profile-icon img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.logout a{
+
+.logout a {
     font-size: 14px;
 }
+
 .logout a:hover {
     text-decoration: underline;
 }
@@ -129,7 +134,7 @@ nav {
     width: 1100px;
     display: flex;
     text-align: start;
-    margin: 0 auto ;
+    margin: 0 auto;
     padding: 30px 50px 80px;
 }
 
@@ -139,7 +144,7 @@ nav {
     font-size: 14px;
 }
 
-.main-section{
+.main-section {
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -157,6 +162,7 @@ nav {
 .main-left-text:hover {
     background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
+
 ul {
     list-style: none;
     /* 기본 스타일 제거 */
@@ -169,18 +175,22 @@ ul {
     padding: 10px;
 }
 
-ul.custom-list li {
+.custom-list li {
     font-size: 17px;
-}
-
-li {
-    padding: 15px;
     border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-li:hover {
-    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+.custom-list li:hover {
+    background-color: #eee;
+}
+
+.custom-list li a {
+    padding: 15px;
+    text-decoration: none;
+    color: inherit;
+    display: block; /* a 태그가 li 전체를 채우도록 */
 }
 
 .main-left-icon {
@@ -193,7 +203,7 @@ li:hover {
     font-weight: bold;
 }
 
-.main-profile{
+.main-profile {
     display: flex;
     gap: 10px;
 }
@@ -201,13 +211,15 @@ li:hover {
 .main-profile div:nth-child(1) {
     align-content: center;
 }
-main .profile-icon{
+
+main .profile-icon {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    border:1px solid #fff;
+    border: 1px solid #fff;
     overflow: hidden;
 }
+
 main .profile-icon img {
     width: 100%;
 }
@@ -230,11 +242,11 @@ main .profile-icon img {
     margin-top: 20px;
 }
 
-.membership-date div:first-child{
+.membership-date div:first-child {
     margin-left: 20px;
 }
 
-.membership-box i{
+.membership-box i {
     margin-right: 20px;
 }
 
@@ -259,7 +271,7 @@ main .profile-icon img {
     align-items: center;
 }
 
-.fa-chevron-right{
+.fa-chevron-right {
     color: rgb(65, 65, 65);
 }
 
@@ -270,7 +282,7 @@ main .profile-icon img {
     border-radius: 10px;
 }
 
-.fast-link i{
+.fast-link i {
     width: 20px;
     margin-right: 10px;
     color: rgb(65, 65, 65);
@@ -282,7 +294,7 @@ main .profile-icon img {
     align-items: center;
 }
 
-.fast-link-div div:nth-child(2){
+.fast-link-div div:nth-child(2) {
     text-align: end;
 }
 
@@ -322,7 +334,7 @@ main .profile-icon img {
     line-height: 1.5; /* 줄 간격 조정 */
 }
 
-.text-container div:nth-child(2){
+.text-container div:nth-child(2) {
     color: gray;
     font-size: 13px;
 }
@@ -362,7 +374,7 @@ footer {
     margin: 5px 0;
 }
 
-footer div{
+footer div {
     color: rgb(160, 160, 160);
     width: 1100px;
     padding: 10px 50px;
@@ -370,7 +382,7 @@ footer div{
     margin-bottom: 40px;
 }
 
-footer div p{
+footer div p {
     font-size: 9px;
     margin-bottom: 5px;
 }
