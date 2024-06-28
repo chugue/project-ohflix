@@ -24,18 +24,19 @@ VALUES
     ('/static/images/profiles/netflix-profile40.png', 'Icon 40', false, false, false, false, false, true);
 
 -- 생성 순서 : 2번, 사용자 더미 1번사용자는 오플릭스 관리자.
-INSERT INTO user_tb (email, password, nickname, name, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, created_at)
+INSERT INTO user_tb (email, password, nickname, name, mobile, profile_icon_id, status, user_save_rate, is_kids, login_save, is_auto_play, is_subscribe, user_key, created_at)
 VALUES
-    ('admin@example.com', '1234', 'adminUser', '관리자', '010-1111-1111', 1, 'ADMIN', 'R', false, true, true, true, NOW()),
-    ('user2@example.com', '1234', 'user2', '김성훈', '010-2222-2222', 11, 'USER', 'ALL', false, false, true, true, NOW()),
-    ('user3@example.com', '1234', 'user3', '박동기', '010-3333-3333', 3, 'USER', 'ALL', true, false, true, false, NOW()),
-    ('user4@example.com', '1234', 'user4', '공지영', '010-4444-4444', 4, 'USER', 'PG', false, true, false, true, NOW()),
-    ('user5@example.com', '1234', 'user5', '양승호', '010-5555-5555', 5, 'USER', 'ALL', false, false, true, false, NOW()),
-    ('user6@example.com', '1234', 'user6', '최윤정', '010-6666-6666', 6, 'USER', 'PG', true, true, false, true, NOW()),
-    ('user7@example.com', '1234', 'user7', '최주호', '010-7777-7777', 7, 'USER', 'ALL', false, false, false, true, NOW()),
-    ('user8@example.com', '1234', 'user8', '홍길동', '010-8888-8888', 8, 'USER', 'PG', true, false, true, false, NOW()),
-    ('user9@example.com', '1234', 'user9', '김철수', '010-9999-9999', 9, 'USER', 'ALL', false, true, false, true, NOW()),
-    ('user10@example.com', '1234', 'user10', '강유리', '010-1111-0000', 10, 'USER','R', true, false, false, false, NOW());
+('admin@example.com', '1234', 'adminUser', '관리자', '010-1111-1111', 1, 'ADMIN', 'R', false, true, true, true, '1234', NOW()),
+('user2@example.com', '1234', 'user2', '김성훈', '010-2222-2222', 11, 'USER', 'ALL', false, false, true, true, '1234', NOW()),
+('user3@example.com', '1234', 'user3', '박동기', '010-3333-3333', 3, 'USER', 'ALL', true, false, true, false, '', NOW()),
+('user4@example.com', '1234', 'user4', '공지영', '010-4444-4444', 4, 'USER', 'PG', false, true, false, true, '1234', NOW()),
+('user5@example.com', '1234', 'user5', '양승호', '010-5555-5555', 5, 'USER', 'ALL', false, false, true, false, '', NOW()),
+('user6@example.com', '1234', 'user6', '최윤정', '010-6666-6666', 6, 'USER', 'PG', true, true, false, true, '1234', NOW()),
+('user7@example.com', '1234', 'user7', '최주호', '010-7777-7777', 7, 'USER', 'ALL', false, false, false, true, '1234', NOW()),
+('user8@example.com', '1234', 'user8', '홍길동', '010-8888-8888', 8, 'USER', 'PG', true, false, true, false, '', NOW()),
+('user9@example.com', '1234', 'user9', '김철수', '010-9999-9999', 9, 'USER', 'ALL', false, true, false, true, '1234', NOW()),
+('user10@example.com', '1234', 'user10', '강유리', '010-1111-0000', 10, 'USER', 'R', true, false, false, false, '', NOW());
+
 
 -- 생성 순서 : 3번, 카드 정보 더미
 INSERT INTO card_info_tb (user_id, card_number, last_digit, expiry_month, card_owner, date_of_birth, is_main, is_agreed_third)
@@ -80,7 +81,7 @@ INSERT INTO content_tb (
     title, thumbnail, video_path, main_photo, poster_photo, text_photo,
     director, introduction, characteristic, play_time, product_year, writers,
     actors, view_count, rate, genre, created_at
-) VALUES ('월드 워 Z','/static/images/dummy/wolrd_war_z/thumbnail.webp','videolocation/wolrd_war_z/main-photo.webp','/static/images/dummy/wolrd_war_z/main-photo.webp','/static/images/dummy/wolrd_war_z/poster-photo.webp','/static/images/dummy/wolrd_war_z/text-photo.webp','마크 포스터','인간을 괴물로 만드는 바이러스의 습격을 다룬 재난 스릴러 영화. 《Variety》가 ‘상상력과 몰입감이 돋보이는 새로운 작품이 좀비 영화 대열에 합류했다. ’라고 호평했다.','긴박감 넘치는, 폭력적인, 무서운','1시간 57분','2013','매튜 마이클 캐너핸, 드류 고다드','브래드 피트, 미레유 에노스',  10 ,'PG','HORROR',NOW()),
+) VALUES ('월드 워 Z','/static/images/dummy/wolrd_war_z/thumbnail.webp','videolocation/wolrd_war_z/wolrd_war_z.mpd','/static/images/dummy/wolrd_war_z/main-photo.webp','/static/images/dummy/wolrd_war_z/poster-photo.webp','/static/images/dummy/wolrd_war_z/text-photo.webp','마크 포스터','인간을 괴물로 만드는 바이러스의 습격을 다룬 재난 스릴러 영화. 《Variety》가 ‘상상력과 몰입감이 돋보이는 새로운 작품이 좀비 영화 대열에 합류했다. ’라고 호평했다.','긴박감 넘치는, 폭력적인, 무서운','1시간 57분','2013','매튜 마이클 캐너핸, 드류 고다드','브래드 피트, 미레유 에노스',  10 ,'PG','HORROR',NOW()),
          ('곤지암','/static/images/dummy/gonziam/thumbnail.webp','videolocation/gonziam/gonziam.mpd','/static/images/dummy/gonziam/main-photo.webp','/static/images/dummy/gonziam/poster-photo.webp','/static/images/dummy/gonziam/text-photo.webp','정범식','환자의 집단 자살과 병원장 실종 이후로 버려진 곤지암 정신병원. 흉가로 유명한 이곳에 체험단 7명이 인터넷 방송을 위해 발을 들인다. 이들의 목표는, 열리지 않는 402호에 들어가는 것. 하지만 촬영 시작부터 괴담이 현실이 된다.','으스스한, 어두운, 무서운','1시간 34분','2018','정범식','위하준, 박지현, 오아연, 박성훈',  3 ,'PG','HORROR',NOW()),
          ('조커','/static/images/dummy/joker/thumbnail.webp','videolocation/joker/joker.mpd','/static/images/dummy/joker/main-photo.webp','/static/images/dummy/joker/poster-photo.webp','/static/images/dummy/joker/text-photo.webp','토드 필립스','1981년 고담시. 정신과 병력이 있는 코미디언 지망생이 대중의 관심을 얻으려 고군분투한다. 어느 날 자신을 공격한 이들에게 반격을 가하는데 그로부터 삶이 어둡고 처참한 방향으로 치닫기 시작한다.','폭력적인, 어두운','2시간 1분','2019','토드 필립스','호아킨 피닉스, 로버트 드 니로',  3 ,'PG','THRILLER',NOW()),
          ('스마트폰을 떨어뜨렸을 뿐인데','/static/images/dummy/smartphone_drop/thumbnail.jpg','videolocation/smartphone_drop/smartphone_drop.mpd','/static/images/dummy/smartphone_drop/main-photo.webp','/static/images/dummy/smartphone_drop/poster-photo.webp','/static/images/dummy/smartphone_drop/text-photo.webp','김태준','젊은 여성의 스마트폰을 손에 넣은 살인범. 스마트폰을 이용해 그녀의 신분을 도용하고 삶을 갉아먹기 시작한다. 손에 땀을 쥐게 하는 스릴러.','긴장감 넘치는','1시간 57분','2023','김태준','천우희, 임시완, 김희원',  2 ,'PG','THRILLER',NOW()),

@@ -12,7 +12,6 @@ import com.project.ohflix.domain.cardInfo.CardInfoRepository;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
-import com.project.ohflix.domain.profileIcon.ProfileIconRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistory;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryNativeRepository;
 import com.project.ohflix.domain.purchaseHistory.PurchaseHistoryRepository;
@@ -24,14 +23,13 @@ import com.project.ohflix.domain.refund.RefundResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -49,7 +47,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserNativeRepository userNativeRepository;
     private final CardInfoRepository cardInfoRepository;
-    private final ProfileIconRepository profileIconRepository;
     private final PurchaseHistoryRepository purchaseHistoryRepository;
     private final ContentRepository contentRepository;
     private final PurchaseHistoryNativeRepository purchaseHistoryNativeRepository;
@@ -64,11 +61,7 @@ public class UserService {
                 .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
     }
 
-    /**
-     * 1. 카카오에서 사용자 정보 요청하기
-     * 2. code 방식과 동일
-     * 3. jwt(스프링서버) 생성해서 엡에게 전달
-     */
+
     // kakaoLogin
     @Transactional
     public User kakaoLogin(String code) {

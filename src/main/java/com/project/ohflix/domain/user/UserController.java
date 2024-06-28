@@ -38,7 +38,6 @@ public class UserController {
 
         User user = userService.kakaoLogin(code);
         SessionUser sessionUser = new SessionUser(user);
-        System.out.println("👉👉👉👉👉👉👉👉👉" + code);
         redisTemplate.opsForValue().set("sessionUser", sessionUser);
         session.setAttribute("sessionUser", sessionUser);
 
@@ -46,7 +45,7 @@ public class UserController {
     }
 
 
-    // 사용자 환불요청 페이지
+    // 사용자 환불요청 페이지 TODO : 손보기
     @GetMapping("/api/refund-request-form")
     public String getAccountRefundPage(HttpServletRequest request) {
         Integer sessionUserId = 2;
