@@ -63,14 +63,18 @@ public class UserResponse {
         private String username;
         private Boolean isSubscribe;
         private Timestamp createdAt;
+        private String formattedCreatedAt;
         private Integer monthsSubscribed;
+        private Integer index;
 
-        public MembersDTO(User user) {
+        public MembersDTO(User user, int index) {
             this.id = user.getId();
             this.username = user.getNickname();
             this.isSubscribe = user.getIsSubscribe();
             this.createdAt = user.getCreatedAt();
+            this.formattedCreatedAt = new SimpleDateFormat("yyyy-MM-dd").format(user.getCreatedAt());
             this.monthsSubscribed = calculateMonthsSubscribed(user.getCreatedAt());
+            this.index = index;
         }
 
         private Integer calculateMonthsSubscribed(Timestamp createdAt) {
