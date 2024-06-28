@@ -135,11 +135,13 @@ VALUES
 
 
 --- 생성 순서 : 6번, mylist 테이블
--- INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
--- VALUES
---     (1, 1, 0, 'WATCHING', NOW()),
---     (1, 2, 0, 'WATCHING', NOW()),
---     (1, 3, 0, 'FAVORITE', NOW());
+INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
+VALUES
+    (1, 1, 0, 'WATCHING', NOW()),
+    (1, 2, 0, 'WATCHING', NOW()),
+    (1, 3, 0, 'FAVORITE', NOW()),
+    (2, 1, 0, 'FAVORITE', NOW()),
+    (2, 1, 25, 'WATCHING', NOW());
 
 
 --- 생성 순서 : 7번, 환불요청 테이블
@@ -148,3 +150,8 @@ INSERT INTO refund_tb (user_id, reason, status, purchased_date, refuse_message, 
     (3, 'TECHNICAL_ISSUE', 'REJECTED','2024-03-02', '죄송합니다.', NOW()),
     (4, 'SUBSCRIPTION_ISSUE', 'REJECTED','2024-03-02', '죄송합니다', NOW()),
     (5, 'PAYMENT_ISSUE', 'PENDING','2024-03-02','', NOW());
+
+--- 생성 순서 : 8번, watchingHistory 테이블
+INSERT INTO watching_history_tb (user_id, content_id, played_time, created_at)
+VALUES
+    (2, 1, 50, NOW());

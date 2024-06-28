@@ -26,14 +26,14 @@ public class MyListService {
     private final WatchingHistoryRepository watchingHistoryRepository;
 
     @Transactional
-    public MyListResponse.MyFavoriteListDTO findMyListById(Integer sessionUserId) {
+    public MyListResponse.MyListDTO findMyListById(Integer sessionUserId) {
         // 헤더 유저 가져오기 ( 프로필 아이콘 )
         User user = userRepository.findUserProfileById(sessionUserId);
 
         List<MyList> myFavoriteList = myListRepository.findMyListByUserId(sessionUserId);
         List<MyList> myWatchList = myListRepository.findMyWatchListByUserId(sessionUserId);
 
-        return new MyListResponse.MyFavoriteListDTO(user, myFavoriteList, myWatchList);
+        return new MyListResponse.MyListDTO(user, myFavoriteList, myWatchList);
     }
 
     // 찜 기능

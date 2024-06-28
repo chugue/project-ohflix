@@ -14,22 +14,16 @@ import java.util.List;
 public class MyListResponse {
 
     @Data
-    public static class MyFavoriteListDTO {
+    public static class MyListDTO {
         private ProfileIcon profileIcon;
         private List<MyFavoriteList> myFavoriteList;
+        private List<MyWatchList> myWatchList;
 
-        public MyFavoriteListDTO(User user, List<MyList> myFavoriteList, List<MyList> myWatchList) {
+
+        public MyListDTO(User user, List<MyList> myFavoriteList, List<MyList> myWatcheList) {
             this.profileIcon = user.getProfileIcon();
-            this.myFavoriteList = myFavoriteList.stream()
-                    .map(myList -> new MyFavoriteList(myList, findMyWatchList(myWatchList, myList)))
-                    .toList();
-        }
-
-        private MyList findMyWatchList(List<MyList> myWatchList, MyList myList) {
-            return myWatchList.stream()
-                    .filter(watchList -> watchList.getContent().equals(myList.getContent()))
-                    .findFirst()
-                    .orElse(null);
+            this.myFavoriteList = myFavoriteList.stream().map(MyFavoriteList::new).toList();
+            this.myWatchList = myWatcheList.stream().map(MyWatchList::new).toList();
         }
 
         @Data
@@ -37,16 +31,32 @@ public class MyListResponse {
             private Integer id;             // PKMyFavoriteListDTO
             private Content content;        // 콘텐츠 테이블
             private Timestamp createdAt;
-            private double playedTime;      // 이어보기 재생시간
+            private Double playedTime;      // 이어보기 재생시간
 
-            public MyFavoriteList(MyList myList, MyList myWatchList) {
+            public MyFavoriteList(MyList myList) {
                 this.id = myList.getId();
                 this.content = myList.getContent();
                 this.createdAt = myList.getCreatedAt();
-                this.playedTime = myWatchList != null && myWatchList.getPlayedTime() != null
-                        ? myList.getContent().getRealPlayTime() / myWatchList.getPlayedTime()
+                this.playedTime = myList.getPlayedTime();
+            }
+
+        }
+        @Data
+        public static class MyWatchList {
+            private Integer id;             // PKMyFavoriteListDTO
+            private Content content;        // 콘텐츠 테이블
+            private Timestamp createdAt;
+            private Double playedTime;      // 이어보기 재생시간
+
+            public MyWatchList(MyList myList) {
+                this.id = myList.getId();
+                this.content = myList.getContent();
+                this.createdAt = myList.getCreatedAt();
+                this.playedTime = myList.getPlayedTime() != null
+                        ? myList.getPlayedTime()/myList.getContent().getRealPlayTime() *100
                         : 0.0;
             }
+
         }
     }
 
