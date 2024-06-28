@@ -75,10 +75,7 @@ nav {
     padding: 10px 50px;
     display: flex;
     justify-content: space-between;
-    /* 그리드 아이템 양쪽 끝 정렬 */
     align-items: center;
-    /* 세로 중앙 정렬 */
-    /* 내부 패딩 추가 */
 }
 
 .nav-div div{
@@ -145,13 +142,6 @@ main {
     background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
 
-ul {
-    list-style: none;
-    /* 기본 스타일 제거 */
-    padding-left: 0;
-    /* 내부 패딩 제거 */
-    text-align: start;
-}
 
 .main-left-bottom {
     padding: 10px;

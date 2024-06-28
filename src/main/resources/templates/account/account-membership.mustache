@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>account</title>
+    <!-- 파비콘 ( 아이콘 ) -->
+    <link rel="icon" href="/static/images/OH!.ico">
+    <title>계정 멤버십 - 오플릭스</title>
 </head>
 
 <body>
@@ -24,8 +26,8 @@
             <div class="profile-icon">
                 <img src={{profileIconPath}} alt="오류"/>
             </div>
-            <div>
-                <i class="fa-solid fa-caret-down fa-xs"></i>
+            <div class="logout">
+                <a href="/logout">로그아웃</a>
             </div>
         </div>
     </div>
@@ -36,14 +38,10 @@
 
 <!-- main start -->
 <main>
-    <!-- main div left -->
-    <!-- 사이드 바 메뉴 시작 -->
-    {{> /_components/custom-list}}
-    <!-- 사이드 바 메뉴 끝 -->
-
-    <!-- main div right -->
     <div class="main-div">
-        <!-- membership inforamtion -->
+    <!-- 사이드 바 메뉴 -->
+    {{> /_components/custom-list}}
+        <div class="main-section">
         <div class="main-right-header mb-20">멤버십</div>
         <div class="mb-20">멤버십 상세정보</div>
         <div class="main-right-div1 mb-20">
@@ -88,7 +86,6 @@
                 </a>
             </div>
         </div>
-
         <a href="/api/cancel-plan">
             <div class="main-right-div3 mb-20 pointer">
                 <div class="membership-cancel m-15">
@@ -103,6 +100,7 @@
                 </div>
             </div>
         </a>
+        </div>
     </div>
 </main>
 <!-- main end-->
