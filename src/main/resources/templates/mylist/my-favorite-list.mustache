@@ -131,6 +131,17 @@
                     searchInput.focus();
                 }
             });
+            document.addEventListener('DOMContentLoaded', function () {
+                const items = document.querySelectorAll('.item.content');
+
+                items.forEach(item => {
+                    const progress = item.getAttribute('data-progress'); // 진행 상태를 가져옵니다. 예: 75
+                    const progressBar = item.querySelector('.progress-bar');
+                    if (progressBar && progress) {
+                        progressBar.style.width = progress + '%';
+                    }
+                });
+            });
         </script>
     </div>
 </header>
@@ -143,13 +154,16 @@
         <h2>내가 찜한 콘텐츠</h2>
         <div class="movies">
             <div class="item-list">
-                    {{#MyFavoriteList}}
-                        {{#content}}
-                            <div class="item content" data-content-id="{{id}}">
-                                <img src={{thumbnail}} alt="{{id}}">
+                {{#MyFavoriteList}}
+                    {{#content}}
+                        <div class="item content" data-content-id="{{id}}" data-progress="{{playedTime}}">
+                            <img src="{{thumbnail}}" alt="{{id}}">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
                             </div>
-                        {{/content}}
-                    {{/MyFavoriteList}}
+                        </div>
+                    {{/content}}
+                {{/MyFavoriteList}}
                 <!-- 프론트 더미 -->
                 <!--                <div class="item">-->
                 <!--                    <img src="/static/images/new_contents/new_contents_02.jpg" alt="new_02">-->

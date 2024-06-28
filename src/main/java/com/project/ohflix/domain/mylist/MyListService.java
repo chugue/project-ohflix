@@ -31,8 +31,9 @@ public class MyListService {
         User user = userRepository.findUserProfileById(sessionUserId);
 
         List<MyList> myFavoriteList = myListRepository.findMyListByUserId(sessionUserId);
+        List<MyList> myWatchList = myListRepository.findMyWatchListByUserId(sessionUserId);
 
-        return new MyListResponse.MyFavoriteListDTO(user, myFavoriteList);
+        return new MyListResponse.MyFavoriteListDTO(user, myFavoriteList, myWatchList);
     }
 
     // 찜 기능

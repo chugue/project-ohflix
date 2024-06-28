@@ -18,9 +18,18 @@ public class MyListResponse {
         private ProfileIcon profileIcon;
         private List<MyFavoriteList> myFavoriteList;
 
-        public MyFavoriteListDTO(User user, List<MyList> myFavoriteList) {
+        public MyFavoriteListDTO(User user, List<MyList> myFavoriteList, List<MyList> myWatchList) {
             this.profileIcon = user.getProfileIcon();
-            this.myFavoriteList = myFavoriteList.stream().map(MyFavoriteList::new).toList();
+            this.myFavoriteList = myFavoriteList.stream()
+                    .map(myList -> new MyFavoriteList(myList, findMyWatchList(myWatchList, myList)))
+                    .toList();
+        }
+
+        private MyList findMyWatchList(List<MyList> myWatchList, MyList myList) {
+            return myWatchList.stream()
+                    .filter(watchList -> watchList.getContent().equals(myList.getContent()))
+                    .findFirst()
+                    .orElse(null);
         }
 
         @Data
@@ -28,15 +37,16 @@ public class MyListResponse {
             private Integer id;             // PKMyFavoriteListDTO
             private Content content;        // 콘텐츠 테이블
             private Timestamp createdAt;
-            private Double playedTime;      // 이어보기 재생시간
+            private double playedTime;      // 이어보기 재생시간
 
-            public MyFavoriteList(MyList myList) {
+            public MyFavoriteList(MyList myList, MyList myWatchList) {
                 this.id = myList.getId();
                 this.content = myList.getContent();
                 this.createdAt = myList.getCreatedAt();
-                this.playedTime = myList.getPlayedTime();
+                this.playedTime = myWatchList != null && myWatchList.getPlayedTime() != null
+                        ? myList.getContent().getRealPlayTime() / myWatchList.getPlayedTime()
+                        : 0.0;
             }
-
         }
     }
 

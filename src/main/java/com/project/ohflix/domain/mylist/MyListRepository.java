@@ -21,6 +21,15 @@ public interface MyListRepository extends JpaRepository<MyList, Integer> {
     List<MyList> findMyListByUserId(@Param("id") int id);
 
     @Query("""
+            SELECT DISTINCT m
+            FROM MyList m
+            JOIN FETCH m.user u
+            JOIN FETCH m.content c
+            WHERE u.id = :id AND m.watchOrFav = 'WATCHING'
+            """)
+    List<MyList> findMyWatchListByUserId(@Param("id") int id);
+
+    @Query("""
             SELECT m
             FROM MyList m
             WHERE m.user.id = :userId AND m.content.id = :contentId AND m.watchOrFav = 'FAVORITE'
