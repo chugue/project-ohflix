@@ -159,9 +159,17 @@ public class UserService {
     }
 
     public List<UserResponse.MembersDTO> MembersDTOList() {
-        return userRepository.findAll().stream()
-                .map(UserResponse.MembersDTO::new)
-                .collect(Collectors.toList());
+        List<User> users = userRepository.findAll();
+        List<UserResponse.MembersDTO> membersDTOs = new ArrayList<>();
+        int index = 1;
+
+        for (User user : users) {
+            if (!user.getNickname().equals("adminUser")) {
+                membersDTOs.add(new UserResponse.MembersDTO(user, index++));
+            }
+        }
+
+        return membersDTOs;
     }
 
     public UserResponse.ProfileFormDTO userProfileForm(Integer sessionUserId) {
@@ -361,6 +369,13 @@ public class UserService {
 
         user.updatePassword(reqDTO);
 
+    }
+
+    public UserResponse.PasswordChangePageDTO passwordChangePage(Integer sessionUserId) {
+        User user = userRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("사용자를 찾을 수 없습니다."));
+
+        return new UserResponse.PasswordChangePageDTO(user);
     }
 }
 

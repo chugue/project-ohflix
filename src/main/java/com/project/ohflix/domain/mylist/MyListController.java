@@ -27,8 +27,9 @@ public class MyListController {
     @GetMapping("/api/my-favorite-list")
     public String getMyFavList(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        MyListResponse.MyFavoriteListDTO respDTO = myListService.findMyListById(sessionUser.getId());
-        request.setAttribute("MyFavoriteListDTO", respDTO);
+        MyListResponse.MyListDTO respDTO = myListService.findMyListById(sessionUser.getId());
+        System.out.println("respDTO = " + respDTO);
+        request.setAttribute("MyListDTO", respDTO);
         return "mylist/my-favorite-list";
     }
 

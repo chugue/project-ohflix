@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>account</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- 파비콘 ( 아이콘 ) -->
+    <link rel="icon" href="/static/images/OH!.ico">
+    <title>계정 설정 - 오플릭스</title>
 </head>
 
 <body>
@@ -20,9 +23,11 @@
             </a>
         </div>
         <div>
-            <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
-            <div>
-                <i class="fa-solid fa-caret-down fa-xs"></i>
+            <div class="profile-icon">
+                <img src={{accountMembershipInfoDTO.profileIconPath}} alt="오류"/>
+            </div>
+            <div class="logout">
+                <a href="/logout">로그아웃</a>
             </div>
         </div>
     </div>
@@ -33,93 +38,84 @@
 
 <!-- main start -->
 <main>
-    <!-- main div left -->
-    <!-- 사이드 바 메뉴 시작 -->
-    {{> /_components/custom-list}}
-    <!-- 사이드 바 메뉴 끝 -->
-
-    <!-- main div right -->
     <div class="main-div">
-        <!-- membership inforamtion -->
-        <div class="main-right-header mb-20">계정</div>
-        <div class="mb-20">멤버십 정보</div>
-        <div class="main-right-div1 mb-20">
-            <div class="membership-date">
-                <div>멤버십 시작: {{accountMembershipInfo.membershipStartDate}}</div>
-            </div>
-            <div class="membership-box m-20">
-                <div class="pointer">
-                    <div class="mb-10">{{accountMembershipInfo.membershipType}}</div>
-                    <div class="mb-10">다음 결제일 : {{accountMembershipInfo.nextPaymentDate}}</div>
-                    <div class="mb-15">
-                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· {{accountMembershipInfo.cardLastFourDigits}}
-                    </div>
+        <!-- 사이드 바 메뉴 -->
+        {{> /_components/custom-list}}
+        <!-- 계정 정보 -->
+        <div class="main-section">
+            <div class="main-right-header mb-20">계정</div>
+            <div class="mb-20">멤버십 정보</div>
+            <div class="main-right-div1 mb-20">
+                <div class="membership-date">
+                    <div>멤버십 시작: {{accountMembershipInfoDTO.membershipStartDate}}</div>
                 </div>
-
-                <hr class="mb-15"/>
-                <a href="/api/account-membership">
-                    <div class="profile-manage pointer">
-                        멤버십 관리
-                        <i class="fa-solid fa-chevron-right"></i>
+                <div class="membership-box plr-5">
+                    <div class="pointer m-5">
+                        <div class="mb-10">{{accountMembershipInfoDTO.membershipType}}</div>
+                        <div class="mb-10">다음 결제일 : {{accountMembershipInfoDTO.nextPaymentDate}}</div>
+                        <div class="mb-15">
+                            <i class="fa-regular fa-credit-card"></i>···· ····
+                            ···· {{accountMembershipInfoDTO.cardLastFourDigits}}
+                        </div>
                     </div>
-                </a>
-
+                    <hr>
+                    <a href="/api/account-membership">
+                        <div class="profile-manage pointer m-5">
+                            멤버십 관리
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
-
-        <!-- fast link -->
-        <div class="mb-20">빠른 링크</div>
-        <div class="main-right-div2 mb-20">
-            <div class="fast-link m-20">
-                <a href="/api/paymethod-manage">
-                    <div class="fast-link-div mb-20 pointer">
-                        <div class="pointer">
-                            <i class="fa-solid fa-credit-card"></i>
-                            결제 수단 관리
+            <div class="mb-20">빠른 링크</div>
+            <div class="main-right-div2 mb-15">
+                <div class="fast-link p-10">
+                    <a href="/api/paymethod-manage">
+                        <div class="fast-link-div mb-5 pointer">
+                            <div class="pointer">
+                                <i class="fa-solid fa-credit-card"></i>
+                                결제 수단 관리
+                            </div>
+                            <div><i class="fa-solid fa-chevron-right"></i></div>
                         </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
-                </a>
+                    </a>
 
-                <hr class="mb-20"/>
-                <a href="/api/password-change-form">
-                    <div class="fast-link-div mb-20 pointer">
-                        <div class="pointer">
-                            <i class="fa-solid fa-lock"></i>
-                            비밀번호 업데이트
+                    <hr class="mb-5"/>
+                    <a href="/api/password-change-form">
+                        <div class="fast-link-div mb-5 pointer">
+                            <div class="pointer">
+                                <i class="fa-solid fa-lock"></i>
+                                비밀번호 업데이트
+                            </div>
+                            <div><i class="fa-solid fa-chevron-right"></i></div>
                         </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
-                </a>
+                    </a>
 
-                <hr class="mb-20"/>
-                <a href="/api/restriction-pass">
-                    <div class="fast-link-div mb-20 pointer">
-                        <div class="pointer">
-                            <i class="fa-solid fa-person-circle-exclamation"></i>
-                            자녀 보호 설정 조정
+                    <hr class="mb-5"/>
+                    <a href="/api/restriction-pass">
+                        <div class="fast-link-div mb-5 pointer">
+                            <div class="pointer">
+                                <i class="fa-solid fa-person-circle-exclamation"></i>자녀 보호 설정 조정
+                            </div>
+                            <div><i class="fa-solid fa-chevron-right"></i></div>
                         </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
-                </a>
-                <hr class="mb-20"/>
-                <a href="/api/profile-setting">
-                    <div class="fast-link-div mb-20 pointer">
-                        <div class="pointer">
-                            <i class="fa-solid fa-gear"></i>
-                            설정 변경
+                    </a>
+                    <hr class="mb-5"/>
+                    <a href="/api/profile-setting">
+                        <div class="fast-link-div pointer">
+                            <div class="pointer">
+                                <i class="fa-solid fa-gear"></i>설정 변경
+                            </div>
+                            <div><i class="fa-solid fa-chevron-right"></i></div>
                         </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
-                </a>
-
+                    </a>
+                </div>
             </div>
-        </div>
-
-        <div class="main-right-div3 mb-20">
-            <div class="profile-manage m-20 pointer">
-                프로필 관리
-                <i class="fa-solid fa-chevron-right"></i>
+            <div class="main-right-div3 mb-5">
+                <div class="profile-manage m-5 pointer" style="padding: 15px">
+                    프로필 관리
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
             </div>
         </div>
     </div>

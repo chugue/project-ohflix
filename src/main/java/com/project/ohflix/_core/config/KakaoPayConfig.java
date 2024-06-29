@@ -9,14 +9,18 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class KakaoPayConfig {
-    @Value("${kakao.pay.cid}")
-    private String cid;
 
-    @Value("${kakao.pay.secret-key}")
-    private String secretKey;
+    private final String cid;
+    private final String adminKey;
+    private final String redirectUrl;
 
-    @Value("${kakao.pay.redirect-url}")
-    private String redirectUrl;
+    public KakaoPayConfig(@Value("${kakao.pay.cid}") String cid,
+                          @Value("${kakao.pay.admin-key}") String adminKey,
+                          @Value("${kakao.pay.redirect-url}") String redirectUrl) {
+        this.cid = cid;
+        this.adminKey = adminKey;
+        this.redirectUrl = redirectUrl;
+    }
 
     @Bean
     public RestTemplate restTemplate() {
@@ -26,8 +30,8 @@ public class KakaoPayConfig {
     @Bean
     public HttpHeaders kakaoPayHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "KakaoAK " + secretKey);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Authorization", "KakaoAK " + adminKey);
         return headers;
     }
 
@@ -35,8 +39,8 @@ public class KakaoPayConfig {
         return cid;
     }
 
-    public String getSecretKey() {
-        return secretKey;
+    public String getAdminKey() {
+        return adminKey;
     }
 
     public String getRedirectUrl() {

@@ -5,6 +5,7 @@ import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.user.User;
+import com.project.ohflix.domain.watchingHistory.WatchingHistory;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,6 +57,7 @@ public class ContentRequest {
         }
     }
 
+    //영화 시청시간 가져오기
     @Data
     public static class VideoProgressDTO {
         private String filename;
@@ -68,10 +70,19 @@ public class ContentRequest {
             this.filename = filename;
             this.currentTime = currentTime;
         }
-        public MyList toEntity(User sessionUser, Content content, ContentRequest.VideoProgressDTO videoProgressDTO){
+        public MyList toMyListEntity(User sessionUser, Content content, ContentRequest.VideoProgressDTO videoProgressDTO){
             return MyList.builder()
                     .playedTime(videoProgressDTO.getCurrentTime())
                     .watchOrFav(WATCHING)
+                    .createdAt(Timestamp.from(Instant.now()))
+                    .user(sessionUser)
+                    .content(content)
+                    .build();
+        }
+
+        public WatchingHistory toWatcingHistoryEntity(User sessionUser, Content content, ContentRequest.VideoProgressDTO videoProgressDTO){
+            return WatchingHistory.builder()
+                    .playedTime(videoProgressDTO.getCurrentTime())
                     .createdAt(Timestamp.from(Instant.now()))
                     .user(sessionUser)
                     .content(content)
