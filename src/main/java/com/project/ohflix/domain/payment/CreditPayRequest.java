@@ -18,4 +18,11 @@ public class CreditPayRequest {
 //        private Integer vat;
 //        private Integer supplyValue;
     }
+
+    @Data
+    public static class CreditPayTestDTO {
+        private String merchantUid; // 클라이언트에서 전송
+        private Timestamp paymentDate; // 클라이언트에서 전송 (혹은 서버에서 현재 시간으로 설정)
+
+    }
 }

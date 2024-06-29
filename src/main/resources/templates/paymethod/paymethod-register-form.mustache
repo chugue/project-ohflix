@@ -33,23 +33,25 @@
                 if (rsp.success) {
                     var msg = '결제가 완료되었습니다.';
                     alert(msg);
-                    location.href = "/api/purchase-histories";
-                    // 결제 정보 서버로 전송
-                    $.ajax({
-                        url: 'api/pay/info', // 서버 엔드포인트 URL
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            createdAt: new Date().toISOString(), // 결제 날짜
-                            description: '스트리밍 서비스', // 설명
-                            servicePeriod: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString(), // 서비스 이용 기간 (한 달 후)
-                            // paymethod: 'CREDITCARD', // 결제 수단
-                            cardNumber: '1111111111111111', // 카드 번호
-                            amount: 12150, // 가격
-                            // vat: Math.round(12150 * 0.1), // 부가세
-                            // supplyValue: 12150 + Math.round(12150 * 0.1) // 총 금액
-                        }),
-                    });
+
+                    // 결제 정보를 서버로 전송
+                    fetch('/save-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            merchant_uid: rsp.merchant_uid,
+                            payment_date: new Date().toISOString() // 클라이언트에서 현재 시간을 보낼 경우
+                        })
+                    }).then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                location.href = "/api/purchase-histories";
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
                 } else {
                     var msg = '결제에 실패하였습니다.';
                     msg += '에러내용 : ' + rsp.error_msg;
@@ -57,6 +59,7 @@
                 }
             });
         }
+
 
     </script>
 </head>
