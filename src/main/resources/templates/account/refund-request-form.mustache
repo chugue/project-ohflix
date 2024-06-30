@@ -13,6 +13,7 @@
 </head>
 
 <body>
+{{#RefundRequestPageDTO}}
 <!-- nav start -->
 <nav>
     <div class="nav-div">
@@ -23,7 +24,7 @@
         </div>
         <div>
             <div class="profile-icon">
-                <img src="/static/images/profile.png" alt="오류" class="nav-profile"/>
+                <img src={{profileIconPath}} alt="오류" class="nav-profile"/>
             </div>
             <div class="logout">
                 <a href="/logout">로그아웃</a>
@@ -138,6 +139,7 @@
     </div>
 </footer>
 <!-- footer end -->
+{{/RefundRequestPageDTO}}
 </body>
 
 </html>
