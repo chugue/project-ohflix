@@ -27,8 +27,6 @@ public class MainController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         ContentResponse.MainPageDTO respDTO =  contentService.getMainPageData(sessionUser.getId());
 
-
-
         request.setAttribute("MainPageDTO", respDTO);
         return "main-page";
     }

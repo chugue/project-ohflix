@@ -10,47 +10,50 @@
 
 
 </style>
-
+<!-- Shaka Player 최신 버전 로드 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.2.0/shaka-player.compiled.js"></script>
 <script>
+
+
     document.addEventListener('DOMContentLoaded', function () {
-        const contents = document.querySelectorAll('.content');
-        const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
-        const closeBtn = document.getElementById('closeBtn'); // 모달을 닫는 버튼(X) 요소 가져오기
-        const modalData = document.getElementById('modalData'); // 모달 내용 요소 가져오기
-        document.addEventListener('fullscreenchange', onFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
-        document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
-        document.addEventListener('msfullscreenchange', onFullscreenChange); // IE/Edge
+                const contents = document.querySelectorAll('.content');
+                const modal = document.getElementById('modalWrap'); // 모달 창 요소 가져오기
+                const closeBtn = document.getElementById('closeBtn'); // 모달을 닫는 버튼(X) 요소 가져오기
+                const modalData = document.getElementById('modalData'); // 모달 내용 요소 가져오기
+                document.addEventListener('fullscreenchange', onFullscreenChange);
+                document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
+                document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
+                document.addEventListener('msfullscreenchange', onFullscreenChange); // IE/Edge
 
-        contents.forEach(content => {``
-            content.addEventListener('click', function () {
-                const contentId = this.dataset.contentId;
-                showModal(contentId);
-            });
-        });
+                contents.forEach(content => {
+                    ``
+                    content.addEventListener('click', function () {
+                        const contentId = this.dataset.contentId;
+                        showModal(contentId);
+                    });
+                });
 
-        closeBtn.onclick = function () {
-            modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김
-            document.body.style.overflow = "auto";
-        };
+                closeBtn.onclick = function () {
+                    modal.style.display = "none"; // 모달을 닫는 버튼(X)을 클릭하면 모달을 숨김
+                    document.body.style.overflow = "auto";
+                };
 
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김
-                document.body.style.overflow = "auto";
-            }
-        };
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none"; // 모달 외부를 클릭하면 모달을 숨김
+                        document.body.style.overflow = "auto";
+                    }
+                };
 
-        function showModal(contentId) {
-            modal.style.display = "block"; // 모달을 보이게 함
-            document.body.style.overflow = "hidden";
+                function showModal(contentId) {
+                    modal.style.display = "block"; // 모달을 보이게 함
+                    document.body.style.overflow = "hidden";
 
-            // AJAX 통신으로 데이터 가져오기
-            fetch(`/api/content-info/${contentId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        modalData.innerHTML = `
+                    // AJAX 통신으로 데이터 가져오기
+                    fetch(`/api/content-info/${contentId}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                modalData.innerHTML = `
                     <div class="body-container">
                         <!-- 헤더 start -->
                         <div class="header-container">
@@ -60,7 +63,7 @@
                                     <img src="${data.response.textPhoto}" />
                                 </div>
                                 <div class="buttons">
-                                    <a href="#" class="play-button playButton" data-filename="${data.response.videoPath}">▶ 재생</a>
+                                    <a href="#" class="play-button playButton" data-contentid="${contentId}">▶ 재생</a>
                                     <button id="favoriteButton" class="icon">
                                         ${data.response.isFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>'}
                                     </button>
@@ -113,210 +116,393 @@
                     </div>
                 `;
 
-                        // 찜하기/찜취소 버튼 클릭 이벤트 핸들러 추가
-                        const favoriteButton = document.getElementById('favoriteButton');
-                        favoriteButton.addEventListener('click', function () {
-                            toggleFavorite(contentId, data.response.isFavorite, favoriteButton);
-                        });
+                                // 찜하기/찜취소 버튼 클릭 이벤트 핸들러 추가
+                                const favoriteButton = document.getElementById('favoriteButton');
+                                favoriteButton.addEventListener('click', function () {
+                                    toggleFavorite(contentId, data.response.isFavorite, favoriteButton);
+                                });
 
-                        // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
-                        // const likeButton = document.getElementById('likeButton');
-                        // likeButton.addEventListener('click', function () {
-                        //     toggleLike(contentId, data.response.isLike, likeButton);
-                        // });
-                        // 비디오 재생 버튼 클릭 이벤트 리스너 추가
-                        document.querySelector('.playButton').addEventListener('click', function (event) {
-                            event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
-                            const filename = this.dataset.filename;
-                            if (filename) { //TODO : filename넣기
-                                const videoUrl =  'https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/'+filename;
-                                loadVideo2(videoUrl, filename);
-                            } else {
-                                alert('먼저 동영상을 업로드해주세요.');
+                                // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
+                                // const likeButton = document.getElementById('likeButton');
+                                // likeButton.addEventListener('click', function () {
+                                //     toggleLike(contentId, data.response.isLike, likeButton);
+                                // });
+
+
+                                // 비디오 재생 버튼 클릭 이벤트 리스너 추가
+                                document.querySelector('.playButton').addEventListener('click', async function (event) {
+                                    event.preventDefault(); // 앵커 태그의 기본 동작을 막습니다.
+
+                                    const contentId = this.dataset.contentid;
+                                    if (contentId) {
+                                        fetchUserVideoInfo(contentId, (response) => {
+                                            loadEncryptedVideo(response);
+                                        });
+                                    } else {
+                                        alert('먼저 동영상을 업로드해주세요.');
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                modalData.innerText = 'Error loading data';
+                                console.error('Error:', error);
+                            });
+
+
+                    // 비디오 재생 버튼 눌렀을때 영상 PK와 유저 세션 정보 가져오기
+                    function fetchUserVideoInfo(contentId, callback) {
+                        $.ajax({
+                            url: `/api/video/play/${contentId}`,
+                            method: 'GET',
+                            success: function (response) {
+                                console.log(response)
+                                callback(response.response);
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
                             }
-                        });
-                    })
-                    .catch(error => {
-                        modalData.innerText = 'Error loading data';
-                        console.error('Error:', error);
-                    });
-        }
+                        })
+                    }
 
-        function toggleFavorite(contentId, isFavorite, favoriteButton) {
-            const url = isFavorite ? `/api/users/${contentId}/unfavorite` : `/api/users/${contentId}/favorite`;
-            fetch(url, { method: 'POST' })
-                    .then(response => {
-                        if (response.ok) {
-                            // 찜 상태를 반대로 변경
-                            const newIsFavorite = !isFavorite;
-                            // 버튼 아이콘 업데이트
-                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
-                            // 다음 클릭 시의 상태를 업데이트
-                            favoriteButton.onclick = function () {
-                                toggleFavorite(contentId, newIsFavorite, favoriteButton);
-                            };
-                        } else {
-                            console.error('Failed to update favorite status');
+                    // https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/videolocation/rush_hour/rush_hour_encrypted.mpd
+                    // 재생 버튼 클릭후 가져온 정보로 라이센스 서버에 라이센스를 발급받아서 영상 해독후 재생
+                    async function loadEncryptedVideo(response) {
+
+                        const {userId, userKey, contentId, videoPath} = response;
+                        // const videoUrl = `https://ohflix-bucket.s3.ap-northeast-2.amazonaws.com/${videoPath}`;
+                        const videoUrl = `http://localhost:7000/${videoPath}`;
+                        const videoContainer = document.getElementById('videoContainer');
+                        const video = createVideoElement(contentId);
+                        const player = new shaka.Player(video);
+                        const drmLicenseUrl = 'http://localhost:7000/api/get-license';
+
+                        window.player = player;
+
+                        player.addEventListener('error', onErrorEvent);
+
+                        // 라이선스 서버에서 키를 가져오는 함수
+                        function fetchKey(contentId) {
+                            return new Promise((resolve, reject) => {
+                                $.ajax({
+                                    url: 'http://localhost:7000/api/get-license',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        userId: userId,
+                                        userKey: userKey,
+                                        contentId: contentId
+                                    }),
+                                    success: function (data) {
+                                        resolve(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        reject(new Error('Failed to fetch key: ' + textStatus));
+                                    }
+                                });
+                            });
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-        }
 
-        function toggleLike(contentId, isLike, likeButton) {
-            const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
-            fetch(url, { method: 'POST' })
-                    .then(response => {
-                        if (response.ok) {
-                            // 찜 상태를 반대로 변경
-                            const newIsLike = !isLike;
-                            // 버튼 아이콘 업데이트
-                            likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
-                            // 다음 클릭 시의 상태를 업데이트
-                            likeButton.onclick = function () {
-                                toggleLike(contentId, newIsLike, likeButton);
-                            };
-                        } else {
-                            console.error('Failed to update like status');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-        }
+                        // 암호화 비디오 재생 함수
+                        async function loadContent(videoUrl, contentId) {
+                            try {
+                                // 먼저 키를 가져옵니다
+                                const data = await fetchKey(contentId);
 
+                                // clearKeys 객체 생성
+                                const clearKeys = {};
+                                clearKeys[String(data.response.keyId)] = String(data.response.contentKey);
 
-        document.addEventListener('DOMContentLoaded', initApp2);
+                                // 키를 설정합니다
+                                player.configure({
+                                    drm: {
+                                        clearKeys: clearKeys
+                                    },
+                                    streaming: {
+                                        autoLowLatencyMode: true,
+                                    }
+                                });
 
-        function initApp2() {
-            // Install built-in polyfills to patch browser incompatibilities.
-            shaka.polyfill.installAll();
+                                // 콘텐츠를 로드합니다
+                                await player.load(videoUrl);
 
-            // Check if the browser supports the basic APIs Shaka needs.
-            if (shaka.Player.isBrowserSupported()) {
-                // Everything looks good!
-                initPlayer2();
-            } else {
-                // This browser does not have the minimum set of APIs we need.
-                console.error('Browser not supported!');
-            }
-
-            // 전체화면 모드 변경 이벤트 리스너 추가
-            // document.addEventListener('fullscreenchange', onFullscreenChange);
-            // document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
-            // document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
-            // document.addEventListener('MSFullscreenChange', onFullscreenChange); // IE/Edge
-
-        }
-
-        function initPlayer2() {
-            // Listen for error events.
-            window.addEventListener('error', onErrorEvent);
-        }
-        function createVideoElement(filename) {
-            const videoContainer = document.getElementById('videoContainer');
-            videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
-
-            const video = document.createElement('video');
-            video.id = 'videoPlayer2';
-            video.controls = true;
-            video.autoplay = true;
-            video.muted = false;
-            video.setAttribute('data-filename', filename); // filename 설정
-            console.log('Setting data-filename attribute:', filename); // Debugging
-
-
-            videoContainer.appendChild(video);
-            videoContainer.style.display = 'block'; // 비디오 컨테이너를 표시
-            return video;
-        }
-
-        function loadVideo2(videoUrl, filename) {
-            console.log("Loading video from URL:", videoUrl); // 추가 로그
-
-            const videoContainer = document.getElementById('videoContainer');
-            const video = createVideoElement(filename);
-            const player = new shaka.Player(video);
-
-            window.player = player;
-
-            player.addEventListener('error', onErrorEvent);
-
-            // 매니페스트를 로드합니다.
-            fetch('/api/video/current-time?filename=' + filename)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Saved time from server:', data.currentTime);  // 서버에서 받아온 현재 시간을 콘솔에 출력
-                        try {
-                            player.load(videoUrl).then(function() {
                                 console.log('The video has now been loaded!');
-                                if (data.currentTime) {
-                                    video.currentTime = data.currentTime;
-                                }
-                                video.play();
-                                if (!document.fullscreenElement) {
-                                    videoContainer.requestFullscreen().catch(err => {
-                                        console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                                    });
-                                }
-                            }).catch(onError);
-                        } catch (e) {
-                            onError(e);
+
+                                // 비디오 메타데이터 로드 후 duration 값 확인
+                                const videoElement = player.getMediaElement();
+                                videoElement.addEventListener('loadedmetadata', () => {
+                                    console.log('Video duration:', videoElement.duration);
+                                    console.log('Buffered ranges:', videoElement.buffered);
+                                });
+
+                                // 네트워크 요청 및 응답 확인
+                                player.getNetworkingEngine().registerResponseFilter((type, response) => {
+                                    console.log('Network response:', response);
+                                });
+
+                                videoElement.currentTime = 0;
+                                videoElement.play();
+
+                            } catch (error) {
+                                console.error('Error code', error.code, 'object', error);
+                            }
                         }
-                    }).catch(error => {
-                console.error('Failed to fetch current time:', error); // 에러 로그 추가
-            });
-        }
+
+                        loadContent(videoUrl, contentId);
+                    }
 
 
-        function onFullscreenChange() {
-            const videoContainer = document.getElementById('videoContainer');
-            const videoPlayer2 = document.getElementById('videoPlayer2');
-            console.log('videoContainer:', videoContainer); // videoContainer 존재 확인
-            console.log('videoPlayer2:', videoPlayer2); // videoPlayer 존재 확인
+                    // Load the video manifest
+                    // fetch(`/api/video/current-time?contentId=${contentId}`)
+                    //         .then(response => response.json())
+                    //         .then(data => {
+                    //             try {
+                    //                 player.load(videoUrl).then(function () {
+                    //                     if (data.currentTime) {
+                    //                         video.currentTime = data.currentTime;
+                    //                     }
+                    //                     video.play();
+                    //                     if (!document.fullscreenElement) {
+                    //                         videoContainer.requestFullscreen().catch(err => {
+                    //                             console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    //                         });
+                    //                     }
+                    //                 }).catch(onError);
+                    //             } catch (e) {
+                    //                 onError(e);
+                    //             }
+                    //         }).catch(error => {
+                    //     console.error('Failed to fetch current time:', error);
+                    // });
+                    // }
 
+                    function createVideoElement(contentId) {
+                        const videoContainer = document.getElementById('videoContainer');
+                        videoContainer.innerHTML = '';
 
-            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement && videoContainer) {
-                videoContainer.style.display = 'none'; // 전체화면에서 나가면 비디오 컨테이너를 숨깁니다.
-                videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
-                if (videoPlayer) {
-                    const currentTime = videoPlayer2.currentTime;
-                    const filename = videoPlayer2.getAttribute('data-filename'); // data-filename 속성 사용
-                    console.log('Saving current time:', currentTime); // 현재 시간을 콘솔에 출력
-                    console.log('Saving filename:', filename); // 현재 시간을 콘솔에 출력
-                    $.ajax({
-                        url: '/api/video/save-time',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({ filename: filename, currentTime: currentTime }),
-                        success: function (response) {
-                            console.log('Current time saved:', currentTime);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('Failed to save current time:', error);F
+                        const video = document.createElement('video');
+                        video.id = 'videoPlayer2';
+                        video.controls = true;
+                        video.autoplay = true;
+                        video.setAttribute('data-contentid', contentId);
+
+                        videoContainer.appendChild(video);
+                        videoContainer.style.display = 'block';
+                        return video;
+                    }
+
+                    function onErrorEvent(event) {
+                        onError(event.detail);
+                    }
+
+                    function onError(error) {
+                        console.error('Error code', error.code, 'object', error);
+
+                        if (error.code === 7002) {
+                            console.error('Manifest loading error. Please check the manifest URL and CORS settings.');
+                        } else if (error.code === 7000) {
+                            console.error('Network request failure. Please check the network connection.');
+                        } else {
+                            console.error('An unknown error occurred.');
                         }
+                    }
+                }
+
+                // 비디오 요소 생성 및 콘텐츠 로드
+                const video = createVideoElement(contentId);
+                loadContent(videoUrl, contentId);
+
+                // 비디오 메타데이터 로딩 후 총 재생시간 확인
+                video.addEventListener('loadedmetadata', () => {
+                    console.log('Video duration:', video.duration);
+                    if (video.duration < 0) {
+                        console.error('Invalid video duration detected.');
+                    }
+                });
+
+                // ////////////////////////////////////////////////////////
+
+
+                function toggleFavorite(contentId, isFavorite, favoriteButton) {
+                    const url = isFavorite ? `/api/users/${contentId}/unfavorite` : `/api/users/${contentId}/favorite`;
+                    fetch(url, {method: 'POST'})
+                            .then(response => {
+                                if (response.ok) {
+                                    // 찜 상태를 반대로 변경
+                                    const newIsFavorite = !isFavorite;
+                                    // 버튼 아이콘 업데이트
+                                    favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
+                                    // 다음 클릭 시의 상태를 업데이트
+                                    favoriteButton.onclick = function () {
+                                        toggleFavorite(contentId, newIsFavorite, favoriteButton);
+                                    };
+                                } else {
+                                    console.error('Failed to update favorite status');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                }
+
+                function toggleLike(contentId, isLike, likeButton) {
+                    const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
+                    fetch(url, {method: 'POST'})
+                            .then(response => {
+                                if (response.ok) {
+                                    // 찜 상태를 반대로 변경
+                                    const newIsLike = !isLike;
+                                    // 버튼 아이콘 업데이트
+                                    likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
+                                    // 다음 클릭 시의 상태를 업데이트
+                                    likeButton.onclick = function () {
+                                        toggleLike(contentId, newIsLike, likeButton);
+                                    };
+                                } else {
+                                    console.error('Failed to update like status');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                }
+
+
+                document.addEventListener('DOMContentLoaded', initApp2);
+
+                function initApp2() {
+                    // Install built-in polyfills to patch browser incompatibilities.
+                    shaka.polyfill.installAll();
+
+                    // Check if the browser supports the basic APIs Shaka needs.
+                    if (shaka.Player.isBrowserSupported()) {
+                        // Everything looks good!
+                        initPlayer2();
+                    } else {
+                        // This browser does not have the minimum set of APIs we need.
+                        console.error('Browser not supported!');
+                    }
+
+                    // 전체화면 모드 변경 이벤트 리스너 추가
+                    // document.addEventListener('fullscreenchange', onFullscreenChange);
+                    // document.addEventListener('webkitfullscreenchange', onFullscreenChange); // Safari
+                    // document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
+                    // document.addEventListener('MSFullscreenChange', onFullscreenChange); // IE/Edge
+
+                }
+
+                function initPlayer2() {
+                    // Listen for error events.
+                    window.addEventListener('error', onErrorEvent);
+                }
+
+                function createVideoElement(filename) {
+                    const videoContainer = document.getElementById('videoContainer');
+                    videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
+
+                    const video = document.createElement('video');
+                    video.id = 'videoPlayer2';
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.muted = false;
+                    video.setAttribute('data-filename', filename); // filename 설정
+                    console.log('Setting data-filename attribute:', filename); // Debugging
+
+
+                    videoContainer.appendChild(video);
+                    videoContainer.style.display = 'block'; // 비디오 컨테이너를 표시
+                    return video;
+                }
+
+                function loadVideo2(response) {
+                    console.log("Loading video from URL:", response.videoPath); // 추가 로그
+
+                    const videoContainer = document.getElementById('videoContainer');
+                    const video = createVideoElement(filename);
+                    const player = new shaka.Player(video);
+
+                    window.player = player;
+
+                    player.addEventListener('error', onErrorEvent);
+
+                    // 매니페스트를 로드합니다.
+                    fetch('/api/video/current-time?filename=' + filename)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Saved time from server:', data.currentTime);  // 서버에서 받아온 현재 시간을 콘솔에 출력
+                                try {
+                                    player.load(videoUrl).then(function () {
+                                        console.log('The video has now been loaded!');
+                                        if (data.currentTime) {
+                                            video.currentTime = data.currentTime;
+                                        }
+                                        video.play();
+                                        if (!document.fullscreenElement) {
+                                            videoContainer.requestFullscreen().catch(err => {
+                                                console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                                            });
+                                        }
+                                    }).catch(onError);
+                                } catch (e) {
+                                    onError(e);
+                                }
+                            }).catch(error => {
+                        console.error('Failed to fetch current time:', error); // 에러 로그 추가
                     });
                 }
-            }
-        }
-        function onErrorEvent(event) {
-            // Extract the shaka.util.Error object from the event.
-            onError(event.detail);
-        }
 
-        function onError(error) {
-            // Log the error.
-            // Log the error with additional information
-            console.error('Error code', error.code, 'object', error);
 
-            if (error.code === 7002) {
-                console.error('Manifest loading error. Please check the manifest URL and CORS settings.');
-            } else if (error.code === 7000) {
-                console.error('Network request failure. Please check the network connection.');
-            } else {
-                console.error('An unknown error occurred.');
+                function onFullscreenChange() {
+                    const videoContainer = document.getElementById('videoContainer');
+                    const videoPlayer2 = document.getElementById('videoPlayer2');
+                    console.log('videoContainer:', videoContainer); // videoContainer 존재 확인
+                    console.log('videoPlayer2:', videoPlayer2); // videoPlayer 존재 확인
+
+
+                    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement && videoContainer) {
+                        videoContainer.style.display = 'none'; // 전체화면에서 나가면 비디오 컨테이너를 숨깁니다.
+                        videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
+                        if (videoPlayer) {
+                            const currentTime = videoPlayer2.currentTime;
+                            const filename = videoPlayer2.getAttribute('data-filename'); // data-filename 속성 사용
+                            console.log('Saving current time:', currentTime); // 현재 시간을 콘솔에 출력
+                            console.log('Saving filename:', filename); // 현재 시간을 콘솔에 출력
+                            $.ajax({
+                                url: '/api/video/save-time',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({filename: filename, currentTime: currentTime}),
+                                success: function (response) {
+                                    console.log('Current time saved:', currentTime);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Failed to save current time:', error);
+                                    F
+                                }
+                            });
+                        }
+                    }
+                }
+
+                function onErrorEvent(event) {
+                    // Extract the shaka.util.Error object from the event.
+                    onError(event.detail);
+                }
+
+                function onError(error) {
+                    // Log the error.
+                    // Log the error with additional information
+                    console.error('Error code', error.code, 'object', error);
+
+                    if (error.code === 7002) {
+                        console.error('Manifest loading error. Please check the manifest URL and CORS settings.');
+                    } else if (error.code === 7000) {
+                        console.error('Network request failure. Please check the network connection.');
+                    } else {
+                        console.error('An unknown error occurred.');
+                    }
+                }
             }
-        }
-    });
+    )
+    ;
+
 </script>

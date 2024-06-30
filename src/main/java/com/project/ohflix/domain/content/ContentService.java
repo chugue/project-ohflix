@@ -5,22 +5,14 @@ import com.project.ohflix.domain.like.Like;
 import com.project.ohflix.domain.like.LikeRepository;
 import com.project.ohflix.domain.mylist.MyList;
 import com.project.ohflix.domain.mylist.MyListRepository;
-import com.project.ohflix.domain.mylist.MyListResponse;
 import com.project.ohflix.domain.user.User;
 import com.project.ohflix.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -137,6 +129,14 @@ public class ContentService {
     public List<ContentResponse.SearchResultDTO> searchContentsByTitle(String title) {
         List<Content> contents = contentRepository.findByTitleContaining(title);
         return contents.stream().map(ContentResponse.SearchResultDTO::new).toList();
+    }
+
+    // 모달 재생 버튼 데이터 요청
+    public ContentResponse.PlayData getUserVideoInfo(Integer userId, Integer contentId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+        Content content = contentRepository.findById(contentId).orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+
+        return new ContentResponse.PlayData(user, content);
     }
 }
 

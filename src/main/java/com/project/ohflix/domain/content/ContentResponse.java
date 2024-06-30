@@ -8,17 +8,31 @@ import com.project.ohflix.domain._enums.Top10Enum;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.user.User;
 import lombok.Data;
-import org.springframework.context.annotation.Profile;
 
-import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ContentResponse {
+
+    @Data
+    public static class PlayData{
+        private Integer userId;
+        private String userKey;
+        private Integer contentId;
+        private String videoPath;
+
+        public PlayData(User user, Content content) {
+            this.userId = user.getId();
+            this.userKey = user.getUserKey();
+            this.contentId = content.getId();
+            this.videoPath = content.getVideoPath();
+        }
+    }
 
     @Data  // 메인 페이지 데이터
     public static class MainPageDTO {
