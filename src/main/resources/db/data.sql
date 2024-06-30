@@ -138,8 +138,8 @@ VALUES
 INSERT INTO mylist_tb (user_id, content_id, played_time, watch_or_fav, created_at)
 VALUES
     (1, 1, 0, 'WATCHING', NOW()),
-    (1, 2, 0, 'WATCHING', NOW()),
-    (1, 3, 0, 'FAVORITE', NOW()),
+--     (1, 2, 0, 'WATCHING', NOW()),
+--     (1, 3, 0, 'FAVORITE', NOW()),
     (2, 1, 0, 'FAVORITE', NOW()),
     (2, 1, 25, 'WATCHING', NOW());
 
