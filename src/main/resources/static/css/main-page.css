@@ -40,7 +40,6 @@ header {
     font-size: 1.5vw;
 }
 
-
 .logo {
     width: 12vw;
     margin-right: 30px;
@@ -148,8 +147,8 @@ nav ul li a {
 }
 
 .dropdown-button img {
-    width: 4vw;
-    height: 4vw;
+    width: 3.5vw;
+    height: 3.5vw;
     border-radius: 2px;
     object-fit: cover;
 }
