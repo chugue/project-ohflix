@@ -55,14 +55,15 @@ public class PurchaseHistoryService {
 
     //purchase-histories
     public PurchaseHistoryResponse.purchaseHistoryDTO purchaseHistories(int userId) {
-        User user=userRepository.findById(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
-
+        User user = userRepository.findById(userId).orElseThrow(() -> new Exception404("유저 정보가 없습니다."));
         //1년 계산
         Timestamp oneYearAgo = Timestamp.valueOf(LocalDateTime.now().minusYears(1));
         //결제내역기간 1년미만만 조회
         List<PurchaseHistory> purchaseHistories= purchaseHistoryRepository.findByUserId(user.getId(), oneYearAgo).orElseThrow(() -> new Exception404("결제내역이 없습니다."));
 
-        return new PurchaseHistoryResponse.purchaseHistoryDTO(purchaseHistories);
+
+
+        return new PurchaseHistoryResponse.purchaseHistoryDTO(purchaseHistories, user);
     }
 
     // AccountSecurityPage (email, mobile 불러오기)

@@ -21,13 +21,15 @@ public class PurchaseHistoryResponse {
     @Data
     public static class purchaseHistoryDTO {
         private String paymentDate;
+        private String profileIconPath;
         private List<purchase> purchaseDTO;
 
-        public purchaseHistoryDTO(List<PurchaseHistory> purchaseHistories) {
+        public purchaseHistoryDTO(List<PurchaseHistory> purchaseHistories, User user) {
             // Convert Timestamp to LocalDate
             LocalDate localDate = purchaseHistories.getFirst().getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             // Add 30 days
             LocalDate newDate = localDate.plusDays(30);
+            this.profileIconPath = user.getProfileIcon().getPath();
             // Format the new date in "yyyy년 MM월 dd일" format
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
             this.paymentDate = newDate.format(formatter);

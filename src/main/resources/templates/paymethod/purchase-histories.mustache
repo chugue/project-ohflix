@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 상세 정보</title>
+    <link rel="stylesheet" href="/static/css/reset.css"/>
     <link rel="stylesheet" href="/static/css/purchase-histories.css"/> <!-- 외부 CSS 파일을 연결 -->
+    <!-- 파비콘 ( 아이콘 ) -->
+    <link rel="icon" href="/static/images/OH!.ico">
 </head>
 
 <body>
+{{#purchaseHistoryDTO}}
 <header>
     <div class="header-content">
-        <img src="/static/images/OH!FLIX.png" alt="Netflix Logo" class="logo">
-        <div class="profile">
-            <img src="/static/images/netflix-profile.png" alt="Profile Icon" class="profile-icon">
-            <button class="dropdown-button">
-                <span class="dropdown-icon">▼</span>
-                <div class="dropdown-content">
-                    <a href="#">프로필 1</a>
-                    <a href="#">프로필 2</a>
-                    <a href="#">프로필 3</a>
-                </div>
-            </button>
+        <div>
+            <a href="/api/main-page">
+                <img src="/static/images/OH!FLIX.png" alt="Netflix Logo" class="logo">
+            </a>
+        </div>
+        <!--        <div class="profile">-->
+        <!--            <img src="/static/images/netflix-profile.png" alt="Profile Icon" class="profile-icon">-->
+        <!--            <button class="dropdown-button">-->
+        <!--                <span class="dropdown-icon">▼</span>-->
+        <!--                <div class="dropdown-content">-->
+        <!--                    <a href="#">프로필 1</a>-->
+        <!--                    <a href="#">프로필 2</a>-->
+        <!--                    <a href="#">프로필 3</a>-->
+        <!--                </div>-->
+        <!--            </button>-->
+        <!--        </div>-->
+        <div>
+            <div class="profile-icon">
+                <img src={{profileIconPath}} alt="오류"/>
+            </div>
+            <div class="logout">
+                <a href="/logout">로그아웃</a>
+            </div>
         </div>
     </div>
 </header>
@@ -33,7 +49,7 @@
             <div>스탠더드</div>
             <div>월 13,500원</div>
             <div>다음 결제 날짜</div>
-            <div>{{purchaseHistoryDTO.paymentDate}}</div>
+            <div>{{paymentDate}}</div>
         </div>
     </div>
     <div class="container3">
@@ -52,7 +68,7 @@
             </tr>
             </thead>
             <tbody>
-            {{#purchaseHistoryDTO.purchaseDTO}}
+            {{#purchaseDTO}}
                 <tr>
                     <td>{{createdAt}}</td>
                     <td>{{description}}</td>
@@ -61,7 +77,7 @@
                     <td>{{supplyValue}} (+{{vat}}원 부가세)</td>
                     <td>{{amount}}</td>
                 </tr>
-            {{/purchaseHistoryDTO.purchaseDTO}}
+            {{/purchaseDTO}}
             </tbody>
         </table>
     </div>
@@ -94,5 +110,6 @@
         <p>공정거래위원회 웹사이트</p>
     </div>
 </footer>
+{{/purchaseHistoryDTO}}
 </body>
 </html>
