@@ -240,6 +240,12 @@ header {
     margin-bottom: 30px;
     color: #666;
 }
+
+.payment-methods .row input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* 크기 조정 */
+}
+
 .button-container {
     display: flex;
     flex-direction: row;
