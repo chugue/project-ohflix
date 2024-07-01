@@ -44,10 +44,13 @@
                         <div>
                             <div class="row">
                                 <div>
+                                    <input type="radio" name="mainPayment" value="{{cardInfoId}}" {{#isMain}}checked{{/isMain}}>
+                                </div>
+                                <div>
                                     <div>신용카드</div>
                                 </div>
                                 <div>
-                                   •••• •••• •••• {{lastDigit}}
+                                    •••• •••• •••• {{lastDigit}}
                                 </div>
                             </div>
                         </div>
