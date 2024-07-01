@@ -6,10 +6,9 @@ import com.project.ohflix.domain._enums.WatchOrFav;
 import com.project.ohflix.domain.content.Content;
 import com.project.ohflix.domain.content.ContentRepository;
 import com.project.ohflix.domain.content.ContentRequest;
-import com.project.ohflix.domain.profileIcon.ProfileIcon;
-import com.project.ohflix.domain.profileIcon.ProfileIconResponse;
 import com.project.ohflix.domain.user.User;
 import com.project.ohflix.domain.user.UserRepository;
+import com.project.ohflix.domain.watchingHistory.WatchingHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,15 +23,17 @@ public class MyListService {
     private final MyListRepository myListRepository;
     private final UserRepository userRepository;
     private final ContentRepository contentRepository;
+    private final WatchingHistoryRepository watchingHistoryRepository;
 
     @Transactional
-    public MyListResponse.MyFavoriteListDTO findMyListById(Integer sessionUserId) {
+    public MyListResponse.MyListDTO findMyListById(Integer sessionUserId) {
         // 헤더 유저 가져오기 ( 프로필 아이콘 )
         User user = userRepository.findUserProfileById(sessionUserId);
 
         List<MyList> myFavoriteList = myListRepository.findMyListByUserId(sessionUserId);
+        List<MyList> myWatchList = myListRepository.findMyWatchListByUserId(sessionUserId);
 
-        return new MyListResponse.MyFavoriteListDTO(user, myFavoriteList);
+        return new MyListResponse.MyListDTO(user, myFavoriteList, myWatchList);
     }
 
     // 찜 기능
@@ -85,11 +86,15 @@ public class MyListService {
         Content content = contentRepository.findByVideoPath(videoProgressDTO.getFilename()).orElseThrow(() -> new Exception404("해당하는 컨텐츠를 찾을 수 없습니다."));
         MyList myList = myListRepository.findMyListByUserIdAndContentIdAndWatch(user.getId(), content.getId()).orElse(null);
         System.out.println("myList = " + myList);
+
+        //시청기록 저장
+        watchingHistoryRepository.save(videoProgressDTO.toWatcingHistoryEntity(user, content, videoProgressDTO));
+
         if (myList != null){
             myListRepository.deleteByUserIdAndContentId(user.getId(), content.getId());
-            myListRepository.save(videoProgressDTO.toEntity(user, content, videoProgressDTO));
+            myListRepository.save(videoProgressDTO.toMyListEntity(user, content, videoProgressDTO));
         }else {
-            myListRepository.save(videoProgressDTO.toEntity(user, content, videoProgressDTO));
+            myListRepository.save(videoProgressDTO.toMyListEntity(user, content, videoProgressDTO));
         }
     }
 

@@ -25,9 +25,12 @@
         document.addEventListener('mozfullscreenchange', onFullscreenChange); // Firefox
         document.addEventListener('msfullscreenchange', onFullscreenChange); // IE/Edge
 
-        contents.forEach(content => {``
+        contents.forEach(content => {
+            ``
             content.addEventListener('click', function () {
                 const contentId = this.dataset.contentId;
+                console.log(`Content clicked: ${contentId}`); // 추가 로그
+
                 showModal(contentId);
             });
         });
@@ -125,7 +128,17 @@
                         // 좋아요/좋아요취소 버튼 클릭 이벤트 핸들러 추가
                         const likeButton = document.getElementById('likeButton');
                         likeButton.addEventListener('click', function () {
-                            toggleLike(contentId, data.response.isLike, likeButton);
+                            $.ajax({
+                                url: `/api/like-status/${contentId}`,
+                                type: "GET",
+                                contentType: 'application/json',
+                            }).done((data) => {
+
+                                toggleLike(data.response.contentId, data.response.isLiked, likeButton);
+
+                            }).fail(function (xhr, status, error) {
+                                console.error('Error fetching content info:', error);
+                            });
                         });
                         // 비디오 재생 버튼 클릭 이벤트 리스너 추가
                         document.querySelector('.playButton').addEventListener('click', function (event) {
@@ -144,50 +157,53 @@
                         modalData.innerText = 'Error loading data';
                         console.error('Error:', error);
                     });
-        }
 
-        function toggleFavorite(contentId, isFavorite, favoriteButton) {
-            const url = isFavorite ? `/api/users/${contentId}/unfavorite` : `/api/users/${contentId}/favorite`;
-            fetch(url, { method: 'POST' })
-                    .then(response => {
-                        if (response.ok) {
-                            // 찜 상태를 반대로 변경
-                            const newIsFavorite = !isFavorite;
-                            // 버튼 아이콘 업데이트
-                            favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
-                            // 다음 클릭 시의 상태를 업데이트
-                            favoriteButton.onclick = function () {
-                                toggleFavorite(contentId, newIsFavorite, favoriteButton);
-                            };
-                        } else {
-                            console.error('Failed to update favorite status');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-        }
 
-        function toggleLike(contentId, isLike, likeButton) {
-            const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
-            fetch(url, { method: 'POST' })
-                    .then(response => {
-                        if (response.ok) {
-                            // 찜 상태를 반대로 변경
-                            const newIsLike = !isLike;
-                            // 버튼 아이콘 업데이트
-                            likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
-                            // 다음 클릭 시의 상태를 업데이트
-                            likeButton.onclick = function () {
-                                toggleLike(contentId, newIsLike, likeButton);
-                            };
-                        } else {
-                            console.error('Failed to update like status');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
+            function toggleFavorite(contentId, isFavorite, favoriteButton) {
+                const url = isFavorite ? `/api/users/${contentId}/unfavorite` : `/api/users/${contentId}/favorite`;
+                fetch(url, {method: 'POST'})
+                        .then(response => {
+                            if (response.ok) {
+                                // 찜 상태를 반대로 변경
+                                const newIsFavorite = !isFavorite;
+                                // 버튼 아이콘 업데이트
+                                favoriteButton.innerHTML = newIsFavorite ? '<i class="fa-solid fa-check"></i></i>' : '<i class="fa-solid fa-plus"></i>';
+                                // 다음 클릭 시의 상태를 업데이트
+                                favoriteButton.onclick = function () {
+                                    toggleFavorite(contentId, newIsFavorite, favoriteButton);
+                                };
+                            } else {
+                                console.error('Failed to update favorite status');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+            }
+
+            function toggleLike(contentId, isLike, likeButton) {
+                const url = isLike ? `/api/users/${contentId}/dislike` : `/api/users/${contentId}/like`;
+                fetch(url, {method: 'POST'})
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // JSON 데이터를 반환하도록 함
+                            } else {
+                                throw new Error('Failed to update like status');
+                            }
+                        }).then(data => {
+                    // JSON 데이터를 성공적으로 받았을 때 실행
+                    const newIsLike = data.isLiked; // 서버 응답에서 새로운 좋아요 상태 가져오기
+                    // 버튼 아이콘 업데이트
+                    likeButton.innerHTML = newIsLike ? '<i class="fa-solid fa-thumbs-up"></i>' : '<i class="fa-regular fa-thumbs-up"></i>';
+                    // 다음 클릭 시의 상태를 업데이트
+                    likeButton.onclick = function () {
+                        toggleLike(contentId, newIsLike, likeButton);
+                    };
+                })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+            }
         }
 
 
@@ -218,6 +234,7 @@
             // Listen for error events.
             window.addEventListener('error', onErrorEvent);
         }
+
         function createVideoElement() {
             const videoContainer = document.getElementById('videoContainer');
             videoContainer.innerHTML = ''; // 비디오 컨테이너를 초기화
@@ -246,7 +263,7 @@
 
             // 매니페스트를 로드합니다.
             try {
-                player.load(videoUrl).then(function() {
+                player.load(videoUrl).then(function () {
                     console.log('The video has now been loaded!');
                     video.play();
 
@@ -256,7 +273,7 @@
                             console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
                         });
                     }
-                }).catch(function(error) {
+                }).catch(function (error) {
                     console.error('Error during player.load:', error);
                     onError(error);
                 });
@@ -275,6 +292,7 @@
                 videoContainer.innerHTML = ''; // 비디오 요소를 제거합니다.
             }
         }
+
         function onErrorEvent(event) {
             // Extract the shaka.util.Error object from the event.
             onError(event.detail);

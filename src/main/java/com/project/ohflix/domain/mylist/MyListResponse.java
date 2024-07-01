@@ -14,13 +14,16 @@ import java.util.List;
 public class MyListResponse {
 
     @Data
-    public static class MyFavoriteListDTO {
+    public static class MyListDTO {
         private ProfileIcon profileIcon;
         private List<MyFavoriteList> myFavoriteList;
+        private List<MyWatchList> myWatchList;
 
-        public MyFavoriteListDTO(User user, List<MyList> myFavoriteList) {
+
+        public MyListDTO(User user, List<MyList> myFavoriteList, List<MyList> myWatcheList) {
             this.profileIcon = user.getProfileIcon();
             this.myFavoriteList = myFavoriteList.stream().map(MyFavoriteList::new).toList();
+            this.myWatchList = myWatcheList.stream().map(MyWatchList::new).toList();
         }
 
         @Data
@@ -35,6 +38,23 @@ public class MyListResponse {
                 this.content = myList.getContent();
                 this.createdAt = myList.getCreatedAt();
                 this.playedTime = myList.getPlayedTime();
+            }
+
+        }
+        @Data
+        public static class MyWatchList {
+            private Integer id;             // PKMyFavoriteListDTO
+            private Content content;        // 콘텐츠 테이블
+            private Timestamp createdAt;
+            private Double playedTime;      // 이어보기 재생시간
+
+            public MyWatchList(MyList myList) {
+                this.id = myList.getId();
+                this.content = myList.getContent();
+                this.createdAt = myList.getCreatedAt();
+                this.playedTime = myList.getPlayedTime() != null
+                        ? myList.getPlayedTime()/myList.getContent().getRealPlayTime() *100
+                        : 0.0;
             }
 
         }
