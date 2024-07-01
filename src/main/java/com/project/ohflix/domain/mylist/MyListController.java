@@ -1,21 +1,17 @@
 package com.project.ohflix.domain.mylist;
 
 import com.project.ohflix._core.utils.ApiUtil;
-import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.user.SessionUser;
 import com.project.ohflix.domain.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
