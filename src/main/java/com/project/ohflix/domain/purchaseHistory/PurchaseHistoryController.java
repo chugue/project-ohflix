@@ -73,7 +73,8 @@ public class PurchaseHistoryController {
     @GetMapping("/admin/content-update-link")
     public String contentUpdateLink(HttpServletRequest request) {
         // contentUpdateLinkPage 데이터 바인딩
-        ContentResponse.ContentUpdateLinkPageDTO respDTO = contentService.contentUpdateLinkPageDTO(1);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        ContentResponse.ContentUpdateLinkPageDTO respDTO = contentService.contentUpdateLinkPageDTO(sessionUser.getId());
         request.setAttribute("ContentUpdateLinkDTO", respDTO);
 
         return "admin/content-update-link";
