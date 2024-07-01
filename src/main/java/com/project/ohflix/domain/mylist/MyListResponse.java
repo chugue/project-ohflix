@@ -99,4 +99,23 @@ public class MyListResponse {
             this.watchOrFav = reqDTO.getWatchOrFav();
         }
     }
+
+    //openai
+    @Data
+    public static class ContentDTO {
+
+        private Integer id;
+
+        private String contentTitle;
+
+        public ContentDTO(Content content) {
+            this.id = content.getId();
+            this.contentTitle = content.getTitle();
+        }
+
+        public ContentDTO(Integer id, String contentTitle) {
+            this.id = id;
+            this.contentTitle = contentTitle;
+        }
+    }
 }
