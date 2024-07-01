@@ -22,6 +22,9 @@ public class Content {
     @Column(nullable = false, length = 255)
     private String title; // 제목
 
+    @Column(nullable = false)
+    private Double realPlayTime; // 실제영상시간
+
     @Column(nullable = false, length = 255)
     private String thumbnail; // 썸네일
 

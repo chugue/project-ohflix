@@ -53,3 +53,12 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
     com.example.final_project: DEBUG
 
+kakao:
+  pay:
+    cid: TC0ONETIME
+    admin-key: f542a3356888f0d79592e8edea6d931e
+    redirect-url: http://localhost:8080
+
+custom:
+  video:
+    request-url: http://localhost:7000/

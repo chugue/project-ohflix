@@ -21,6 +21,26 @@ import java.util.List;
 
 public class UserResponse {
 
+    @Data
+    public static class PasswordChangePageDTO{
+        private String profileIconPath;
+
+        public PasswordChangePageDTO(User user) {
+            this.profileIconPath = user.getProfileIcon().getPath();
+        }
+    }
+
+    // 비밀번호 변경 페이지
+    @Data
+    public static class UpdatePasswordDTO {
+        private String newPassword;
+
+
+        public UpdatePasswordDTO(User user) {
+            this.newPassword = user.getPassword();
+        }
+    }
+
     // 로그인 사용자의 관람등급 가져오기
     @Data
     public static class RestrictionLevelDTO {
@@ -52,14 +72,18 @@ public class UserResponse {
         private String username;
         private Boolean isSubscribe;
         private Timestamp createdAt;
+        private String formattedCreatedAt;
         private Integer monthsSubscribed;
+        private Integer index;
 
-        public MembersDTO(User user) {
+        public MembersDTO(User user, int index) {
             this.id = user.getId();
             this.username = user.getNickname();
             this.isSubscribe = user.getIsSubscribe();
             this.createdAt = user.getCreatedAt();
+            this.formattedCreatedAt = new SimpleDateFormat("yyyy-MM-dd").format(user.getCreatedAt());
             this.monthsSubscribed = calculateMonthsSubscribed(user.getCreatedAt());
+            this.index = index;
         }
 
         private Integer calculateMonthsSubscribed(Timestamp createdAt) {
@@ -78,7 +102,7 @@ public class UserResponse {
         private String username;            // 이름
         private String email;               // 이메일
         private Rate userSaveRate;          // 관람등급
-        private Status isKids;              // 키즈 시청 제한 여부
+        private Boolean isKids;              // 키즈 시청 제한 여부
         private Boolean isAutoPlay;         // 자동 재생 여부
         private Timestamp createdAt;
         private String profileIconPath;
@@ -101,13 +125,13 @@ public class UserResponse {
     @Data
     public static class ProfileSettingDTO {
         private Integer userId;
-        private String username;
+        private String nickname;
         private Integer iconId;
         private String iconPath;
 
         public ProfileSettingDTO(User user) {
             this.userId = user.getId();
-            this.username = user.getNickname();
+            this.nickname = user.getNickname();
             this.iconId = user.getProfileIcon().getId();
             this.iconPath = user.getProfileIcon().getPath();
         }
@@ -124,7 +148,7 @@ public class UserResponse {
         //        private Timestamp oldestCreatedAt;     // 가장 오래된 createdAt
         private String latestServicePeriod;     // 가장 최근의 servicePeriod
         private String oldestPurchaseHistory;     // 가장 최근의 servicePeriod
-        private List<ContentResponse.CanclePlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
+        private List<ContentResponse.CancelPlanPageContentDTO> latestContentList; // 현재는 최신 컨텐츠 12개 뿌리기, 찜한 컨텐츠로 바꿀 수도
 
         // ~ 뒤의 날짜를 추출
         private String endDate(String servicePeriod) {
@@ -157,7 +181,7 @@ public class UserResponse {
             this.oldestServicePeriod = startDate(oldestPurchaseHistory != null ? oldestPurchaseHistory.getServicePeriod() : null);
             this.latestServicePeriod = endDate(latestPurchaseHistory != null ? latestPurchaseHistory.getServicePeriod() : null);
             this.latestContentList = latestContentList.stream()
-                    .map(ContentResponse.CanclePlanPageContentDTO::new)
+                    .map(ContentResponse.CancelPlanPageContentDTO::new)
                     .toList();
         }
     }
@@ -274,6 +298,24 @@ public class UserResponse {
         public LoginDTO(Integer id, Status status) {
             Id = id;
             this.status = status;
+        }
+    }
+
+    // 회원가입 응답 DTO
+    @Data
+    public static class SignupDTO{
+        // 회원가입 입력 값.
+        private String email;
+        private String nickname;
+        private String password;
+        // Default 값
+        private Status status;          // USER(사용자) / ADMIN(관리자)
+
+        public SignupDTO(User user) {
+            this.email = user.getEmail();
+            this.password = user.getPassword();
+            this.nickname = user.getNickname();
+            this.status = user.getStatus();
         }
     }
 }

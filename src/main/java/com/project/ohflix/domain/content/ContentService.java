@@ -1,21 +1,43 @@
 package com.project.ohflix.domain.content;
 
 import com.project.ohflix._core.error.exception.Exception404;
+import com.project.ohflix.domain.like.Like;
+import com.project.ohflix.domain.like.LikeRepository;
+import com.project.ohflix.domain.mylist.MyList;
+import com.project.ohflix.domain.mylist.MyListRepository;
+import com.project.ohflix.domain.mylist.MyListResponse;
+import com.project.ohflix.domain.user.User;
+import com.project.ohflix.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @Service
 @RequiredArgsConstructor
 public class ContentService {
+    private final UserRepository userRepository;
     private final ContentRepository contentRepository;
+    private final MyListRepository myListRepository;
+    private final LikeRepository likeRepository;
+
 
     // main page data
-    public ContentResponse.MainPageDTO getMainPageData() {
+    public ContentResponse.MainPageDTO getMainPageData(Integer sessionUserId) {
+        // 헤더 유저 가져오기 ( 프로필 아이콘 )
+        User user = userRepository.findUserProfileById(sessionUserId);
+
         // 제일 인기많은 영상을 메인페이지 대문으로 뿌리기
         PageRequest pickOne = PageRequest.of(0, 1);
         Content mostViewed = contentRepository.findOneMostViewed(pickOne).getContent().get(0);
@@ -31,7 +53,7 @@ public class ContentService {
         PageRequest fiveItems = PageRequest.of(0, 5);
         List<Content> navbarItems = contentRepository.findNewFive(fiveItems);
 
-        return new ContentResponse.MainPageDTO(mostViewed, top10List, newList, navbarItems);
+        return new ContentResponse.MainPageDTO(user, mostViewed, top10List, newList, navbarItems);
     }
 
     // ContentUpdateLinkPage
@@ -54,12 +76,12 @@ public class ContentService {
     }
 
     //
-    public List<ContentResponse.LatestContentDTO> findLatestContent() {
+    public ContentResponse.LatestContentDTO findLatestContent(Integer sessionUser) {
+        User user = userRepository.findUserProfileById(sessionUser);
         List<Content> latestContentList = contentRepository.findLatestContent();
         System.out.println(latestContentList);
 
-        return latestContentList.stream().map(content
-                -> new ContentResponse.LatestContentDTO(content)).toList();
+        return new ContentResponse.LatestContentDTO(user, latestContentList);
     }
 
     // 영화 상세정보 페이지 데이터
@@ -70,6 +92,35 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
+
+    // 영화 상세정보 페이지 + 찜 여부 + 좋아요 여부 데이터
+    public ContentResponse.MainContent getMainContent(Integer sessionUserId, Integer contentId) {
+        Content content = contentRepository.findById(contentId)
+                .orElseThrow(() -> new Exception404("정보를 찾을 수 없습니다."));
+
+        // 찜 여부
+        Optional<MyList> favorite = myListRepository.findByUserIdAndContentId(sessionUserId, contentId);
+        boolean isFavorite;
+        if (favorite.isPresent()) {
+            isFavorite = true;
+        } else {
+            isFavorite = false;
+        }
+
+        // 좋아요 여부
+        Optional<Like> like = likeRepository.findByUserIdAndContentId(sessionUserId, contentId);
+        boolean isLike;
+        if (like.isPresent()) {
+            isLike = true;
+        } else {
+            isLike = false;
+        }
+
+
+        return new ContentResponse.MainContent(content, isFavorite, isLike);
+    }
+
+
     // 메인 페이지 영화 상세정보 가져오는 모달 - 비동기 통신
     public ContentResponse.DetailsDTO getContentInfo(Integer contentId) {
         Content content = contentRepository.findById(contentId)
@@ -77,6 +128,16 @@ public class ContentService {
         return new ContentResponse.DetailsDTO(content);
     }
 
+    //content save
+    public void saveContent(ContentRequest.AdminUploadDTO requestDTO) {
+        contentRepository.save(requestDTO.toEntity());
+    }
+
+    // 검색
+    public List<ContentResponse.SearchResultDTO> searchContentsByTitle(String title) {
+        List<Content> contents = contentRepository.findByTitleContaining(title);
+        return contents.stream().map(ContentResponse.SearchResultDTO::new).toList();
+    }
 }
 
 

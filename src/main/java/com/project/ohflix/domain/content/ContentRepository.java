@@ -52,4 +52,11 @@ public interface ContentRepository extends JpaRepository<Content, Integer> {
     // 메인페이지 navbar 최신 미니 아이템
     @Query("select c from Content c order by c.createdAt desc")
     List<Content> findNewFive(Pageable fiveItems);
+
+    @Query("SELECT c FROM Content c WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :title, '%'))")
+    List<Content> findByTitleContaining(@Param("title") String title);
+
+
+    @Query("SELECT c FROM Content c WHERE c.videoPath = :videoPath")
+    Optional<Content> findByVideoPath(@Param("videoPath") String videoPath);
 }

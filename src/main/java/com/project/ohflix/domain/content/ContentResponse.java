@@ -5,7 +5,11 @@ import com.project.ohflix._core.utils.FilenameFormatUtil;
 import com.project.ohflix.domain._enums.Genre;
 import com.project.ohflix.domain._enums.Rate;
 import com.project.ohflix.domain._enums.Top10Enum;
+import com.project.ohflix.domain.profileIcon.ProfileIcon;
+import com.project.ohflix.domain.user.User;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
+
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,12 +22,14 @@ public class ContentResponse {
 
     @Data  // 메인 페이지 데이터
     public static class MainPageDTO {
+        private ProfileIcon profileIcon;
         private MainContent mainContent;
         private List<Top10> top10List;
         private List<New> newList;
         private List<Navbar> navbarList;
 
-        public MainPageDTO(Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+        public MainPageDTO(User user, Content mainContent, List<Content> top10List, List<Content> newList, List<Content> navbarItemsList) {
+            this.profileIcon =  user.getProfileIcon();
             this.mainContent = new MainContent(mainContent);
             // Top10 list mapping with rankPath assignment
             List<Top10> sortedTop10List = top10List.stream()
@@ -99,9 +105,6 @@ public class ContentResponse {
         }
     }
 
-
-
-
     @Data // 메인 페이지 모달 - 컨텐츠 상세정보 데이터
     public static class InfoDTO {
         private Integer id;
@@ -136,6 +139,52 @@ public class ContentResponse {
             this.introduction = content.getIntroduction();
         }
     }
+
+    // 메인  상세 정보 페이지 + 찜 여부 + 좋아요 여부
+    @Data
+    public static class MainContent {
+        private Integer id;
+        private String title;
+        private String videoPath;
+        private String mainPhoto;
+        private String productYear;
+        private String playTime;
+        private String textPhoto;
+        private String actors;
+        private String writers;
+        private String genre;
+        private String characteristics;
+        private String introduction;
+        private String rateImg;
+        private String rate;
+        private String director;
+
+        private boolean isFavorite;
+        private boolean isLike;
+
+        public MainContent(Content content, boolean isFavorite, boolean isLike) {
+            this.id = content.getId();
+            this.videoPath = content.getVideoPath();
+            this.mainPhoto = content.getMainPhoto();
+            this.videoPath = content.getVideoPath();
+            this.title = content.getTitle();
+            this.productYear = content.getProductYear();
+            this.playTime = content.getPlayTime();
+            this.actors = content.getActors();
+            this.textPhoto = content.getTextPhoto();
+            this.director = content.getDirector();
+            this.genre = content.getGenre().getValue();
+            this.rateImg = content.getRate().getImgPath();
+            this.rate = content.getRate().getValue();
+            this.writers = content.getWriters();
+            this.characteristics = content.getCharacteristic();
+            this.introduction = content.getIntroduction();
+
+            this.isFavorite = isFavorite; // 찜 여부
+            this.isLike = isLike; // 좋아요 여부
+        }
+    }
+
 
     // 상세정보 페이지 데이터
     @Data
@@ -235,36 +284,59 @@ public class ContentResponse {
             }
         }
     }
+    @Data
+    public static class LatestContentDTO{
+        private ProfileIcon profileIcon;
+        private List<LatestContentList> latestContentList;
+
+        public LatestContentDTO(User user, List<Content> latestContentList) {
+            this.profileIcon = user.getProfileIcon();
+            this.latestContentList = latestContentList.stream().map(LatestContentList::new).toList();
+        }
+
+        @Data
+        public static class LatestContentList {
+            private Integer contentId;
+            private String thumbnail;       // 썸네일
+            private String posterPhoto;       // 썸네일
+            private Timestamp createdAt;
+
+            public LatestContentList(Content content) {
+                this.contentId = content.getId();
+                this.thumbnail = content.getThumbnail();
+                this.posterPhoto = content.getPosterPhoto();
+                this.createdAt = content.getCreatedAt();
+            }
+        }
+    }
+
+
 
     @Data
-    public static class LatestContentDTO {
+    public static class CancelPlanPageContentDTO {
         private Integer id;
-        private String thumbnail;       // 썸네일
         private String posterPhoto;       // 썸네일
         private Timestamp createdAt;
 
-        public LatestContentDTO(Content content) {
+        public CancelPlanPageContentDTO(Content content) {
             this.id = content.getId();
+            this.posterPhoto = content.getPosterPhoto();
+            this.createdAt = content.getCreatedAt();
+        }
+    }
+
+    @Data
+    public static class SearchResultDTO {
+        private final Integer id;
+        private final String title;
+        private final String thumbnail;
+
+        public SearchResultDTO(Content content) {
+            this.id = content.getId();
+            this.title = content.getTitle();
             this.thumbnail = content.getThumbnail();
-            this.posterPhoto = content.getPosterPhoto();
-            this.createdAt = content.getCreatedAt();
         }
     }
-
-    @Data
-    public static class CanclePlanPageContentDTO {
-        private Integer id;
-        private String posterPhoto;       // 썸네일
-        private Timestamp createdAt;
-
-        public CanclePlanPageContentDTO(Content content) {
-            this.id = content.getId();
-            this.posterPhoto = content.getPosterPhoto();
-            this.createdAt = content.getCreatedAt();
-        }
-    }
-
-
 
 }
 

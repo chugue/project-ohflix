@@ -1,28 +1,26 @@
-<div class="main-div">
-    <div class="main-left-top">
-        <a href="/">
-            <div class="main-left-text">
-                <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로
-                돌아가기
-            </div>
-        </a>
-        <ul class="custom-list">
-            <a href="/api/account-view">
-                <li><i class="fa-solid fa-house main-left-icon"></i>개요</li>
-            </a>
-            <a href="/api/account-membership">
-                <li>
-                    <i class="fa-solid fa-credit-card main-left-icon"></i>멤버십
-                </li>
-            </a>
-            <a href="/api/account-security">
-                <li><i class="fa-solid fa-key main-left-icon"></i> 보안</li>
-            </a>
-            <a href="/api/profile-setting">
-                <li>
-                    <i class="fa-solid fa-users main-left-icon"></i>프로필
-                </li>
-            </a>
-        </ul>
-    </div>
+<div class="sidebar">
+    <a href="/api/main-page">
+        <div class="main-left-text">
+            <i class="fa-solid fa-arrow-left main-left-icon"></i>넷플릭스로 돌아가기
+        </div>
+    </a>
+    <ul class="custom-list">
+        <li id="account-view"><a href="/api/account-view"><i class="fa-solid fa-house main-left-icon"></i>개요</a></li>
+        <li id="account-membership"><a href="/api/account-membership"><i class="fa-solid fa-credit-card main-left-icon"></i>멤버십</a></li>
+        <li id="account-security"><a href="/api/account-security"><i class="fa-solid fa-key main-left-icon"></i>보안</a></li>
+        <li id="profile-setting"><a href="/api/profile-setting"><i class="fa-solid fa-users main-left-icon"></i>프로필</a></li>
+    </ul>
 </div>
+<!-- 사이드바 현재 위치 표시 백그라운드 -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var currentUrl = window.location.pathname;
+        var links = document.querySelectorAll(".custom-list li a");
+
+        links.forEach(function(link) {
+            if (link.getAttribute("href") === currentUrl) {
+                link.parentElement.style.backgroundColor = "#ddd";
+            }
+        });
+    });
+</script>

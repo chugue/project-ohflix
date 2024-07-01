@@ -9,61 +9,60 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>프로필 변경</h1>
-        </header>
-        <main>
+<div class="container">
+    <header>
+        <h1>프로필 변경</h1>
+    </header>
+    <main>
+<!--        <form id="profile-form" action="/api/save-profile" method="POST">-->
             <div class="profile-card">
                 {{#UserProfileFormDTO}}
-                <a href="/api/profile-icons">
-                    <div class="profile-pic">
-                        <div class="pic-container">
-                            <img id="profile-pic" src={{profileIconPath}} alt="Profile Picture">
-                            <label for="profile-pic-upload" class="clip-icon">
-                                <img src="/static/images/system/edit.svg" alt="Clip Icon">
-                            </label>
+                    <a href="/api/profile-icons">
+                        <div class="profile-pic">
+                            <div class="pic-container">
+                                <img id="profile-pic" src={{profileIconPath}} alt="Profile Picture">
+                                <label for="profile-pic-upload" class="clip-icon">
+                                    <img src="/static/images/system/edit.svg" alt="Clip Icon">
+                                </label>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="profile-info">
+                        <label for="profile-name">이름</label>
+                        <input type="text" id="profile-name" value={{username}}>
+
+                        <label for="profile-email">이메일</label>
+                        <input type="email" id="profile-email" value={{email}}>
+                        <p>이메일은 넷플릭스의 콘텐츠를 이용하기 위해 필요합니다. 자세히 알아보기</p>
+
+                        <label for="profile-restrictions">관람등급 설정</label>
+                        <div class="restriction-container">
+                            <select id="restriction-level">
+                                <!-- TODO : user_save_rate 로 선택하기 -->
+                                <option value="restriction-all">모든 관람등급</option>
+                                <option value="restriction-child">7세미만</option>
+                                <option value="restriction-student">15세미만</option>
+                                <option value="restriction-adult">19세이상</option>
+                            </select>
+                            <p>이 프로필에서는 모든 관람등급의 콘텐츠가 표시됩니다.</p>
+                        </div>
+                        <br>
+                        <label for="profile-autoplay">자동 재생 설정</label>
+                        <div class="autoplay-setting">
+                            <label for="autoplay-next">모든 디바이스에서 시리즈의 다음 화 자동 재생</label>
+                            {{#isAutoPlay}}
+                                <input type="checkbox" id="autoplay-next" checked>
+                            {{/isAutoPlay}}
+                            {{^isAutoPlay}}
+                                <input type="checkbox" id="autoplay-next">
+                            {{/isAutoPlay}}
+                        </div>
+                        <div class="autoplay-setting">
+                            <label for="autoplay-preview">모든 디바이스에서 탐색 중 미리보기 자동 재생</label>
+                            <input type="checkbox" id="autoplay-preview" checked>
+
                         </div>
                     </div>
-                </a>
-                <div class="profile-info">
-                    <label for="profile-name">이름</label>
-                    <input type="text" id="profile-name" value={{username}}>
-
-                    <label for="profile-email">이메일</label>
-                    <input type="email" id="profile-email" value={{email}}>
-                    <button class="btn register">이메일 등록</button>
-                    <p>이메일은 넷플릭스의 콘텐츠를 이용하기 위해 필요합니다. 자세히 알아보기</p>
-
-                    <label for="profile-restrictions">관람등급 설정</label>
-                    <div class="restriction-container">
-                        <select id="restriction-level">
-                            <!-- TODO : user_save_rate 로 선택하기 -->
-                            <option value="restriction-all">모든 관람등급</option>
-                            <option value="restriction-child">7세미만</option>
-                            <option value="restriction-student">15세미만</option>
-                            <option value="restriction-adult">19세이상</option>
-                        </select>
-                        <p>이 프로필에서는 모든 관람등급의 콘텐츠가 표시됩니다.</p>
-                        <button class="btn edit" id="restriction-button">수정</button>
-                    </div>
-                    <br>
-                    <label for="profile-autoplay">자동 재생 설정</label>
-                    <div class="autoplay-setting">
-                        <label for="autoplay-next">모든 디바이스에서 시리즈의 다음 화 자동 재생</label>
-                        {{#isAutoPlay}}
-                        <input type="checkbox" id="autoplay-next" checked>
-                        {{/isAutoPlay}}
-                        {{^isAutoPlay}}
-                        <input type="checkbox" id="autoplay-next">
-                        {{/isAutoPlay}}
-                    </div>
-                    <div class="autoplay-setting">
-                        <label for="autoplay-preview">모든 디바이스에서 탐색 중 미리보기 자동 재생</label>
-                        <input type="checkbox" id="autoplay-preview" checked>
-
-                    </div>
-                </div>
                 {{/UserProfileFormDTO}}
             </div>
             <div class="actions">
@@ -72,8 +71,9 @@
                     <button class="btn cancel">취소</button>
                 </a>
             </div>
-        </main>
-    </div>
-    <script src="/static/js/script.js"></script>
+<!--        </form>-->
+    </main>
+</div>
+<script src="/static/js/script.js"></script>
 </body>
 </html>

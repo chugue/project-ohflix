@@ -38,6 +38,7 @@ header h1 {
     border-radius: 5%;
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 
 .clip-icon {
@@ -60,12 +61,17 @@ header h1 {
     font-weight: bold;
 }
 
+.profile-info label[for="profile-restrictions"] {
+    margin-top: 20px;
+}
+
+
 .profile-info input[type="text"],
 .profile-info input[type="email"],
 .profile-info select {
     width: 95%;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color: #333333;
     border: 1px solid #444444;
     border-radius: 4px;
@@ -83,12 +89,9 @@ header h1 {
 
 .profile-info p {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 0.9em;
     color: #b3b3b3;
-}
-
-.restriction-container {
-    margin-top: 10px;
 }
 
 .actions {
@@ -97,8 +100,7 @@ header h1 {
     color: #111111;
 }
 
-.actions .btn,
-.profile-info .btn {
+.actions .btn{
     padding: 10px 20px;
     margin: 5px 0;
     border: none;

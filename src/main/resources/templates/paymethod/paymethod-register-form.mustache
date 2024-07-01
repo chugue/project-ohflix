@@ -6,84 +6,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제 수단 등록</title>
     <link rel="stylesheet" href="/static/css/paymethod-form.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="/static/js/kakao-paymethod-form.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        function requestPay() {
+            IMP.init('imp37577772'); // 가맹점 식별 코드
+            IMP.request_pay({
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: '결제테스트',
+                amount: 100,
+                buyer_email: 'iamport@siot.do',
+                buyer_name: '구매자',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울특별시 강남구 삼성동',
+                buyer_postcode: '123-456'
+            }, function (rsp) { // callback
+                console.log(rsp);
+                if (rsp.success) {
+                    var msg = '결제가 완료되었습니다.';
+                    alert(msg);
+
+                    // 결제 정보를 서버로 전송
+                    fetch('/save-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            merchant_uid: rsp.merchant_uid,
+                            payment_date: new Date().toISOString() // 클라이언트에서 현재 시간을 보낼 경우
+                        })
+                    }).then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                location.href = "/api/purchase-histories";
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                    alert(msg);
+                }
+            });
+        }
+
+
+    </script>
 </head>
 <body>
-    <div class="white-header">
-        <div class="header-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo">
-        </div>
-        <div class="logout">
-            <a href="#">로그아웃</a>
-        </div>
+<div class="white-header">
+    <div class="header-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo">
     </div>
-    <div class="main-container">
-        <div class="msg-container">
-            <div class="lock-icon">
-                <img src="/static/images/system/lock.png" alt="Lock Icon">
-            </div>
-            <h2>결제 수단 등록</h2>
-            <p>기존 결제 수단에 문제가 생겼을 때만 예비 결제 수단으로 사용됩니다.</p>
+    <div class="logout">
+        <a href="#">로그아웃</a>
+    </div>
+</div>
+<div class="main-container">
+    <div class="msg-container">
+        <div class="lock-icon">
+            <img src="/static/images/system/lock.png" alt="Lock Icon">
         </div>
-        <div class="payment-container">
-            <div class="payment-methods">
-                <div class="method">
-                    <div>
-                        <p>신용카드 또는 체크카드</p>
-                        <div class="icons">
-                            <img src="/static/images/cards/BC.png" alt="BC">
-                            <img src="/static/images/cards/Hana.png" alt="Hana">
-                            <img src="/static/images/cards/Hyundai.png" alt="Hyundai">
-                            <img src="/static/images/cards/KB.png" alt="KB">
-                            <img src="/static/images/cards/Lotte.png" alt="Lotte">
-                            <img src="/static/images/cards/NH.png" alt="NH">
-                            <img src="/static/images/cards/Samsung.png" alt="Samsung">
-                            <img src="/static/images/cards/Shinhan.png" alt="Shinhan">
-                            <!-- Add more icons as needed -->
-                        </div>
-                    </div>
-                    <div>
-                        <img src="/static/images/system/icons8-arrow-right-30.png" alt="arrow">
+        <h2>결제 수단 등록</h2>
+        <p>기존 결제 수단에 문제가 생겼을 때만 예비 결제 수단으로 사용됩니다.</p>
+    </div>
+    <div class="payment-container">
+        <div class="payment-methods">
+            <div class="method" onclick="requestPay()">
+                <div>
+                    <p>신용카드 또는 체크카드</p>
+                    <div class="icons">
+                        <img src="/static/images/cards/BC.png" alt="BC">
+                        <img src="/static/images/cards/Hana.png" alt="Hana">
+                        <img src="/static/images/cards/Hyundai.png" alt="Hyundai">
+                        <img src="/static/images/cards/KB.png" alt="KB">
+                        <img src="/static/images/cards/Lotte.png" alt="Lotte">
+                        <img src="/static/images/cards/NH.png" alt="NH">
+                        <img src="/static/images/cards/Samsung.png" alt="Samsung">
+                        <img src="/static/images/cards/Shinhan.png" alt="Shinhan">
+                        <!-- Add more icons as needed -->
                     </div>
                 </div>
-                <div class="method">
-                    <div>
-                        <p>간편 결제</p>
-                        <div class="icons">
-                            <img src="/static/images/cards/KAKAOPAY.png" alt="Paypal">
-                            <!-- Add more icons as needed -->
-                        </div>
+                <div>
+                    <img src="/static/images/system/icons8-arrow-right-30.png" alt="arrow">
+                </div>
+            </div>
+            <div class="method">
+                <div>
+                    <p>간편 결제</p>
+                    <div class="icons">
+                        <img src="/static/images/cards/KAKAOPAY.png" alt="KAKAOPAY">
+                        <!-- Add more icons as needed -->
                     </div>
-                    <div>
-                        <img src="/static/images/system/icons8-arrow-right-30.png" alt="arrow">
-                    </div>
+                </div>
+                <div>
+                    <img id="paymentButton" src="/static/images/system/icons8-arrow-right-30.png" alt="arrow">
                 </div>
             </div>
         </div>
     </div>
-    <footer class="white-footer">
-        <div class="white-footer-container">
-            <p>질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)</p>
-            <div class="grid-list-container">
-                <ul class="grid-list">
-                    <li><a href="#">자주 묻는 질문</a></li>
-                    <li><a href="#">고객 센터</a></li>
-                    <li><a href="#">넷플릭스 스토어</a></li>
-                    <li><a href="#">이용 약관</a></li>
-                    <li><a href="#">회사 정보</a></li>
-                    <li><a href="#">개인정보 처리방침</a></li>
-                    <li><a href="#">쿠키 설정</a></li>
-                </ul>
-            </div>
-            <div class="footer-bt">
-                <p>넷플릭스서비스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
-                <p>대표: 레지널드 숀 톰프슨</p>
-                <p>이메일 주소: korea@netflix.com</p>
-                <p>주소: 대한민국 서울특별시 종로구 종로 26, 서울특별시 종로구 종로 26, 03161</p>
-                <p>사업자등록번호: 165-87-00119</p>
-                <p>클라우드 호스팅: Amazon Web Services Inc.</p>
-                <p>공정거래위원회 웹사이트</p>
-            </div>
+</div>
+<footer class="white-footer">
+    <div class="white-footer-container">
+        <p>질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)</p>
+        <div class="grid-list-container">
+            <ul class="grid-list">
+                <li><a href="#">자주 묻는 질문</a></li>
+                <li><a href="#">고객 센터</a></li>
+                <li><a href="#">넷플릭스 스토어</a></li>
+                <li><a href="#">이용 약관</a></li>
+                <li><a href="#">회사 정보</a></li>
+                <li><a href="#">개인정보 처리방침</a></li>
+                <li><a href="#">쿠키 설정</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="footer-bt">
+            <p>넷플릭스서비스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
+            <p>대표: 레지널드 숀 톰프슨</p>
+            <p>이메일 주소: korea@netflix.com</p>
+            <p>주소: 대한민국 서울특별시 종로구 종로 26, 서울특별시 종로구 종로 26, 03161</p>
+            <p>사업자등록번호: 165-87-00119</p>
+            <p>클라우드 호스팅: Amazon Web Services Inc.</p>
+            <p>공정거래위원회 웹사이트</p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

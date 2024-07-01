@@ -16,7 +16,7 @@ public class ContentApiController {
     // 메인페이지 모달 영화 정보 가져오기
     @GetMapping("/api/content-info/{contentId}")
     public ResponseEntity<?> getContentInfo(@PathVariable Integer contentId){
-        ContentResponse.DetailsDTO respDTO= contentService.getContentDetails(contentId);
+        ContentResponse.MainContent respDTO= contentService.getMainContent(2, contentId);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
