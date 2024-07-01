@@ -8,11 +8,10 @@ import com.project.ohflix.domain._enums.Top10Enum;
 import com.project.ohflix.domain.profileIcon.ProfileIcon;
 import com.project.ohflix.domain.user.User;
 import lombok.Data;
-import org.springframework.context.annotation.Profile;
 
-import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -159,12 +158,11 @@ public class ContentResponse {
         private String rate;
         private String director;
 
-        private boolean isFavorite;
-        private boolean isLike;
+        private Boolean isFavorite;
+        private Boolean isLike;
 
         public MainContent(Content content, boolean isFavorite, boolean isLike) {
             this.id = content.getId();
-            this.videoPath = content.getVideoPath();
             this.mainPhoto = content.getMainPhoto();
             this.videoPath = content.getVideoPath();
             this.title = content.getTitle();
