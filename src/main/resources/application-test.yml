@@ -1,0 +1,14 @@
+# src/test/resources/application-test.yml
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 1111
+
+
+kakao:
+  pay:
+    cid: TC0ONETIME
+    admin-key: f542a3356888f0d79592e8edea6d931e
+    redirect-url: http://localhost:8080
