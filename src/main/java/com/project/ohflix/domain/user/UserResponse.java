@@ -20,6 +20,17 @@ import java.time.Period;
 import java.util.List;
 
 public class UserResponse {
+    // 환불 요청 페이지
+    @Data
+    public static class RefundRequestPageDTO{
+        private Integer sessionUserId;
+        private String profileIconPath;
+
+        public RefundRequestPageDTO(User user) {
+            this.sessionUserId = user.getId();
+            this.profileIconPath = user.getProfileIcon().getPath();
+        }
+    }
 
     @Data
     public static class PasswordChangePageDTO{

@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* """""""""""""""""""""""""""공통 마진""""""""""""""""""""""""""" */
 .mt-70{
     margin-top: 70px;
@@ -64,17 +69,9 @@ body {
 
 /* """""""""""""""""""""""""""""nav""""""""""""""""""""""""""""" */
 nav {
-    background-color: rgb(255, 255, 255);
+    background: #fff;
     text-align: center;
     flex: 0 1 auto;
-    position: fixed;
-    /* 네비게이션 바를 고정 */
-    top: 0;
-    /* 화면 상단에 위치 */
-    width: 100%;
-    /* 화면 전체 너비 차지 */
-    z-index: 1000;
-    /* 다른 요소들 위에 표시되도록 z-index 설정 */
     display: flex;
     justify-content: center;
     /* Center the nav-div within the nav */
@@ -82,15 +79,12 @@ nav {
 }
 
 .nav-div {
-    margin-bottom: 5px;
+    width: 1100px;
+    margin: 0 auto;
+    padding: 10px 50px;
     display: flex;
     justify-content: space-between;
-    /* 그리드 아이템 양쪽 끝 정렬 */
     align-items: center;
-    /* 세로 중앙 정렬 */
-    padding: 10px;
-    /* 내부 패딩 추가 */
-    width: 70vw;
 }
 
 .nav-div div{
@@ -103,38 +97,49 @@ nav {
     margin-top: 9px;
 }
 
-.nav-profile {
+.profile-icon {
+    width: 35px;
+    height: 35px;
     border-radius: 5px;
+    overflow: hidden;
     margin-right: 13px;
+}
+.profile-icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.logout a{
+    font-size: 14px;
+}
+.logout a:hover {
+    text-decoration: underline;
 }
 
 /* """"""""""""""""""""""""""""""main"""""""""""""""""""""""""""""" */
-main {
-    width: 70vw;
-    /* main 요소 너비를 60%로 설정 */
-    margin: 67px auto 0;
-    /* 네비게이션 바의 높이에 따라 조절 */
-    flex: 1 0 auto;
-    text-align: center;
-    display: grid;
-    grid-template-columns: 2fr 5fr;
-    gap: 100px;
-    /* 간격 설정 */
-}
 
 .main-div {
-    margin: 5px;
+    width: 1100px;
+    display: flex;
     text-align: start;
-    margin-top: 35px;
+    margin: 0 auto ;
+    padding: 30px 50px 80px;
 }
+
 
 /* """"""""""""""""""""""""""main - left"""""""""""""""""""""""""" */
-.main-left-top {
-    font-size: 14px;
-    text-align: start;
+
+.sidebar {
+    width: calc(30% - 20px);
     margin-right: 20px;
+    font-size: 14px;
 }
 
+.main-section{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
 .main-left-text {
     border-radius: 10px;
     padding: 15px;
@@ -146,32 +151,27 @@ main {
     background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
 }
 
-ul {
-    list-style: none;
-    /* 기본 스타일 제거 */
-    padding-left: 0;
-    /* 내부 패딩 제거 */
-    text-align: start;
-}
 
 .main-left-bottom {
     padding: 10px;
 }
-
-ul.custom-list li {
+.custom-list li {
     font-size: 17px;
-}
-
-li {
-    padding: 15px;
     border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-li:hover {
-    background-color: #E2E2E2; /* 커서를 가져다댔을 때 어두워지는 효과 */
+.custom-list li:hover {
+    background-color: #eee;
 }
 
+.custom-list li a {
+    padding: 15px;
+    text-decoration: none;
+    color: inherit;
+    display: block; /* a 태그가 li 전체를 채우도록 */
+}
 .main-left-icon {
     margin-right: 10px;
 }
@@ -204,26 +204,26 @@ li:hover {
     margin-right: 20px;
 }
 
-.membership-box div:nth-child(1) {
+.membership-box div {
     font-size: 17px;
     font-weight: 500;
 }
 
-.membership-box div:nth-child(2) {
-    font-size: 15px;
-    color: rgb(82, 82, 82);
-}
+/*.membership-box div:nth-child(2) {*/
+/*    font-size: 15px;*/
+/*    color: rgb(82, 82, 82);*/
+/*}*/
 
-.membership-box div:nth-child(3) {
-    font-size: 14px;
-    font-weight: 600;
-}
+/*.membership-box div:nth-child(3) {*/
+/*    font-size: 14px;*/
+/*    font-weight: 600;*/
+/*}*/
 
-.membership-box div:nth-child(4) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/*.membership-box div:nth-child(4) {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
 
 .text{
     font-size: 12.5px;
@@ -308,7 +308,8 @@ footer {
 
 footer div{
     color: rgb(160, 160, 160);
-    width: 70vw;
+    width: 1100px;
+    padding: 10px 50px;
     margin-top: 40px;
     margin-bottom: 40px;
 }

@@ -6,20 +6,25 @@
     </a>
     <ul class="custom-list">
         <li id="account-view"><a href="/api/account-view"><i class="fa-solid fa-house main-left-icon"></i>개요</a></li>
-        <li id="account-membership"><a href="/api/account-membership"><i class="fa-solid fa-credit-card main-left-icon"></i>멤버십</a></li>
-        <li id="account-security"><a href="/api/account-security"><i class="fa-solid fa-key main-left-icon"></i>보안</a></li>
-        <li id="profile-setting"><a href="/api/profile-setting"><i class="fa-solid fa-users main-left-icon"></i>프로필</a></li>
+        <li id="account-membership"><a href="/api/account-membership"><i
+                class="fa-solid fa-credit-card main-left-icon"></i>멤버십</a></li>
+        <li id="account-security"><a href="/api/account-security"><i class="fa-solid fa-key main-left-icon"></i>보안</a>
+        </li>
+        <li id="profile-setting"><a href="/api/profile-setting"><i class="fa-solid fa-users main-left-icon"></i>프로필</a>
+        </li>
     </ul>
 </div>
 <!-- 사이드바 현재 위치 표시 백그라운드 -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var currentUrl = window.location.pathname;
         var links = document.querySelectorAll(".custom-list li a");
 
-        links.forEach(function(link) {
-            if (link.getAttribute("href") === currentUrl) {
-                link.parentElement.style.backgroundColor = "#ddd";
+        links.forEach(function (link) {
+            if (link.getAttribute("href") === currentUrl ||         // href 와 현재가 버튼페이지가 동일 할 때,
+                    // 맴버십 페이지일때와 환불요청 페이지 일 때,
+                    (link.getAttribute("href") === "/api/account-membership" && currentUrl === "/api/refund-request-form")) {
+                link.parentElement.style.backgroundColor = "#ddd";  // 버튼의 배겨을 #ddd로
             }
         });
     });

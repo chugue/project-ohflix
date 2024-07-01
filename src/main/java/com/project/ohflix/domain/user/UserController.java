@@ -51,8 +51,9 @@ public class UserController {
     // 사용자 환불요청 페이지
     @GetMapping("/api/refund-request-form")
     public String getAccountRefundPage(HttpServletRequest request) {
-        Integer sessionUserId = 2;
-        request.setAttribute("sessionUserId", sessionUserId);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserResponse.RefundRequestPageDTO respDTO = userService.refundRequestPage(sessionUser.getId());
+        request.setAttribute("RefundRequestPageDTO", respDTO);
         return "account/refund-request-form";
     }
 
