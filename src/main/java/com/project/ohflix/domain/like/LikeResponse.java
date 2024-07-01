@@ -1,43 +1,53 @@
 package com.project.ohflix.domain.like;
 
-import com.project.ohflix.domain._enums.WatchOrFav;
-import com.project.ohflix.domain.mylist.MyListRequest;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class LikeResponse {
 
+    @Data
+    public static class LikeStatus {
+        private Integer userId;
+        private Integer contentId;
+        private Boolean isLiked;
+
+        public LikeStatus(Integer userId, Integer contentId, Optional<Like> like){
+            this.userId = userId;
+            this.contentId = contentId;
+            if (like.isPresent()){
+                this.isLiked = true;
+            } else {
+                this.isLiked = false;
+            }
+        }
+    }
+
     // 좋아요 하기
     @Data
-    @AllArgsConstructor
     public static class AddLikeDTO {
-        private int userId;
-        private int contentId;
+        private Integer userId;
+        private Integer contentId;
+        private Boolean isLiked = true;
 
 
-        public AddLikeDTO(LikeRequest.AddLikeDTO reqDTO) {
-            this.userId = reqDTO.getUserId();
-            this.contentId = reqDTO.getContentId();
-
+        public AddLikeDTO(Like like) {
+            this.userId = like.getUser().getId();
+            this.contentId = like.getContent().getId();
         }
     }
 
     // 좋아요 취소
     @Data
-    @AllArgsConstructor
     public static class RemoveLikeDTO {
-        private int userId;
-        private int contentId;
+        private Integer userId;
+        private Integer contentId;
+        private Boolean isLiked = false;
 
 
-        public RemoveLikeDTO(LikeRequest.RemoveLikeDTO reqDTO) {
-            this.userId = reqDTO.getUserId();
-            this.contentId = reqDTO.getContentId();
+        public RemoveLikeDTO(Like like) {
+            this.userId = like.getUser().getId();
+            this.contentId = like.getContent().getId();
 
         }
     }
