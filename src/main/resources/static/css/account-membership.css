@@ -273,10 +273,22 @@ nav {
     border-radius: 10px;
 }
 
+.membership-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
 .membership-cancel {
     display: flex;
     justify-content: center;
     color: #C11119;
+}
+
+.membership-pay {
+    display: flex;
+    justify-content: center;
+    color: #19751c;
 }
 
 .profile-manage i {
