@@ -28,6 +28,14 @@ public class PurchaseHistoryController {
     private final ContentService contentService;
     private final CardInfoService cardInfoService;
 
+    @GetMapping("/api/membership/payment")
+    public String membershipPayment(HttpServletRequest request) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        List<CardInfoResponse.paymethodManageDTO> respDTO = purchaseHistoryService.paymethodManagePage(sessionUser.getId());
+        request.setAttribute("paymethodManageDTO", respDTO);
+        return "paymethod/membership-pay-form";
+    }
+
     @GetMapping("/api/paymethod-form")
     public String getPaymethodRegisterForm() {
         return "paymethod/paymethod-register-form";

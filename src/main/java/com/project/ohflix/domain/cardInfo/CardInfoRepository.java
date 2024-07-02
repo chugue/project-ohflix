@@ -29,4 +29,9 @@ public interface CardInfoRepository extends JpaRepository<CardInfo, Integer> {
             select c from CardInfo c where c.user.id = :userId and c.isMain = true
             """)
     Optional<CardInfo> findMainCardInfoByUserId(@Param("userId") Integer userId);
+
+    @Query(""" 
+             select c from CardInfo c where c.id = :cardInfoId
+             """)
+    CardInfo findCardNumById(@Param("cardInfoId") Integer cardInfoId);
 }

@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,8 +50,10 @@ public class PaymentService {
         User user = userRepository.findById(sessionUserId)
                 .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
 
-        List<CardInfo> cardInfo = cardInfoRepository.findByUserId(sessionUserId)
+        cardInfoRepository.findByUserId(sessionUserId)
                 .orElseThrow(() -> new Exception404("해당 카드를 찾을 수 없습니다."));
+
+        CardInfo card = cardInfoRepository.findCardNumById(reqDTO.getCardInfoId());
 
         PurchaseHistory purchaseHistory = new PurchaseHistory();
 
@@ -58,7 +61,7 @@ public class PaymentService {
         purchaseHistory.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         purchaseHistory.setDescription("스트리밍 서비스");
         purchaseHistory.setPaymethod(Paymethod.CREDITCARD);
-        purchaseHistory.setCardInfo(cardInfo.getFirst());
+        purchaseHistory.setCardInfo(card);
         purchaseHistory.setAmount(13500);
 
         // 한 달 뒤의 날짜 계산

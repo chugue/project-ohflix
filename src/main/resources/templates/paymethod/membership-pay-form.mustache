@@ -6,6 +6,73 @@
     <title>결제 수단 관리</title>
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/paymethod-manage.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        function requestPay() {
+            // 선택된 라디오 버튼의 value를 가져옵니다.
+            var selectedRadio = document.querySelector('input[name="mainPayment"]:checked');
+
+            if (!selectedRadio) {
+                alert('결제 수단을 선택해주세요.');
+                return;
+            }
+
+            var selectedCardInfoId = selectedRadio.value;
+            console.log('선택된 카드 정보 ID:', selectedCardInfoId);
+
+            IMP.init('imp37577772'); // 가맹점 식별 코드
+            IMP.request_pay({
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: '결제테스트',
+                amount: 100,
+                buyer_email: 'iamport@siot.do',
+                buyer_name: '구매자',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울특별시 강남구 삼성동',
+                buyer_postcode: '123-456',
+                custom_data: { cardInfoId: selectedCardInfoId }
+            }, function (rsp) { // callback
+                console.log(rsp);
+                if (rsp.success) {
+                    var msg = '결제가 완료되었습니다.';
+                    alert(msg);
+
+                    // 결제 정보를 서버로 전송
+                    fetch('/save-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            merchant_uid: rsp.merchant_uid,
+                            payment_date: new Date().toISOString(), // 클라이언트에서 현재 시간을 보낼 경우
+                            cardInfoId: selectedCardInfoId // 선택된 카드 정보 ID를 함께 전송
+                        })
+                    }).then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                location.href = "/api/purchase-histories";
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    // msg += '에러내용 : ' + rsp.error_msg;
+                    alert(msg);
+                }
+            });
+        }
+
+
+    </script>
 </head>
 <body>
 <header>
@@ -70,17 +137,14 @@
         </div>
 
         <div class="button-container">
-            <a href="/api/paymethod-form">
                 <button>
-                    <div class="button-elements">
-                        <img src="/static/images/system/add-icon.svg">
+                    <div class="button-elements" onclick="requestPay()">
                         <div style="width: 5px;"></div>
-                        <div>
-                            결제수단 등록
+                        <div style="font-weight: bold;">
+                            결제하기
                         </div>
                     </div>
                 </button>
-            </a>
         </div>
 
     </div>

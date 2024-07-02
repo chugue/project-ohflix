@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="/static/css/reset.css" />
-    <link rel="stylesheet" href="/static/css/account-membership.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/account-membership.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- 파비콘 ( 아이콘 ) -->
     <link rel="icon" href="/static/images/OH!.ico">
     <title>계정 멤버십 - 오플릭스</title>
@@ -15,109 +15,119 @@
 <body>
 <!-- nav start -->
 {{#AccountMembershipDTO}}
-<nav>
-    <div class="nav-div">
-        <div>
-            <a href="/api/main-page">
-                <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo" />
-            </a>
-        </div>
-        <div>
-            <div class="profile-icon">
-                <img src={{profileIconPath}} alt="오류"/>
-            </div>
-            <div class="logout">
-                <a href="/logout">로그아웃</a>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- nav end-->
-
-<!-- ------------------------------------------------------------------------------------------------ -->
-
-<!-- main start -->
-<main>
-    <div class="main-div">
-    <!-- 사이드 바 메뉴 -->
-    {{> /_components/custom-list}}
-        <div class="main-section">
-        <div class="main-right-header mb-20">멤버십</div>
-        <div class="mb-20">멤버십 상세정보</div>
-        <div class="main-right-div1 mb-20">
-            <div class="membership-deco">
-            </div>
-
-            <div class="membership-box m-20">
-                <div class="mb-10">스텐다드 멤버십</div>
-                <div class="mb-10">4K 영상 해상도, 공간 음향, 광고 없이 시청 등.</div>
-            </div>
-        </div>
-
-        <!-- fast link -->
-        <div class="mb-15">결제 정보</div>
-        <div class="main-right-div2 mb-20">
-            <div class="fast-link plr-5">
-                <div class="membership-box m-15">
-                    <div class="mb-10">프리미엄 멤버십</div>
-                    <div class="mb-10">다음 결제일 : {{servicePeriod}}</div>
-                    <div class="mb-15">
-                        <i class="fa-regular fa-credit-card"></i>···· ···· ···· {{lastDigit}}
-                    </div>
-                </div>
-                <hr>
-                <a href="/api/paymethod-manage">
-                    <div class="fast-link-div pointer m-5">
-                        <div>
-                            결제 수단 관리
-                        </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
-                </a>
-
-                <hr>
-                <a href="/api/purchase-histories">
-                    <div class="m-5 fast-link-div pointer">
-                        <div>
-                            결제 내역 관리
-                        </div>
-                        <div><i class="fa-solid fa-chevron-right"></i></div>
-                    </div>
+    <nav>
+        <div class="nav-div">
+            <div>
+                <a href="/api/main-page">
+                    <img src="/static/images/OH!FLIX.png" alt="오류" class="nav-logo"/>
                 </a>
             </div>
-        </div>
-        <a href="/api/cancel-plan">
-            <div class="main-right-div3 mb-20 pointer">
-                <div class="membership-cancel m-5">
-                    멤버십 해지
+            <div>
+                <div class="profile-icon">
+                    <img src={{profileIconPath}} alt="오류"/>
+                </div>
+                <div class="logout">
+                    <a href="/logout">로그아웃</a>
                 </div>
             </div>
-        </a>
-        <a href="/api/refund-request-form">
-            <div class="main-right-div3 mb-20 pointer">
-                <div class="membership-cancel m-5">
-                    환불 요청
-                </div>
-            </div>
-        </a>
         </div>
+    </nav>
+    <!-- nav end-->
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+
+    <!-- main start -->
+    <main>
+        <div class="main-div">
+            <!-- 사이드 바 메뉴 -->
+            {{> /_components/custom-list}}
+            <div class="main-section">
+                <div class="main-right-header mb-20">멤버십</div>
+                <div class="mb-20">멤버십 상세정보</div>
+                <div class="main-right-div1 mb-20">
+                    <div class="membership-deco">
+                    </div>
+
+                    <div class="membership-box m-20">
+                        <div class="mb-10">스텐다드 멤버십</div>
+                        <div class="mb-10">4K 영상 해상도, 공간 음향, 광고 없이 시청 등.</div>
+                    </div>
+                </div>
+
+                <!-- fast link -->
+                <div class="mb-15">결제 정보</div>
+                <div class="main-right-div2 mb-20">
+                    <div class="fast-link plr-5">
+                        <div class="membership-box m-15">
+                            <div class="mb-10">프리미엄 멤버십</div>
+                            <div class="mb-10">다음 결제일 : {{servicePeriod}}</div>
+                            <div class="mb-15">
+                                <i class="fa-regular fa-credit-card"></i>···· ···· ···· {{lastDigit}}
+                            </div>
+                        </div>
+                        <hr>
+                        <a href="/api/paymethod-manage">
+                            <div class="fast-link-div pointer m-5">
+                                <div>
+                                    결제 수단 관리
+                                </div>
+                                <div><i class="fa-solid fa-chevron-right"></i></div>
+                            </div>
+                        </a>
+
+                        <hr>
+                        <a href="/api/purchase-histories">
+                            <div class="m-5 fast-link-div pointer">
+                                <div>
+                                    결제 내역 관리
+                                </div>
+                                <div><i class="fa-solid fa-chevron-right"></i></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="membership-select">
+                    <a href="/api/membership/payment">
+                        <div class="main-right-div3 mb-20 pointer">
+                            <div class="membership-pay m-5">
+                                멤버십 결제
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/api/cancel-plan">
+                        <div class="main-right-div3 mb-20 pointer">
+                            <div class="membership-cancel m-5">
+                                멤버십 해지
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <a href="/api/refund-request-form">
+                    <div class="main-right-div3 mb-20 pointer">
+                        <div class="membership-cancel m-5">
+                            환불 요청
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+    <!-- main end-->
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+
+    <!-- hr -->
+    <div class="mt-70">
+        <hr/>
     </div>
-</main>
-<!-- main end-->
+    <!-- hr -->
 
-<!-- ------------------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------------------ -->
 
-<!-- hr -->
-<div class="mt-70">
-    <hr />
-</div>
-<!-- hr -->
-
-<!-- ------------------------------------------------------------------------------------------------ -->
-
-<!-- footer start -->
-{{> /_components/white-footer}}
-<!-- footer end -->
+    <!-- footer start -->
+    {{> /_components/white-footer}}
+    <!-- footer end -->
 {{/AccountMembershipDTO}}
 </body>
 
