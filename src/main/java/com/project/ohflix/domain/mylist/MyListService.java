@@ -17,6 +17,7 @@ import com.project.ohflix.domain.watchingHistory.WatchingHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -130,8 +132,9 @@ public class MyListService {
     }
 
     //openai
-    public List<Content> getOpenAi() {
-        List<WatchingHistory> watchingHistories = watchingHistoryRepository.findByUserId(2);
+    @Async
+    public CompletableFuture<List<Content>> getOpenAi(Integer userId) {
+        List<WatchingHistory> watchingHistories = watchingHistoryRepository.findByUserId(userId);
         List<Content> contents = contentRepository.findAll();
         List<MyListRequest.WatchingHistoryDTO> watchingHistoryRequest = watchingHistories.stream().map(MyListRequest.WatchingHistoryDTO::new).toList();
         List<MyListRequest.ContentDTO> contentRequest = contents.stream().map(MyListRequest.ContentDTO::new).toList();
@@ -149,16 +152,20 @@ public class MyListService {
         // Create the OpenAI request with the JSON strings
         String userMessage = String.format("Here is the watching history: %s. Based on this watching history and the available contents: %s, please recommend 5 movies and provide their ids and titles only.", watchingHistoryJson, contentJson);
         MyListRequest.OpenAIRequest openAIRequest = new MyListRequest.OpenAIRequest("gpt-3.5-turbo-0125", userMessage);
-        List<MyListResponse.ContentDTO> recommendedMovies = processOpenAIRequest(openAIRequest).getBody();
-        List<Content> responseDTO = new ArrayList<>();
-        for(MyListResponse.ContentDTO recommendedMovie:recommendedMovies){
-            Content content=contentRepository.findById(recommendedMovie.getId()).orElseThrow(() -> new Exception404("찾으시는 영화가 없습니다"));
-            responseDTO.add(content);
-        }
-        return responseDTO;
+
+        return processOpenAIRequest(openAIRequest).thenApply(recommendedMovies -> {
+            List<Content> responseDTO = new ArrayList<>();
+            for (MyListResponse.ContentDTO recommendedMovie : recommendedMovies) {
+                Content content = contentRepository.findById(recommendedMovie.getId()).orElseThrow(() -> new Exception404("찾으시는 영화가 없습니다"));
+                responseDTO.add(content);
+            }
+            return responseDTO;
+        });
+
     }
     //restapi 처리할거
-    public ResponseEntity<List<MyListResponse.ContentDTO>> processOpenAIRequest(MyListRequest.OpenAIRequest openAIRequest) {
+    @Async
+    public CompletableFuture<List<MyListResponse.ContentDTO>> processOpenAIRequest(MyListRequest.OpenAIRequest openAIRequest) {
         try {
             // 메시지 생성
             ObjectNode messageNode = objectMapper.createObjectNode();
@@ -197,27 +204,22 @@ public class MyListService {
             // 응답 본문 출력 (디버깅용)
             System.out.println("Response Body: " + response.getBody());
 
-            // 응답 본문 파싱
             String responseBody = response.getBody();
             List<MyListResponse.ContentDTO> recommendedMovies = new ArrayList<>();
             if (responseBody != null) {
-                // 응답 본문이 JSON 형식이 아닌 경우 텍스트 형식으로 처리
                 if (responseBody.startsWith("{")) {
-                    // JSON 형식인 경우
                     recommendedMovies = parseRecommendedMovies(responseBody);
                 } else {
-                    // 텍스트 형식인 경우
                     recommendedMovies = parseRecommendedMoviesFromText(responseBody);
                 }
             }
 
-            // 추천 영화 목록 출력
             recommendedMovies.forEach(movie -> System.out.println("Recommended Movie: " + movie));
 
-            return ResponseEntity.ok(recommendedMovies);
+            return CompletableFuture.completedFuture(recommendedMovies);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return CompletableFuture.failedFuture(e);
         }
     }
 

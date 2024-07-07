@@ -9,13 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
 @Controller
+@EnableAsync
 public class MyListController {
     private final HttpSession session;
     private final MyListService myListService;
@@ -25,15 +29,12 @@ public class MyListController {
 
 
 
-    @PostMapping("/api/my-favorite-list")
-    @ResponseBody
-    public ResponseEntity<List<MyListResponse.ContentDTO>> sendRequestToOpenAI(@RequestBody MyListRequest.OpenAIRequest openAIRequest) {
-        return myListService.processOpenAIRequest(openAIRequest);
-    }
+//    @PostMapping("/api/my-favorite-list")
+//    @ResponseBody
+//    public ResponseEntity<List<MyListResponse.ContentDTO>> sendRequestToOpenAI(@RequestBody MyListRequest.OpenAIRequest openAIRequest) {
+//        return myListService.processOpenAIRequest(openAIRequest);
+//    }
 
-
-
-    // 내가 찜한 콘텐츠
     @GetMapping("/api/my-favorite-list")
     public String getMyFavList(HttpServletRequest request) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
@@ -42,17 +43,30 @@ public class MyListController {
         if (sessionAdmin != null) {
             userId = sessionAdmin.getId();
         }
-        if (sessionUser!= null) {
+        if (sessionUser != null) {
             userId = sessionUser.getId();
         }
         MyListResponse.MyListDTO respDTO = myListService.findMyListById(userId);
-        List<Content> openAIRequest =myListService.getOpenAi();
-        System.out.println("openAIRequest = " + openAIRequest);
+
         request.setAttribute("MyListDTO", respDTO);
-        request.setAttribute("openAIRequest", openAIRequest);
+
         return "mylist/my-favorite-list";
     }
 
+    @GetMapping("/api/my-favorite-list/openai")
+    @ResponseBody
+    public CompletableFuture<List<Content>> getOpenAIRecommendations() {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        SessionUser sessionAdmin = (SessionUser) session.getAttribute("sessionAdmin");
+        Integer userId = null;
+        if (sessionAdmin != null) {
+            userId = sessionAdmin.getId();
+        }
+        if (sessionUser != null) {
+            userId = sessionUser.getId();
+        }
+        return myListService.getOpenAi(userId);
+    }
     // 찜하기
 
     @PostMapping("/api/users/{contentId}/favorite")
