@@ -1,69 +1,69 @@
 server:
-  servlet:
-    encoding:
-      charset: utf-8
-      force: true
-    session:
-      tracking-modes: COOKIE
-      timeout: 30m
-  port: 8080
-  tomcat:
-    max-swallow-size: -1 # -1은 제한 없음을 의미합니다.
+    servlet:
+        encoding:
+            charset: utf-8
+            force: true
+        session:
+            tracking-modes: COOKIE
+            timeout: 30m
+    port: 8080
+    tomcat:
+        max-swallow-size: -1 # -1은 제한 없음을 의미합니다.
 
 spring:
-  # .env import
-  config:
-    import: optional:file:.env[.properties]
-  mustache:
-    servlet:
-      expose-session-attributes: true
-      expose-request-attributes: true
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      password: 1111
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;MODE=MySQL
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-  sql:
-    init:
-      mode: always
-      data-locations:
-        - classpath:db/data.sql
+    # .env import
+    config:
+        import: optional:file:.env[.properties]
+    mustache:
+        servlet:
+            expose-session-attributes: true
+            expose-request-attributes: true
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            password: 1111
+    datasource:
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:mem:test;MODE=MySQL
+        username: sa
+        password:
+    h2:
+        console:
+            enabled: true
+    sql:
+        init:
+            mode: always
+            data-locations:
+                - classpath:db/data.sql
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 10
-    defer-datasource-initialization: true
-    open-in-view: true
-  servlet:
-    multipart:
-      maxFileSize: 200MB # 파일 하나의 최대 크기
-      maxRequestSize: 200MB
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true
+                default_batch_fetch_size: 10
+        defer-datasource-initialization: true
+        open-in-view: true
+    servlet:
+        multipart:
+            maxFileSize: 200MB # 파일 하나의 최대 크기
+            maxRequestSize: 200MB
 logging:
-  level:
-    org.hibernate.orm.jdbc.bind: TRACE
-    com.example.final_project: DEBUG
+    level:
+        org.hibernate.orm.jdbc.bind: TRACE
+        com.example.final_project: DEBUG
 
 kakao:
-  pay:
-    cid: TC0ONETIME
-    admin-key: f542a3356888f0d79592e8edea6d931e
-    redirect-url: http://localhost:8080
+    pay:
+        cid: TC0ONETIME
+        admin-key: f542a3356888f0d79592e8edea6d931e
+        redirect-url: http://localhost:8080
 
 custom:
-  video:
-    request-url: http://localhost:7000/
-  openai:
-    key: ${OPENAI_KEY}
+    video:
+        request-url: http://localhost:7000/
+    openai:
+        key: ${OPENAI_KEY}upoooo
